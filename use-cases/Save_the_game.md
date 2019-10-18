@@ -16,3 +16,7 @@
 **Extensions:**
 * *a. The program fails.
 	* 1. The user runs the game again.
+* 3a. The disk is full
+	* 1. User should free storage space.
+* 4a. User overwrites a previous save
+	* 1. User should choose another name for save
