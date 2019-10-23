@@ -1,8 +1,11 @@
 
 # Use Case Name
 **Scope:** scope of use case
+
 **Level:** level of use case (user goal/sub-function)
+
 **Primary Actor:** Primary_Actor  
+
 **Stakeholders and interests:**  
 
  -   StakeHolder 1: interests
@@ -10,6 +13,7 @@
  
 **Preconditions:** Preconditions  
 **Postconditions:** Postconnditions 
+
 **Main Success Scenario:**  
 
 1.  step 1
@@ -37,4 +41,5 @@
 - variation 2
 
 **Frequency of occurence:**
+
 frequency
