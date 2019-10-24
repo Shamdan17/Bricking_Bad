@@ -1,11 +1,17 @@
 # Build a Map
 
+**Scope:** The Building Mode
+
+**Level:** User goal
+
 **Primary Actor:** User     
+
 **Stakeholders and interests:**     
 - User: Wants to create a new map that can be loaded in future in order to play the game
 
 **Preconditions:** User has a valid account with a username and password    
 **Postconditions:** The user-created map appears in the map list    
+
 **Main Success Scenario:**
 1. The user enters building mode by clicking the “building mode” button
 2. The user interacts with the system to specify the number of each brick type
@@ -27,3 +33,16 @@
 	*   1. The system warns the user to satisfy minimum requirements
 * 6a. The disk is full so the map cannot be saved.
 	*   1. Delete another map or increase the disk capacity
+
+
+**Special Requirements:**
+- The buttons and bricks on the screen should be visible
+- Write permission for storage access
+
+**Technology and data variations:**
+- Provide different color schemes for color blind people
+- Different storage devices such as cloud, local etc.
+
+**Frequency of occurence:**
+
+At User's demand.
