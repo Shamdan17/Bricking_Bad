@@ -3,11 +3,12 @@
  
 **Functionality:**  
 - The user needs authentication to play the game. 
-When an error occurs in the system, the error should be logged into a specified text file and the game is ended.
+- When an error occurs in the system, the error should be logged into a specified text file and the game is ended.
 
 **Usability**  
 - The game GUI should be visible from 1 meter.  
 - Colors of the bricks should be visible by color blind people. 
+- The game should demonstrate sound effects of the actions happenning.
 
 **Reliability**  
 - The system should continue to execute user commands even if there is a minor error occurs which does not affect the continuity of the game.
