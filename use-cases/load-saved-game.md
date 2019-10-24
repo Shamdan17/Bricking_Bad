@@ -1,4 +1,4 @@
-# Continue the game
+# Load saved game
 
 **Scope:** The Game
 
