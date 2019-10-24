@@ -1,5 +1,6 @@
 # Make an account
 
+**Scope:** Game login screen
 **Level:** user goal
 
 **Primary Actor:** User
