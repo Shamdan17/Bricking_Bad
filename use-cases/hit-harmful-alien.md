@@ -1,19 +1,40 @@
 # Hit Harmful Alien
 
-**Primary Actor:** User
-**Stakeholders and interests:**
-- User: wants to hit harmful aliens so that they disappear
+**Scope:** The Game
 
-**Preconditions:** User is playing and the game and alien is appearing.
-**Postconditions:** Harmful alien disappears
-**Main Success Scenario:**
-1. User is playing the game
-2. Harmful alien appears
-3. User directs the ball towards the alien
-4. Alien is hit in the correct place (place which it gets damaged)
-5. Alien disappears from map
+**Level:** User goal
 
-**Extensions:**
-* *a. The program fails.
-	* 1. The user runs the game again.
-* 
+**Primary Actor:** User  
+
+**Stakeholders and interests:**  
+
+ -   User: Wants to hit harmful aliens so that they disappear from screen.
+
+**Preconditions:** At least one harmful alien appears in game screen. 
+**Postconditions:** At least one harmful alien has disappeared
+
+**Main Success Scenario:**  
+
+1. User performs __Move the Paddle__ in order to direct the ball towards the harmful alien
+2. System shows the user the movement of the ball on the board.
+3. User directs the ball towards the harmful alien.
+4. Harmful Alien is hit by the ball in the way that causes it to disappear.
+5. System removes Harmful Alien from board.
+
+**Extensions:**  
+
+-   *a. The program fails
+    -   1.  The user runs the game again.
+-   *4a. The ball does not hit any harmful alien. 
+    -   1.  User performs __Move the Paddle__ again to hit alien.
+-   *4b. Harmful Alien was not hit in the proper way that makes it disappear. 
+    -   1.  User performs __Move the Paddle__ again to hit the alien
+
+**Special Requirements:**
+- none
+
+**Technology and data variations:**
+- none
+
+**Frequency of occurence:** Throughout the game.
+	
