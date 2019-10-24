@@ -1,21 +1,44 @@
 # Save the game
 
-**Primary Actor:** User
-**Stakeholders and interests:**
-- User: Wants to save the state of game to resume at the same state later
+**Scope:** The game
 
-**Preconditions:** User is playing and the game
-**Postconditions:** Game state is saved at the moment of pause
-**Main Success Scenario:**
-1. User pauses the game: Include pause the game
-2. User chooses the save option from the pause screen
-3. User types a name to identify the saved state of the game
-4. User confirms the save and the game is saved
+**Level:** user goal
 
-**Extensions:**
-* *a. The program fails.
-	* 1. The user runs the game again.
-* 2a. The disk is full
-	* 1. User should free storage space.
-* 3a. User overwrites a previous save
-	* 1. User should choose another name for save
+**Primary Actor:** User  
+
+**Stakeholders and interests:**  
+
+ -   User: Wants to save the state of game to resume at the same state later
+
+**Preconditions:** The game is paused. 
+**Postconditions:** The game is saved according to its state at the moment of pausing.
+
+**Main Success Scenario:**  
+
+1.  User pauses the game.
+2.  System shows the user the option menu.
+3.  User chooses the save option.
+4.	System prompts user to enter a save name identifying the saved state of the game.
+5.	User enters a save name to identify the save.
+6.	System saves the state of the game and links it with the save name the user entered.
+7.	System shows the User that the operation is successful.
+
+**Extensions:**  
+
+-   *a. The program fails
+    -   1.  The user runs the game again.
+-   *3a. The storage disk is full. 
+    -   1.  System shows the user that there is no enough storage after choosing save option.
+    -   2.  User frees storage and retries to save steps.
+-   *5a. Save name entered by user already exists as a save name for a previously saved game. 
+    -   1.  System asks the user if he wants to overwrite this save name or choose another save name.
+    -   2.  User either chooses to overwrite, in which case previous save information is lost, or enter another save name.
+
+**Special Requirements:**
+- none
+
+**Technology and data variations:**
+- none
+
+**Frequency of occurence:** At User's demand.
+	
