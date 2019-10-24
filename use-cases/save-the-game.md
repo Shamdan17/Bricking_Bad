@@ -15,13 +15,12 @@
 
 **Main Success Scenario:**  
 
-1.  User pauses the game.
-2.  System shows the user the option menu.
-3.  User chooses the save option.
-4.	System prompts user to enter a save name identifying the saved state of the game.
-5.	User enters a save name to identify the save.
-6.	System saves the state of the game and links it with the save name the user entered.
-7.	System shows the User that the operation is successful.
+1.  System shows the user the option menu.
+2.  User chooses the save option.
+3.	System prompts user to enter a save name identifying the saved state of the game.
+4.	User enters a save name to identify the save.
+5.	System saves the state of the game and links it with the save name the user entered.
+6.	System shows the User that the operation is successful.
 
 **Extensions:**  
 

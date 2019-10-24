@@ -4,9 +4,9 @@
 sequenceDiagram
 participant User
 participant System
-User->> System: playGame()
-System-->>User: showAlienOnMap
-User->> System: HitBall()
-System-->>User: removeAlien()
+System-->>User: showBallMovement
+User->> System: movePaddle
+System-->>User: showBallMovement
+System-->>User: hideAlien
 
 ```
