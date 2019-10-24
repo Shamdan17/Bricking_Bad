@@ -10,7 +10,7 @@
 
  -   User: Wants to save the state of game to resume at the same state later
 
-**Preconditions:** The game is paused. 
+**Preconditions:** The game is paused.  
 **Postconditions:** The game is saved according to its state at the moment of pausing.
 
 **Main Success Scenario:**  
@@ -39,5 +39,7 @@
 **Technology and data variations:**
 - none
 
-**Frequency of occurence:** At User's demand.
+**Frequency of occurence:** 
+
+At User's demand.
 	

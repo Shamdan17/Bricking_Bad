@@ -10,7 +10,7 @@
  - User: Wants to reach help information
 
 
-**Preconditions:**  Running Application
+**Preconditions:**  Running Application  
 **Postconditions:** User welcomed with a help screen
 
 **Main Success Scenario:**
@@ -30,4 +30,5 @@
 - Include a text version, and a visual version (provide video guide)
 
 **Frequency of occurence:**
+
 Whenever the users wishes to seek help

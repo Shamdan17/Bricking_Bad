@@ -9,7 +9,7 @@
 **Stakeholders and interests:**  
  - User: Wants to continue a previously saved game
  
-**Preconditions:** User has an account and at least one game saved by the same User
+**Preconditions:** User has an account and at least one game saved by the same User  
 **Postconditions:** Game is resumed from the saved state.
 
 **Main Success Scenario:**  
@@ -32,4 +32,5 @@
 - Different storage devices (cloud, local, ...)
 
 **Frequency of occurence:**
+
 Whenever the users wishes to

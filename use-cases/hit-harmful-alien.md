@@ -36,5 +36,7 @@
 **Technology and data variations:**
 - none
 
-**Frequency of occurence:** Throughout the game.
+**Frequency of occurence:** 
+
+Throughout the game.
 	

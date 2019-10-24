@@ -1,6 +1,7 @@
 # Make an account
 
 **Scope:** Game login screen
+
 **Level:** user goal
 
 **Primary Actor:** User
@@ -9,6 +10,7 @@
 
 **Preconditions:** User does not have an account and is on the login screen
 **Postconditions:** User has a valid account with a username and password
+
 **Main Success Scenario:**
 1. User chooses the option of making a new account
 2. The system displays the account registration screen

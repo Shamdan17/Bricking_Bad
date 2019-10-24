@@ -3,11 +3,13 @@
 **Level:** user goal
 
 **Primary Actor:** User
+
 **Stakeholders and interests:**
 - User: Wants to destroy all the blocks in order to win the game
 
-**Preconditions:** User is playing.
+**Preconditions:** User is playing.  
 **Postconditions:** Brick is broken
+
 **Main Success Scenario:**
 1. Ball is moving around on the screen and heads towards the bottom of the screen
 2. User moves the paddle to be directly below the ball: Include Move the Paddle
