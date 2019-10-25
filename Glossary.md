@@ -15,3 +15,5 @@
 |Protecting Alien | Alien that protects the wall by moving horizontally under the bricks|
 |Cooperative Alien | Alien that helps user by randomly choosing a row and destroying it|
 |Harmful Alien | This includes **Repairing Alien** and **Protecting Alien**|
+|Manual Power-Up | A power-up that user must activate manually after getting it|
+|Non-Manual Power-Up | A power-up that activates as soon as user gets it|
