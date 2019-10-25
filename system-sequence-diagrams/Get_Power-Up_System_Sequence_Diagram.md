@@ -8,7 +8,7 @@ System-->>User: PUFall(tp)
 User->> System: movePaddle
 alt IsManualPU(pt)
 	System-->>User: addPUtoInventory(pt)
-else 
+else else
 	System-->>User: activatePU(pt)
 end
 ```
