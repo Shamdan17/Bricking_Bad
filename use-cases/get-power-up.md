@@ -32,22 +32,23 @@
 -   *5a. The power-up user gets is a manual power-up
     -   1.  The power-up is added to the user's inventory
     -   2.  The power-up is automatically activated.	
--   *5b. The non-manual power-up is Destructive Laser Gun
+-   *5b. The automatic power-up is Destructive Laser Gun
 	-   1.  The power-up is automatically activated.
     -   2.  A laser gun appears at the both ends of the paddle
 	-	3.	The	Destructive Laser Gun power-up is active.
--   *5c. The non-manual power-up is Fireball
+-   *5c. The automatic power-up is Fireball
 	-   1.  The power-up is automatically activated.
     -   2.  The ball changes to a fireball
 	-	3.	The fireball damages also the bricks next to one it hits
 	-	4.	The fireball can destroy metal sides of bricks in two hits.
 	-	5.	The fireball return to normal when the user loses it.
--   *5d. The non-manual power-up is Gang-of-balls	
+-   *5d. The automatic power-up is Gang-of-balls	
 	-   1.  The power-up is automatically activated.
 	-   2.  After the ball hits the paddle, it multiplies by 10.
 	
 **Special Requirements:**
--	Any acquired manual power-ups are displayed at the inventory using icons. If the 10 balls created by the Gang-of-balls power-up move with the same speed, but with an angle equals to the ball index multiplied by 360 and divided by 10.
+-	Any acquired manual power-ups are displayed at the inventory using icons. 
+-	If the 10 balls created by the Gang-of-balls power-up move with the same speed, but with an angle equals to the ball index multiplied by 360 and divided by 10.
 
 **Technology and data variations:**
 - A keyboard is used to move the paddle.
