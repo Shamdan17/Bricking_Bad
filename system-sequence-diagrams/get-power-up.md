@@ -4,7 +4,7 @@
 sequenceDiagram
 participant User
 participant System
-System-->>User: PUFall(tp)
+System-->>User: ReleasePowerup(pt)
 User->> System: movePaddle
 alt IsManualPU(pt)
 	System-->>User: addPUtoInventory(pt)
