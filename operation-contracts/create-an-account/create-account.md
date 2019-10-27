@@ -10,4 +10,3 @@
 * An *Account* instance is created 
 * Account.user becomes Username
 * Account.password becomes Password
-* The account is stored in a database
