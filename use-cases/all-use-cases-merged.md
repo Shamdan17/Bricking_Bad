@@ -116,7 +116,7 @@
 
 ---
 
-# Use Case UC4: Break a brick
+# Use Case UC4: Break a Brick
 
 **Scope:** Gameplay
 
@@ -625,7 +625,7 @@
 
 ---
 
-# Use Case UC16: Save the game
+# Use Case UC16: Save the Game
 
 **Scope:** The game
 
