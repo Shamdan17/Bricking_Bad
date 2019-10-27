@@ -1,4 +1,3 @@
-
 # Activate a Manual Power-Up
 **Scope:** The game
 
@@ -10,15 +9,15 @@
 
  -   User: Wants to activate a manual power-up in their inventory
  
-**Preconditions:** User is playing the game 
+**Preconditions:** User has the power-up in their inventory.
 **Postconditions:** The power-up is active 
 
 **Main Success Scenario:**  
 
 1.  User gets a power-up
 2.  User clicks the power-up icon or types the first letter of the powerup
-3.  The power-up is removed from the inventory.,
-4.	The power-up is activated
+3.  The game removes the power-up from the inventory
+4.	The game activates the power-up
 
 **Extensions:**  
 
