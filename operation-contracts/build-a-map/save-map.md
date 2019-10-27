@@ -5,4 +5,4 @@
 **Preconditions:** The user is on the building mode screen  
 **Postconditions:** 
 * map.name becomes mapName
-* The game created the map
+* The map is created
