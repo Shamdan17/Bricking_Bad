@@ -16,7 +16,7 @@
 **Main Success Scenario:**  
 
 1.  The ball touches the paddle, Game stops it and makes it stuck to the paddle
-2.	The user presses w or clicks
+2.	The user presses the appropriate key or clicks
 3.	The Game releases the ball from the paddle
 4.	The Game deactivaes the Magnet power-up
 
