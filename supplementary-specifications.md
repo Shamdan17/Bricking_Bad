@@ -4,6 +4,9 @@
 **Functionality:**  
 - The user needs authentication to play the game. 
 - When an error occurs in the system, the error should be logged into a specified text file and the game is ended.
+- User presses the first letter of the power-up when they want to activate(T for Taller paddle, M for Magnet, and C for Chemical ball) if they are using the keyboard to activate
+- User presses W to release a ball captured by the Magnet power-up if they are using the keyboard to release
+- User presses W to fire a Fire Destructive Laser Gun shot if they are using the keyboard to fire
 
 **Usability**  
 - The game GUI should be visible from 1 meter.  

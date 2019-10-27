@@ -5,7 +5,7 @@ sequenceDiagram
 participant User
 participant Game
 User->> Game: authenticate(user, pw)
-alt Valid?(user,pt)
+alt Valid?(user,pw)
 	Game-->>User: Authorize(user)
 	User->>Game: continue()
 	Game-->>User: showBuildMode()
