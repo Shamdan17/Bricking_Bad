@@ -1,13 +1,13 @@
-## Save the game System Sequence Diagram
+## Save the game Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-System->> User: showPauseMenu
-User->> System: clickSave
-System-->>User: enterSaveName
-User->> System: submitSaveName
-System-->>User: printSaveSuccessful
+participant Game
+Game->> User: showPauseMenu
+User->> Game: clickSave
+Game-->>User: enterSaveName
+User->> Game: submitSaveName
+Game-->>User: printSaveSuccessful
 
 ```

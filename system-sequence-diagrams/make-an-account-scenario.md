@@ -3,12 +3,12 @@
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: runGame
-System-->>User: showLoginScreen
-User->> System: createNewAcc
-System-->>User: showAccCreationScreen
-User->> System: createAcc(User, Password)
-System-->>User: showAccountCreationSuccess
+participant Game
+User->> Game: runGame
+Game-->>User: showLoginScreen
+User->> Game: createNewAcc
+Game-->>User: showAccCreationScreen
+User->> Game: createAcc(User, Password)
+Game-->>User: showAccountCreationSuccess
 
 ```

@@ -1,12 +1,12 @@
-## Save Harmful Alien System Sequence Diagram
+## Save Harmful Alien Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-System-->>User: showBallMovement
-User->> System: movePaddle
-System-->>User: showBallMovement
-System-->>User: hideAlien
+participant Game
+Game-->>User: showBallMovement
+User->> Game: movePaddle
+Game-->>User: showBallMovement
+Game-->>User: hideAlien
 
 ```

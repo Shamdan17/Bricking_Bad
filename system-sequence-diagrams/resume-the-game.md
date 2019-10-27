@@ -1,10 +1,10 @@
-## resume the game System Sequence Diagram
+## resume the game Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: requestResumeGame()
-System-->>User: removePauseScreen
-System-->>User: resumeGame
+participant Game
+User->> Game: requestResumeGame()
+Game-->>User: removePauseScreen
+Game-->>User: resumeGame
 ```

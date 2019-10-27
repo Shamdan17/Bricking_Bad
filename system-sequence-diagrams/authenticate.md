@@ -1,15 +1,15 @@
-## Authenticate System Sequence Diagram
+## Authenticate Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: authenticate(user, pw)
+participant Game
+User->> Game: authenticate(user, pw)
 alt Valid?(user,pt)
-	System->>User: Authorize(user)
-	System->>User: showBuildMode()
+	Game->>User: Authorize(user)
+	Game->>User: showBuildMode()
 else else
-	System->>User: showInvalidCredMsg()
+	Game->>User: showInvalidCredMsg()
 end
 
 ```

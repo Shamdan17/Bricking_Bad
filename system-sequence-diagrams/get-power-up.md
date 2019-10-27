@@ -1,15 +1,15 @@
-﻿## Get Power-Up System Sequence Diagram
+﻿## Get Power-Up Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-System-->>User: ReleasePowerup(pt)
-User->> System: movePaddle
+participant Game
+Game-->>User: ReleasePowerup(pt)
+User->> Game: movePaddle
 alt IsManualPU(pt)
-	System-->>User: addPUtoInventory(pt)
+	Game-->>User: addPUtoInventory(pt)
 else else
-	System-->>User: activatePU(pt)
+	Game-->>User: activatePU(pt)
 end
 ```
 

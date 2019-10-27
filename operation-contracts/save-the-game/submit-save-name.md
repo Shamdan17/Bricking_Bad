@@ -7,4 +7,4 @@
 **Preconditions:** user is prompted to enter a save name
 
 **Postconditions:** 
-* save name entered by user was sent to system
+* save name entered by user was sent to Game

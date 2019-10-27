@@ -1,12 +1,12 @@
-## Load a saved game System Sequence Diagram
+## Load a saved game Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: requestSavedGamesList()
-System-->>User: showSavedGameMenu
-User->> System: loadGame(saved_game)
-System-->>User: updateBoardWithSavedGame
-System-->>User: loadGameSuccess
+participant Game
+User->> Game: requestSavedGamesList()
+Game-->>User: showSavedGameMenu
+User->> Game: loadGame(saved_game)
+Game-->>User: updateBoardWithSavedGame
+Game-->>User: loadGameSuccess
 ```

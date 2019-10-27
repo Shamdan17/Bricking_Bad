@@ -1,10 +1,10 @@
-## Use power up System Sequence Diagram
+## Use power up Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: usePowerup(type)
-System->>User : activatePowerup(type)
-System->>User: updatePUCount(type)
+participant Game
+User->> Game: usePowerup(type)
+Game->>User : activatePowerup(type)
+Game->>User: updatePUCount(type)
 ```

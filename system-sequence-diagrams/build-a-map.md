@@ -1,19 +1,19 @@
-## Build a Map System Sequence Diagram
+## Build a Map Game Sequence Diagram
 
 ```mermaid
 sequenceDiagram
 participant User
-participant System
-User->> System: activateBuildingMode()
-System-->>User: showBuildingScreen
-User->> System: setBrickNumbers(s, hm, m, w)
-System-->>User: randomMapWithBricks
+participant Game
+User->> Game: activateBuildingMode()
+Game-->>User: showBuildingScreen
+User->> Game: setBrickNumbers(s, hm, m, w)
+Game-->>User: randomMapWithBricks
 loop more brick
-	User->> System: moveBrickToPosition(b, p)
-	System-->>User: updatedMap
+	User->> Game: moveBrickToPosition(b, p)
+	Game-->>User: updatedMap
 end
-User->> System: saveMap(mapName)
-System-->>User: mapSaveSuccess
+User->> Game: saveMap(mapName)
+Game-->>User: mapSaveSuccess
 
 ```
 ## Glossary 
