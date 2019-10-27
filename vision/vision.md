@@ -1,6 +1,6 @@
 # Vision
 
-We are as team Shawarma dedicated to creating epic entertainment experiences of retro games starting with a fun revamp of the old school game brick breaker.
+We are as team Shawarma dedicated to creating epic entertainment experiences of retro games starting with a fun revamp of the old school brick breaker.
 
 Keyboard as the old school controller and the old school display you can clealy see pixels are our lovely friends during this adventure so keep them close.
 
