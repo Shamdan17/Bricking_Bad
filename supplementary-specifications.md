@@ -7,6 +7,8 @@
 - User presses the first letter of the power-up when they want to activate(T for Taller paddle, M for Magnet, and C for Chemical ball) if they are using the keyboard to activate
 - User presses W to release a ball captured by the Magnet power-up if they are using the keyboard to release
 - User presses W to fire a Fire Destructive Laser Gun shot if they are using the keyboard to fire
+- User presses left arrow or right arrow to move the paddle left or right respectively
+- User presses A or D to rotate the paddle 45 or 135 degrees respectively
 
 **Usability**  
 - The game GUI should be visible from 1 meter.  

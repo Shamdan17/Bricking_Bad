@@ -14,8 +14,8 @@
 
 **Main Success Scenario:**
 1. The user predicts where s/he should move the paddle 
-2. The user moves the paddle by either pressing and releasing {arrow left, arrow right} buttons or keeping them down to move further
-3. User can rotate the paddle by pressing {a, d} buttons up to {45, 135} degrees 
+2. The user moves the paddle by either pressing and releasing responsible buttons or keeping them down to move further
+3. User can rotate the paddle by pressing required buttons up to {45, 135} degrees 
 4. The paddle moves according to input of the user
 5. The paddle stops at the final location
 
