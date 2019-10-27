@@ -1,4 +1,3 @@
-
 # Fire Destructive Laser Gun
 **Scope:** The game
 
@@ -17,7 +16,7 @@
 
 1.  User presses w or clicks.
 2.  The laser gun fires
-3.  The number of laser gun shots remaining is decreased by 1
+3.  The game decrements number of laser gun shots remaining by 1.
 4.  If the gun hits a brick, it gets destroyed. 
 
 **Extensions:**  
