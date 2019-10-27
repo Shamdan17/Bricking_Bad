@@ -14,7 +14,7 @@
 
 **Main Success Scenario:**  
 
-1.  User presses w or clicks.
+1.  User presses the appropriate key or clicks.
 2.  The laser gun fires
 3.  The game decrements number of laser gun shots remaining by 1.
 4.  If the gun hits a brick, it gets destroyed. 
