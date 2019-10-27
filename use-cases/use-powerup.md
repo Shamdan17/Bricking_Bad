@@ -10,8 +10,8 @@
 **Main Success Scenario:**  
 
 1.  User clicks the power-up icon or types the first letter of the powerup
-2.  The System activates the power-up and applies its effect
-3.  System removes the power-up from inventory
+2.  Game activates the power-up and applies its effect
+3.  Game removes the power-up from inventory
 
 **Extensions:**  
 

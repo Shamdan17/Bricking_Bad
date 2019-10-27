@@ -16,15 +16,15 @@
 **Main Success Scenario:**  
 
 1.  User provides his username and password, chooses to continue
-2.  System retrieves the account of the user and authenticates him
-3.  System shows a welcome message and takes the user to the building mode
+2.  Game retrieves the account of the user and authenticates him
+3.  Game shows a welcome message and takes the user to the building mode
 
 **Extensions:**  
 
 -   *2a. The username or password is incorrect
-    -   1. The System informs the user that the login credentials are incorrect
+    -   1. The Game informs the user that the login credentials are incorrect
     -   2. User enters the correct information
-    -   3. System authenticates the user
+    -   3. Game authenticates the user
 
 **Special Requirements:**
 - Password should be hidden from view

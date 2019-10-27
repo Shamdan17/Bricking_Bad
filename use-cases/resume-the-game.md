@@ -14,8 +14,8 @@
 **Main Success Scenario:**  
 
 1.  User clicks on the resume button or presses the resume shortcut on the keyboard
-2.  System continues the game and displays the removes the pause screen
-3.  System changes the resume button to a pause button
+2.  Game continues the game and displays the removes the pause screen
+3.  Game changes the resume button to a pause button
 
 **Extensions:**  
 

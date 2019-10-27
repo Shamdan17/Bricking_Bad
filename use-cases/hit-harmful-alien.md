@@ -16,10 +16,10 @@
 **Main Success Scenario:**  
 
 1. User performs __Move the Paddle__ in order to direct the ball towards the harmful alien
-2. System shows the user the movement of the ball on the board.
+2. Game shows the user the movement of the ball on the board.
 3. User directs the ball towards the harmful alien.
 4. Harmful Alien is hit by the ball in the way that causes it to disappear.
-5. System removes Harmful Alien from board.
+5. Game removes Harmful Alien from board.
 
 **Extensions:**  
 

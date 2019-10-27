@@ -16,10 +16,10 @@
 **Main Success Scenario:**  
 
 1.  User breaks a wrapper brick that contains a power-up
-2.  System releases power-up from broken wrapper brick and makes it fall.
+2.  Game releases power-up from broken wrapper brick and makes it fall.
 3.  User moves the paddle to be directly below the power up: include Move The Paddle
 4.  Power-up touches the paddle.
-5.  System removes the power-up and gives it to the User
+5.  Game removes the power-up and gives it to the User
 
 
 **Extensions:**  

@@ -16,9 +16,9 @@
 **Main Success Scenario:**  
 
 1. User clicks on the quit button or shortcut on the keyboard
-2. System halts the game and displays a message to be confirmed by user 
+2. Game halts the game and displays a message to be confirmed by user 
 3. User confirms quitting
-3. System closes the game
+3. Game closes the game
 
 **Extensions:**  
 
