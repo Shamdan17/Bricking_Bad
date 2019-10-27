@@ -1,6 +1,6 @@
-# Save the game
+# Use Case: Save the Game
 
-**Scope:** The game
+**Scope:** The Game
 
 **Level:** user goal
 
@@ -11,6 +11,7 @@
  -   User: Wants to save the state of game to resume at the same state later
 
 **Preconditions:** The game is paused.  
+
 **Postconditions:** The game is saved according to its state at the moment of pausing.
 
 **Main Success Scenario:**  
@@ -25,7 +26,7 @@
 **Extensions:**  
 
 -   *a. The program fails
-    -   1.  The user runs the game again.
+    -   1.  User runs the game again.
 -   *3a. The storage disk is full. 
     -   1.  Game shows the user that there is no enough storage after choosing save option.
     -   2.  User frees storage and retries to save steps.
@@ -39,7 +40,4 @@
 **Technology and data variations:**
 - none
 
-**Frequency of occurence:** 
-
-At User's demand.
-	
+**Frequency of occurence:**  At User's demand.

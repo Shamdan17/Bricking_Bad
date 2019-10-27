@@ -8,7 +8,7 @@
 
 **Postconditions:** 
 
-* Display access help screen 
+* Access help screen was displayed
 
 ---
 
@@ -21,8 +21,8 @@
 **Preconditions:** The user is logged in    
 
 **Postconditions:** 
-* The display switches to the building mode screen
-* The cursor of the user is in the simple brick field by default
+* The display switched to the building mode screen
+* The cursor of the user was placed in the simple brick field by default
 
 ---
 
@@ -35,8 +35,8 @@
 **Preconditions:** The user is on the building mode screen and there is at least one brick in the map   
 
 **Postconditions:** 
-* The brick places in the given position
-* Brick object *brick* is get
+* The brick was placed in the given position
+* Brick object *brick* was gotten
 * brick.position becomes position
 
 ---
@@ -50,8 +50,8 @@
 **Preconditions:** The user is on the building mode screen  
 
 **Postconditions:** 
-* map.name becomes mapName
-* The map is created
+* map.name became mapName
+* The map was created
 
 --- 
 
@@ -64,12 +64,12 @@
 **Preconditions:** The user is on the building mode screen  
 
 **Postconditions:** 
-* A Map instance *map* is created
-* map is associated with the current map
-* map.numSimpleBrick becomes simple
-* map.numHalfMetalBrick becomes halfMetal
-* map.numMineBrick becomes mine
-* map.numWrapperBrick becomes wrapper
+* A Map instance *map* was created
+* map was associated with the current map
+* map.numSimpleBrick became simple
+* map.numHalfMetalBrick became halfMetal
+* map.numMineBrick became mine
+* map.numWrapperBrick became wrapper
 
 ---
 
@@ -82,13 +82,13 @@
 **Preconditions:** The user is on the account creation screen
 
 **Postconditions:** 
-* An *Account* instance is created 
-* Account.user becomes Username
-* Account.password becomes Password
+* An *Account* instance was created 
+* Account.user became Username
+* Account.password became Password
 
 ---
 
-# Contract CO7: createAcc
+# Contract CO7: createNewAcc
 
 **Operation:** createNewAcc
 
@@ -97,20 +97,20 @@
 **Preconditions:** The user is on the login screen
 
 **Postconditions:** 
-* The Board displays the account creation screen
+* The Board displayed the account creation screen
 
 ---
 
-# Contract CO8: createAcc
+# Contract CO8: showAccountCreationSuccess
 
-**Operation:** createNewAcc
+**Operation:** showAccountCreationSuccess
 
 **Cross references:** Use Cases: Create an Account
 
-**Preconditions:** The user is on the login screen
+**Preconditions:** The user creates an account
 
 **Postconditions:** 
-* The Board displays the account creation screen
+* The Board displayed account creation was successful
 
 ---
 
@@ -123,7 +123,7 @@
 **Preconditions:** Game is not paused and at least a harmful alien is on the board.
 
 **Postconditions:** 
-* Harmful alien was removed after it had been hit by the ball.
+* Harmful alien instance was removed.
 
 ---
 
@@ -136,7 +136,7 @@
 **Preconditions:** Game is not paused
 
 **Postconditions:** 
-* Paddle's position was changed according to the movement command.
+* Paddle.position was changed.
 
 --- 
 
@@ -149,7 +149,7 @@
 **Preconditions:** Game is not paused
 
 **Postconditions:** 
-* Ball's new position was shown to user.
+* Ball.position was shown to user.
 
 ---
 
@@ -162,7 +162,7 @@
 **Preconditions:** There are already saved games
 
 **Postconditions:** 
-* The Game loads the selected saved game into the board
+* The Game loaded the selected saved game into the board
 
 ---
 
@@ -175,7 +175,7 @@
 **Preconditions:** There are already saved games
 
 **Postconditions:**  
-* User receives a list of saved games
+* User received a list of saved games
 
 ---
 
@@ -188,7 +188,7 @@
 **Preconditions:** There are already a paused games
 
 **Postconditions:** 
-* The Game resumes the paused game and hides the pause screen
+* The Game resumed the paused game and hided the pause screen
 
 ---
 
@@ -201,7 +201,7 @@
 **Preconditions:** user clicked save button
 
 **Postconditions:** 
-* User was prompted to submit a save name.
+* Box appeared to user prompting him to enter a save name.
 
 ---
 
@@ -214,7 +214,7 @@
 **Preconditions:** user submitted a save name to Game
 
 **Postconditions:** 
-* User saw a message denoting that save operation was successful.
+* Message was shown to user notifying of successful operation.
 
 ---
 
@@ -240,6 +240,7 @@
 **Preconditions:** user is prompted to enter a save name
 
 **Postconditions:** 
-* save name entered by user was sent to Game
+* savename instance was created.
+* savename instance associated with The Game. 
 
 ---

@@ -4,7 +4,7 @@
 sequenceDiagram
 participant User
 participant Game
-Game->> User: showPauseMenu
+Game-->> User: showPauseMenu
 User->> Game: clickSave
 Game-->>User: enterSaveName
 User->> Game: submitSaveName

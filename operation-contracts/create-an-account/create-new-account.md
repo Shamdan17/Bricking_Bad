@@ -1,4 +1,4 @@
-# Contract: createAcc
+# Contract: createNewAcc
 
 **Operation:** createNewAcc
 **Cross references:** Use Cases: Create an Account
