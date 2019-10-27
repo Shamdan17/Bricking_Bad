@@ -15,7 +15,7 @@
 **Main Success Scenario:**  
 
 1.  User gets a power-up
-2.  User clicks the power-up icon or types the appropriate key
+2.  User clicks the power-up icon or presses the appropriate key
 3.  The game removes the power-up from the inventory
 4.	The game activates the power-up
 
