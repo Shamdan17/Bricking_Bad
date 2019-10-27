@@ -1,5 +1,5 @@
 # Activate a Manual Power-Up
-**Scope:** The game
+**Scope:** Gameplay
 
 **Level:** user goal
 

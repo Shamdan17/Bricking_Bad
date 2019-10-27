@@ -1,4 +1,4 @@
-# Continue the game
+# Access help screen
 
 **Scope:** The Game
 

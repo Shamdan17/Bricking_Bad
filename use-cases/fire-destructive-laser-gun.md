@@ -1,5 +1,5 @@
 # Fire Destructive Laser Gun
-**Scope:** The game
+**Scope:** Gameplay
 
 **Level:** user goal
 

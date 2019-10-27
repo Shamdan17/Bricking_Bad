@@ -1,5 +1,7 @@
 # Break a brick
 
+**Scope:** Gameplay
+
 **Level:** user goal
 
 **Primary Actor:** User

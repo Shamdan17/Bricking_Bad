@@ -17,3 +17,5 @@
 |Harmful Alien | This includes **Repairing Alien** and **Protecting Alien**|
 |Manual Power-Up | A power-up that user must activate manually after getting it|
 |Automatic Power-Up | A power-up that activates as soon as user gets it|
+|Game | The scope that refers the time when a user is not actually playing the game but the application is running |
+|Gameplay | The scope that refers the time when a user is actually playing the game |

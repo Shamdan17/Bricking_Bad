@@ -1,4 +1,4 @@
-# Use Case Name
+# Pause the Game
 
 **Scope:** Gameplay
 

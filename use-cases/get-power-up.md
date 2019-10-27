@@ -1,6 +1,6 @@
 
 # Get a Power-Up
-**Scope:** The game
+**Scope:** Gameplay
 
 **Level:** user goal
 

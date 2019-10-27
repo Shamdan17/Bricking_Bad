@@ -1,6 +1,6 @@
 # Hit Harmful Alien
 
-**Scope:** The Game
+**Scope:** Gameplay
 
 **Level:** User goal
 

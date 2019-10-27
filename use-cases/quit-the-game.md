@@ -1,6 +1,6 @@
-# Use Case Name
+# Quit the Game
 
-**Scope:** Gameplay
+**Scope:** The Game
 
 **Level:** User goal
 

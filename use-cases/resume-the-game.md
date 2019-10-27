@@ -1,4 +1,4 @@
-# Use Case Name
+# Resume the Game
 **Scope:** The Game
 
 **Level:** User goal
