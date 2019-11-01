@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements KeyListener {
+public class GamePanel extends JFrame implements KeyListener {
 
     Paddle paddle;
 

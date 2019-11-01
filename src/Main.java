@@ -6,5 +6,7 @@ public class Main {
         System.out.println("Hello World!");
 
         GamePanel gamePanel = new GamePanel();
+        gamePanel.setSize(100,100);
+        gamePanel.setVisible(true);
     }
 }
