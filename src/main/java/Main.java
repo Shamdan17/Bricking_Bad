@@ -1,10 +1,13 @@
+import org.apache.log4j.Logger;
 import ui.GamePanel;
 import ui.LoginForm;
 
 public class Main {
 
+    final static Logger logger = Logger.getLogger(Main.class);
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        logger.info("The game is running");
 
         LoginForm loginForm =new LoginForm();
 //        gamePanel.setSize(100,100);
