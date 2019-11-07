@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Paddle;
+import Domain.Paddle;
 
 import javax.swing.*;
 
@@ -10,8 +10,6 @@ import java.awt.event.KeyListener;
 public class GamePanel extends JFrame implements KeyListener {
 
     Paddle paddle;
-
-
 
     public GamePanel() {
         super();

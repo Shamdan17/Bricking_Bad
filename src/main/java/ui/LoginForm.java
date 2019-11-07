@@ -1,9 +1,7 @@
 package ui;
 
-import domain.GameEngine;
-import domain.PropertyListener;
-
-import java.awt.EventQueue;
+import Domain.GameEngine;
+import Domain.PropertyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
