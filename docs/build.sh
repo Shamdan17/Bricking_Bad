@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# build.sh is a script to generate the final PDF document of requirements using
-# pandoc
+# build.sh is a script to generate the final PDF document of requirements
+
+# Dependencies: mermaid-filter, pandoc, pdflatex
 
 function generate() {
 
