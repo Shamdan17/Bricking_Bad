@@ -10,8 +10,8 @@ public class Main {
         logger.info("The game is running");
 
         LoginForm loginForm =new LoginForm();
-//        gamePanel.setSize(100,100);
-//        gamePanel.setVisible(true);
+
+
         loginForm.setVisible(true);
 
     }

@@ -30,9 +30,9 @@ public class BrickingBad {
     public void loginAttempt(String username, String password){
         Account acc = accountManager.Authenticate(username, password);
         if(acc == null){
-            listeners.forEach(listener -> onPropertyEvent("login", "failed"));
+            onPropertyEvent("login", "failed");
         }else{
-            listeners.forEach(listener -> onPropertyEvent("login", "success"));
+            onPropertyEvent("login", "success");
         }
     }
 }
