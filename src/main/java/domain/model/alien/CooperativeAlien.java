@@ -1,6 +1,6 @@
-package Domain.Model.Alien;
+package domain.model.alien;
 
-public class ProtectingAlien extends Alien{
+public class CooperativeAlien extends Alien{
     @Override
     public void behave() {
         //todo implementation

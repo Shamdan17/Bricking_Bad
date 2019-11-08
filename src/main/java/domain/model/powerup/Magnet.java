@@ -1,6 +1,6 @@
-package Domain.Model.PowerUp;
+package domain.model.powerup;
 
-public class ChemicalBall extends PowerUp {
+public class Magnet extends PowerUp{
     @Override
     public boolean activate() {
         return false;

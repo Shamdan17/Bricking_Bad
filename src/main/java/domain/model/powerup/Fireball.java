@@ -1,4 +1,4 @@
-package Domain.Model.PowerUp;
+package domain.model.powerup;
 
 public class Fireball extends PowerUp{
     @Override

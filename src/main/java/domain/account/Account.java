@@ -1,4 +1,4 @@
-package Domain;
+package domain.account;
 
 public class Account {
     private String username;
@@ -13,11 +13,11 @@ public class Account {
     // Valid Password constants
     // min password size
     private static final int minSize = 8;
-    // does the password need to have atleast 1 char
+    // does the password need to have at least 1 char
     private static final boolean mustChar = true;
-    // does the password need to have atleast 1 digit
+    // does the password need to have at least 1 digit
     private static final boolean mustNum = true;
-    // does the password need to have atleast 1 special char
+    // does the password need to have at least 1 special char
     private static final boolean mustSpecialChar = false;
 
 

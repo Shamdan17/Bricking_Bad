@@ -1,6 +1,6 @@
-package Domain.Model.Brick;
+package domain.model.brick;
 
-public class SimpleBrick extends Brick {
+public class MineBrick extends Brick {
     @Override
     public void onHit() {
         //todo implementation

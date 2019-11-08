@@ -1,7 +1,8 @@
 package ui;
 
-import Domain.GameEngine;
-import Domain.PropertyListener;
+import domain.BrickingBad;
+import domain.GameEngine;
+import domain.PropertyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,26 +19,10 @@ import java.awt.Insets;
 
 public class LoginForm extends JFrame implements PropertyListener {
 
-    private static GameEngine gameEngine = GameEngine.getInstance();
+    private static BrickingBad brickingBad = BrickingBad.getInstance();
     private JPanel contentPane;
     private JTextField textField;
     private JPasswordField passwordField;
-
-//    /**
-//     * Launch the application.
-//     */
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    LoginForm frame = new LoginForm();
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     /**
      * Create the frame.
@@ -106,7 +91,7 @@ public class LoginForm extends JFrame implements PropertyListener {
             public void actionPerformed(ActionEvent arg0) {
                 String username = textField.getText();
                 String password = String.valueOf(passwordField.getPassword());
-                gameEngine.loginAttempt(username, password);
+                brickingBad.loginAttempt(username, password);
             }
         });
         GridBagConstraints gbc_confirmBtn = new GridBagConstraints();
@@ -115,7 +100,7 @@ public class LoginForm extends JFrame implements PropertyListener {
         gbc_confirmBtn.gridx = 1;
         gbc_confirmBtn.gridy = 2;
         contentPane.add(confirmBtn, gbc_confirmBtn);
-        gameEngine.addPropertyListener(this);
+        brickingBad.addPropertyListener(this);
     }
 
 

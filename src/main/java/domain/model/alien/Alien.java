@@ -1,4 +1,4 @@
-package Domain.Model.Alien;
+package domain.model.alien;
 
 import utils.Position;
 

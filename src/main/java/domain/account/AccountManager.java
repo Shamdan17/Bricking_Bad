@@ -1,26 +1,26 @@
-package Domain;
+package domain.account;
 
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// LoginManager is responsible for authenticating users
-public class LoginManager {
+// AccountManager is responsible for authenticating users
+public class AccountManager {
 
-    final static Logger logger = Logger.getLogger(LoginManager.class);
+    final static Logger logger = Logger.getLogger(AccountManager.class);
 
     // A list of all the accounts that currently exist
     private List<Account> accounts = new ArrayList<Account>();
 
-    public static LoginManager loginManager = new LoginManager();
+    public static AccountManager accountManager = new AccountManager();
 
-    public LoginManager(){
+    public AccountManager(){
         accounts.add(new Account("Hello", "World"));
     }
 
-    public static LoginManager getInstance(){
-        return loginManager;
+    public static AccountManager getInstance(){
+        return accountManager;
     }
 
     public void Register(String username, String password){

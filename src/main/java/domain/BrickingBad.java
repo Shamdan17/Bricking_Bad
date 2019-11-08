@@ -1,31 +1,34 @@
-package Domain;
+package domain;
 
+import domain.account.Account;
+import domain.account.AccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Game Engine is the controller
-public class GameEngine {
-    private List<PropertyListener> listeners = new ArrayList<PropertyListener>();
-    private LoginManager loginManager = LoginManager.getInstance();
-    private static GameEngine gameEngine = new GameEngine();
+//BrickingBad is the main controller
+public class BrickingBad {
 
-    public static GameEngine getInstance(){
-        return gameEngine;
+    private List<PropertyListener> listeners = new ArrayList<PropertyListener>();
+    private AccountManager accountManager = AccountManager.getInstance();
+    private static BrickingBad brickingBad = new BrickingBad();
+
+    public static BrickingBad getInstance(){
+        return brickingBad;
     }
 
     public void addPropertyListener(PropertyListener pl){
         listeners.add(pl);
     }
 
-    public void onPropertyEvent(String name, String value){
+    private void onPropertyEvent(String name, String value){
         for(PropertyListener pl : listeners){
             pl.onPropertyEvent("domain.GameEngine", name, value);
         }
     }
 
     public void loginAttempt(String username, String password){
-        Account acc = loginManager.Authenticate(username, password);
+        Account acc = accountManager.Authenticate(username, password);
         if(acc == null){
             listeners.forEach(listener -> onPropertyEvent("login", "failed"));
         }else{

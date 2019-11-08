@@ -1,4 +1,4 @@
-package Domain.Model.Brick;
+package domain.model.brick;
 
 public class HalfMetalBrick extends Brick {
     @Override

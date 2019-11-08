@@ -1,7 +1,9 @@
-package Domain;
+package domain;
 import utils.Position;
 
-public class Paddle {
+import java.io.Serializable;
+
+public class Paddle implements Serializable {
 
     private Position position;
     private int width;
