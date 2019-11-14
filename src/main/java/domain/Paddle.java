@@ -3,7 +3,7 @@ import utils.Position;
 
 import java.io.Serializable;
 
-public class Paddle implements Serializable {
+public class Paddle{
 
     private Position position;
     private int width;
