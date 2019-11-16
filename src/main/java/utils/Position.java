@@ -25,4 +25,14 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    public Position incrementX(int dx){
+        this.x += dx;
+        return this;
+    }
+
+    public Position incrementY(int dy){
+        this.y += dy;
+        return this;
+    }
 }

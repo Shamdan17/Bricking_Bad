@@ -1,8 +1,6 @@
 package domain;
 import utils.Position;
 
-import java.io.Serializable;
-
 public class Paddle{
 
     private Position position;

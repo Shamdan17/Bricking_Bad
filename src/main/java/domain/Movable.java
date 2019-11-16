@@ -1,17 +1,21 @@
 package domain;
 
 import utils.Position;
-
-import java.util.List;
+import utils.Velocity;
 
 public interface Movable {
 
-    final static int pointRatio = 20;
+    enum Shape{
+        Rectangle,
+        Circle
+    }
 
-    public void collide();
+    public void collide(Movable obj);
     public void move();
     public Position getPosition();
     public void setPosition(Position ps);
-    public List<Position> getPerimeterPoints();
+    public Velocity getVelocity();
+    public void setVelocity(Velocity ps);
+    public Shape getShape();
 
 }

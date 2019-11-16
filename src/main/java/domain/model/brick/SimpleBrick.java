@@ -1,23 +1,27 @@
 package domain.model.brick;
 
+import domain.Movable;
+import domain.model.Ball;
 import utils.Position;
-
-import java.util.List;
+import utils.Velocity;
+import utils.physics.PhysicsEngine;
 
 public class SimpleBrick extends Brick {
 
-    //Length and width of the brick
-    private int length;
-    private int width;
-
-    public SimpleBrick(int length, int width) {
-        this.length = length;
-        this.width = width;
+    public Shape getShape(){
+        return Shape.Rectangle;
     }
 
-    @Override
-    public void collide() {
+    //flag
+    private boolean destroyed = false;
 
+    //Position and velocity
+    private Position position;
+    private Velocity velocity;
+
+    public SimpleBrick(int length, int width, Position pos) {
+        super(length, width);
+        this.position = pos;
     }
 
     @Override
@@ -26,7 +30,22 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
-    public List<Position> getPerimeterPoints() {
+    public Velocity getVelocity() {
         return null;
+    }
+
+    @Override
+    // Since simple bricks don't move the method is not used
+    public void setVelocity(Velocity ps) {
+        return;
+    }
+
+    @Override
+    public void collide(Movable obj) {
+        if(obj instanceof Ball){
+            if(PhysicsEngine.isCollided(this, obj)){
+                destroyed = true;
+            }
+        }
     }
 }

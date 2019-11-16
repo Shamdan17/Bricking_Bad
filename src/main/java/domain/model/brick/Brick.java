@@ -1,21 +1,22 @@
 package domain.model.brick;
 
 import domain.Movable;
+import domain.model.shape.Rectangle;
 import utils.Position;
 
-public abstract class Brick implements Movable {
+public abstract class Brick extends Rectangle implements Movable {
 
-    private Position position;
-
-    public abstract void collide();
+    public Brick(int length, int width) {
+        super(length, width);
+    }
 
     public abstract void move();
 
     public Position getPosition() {
-        return position;
+        return super.getPosition();
     }
 
     public void setPosition(Position position) {
-        this.position = position;
+        super.setPosition(position);
     }
 }
