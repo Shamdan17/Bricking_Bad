@@ -1,6 +1,5 @@
 package utils.physics.math;
 
-import javafx.geometry.Pos;
 import utils.Position;
 
 public class Slope {

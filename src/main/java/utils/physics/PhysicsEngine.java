@@ -151,9 +151,38 @@ public final class PhysicsEngine {
                 (y2 + wid2 > y1 && y1 + len1 > y2);
     }
 
-    // TODO: develop this
     private static boolean isRectCollidedWithCircle(Movable obj1, Movable obj2){
-        return false;
+        Position rect = obj1.getPosition();
+        int len, wid;
+        len = ((Rectangle) obj2).getLength();
+        wid = ((Rectangle) obj2).getWidth();
+
+        Position cnt = getCircleCenter(obj2);
+        int radius = ((Circle) obj2).getRadius();
+
+        // if the circle center is between the X bounds of the rect
+        // This means the circle is either above or below the rectangle
+        if(cnt.getX() >= rect.getX() && cnt.getX()<= rect.getX() + len){
+            //check if the center differs from the y bounds by less than R
+           return (Math.abs(rect.getY()-cnt.getY())<=radius) || (Math.abs(rect.getY()+wid-cnt.getY())<=radius);
+        }
+
+        // if the circle center is between the Y bounds of the rect
+        // This means the circle is on either side of the rectangle
+        if(cnt.getY() >= rect.getY() && cnt.getY() <= rect.getY()+wid){
+            //check if the center differs from the x bounds by less than R
+            return (Math.abs(rect.getX()-cnt.getX())<=radius) || (Math.abs(rect.getX()+len-cnt.getX())<= radius);
+        }
+
+        // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
+        boolean result =
+                  getDistance(cnt, rect) <= radius //top left
+                ||getDistance(cnt, rect.incrementX(len))<=radius //top right
+                ||getDistance(cnt, rect.incrementY(wid))<=radius //bottom left
+                ||getDistance(cnt, rect.incrementX(len).incrementY(wid))<=radius; //bottom right
+
+        return result;
+
     }
 
     private static boolean isCircleCollidedWithCircle(Movable obj1, Movable obj2){
@@ -187,7 +216,7 @@ public final class PhysicsEngine {
 
     // Takes the old velocity and the angle of the normal of the wall that the object collided
     // into and calculates the new velocity after the collision
-    // Uses the formula: -(x-x1)/m = (y-y1) = -2(-m*x1 + y1) / (1 + m^2)
+    // Uses the formula: (x-x1)/m = (y-y1) = -2(m*x1 + y1) / (1 + m^2)
     protected static Velocity calculatePostCollisionVelocity(Velocity oldVelocity, Slope normalSlope){
         if(normalSlope.isVertical()){
             //Simply invert the y velocity
@@ -196,8 +225,8 @@ public final class PhysicsEngine {
         double oldX = oldVelocity.getX();
         double oldY = oldVelocity.getY();
         double m = normalSlope.getSlope();
-        double tmp = -2*(oldY - m * oldX)/(1 + m * m);
-        double newX = (-m) * tmp + oldX;
+        double tmp = (-2*(oldY + m * oldX))/(1 + m * m);
+        double newX = (m) * tmp + oldX;
         double newY = tmp + oldY;
         return new Velocity(newX, newY);
     }

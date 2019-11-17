@@ -1,19 +1,20 @@
 package domain;
+import com.sun.org.apache.bcel.internal.Const;
+import domain.model.shape.Rectangle;
+import utils.Constants;
 import utils.Position;
 
-public class Paddle{
+public class Paddle extends Rectangle {
 
     private Position position;
-    private int width;
     private int angle;
 
     boolean isTallerPaddle = false;
 
-    public Paddle(Position position, int angle) {
+    public Paddle(Position position) {
+        super(Constants.paddleLength, Constants.paddleWidth);
         this.position = position;
-        this.angle = angle;
-        //todo width should be %10 of the screen width
-        this.width = 60;
+        this.angle = 0;
     }
 
     public Position getPosition() {
@@ -22,14 +23,6 @@ public class Paddle{
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
     }
 
     public int getAngle() {
