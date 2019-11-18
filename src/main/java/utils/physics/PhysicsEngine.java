@@ -8,48 +8,70 @@ import utils.Velocity;
 import utils.physics.math.Slope;
 
 public final class PhysicsEngine {
-    //Calculates the new velocity of the first object if it is in collision with the second
+
+    private static PhysicsEngine _instance = new PhysicsEngine();
+
+    public static PhysicsEngine getInstance(){return _instance;}
+
+    // Calculates the new Velocity of the first object if it is in collision with the second, returns the
+    // same velocity if it not in collision
     public static Velocity calculateNewVelocity(Movable obj1, Movable obj2){
+        if(!isCollided(obj1, obj2)){
+            return obj1.getVelocity();
+        }
+        Slope collisionWallSlope = calculateCollisionSlope(obj1, obj2);
+
+        // Encountered unsupported object type
+        if(collisionWallSlope == null){
+            return null;
+        }
+
+        return calculatePostCollisionVelocity(obj1.getVelocity(), collisionWallSlope);
+    }
+
+    // Calculates the slope (normal of the line) of the collision wall if it is in collision with the second
+    // Required: Two objects that are collided
+    public static Slope calculateCollisionSlope(Movable obj1, Movable obj2){
         switch (obj1.getShape()){
             case Circle:
-                return calculateCircleVelocity(obj1, obj2);
+                return calculateCircleCollisionSlope(obj1, obj2);
             case Rectangle:
                 return calculateRectVelocity(obj1, obj2);
         }
         return null;
     }
 
-    private static Velocity calculateCircleVelocity(Movable obj1, Movable obj2){
+    private static Slope calculateCircleCollisionSlope(Movable obj1, Movable obj2){
         switch(obj2.getShape()){
             case Circle:
-                return calculateCircleOnCircleVelocity(obj1, obj2);
+                return calculateCircleOnCircleCollisionSlope(obj1, obj2);
             case Rectangle:
-                return calculateCircleOnRectVelocity(obj1, obj2);
+                return calculateCircleOnRectCollisionSlope(obj1, obj2);
         }
         return null;
     }
 
-    private static Velocity calculateRectVelocity(Movable obj1, Movable obj2){
+    private static Slope calculateRectVelocity(Movable obj1, Movable obj2){
         switch(obj2.getShape()){
             case Circle:
-                return calculateRectOnCircleVelocity(obj1, obj2);
+                return calculateRectOnCircleCollisionSlope(obj1, obj2);
             case Rectangle:
-                return calculateRectOnRectVelocity(obj1, obj2);
+                return calculateRectOnRectCollisionSlope(obj1, obj2);
         }
         return null;
     }
 
-    private static Velocity calculateCircleOnCircleVelocity(Movable obj1, Movable obj2){
+    private static Slope calculateCircleOnCircleCollisionSlope(Movable obj1, Movable obj2){
         Position center1 = getCircleCenter(obj1);
         Position center2 = getCircleCenter(obj2);
 
         // Calculate the normal of the collision wall
         Slope m = new Slope(center1, center2);
 
-        return calculatePostCollisionVelocity(obj1.getVelocity(),m);
+        return m;//calculatePostCollisionVelocity(obj1.getVelocity(),m);
     }
 
-    private static Velocity calculateCircleOnRectVelocity(Movable obj1, Movable obj2){
+    private static Slope calculateCircleOnRectCollisionSlope(Movable obj1, Movable obj2){
         Position circleCenter = getCircleCenter(obj1);
         int cx = circleCenter.getX(), cy = circleCenter.getY();
 
@@ -78,18 +100,18 @@ public final class PhysicsEngine {
             dy = 1;
         }
 
-        Slope m = new Slope(dx, dy);
-        return calculatePostCollisionVelocity(obj1.getVelocity(), m);
+        return new Slope(dx, dy);//calculatePostCollisionVelocity(obj1.getVelocity(), m);
     }
 
     // TODO: implement this
-    private static Velocity calculateRectOnRectVelocity(Movable obj1, Movable obj2){
-        return new Velocity(0,0);
+    private static Slope calculateRectOnRectCollisionSlope(Movable obj1, Movable obj2){
+        return new Slope(0,0);
     }
 
     // TODO: implement this
-    private static Velocity calculateRectOnCircleVelocity(Movable obj1, Movable obj2){
-        return new Velocity(0,0);
+    private static Slope calculateRectOnCircleCollisionSlope(Movable obj1, Movable obj2){
+        // switch arguments and proceed
+        return calculateCircleOnRectCollisionSlope(obj2, obj1);
     }
 
     public static boolean isCollided(Movable obj1, Movable obj2){
@@ -115,7 +137,7 @@ public final class PhysicsEngine {
     private static boolean isCircleCollided(Movable obj1, Movable obj2){
         switch(obj2.getShape()){
             case Rectangle:
-                return isRectCollidedWithCircle(obj1, obj2);
+                return isRectCollidedWithCircle(obj2, obj1);
             case Circle:
                 return isCircleCollidedWithCircle(obj1, obj2);
         }
