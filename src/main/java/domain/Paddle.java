@@ -1,5 +1,4 @@
 package domain;
-import com.sun.org.apache.bcel.internal.Const;
 import domain.model.shape.Rectangle;
 import utils.Constants;
 import utils.Position;
