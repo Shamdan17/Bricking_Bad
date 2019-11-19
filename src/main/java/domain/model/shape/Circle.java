@@ -2,20 +2,15 @@ package domain.model.shape;
 
 import utils.Position;
 
-public class Circle {
+public abstract class Circle extends MovableShape{
     int radius;
 
-    public Position getPosition() {
-        return position;
+    public final Shape getShape(){
+        return Shape.Circle;
     }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    private Position position;
 
     public Circle(int radius){
+        super(2*radius, 2*radius);
         this.radius = radius;
     }
 
@@ -25,5 +20,17 @@ public class Circle {
 
     public void setRadius(int radius) {
         this.radius = radius;
+        super.setLength(2*radius);
+        super.setWidth(2*radius);
+    }
+
+    @Override
+    public void setWidth(int width){
+        setRadius(width/2);
+    }
+
+    @Override
+    public void setLength(int width){
+        setRadius(width/2);
     }
 }

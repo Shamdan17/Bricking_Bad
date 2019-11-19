@@ -1,44 +1,36 @@
 package domain.model;
 
-import domain.Movable;
+import domain.model.shape.Circle;
+import domain.model.shape.MovableShape;
 import utils.Position;
 import utils.Velocity;
-import utils.physics.PhysicsEngine;
 
-public class Ball implements Movable {
+public class Ball extends Circle {
 
-    @Override
-    public void collide(Movable obj) {
-        setVelocity(PhysicsEngine.calculateNewVelocity(this, obj));
+    public Ball(int radius) {
+        super(radius);
+    }
+
+    public void collide(MovableShape obj) {
+        //TODO Implement this
+//        if (obj.getType() == bottomWall) {
+//            destroy();
+//        }
     }
 
     @Override
     public void move() {
+        // Get parameters
+        Position oldPos = getPosition();
+        Velocity velocity = getVelocity();
 
+        // Calculate new position
+        Position newPos = oldPos.incrementX(velocity.getX()).incrementY(velocity.getY());
+        setPosition(newPos);
     }
 
     @Override
-    public Position getPosition() {
-        return null;
-    }
-
-    @Override
-    public void setPosition(Position ps) {
-
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return null;
-    }
-
-    @Override
-    public void setVelocity(Velocity ps) {
-
-    }
-
-    @Override
-    public Shape getShape() {
-        return Shape.Circle;
+    public final Type getType() {
+        return Type.Ball;
     }
 }
