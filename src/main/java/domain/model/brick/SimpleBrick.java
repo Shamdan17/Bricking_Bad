@@ -5,13 +5,9 @@ import utils.Position;
 import utils.Velocity;
 
 public class SimpleBrick extends Brick {
-    //Position and velocity
-    private Position position;
-    private Velocity velocity;
 
-    public SimpleBrick(int length, int width, Position pos) {
+    public SimpleBrick(int length, int width) {
         super(length, width);
-        this.position = pos;
     }
 
     @Override

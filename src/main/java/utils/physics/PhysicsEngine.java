@@ -79,9 +79,8 @@ public final class PhysicsEngine {
 
         // Rectangle parameters
         int length, width;
-        Rectangle rect = (Rectangle)obj2;
-        length = rect.getLength();
-        width = rect.getWidth();
+        length = obj2.getLength();
+        width = obj2.getWidth();
 
 
         // Normal vector parameters
@@ -147,8 +146,6 @@ public final class PhysicsEngine {
     private boolean isRectCollidedWithRect(MovableShape obj1, MovableShape obj2){
         Position pos1 = obj1.getPosition();
         Position pos2 = obj2.getPosition();
-        Rectangle rec1 = (Rectangle) obj1;
-        Rectangle rec2 = (Rectangle) obj2;
 
 
         int x1, x2;
@@ -163,24 +160,24 @@ public final class PhysicsEngine {
         int len1, len2;
         int wid1, wid2;
 
-        len1 = rec1.getLength();
-        len2 = rec2.getLength();
+        len1 = obj1.getLength();
+        len2 = obj2.getLength();
 
-        wid1 = rec1.getWidth();
-        wid2 = rec2.getWidth();
+        wid1 = obj1.getWidth();
+        wid2 = obj2.getWidth();
 
         return  (x2 + len2 > x1 && x1 + len1 > x2) &&
-                (y2 + wid2 > y1 && y1 + len1 > y2);
+                (y2 + wid2 > y1 && y1 + wid1 > y2);
     }
 
     private boolean isRectCollidedWithCircle(MovableShape obj1, MovableShape obj2){
         Position rect = obj1.getPosition();
         int len, wid;
-        len = ((Rectangle) obj2).getLength();
-        wid = ((Rectangle) obj2).getWidth();
+        len = obj1.getLength();
+        wid = obj1.getWidth();
 
         Position cnt = getCircleCenter(obj2);
-        int radius = ((Circle) obj2).getRadius();
+        int radius = getRadius(obj2);
 
         // if the circle center is between the X bounds of the rect
         // This means the circle is either above or below the rectangle
@@ -211,8 +208,8 @@ public final class PhysicsEngine {
         Position cnt1 = getCircleCenter(obj1);
         Position cnt2 = getCircleCenter(obj2);
 
-        int radius1 = ((Circle) obj1).getRadius();
-        int radius2 = ((Circle) obj2).getRadius();
+        int radius1 = getRadius(obj1);
+        int radius2 = getRadius(obj2);
 
         return getDistance(cnt1, cnt2) < (radius1 + radius2);
     }
@@ -224,16 +221,18 @@ public final class PhysicsEngine {
 
 
     private Position getCircleCenter(MovableShape obj){
-        // Cast the movable objects to circles to get access to their radii
-        Circle circle = (Circle)obj;
-
         // Get the radius
-        int radius = circle.getRadius();
+        int radius = getRadius(obj);
 
         // Get the top left corner and add the offset (radius) to get the center
         Position center = obj.getPosition().incrementX(radius).incrementY(radius);
 
         return center;
+    }
+
+    // Since circles have their length and width as their diameters, this returns the radius
+    private int getRadius(MovableShape obj){
+        return obj.getLength()/2;
     }
 
     // Takes the old velocity and the angle of the normal of the wall that the object collided

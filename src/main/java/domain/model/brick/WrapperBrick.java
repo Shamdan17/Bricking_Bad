@@ -20,11 +20,6 @@ public class WrapperBrick extends Brick {
     }
 
     @Override
-    public Velocity getVelocity() {
-        return null;
-    }
-
-    @Override
     public void setVelocity(Velocity ps) {
         //TODO: Implement
     }

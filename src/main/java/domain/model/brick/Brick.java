@@ -13,13 +13,4 @@ public abstract class Brick extends Rectangle {
         return Type.Brick;
     }
 
-    public abstract void move();
-
-    public Position getPosition() {
-        return super.getPosition();
-    }
-
-    public void setPosition(Position position) {
-        super.setPosition(position);
-    }
 }

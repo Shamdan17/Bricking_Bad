@@ -1,6 +1,7 @@
 package domain.model.shape;
 
 import domain.model.Movable;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
@@ -34,10 +35,28 @@ public abstract class MovableShape implements Movable {
         Rectangle,
     }
 
+    MovableShape(Position position, Velocity velocity, int length, int width){
+        this.destroyed = false;
+        this.length = length;
+        this.width = width;
+        this.position = position;
+        this.velocity = velocity;
+    }
+
+    MovableShape(Position position, int length, int width){
+        this.destroyed = false;
+        this.length = length;
+        this.width = width;
+        this.position = position;
+        this.velocity = Constants.defaultVelocity;
+    }
+
     MovableShape(int length, int width){
         this.destroyed = false;
         this.length = length;
         this.width = width;
+        this.position = Constants.defaultPosition;
+        this.velocity = Constants.defaultVelocity;
     }
 
     public void destroy(){

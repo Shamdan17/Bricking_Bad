@@ -1,7 +1,9 @@
 package utils.physics;
 
 import domain.model.Ball;
+import domain.model.brick.SimpleBrick;
 import domain.model.shape.Circle;
+import domain.model.shape.Rectangle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Position;
@@ -55,6 +57,72 @@ class PhysicsEngineTest {
         b2.setPosition(p2);
         assertFalse(physicsEngine.isCollided(b1,b2));
 
+        // Ball with rectangle
+        // Collided
+        // Test 1
+        p1 = new Position(10,10);
+        Rectangle r1 = new SimpleBrick(5,5);
+        r1.setPosition(p1);
+        p2 = new Position(10,10);
+        b1 = new Ball(10);
+        b1.setPosition(p2);
+        assertTrue(physicsEngine.isCollided(b1,r1));
+        assertTrue(physicsEngine.isCollided(r1,b1));
+        // Test 2
+        p1 = new Position(5,5);
+        r1 = new SimpleBrick(8,8);
+        r1.setPosition(p1);
+        p2 = new Position(10,10);
+        b1 = new Ball(10);
+        b1.setPosition(p2);
+        assertTrue(physicsEngine.isCollided(b1,r1));
+        assertTrue(physicsEngine.isCollided(r1,b1));
+        // Not Collided
+        // Test 1
+        p1 = new Position(10,10);
+        r1 = new SimpleBrick(5,5);
+        r1.setPosition(p1);
+        p2 = new Position(15,15);
+        b1 = new Ball(100);
+        b1.setPosition(p2);
+        assertFalse(physicsEngine.isCollided(b1,r1));
+        assertFalse(physicsEngine.isCollided(r1,b1));
+        // Test 2
+        p1 = new Position(10,10);
+        r1 = new SimpleBrick(5,5);
+        r1.setPosition(p1);
+        p2 = new Position(0,0);
+        b1 = new Ball(5);
+        b1.setPosition(p2);
+        assertFalse(physicsEngine.isCollided(b1,r1));
+        assertFalse(physicsEngine.isCollided(r1,b1));
+
+        // Rectangle with Rectangle
+        // Collided
+        p1 = new Position(10,10);
+        r1 = new SimpleBrick(5,5);
+        r1.setPosition(p1);
+        p2 = new Position(14, 14);
+        Rectangle r2 = new SimpleBrick(5,5);
+        r2.setPosition(p2);
+        assertTrue(physicsEngine.isCollided(r1,r2));
+        assertTrue(physicsEngine.isCollided(r2,r1));
+
+        // Not collided
+        p1 = new Position(10,10);
+        r1 = new SimpleBrick(5,5);
+        r1.setPosition(p1);
+        p2 = new Position(16, 16);
+        r2 = new SimpleBrick(5,5);
+        r2.setPosition(p2);
+        assertFalse(physicsEngine.isCollided(r1,r2));
+        assertFalse(physicsEngine.isCollided(r2,r1));
+
+        // Objects should always be in collision with themselves
+        assertTrue(physicsEngine.isCollided(r1,r1));
+        assertTrue(physicsEngine.isCollided(r2,r2));
+        assertTrue(physicsEngine.isCollided(b1,b1));
+        assertTrue(physicsEngine.isCollided(b2,b2));
 
 
     }
