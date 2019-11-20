@@ -31,7 +31,12 @@ public class Position {
         return this;
     }
 
-    public Position incrementY(int dy){
+    public Position incrementX(double dx){
+        this.x += dx;
+        return this;
+    }
+
+    public Position incrementY(double dy){
         this.y += dy;
         return this;
     }

@@ -1,13 +1,16 @@
 package domain.model.brick;
 
-import domain.Movable;
 import domain.model.shape.Rectangle;
 import utils.Position;
 
-public abstract class Brick extends Rectangle implements Movable {
+public abstract class Brick extends Rectangle {
 
     public Brick(int length, int width) {
         super(length, width);
+    }
+
+    public final Type getType(){
+        return Type.Brick;
     }
 
     public abstract void move();

@@ -1,6 +1,6 @@
 package domain.model.brick;
 
-import domain.Movable;
+import domain.model.shape.MovableShape;
 import utils.Velocity;
 
 public class HalfMetalBrick extends Brick {
@@ -11,13 +11,13 @@ public class HalfMetalBrick extends Brick {
     }
 
     @Override
-    public void collide(Movable obj) {
-
+    public void collide(MovableShape obj) {
+        //TODO: Implement
     }
 
     @Override
     public void move() {
-
+        //TODO: Implement
     }
 
     @Override
@@ -27,11 +27,7 @@ public class HalfMetalBrick extends Brick {
 
     @Override
     public void setVelocity(Velocity ps) {
-
+        //TODO: Implement
     }
 
-    @Override
-    public Shape getShape() {
-        return null;
-    }
 }

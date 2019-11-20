@@ -1,6 +1,7 @@
 package domain.model.brick;
 
-import domain.Movable;
+import domain.model.Movable;
+import domain.model.shape.MovableShape;
 import utils.Velocity;
 
 public class MineBrick extends Brick {
@@ -10,13 +11,17 @@ public class MineBrick extends Brick {
     }
 
     @Override
-    public void collide(Movable obj) {
+    public void collide(MovableShape obj) {
+        //TODO: Implement
+    }
 
+    public void collide(Movable obj) {
+        //TODO: Implement
     }
 
     @Override
     public void move() {
-
+        //TODO: Implement
     }
 
     @Override
@@ -26,11 +31,6 @@ public class MineBrick extends Brick {
 
     @Override
     public void setVelocity(Velocity ps) {
-
-    }
-
-    @Override
-    public Shape getShape() {
-        return null;
+        //TODO: Implement
     }
 }

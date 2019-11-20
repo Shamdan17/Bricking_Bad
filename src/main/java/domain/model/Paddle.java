@@ -1,12 +1,23 @@
-package domain;
+package domain.model;
+import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import utils.Constants;
 import utils.Position;
+import utils.Velocity;
 
 public class Paddle extends Rectangle {
 
     private Position position;
     private int angle;
+
+    @Override
+    public void collide(MovableShape obj) {
+        return;
+    }
+
+    public Type getType(){
+        return Type.Paddle;
+    }
 
     boolean isTallerPaddle = false;
 
@@ -16,13 +27,17 @@ public class Paddle extends Rectangle {
         this.angle = 0;
     }
 
-    public Position getPosition() {
-        return position;
+    @Override
+    public void move() {
+        return;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+
+    // Since paddles don't move on collision the method is not used
+    public void setVelocity(Velocity ps) {
+        return;
     }
+
 
     public int getAngle() {
         return angle;
