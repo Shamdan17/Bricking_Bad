@@ -1,14 +1,19 @@
 package utils.physics;
 
 import domain.model.Ball;
+import domain.model.Paddle;
+import domain.model.brick.SimpleBrick;
 import domain.model.shape.Circle;
+import domain.model.shape.Rectangle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Slope;
 
+import static domain.model.shape.MovableShape.Type.Paddle;
 import static org.junit.jupiter.api.Assertions.*;
+import static utils.physics.PhysicsEngine.logger;
 
 class PhysicsEngineTest {
 
@@ -17,6 +22,30 @@ class PhysicsEngineTest {
     @BeforeAll
     static void setUp() {
         physicsEngine = PhysicsEngine.getInstance();
+    }
+
+    @Test
+    void testCalculateNewVelocity(){
+        //Paddle with ball
+        Position p1 = new Position(0,0);
+        Circle b1 = new Ball(5);
+        b1.setPosition(p1);
+        Position p2 = new Position(0,0);
+        Paddle pd = new Paddle(p2);
+        pd.setLength(100);
+        Rectangle brck = new SimpleBrick(100,5, p2);
+        brck.setPosition(p2);
+        Velocity v1 = new Velocity(0,-10);
+        b1.setVelocity(v1);
+
+        physicsEngine.isCollided(b1,pd);
+        for (int i=-45; i<45; i++){
+            pd.setAngle(i);
+            physicsEngine.calculateNewVelocity(b1, pd);
+            logger.debug("Current angle: " + i);
+            logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
+        }
+        //logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd) + physicsEngine.isCollided(b1,brck));
     }
 
     @Test
@@ -54,9 +83,24 @@ class PhysicsEngineTest {
         b2 = new Ball(5);
         b2.setPosition(p2);
         assertFalse(physicsEngine.isCollided(b1,b2));
-
-
-
     }
+
+    @Test
+    void testIsCollidedWithRotation(){
+        //Paddle with ball
+        Position p1 = new Position(10,0);
+        Circle b1 = new Ball(5);
+        b1.setPosition(p1);
+        Position p2 = new Position(0,0);
+        Paddle pd = new Paddle(p2);
+        pd.setPosition(p2);
+        pd.setLength(20);
+
+        for(int i=-45; i<=45;i++){
+            pd.setAngle(i);
+            System.out.println(physicsEngine.isCollided(pd, b1));
+        }
+    }
+
 
 }

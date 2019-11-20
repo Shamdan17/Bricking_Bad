@@ -1,5 +1,7 @@
 package utils.physics.math;
 
+import utils.Position;
+
 // Vector defines a vector struct, which has an x magnitude and a y magnitude.
 public class Vector {
     int x, y;
@@ -7,6 +9,12 @@ public class Vector {
     public Vector(int x, int y){
         this.x = x;
         this.y = y;
+    }
+
+    // creates a vector pointing from a to b
+    public Vector(Position a, Position b){
+        this.x = b.getX()-a.getX();
+        this.y = b.getY()-a.getY();
     }
 
     // Reverse the direction of the vector
