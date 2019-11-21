@@ -13,7 +13,9 @@ public class Board {
   public Board() {
     movables = new ArrayList<>();
     movables.add(new Ball(new Position(50,50),10));
-    movables.add(new Paddle(new Position(500, 150)));
+    Paddle paddle = new Paddle(new Position(500, 700));
+    paddle.setAngle(45);
+    movables.add(paddle);
   }
 
   public void animate() {

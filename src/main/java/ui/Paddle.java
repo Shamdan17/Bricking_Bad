@@ -14,8 +14,8 @@ public class Paddle implements Drawable {
 
     public void draw(Graphics g){
 
-        double sina = Math.sin(Math.toRadians(ms.getAngle() + 90));
-        double cosa = Math.cos(Math.toRadians(ms.getAngle() + 90));
+        double sina = Math.sin(Math.toRadians(ms.getAngle() - 90));
+        double cosa = Math.cos(Math.toRadians(ms.getAngle() - 90));
 
         int px = ms.getPosition().getX();
         int py = ms.getPosition().getY();
