@@ -31,13 +31,13 @@ public class Board {
     // Constructor
     public Board() {
         // assumed res is 960*640 we need to define global variables and parametrize them
-        Paddle paddle = new Paddle(new Position(430, 610)); // 10px above from bottom paddle length = 100
-        Ball ball = new Ball(new Position(20, 20), 8); //todo diameter of ball is 17px. need to change radius definition
-        ball.setVelocity(new Velocity(0, 1));
-        movables.add(paddle);
-        movables.add(ball);
-        Brick brick = new SimpleBrick(new Position(10,40), 20, 20);
-        movables.add(brick);
+//        Paddle paddle = new Paddle(new Position(430, 610)); // 10px above from bottom paddle length = 100
+//        Ball ball = new Ball(new Position(20, 20), 8); //todo diameter of ball is 17px. need to change radius definition
+//        ball.setVelocity(new Velocity(0, 1));
+//        movables.add(paddle);
+//        movables.add(ball);
+//        Brick brick = new SimpleBrick(new Position(10,40), 20, 20);
+//        movables.add(brick);
 
 
         //TODO game might start with a button press ? on the upper level ?

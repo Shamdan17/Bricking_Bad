@@ -33,7 +33,7 @@ public final class PhysicsEngine {
 
         // Handle possible rotated paddle collision logic
         if(obj2.getType()== MovableShape.Type.Paddle){
-            calculateObjectWithPaddleVelocity(obj2,obj1);
+            return calculateObjectWithPaddleVelocity(obj2,obj1);
         }
 
         Slope collisionWallSlope = calculateCollisionSlope(obj1, obj2);
@@ -124,7 +124,7 @@ public final class PhysicsEngine {
 
     private Slope calculateCircleOnRectCollisionSlope(MovableShape obj1, MovableShape obj2){
         Position circleCenter = getCircleCenter(obj1);
-        int cx = circleCenter.getX(), cy = circleCenter.getY();
+        double cx = circleCenter.getX(), cy = circleCenter.getY();
 
         Position rectPos = obj2.getPosition();
 
@@ -174,11 +174,9 @@ public final class PhysicsEngine {
         // TODO: find a way to improve this checking
         if(obj1.getType() == MovableShape.Type.Paddle){
             Position oldPos = obj2.getPosition();
-            logger.debug("Old Position: " + oldPos);
             // Rotate the other object
             obj1.getPosition();
             Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
-            logger.debug("Old Position: " + newPos);
             // Set the updated (rotated position)
             obj2.setPosition(newPos);
             // Perform the check
@@ -226,8 +224,8 @@ public final class PhysicsEngine {
         Position pos2 = obj2.getPosition();
 
 
-        int x1, x2;
-        int y1, y2;
+        double x1, x2;
+        double y1, y2;
 
         x1 = pos1.getX();
         y1 = pos1.getY();
@@ -235,8 +233,8 @@ public final class PhysicsEngine {
         x2 = pos2.getX();
         y2 = pos2.getY();
 
-        int len1, len2;
-        int wid1, wid2;
+        double len1, len2;
+        double wid1, wid2;
 
         len1 = obj1.getLength();
         len2 = obj2.getLength();
