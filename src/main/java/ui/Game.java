@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.*;
 import java.util.List;
-
 import domain.model.shape.MovableShape;
 import utils.Position;
 import domain.BrickingBad;
