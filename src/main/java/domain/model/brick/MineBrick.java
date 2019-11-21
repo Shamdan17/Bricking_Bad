@@ -33,4 +33,10 @@ public class MineBrick extends Brick {
     public void setVelocity(Velocity ps) {
         //TODO: Implement
     }
+
+    @Override
+    public String toString() {
+        return "Mine brick with"; //TODO add position info
+    }
+
 }

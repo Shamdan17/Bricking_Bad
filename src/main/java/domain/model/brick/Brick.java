@@ -23,6 +23,8 @@ public abstract class Brick extends Rectangle {
         super.setPosition(position);
     }
 
+    public abstract String toString();
+
     @Override
     // Bricks can't rotate so angle is always 0
     public final double getAngle() {

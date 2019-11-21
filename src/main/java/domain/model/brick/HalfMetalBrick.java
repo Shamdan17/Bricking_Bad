@@ -30,4 +30,9 @@ public class HalfMetalBrick extends Brick {
         //TODO: Implement
     }
 
+    @Override
+    public String toString() {
+        return "Half Metal Brick with "; //TODO add position.toString here;
+    }
+
 }

@@ -20,12 +20,34 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
+    public Position getPosition() {
+        return position;
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return velocity;
+    }
+
+    @Override
     // Since simple bricks don't move the method is not used
     public void setVelocity(Velocity ps) {
         return;
     }
 
     public void collide(MovableShape obj) {
-        super.destroy();
+        if (obj.getType() == Type.Ball)
+            super.destroy();
+        //TODO if collide with another brick, change direction in order to move to the other way
+    }
+
+    @Override
+    public String toString() {
+        return "Simple brick with " + position.toString();
     }
 }
