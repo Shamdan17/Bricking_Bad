@@ -24,15 +24,15 @@ public class Map {
             if(pEngine.isCollided(msh,objects.get(i)))
                 return false;
         }
-
         objects.add(msh);
 
         return true;
     }
 
     public boolean remove(Position pos){
-
+        System.out.printf("Removing: %d %d , size registered: %d",pos.getX(),pos.getY(),objects.size());
         for(int i = 0 ; i < objects.size() ; ++i){
+            System.out.printf("found: %d %d ",objects.get(i).getPosition().getX(),objects.get(i).getPosition().getY());
             if(pos.equals(objects.get(i).getPosition())){
                 objects.remove(i);
                 return true;

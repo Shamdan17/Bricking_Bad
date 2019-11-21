@@ -4,16 +4,15 @@ import domain.BrickingBad;
 import domain.model.shape.MovableShape;
 import utils.Position;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.font.GraphicAttribute;
+import java.awt.event.*;
 
-public class Brick implements Drawable, MouseMotionListener, MouseListener {
+public class Brick implements Drawable , MouseListener {
 
     private MovableShape ms;
     private BrickingBad brickingBad;
+    private static boolean removeFlag = false;
 
     public Brick(MovableShape ms, BrickingBad bb){
         this.ms = ms;
@@ -29,9 +28,26 @@ public class Brick implements Drawable, MouseMotionListener, MouseListener {
         g.drawRect(x,y,length,width);
     }
 
+    public static void setRemoveFlag(boolean state){
+        removeFlag = state;
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+
+
+        int x = mouseEvent.getX();
+        int y = mouseEvent.getY();
+        int myX = ms.getPosition().getX();
+        int myY = ms.getPosition().getY();
+        int len = ms.getLength();
+        int wid = ms.getWidth();
+        boolean flag = (x <= myX + wid && x >= myX ) && (y >= myY && y <= myY + len);
+        if(flag && removeFlag){
+            System.out.println("Click spotted");
+            brickingBad.removeBrick(new Position(myX,myY));
+        }
 
     }
 
@@ -54,21 +70,4 @@ public class Brick implements Drawable, MouseMotionListener, MouseListener {
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-        if(mouseEvent.getButton() == MouseEvent.BUTTON1){
-            Position oldPos = ms.getPosition();
-            int x = mouseEvent.getX();
-            int y = mouseEvent.getY();
-            brickingBad.moveBrick(oldPos,new Position(x,y));
-            ms.setPosition(new Position(x,y));
-        }
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-
-    }
-
 }

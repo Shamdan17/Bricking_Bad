@@ -38,6 +38,8 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void paintComponent(Graphics g){
+        brickingBad.animate();
+        super.paintComponent(g);
         List<MovableShape> drawables = brickingBad.getGameMovables();
         for(MovableShape ms : drawables){
             Drawable d = getDrawable(ms);
@@ -52,6 +54,8 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
             return new Paddle(ms);
         if(ms.getType() == MovableShape.Type.Ball)
             return new Ball(ms);
+        // TODO: add a dummy default value
+        // default return value
         return new Brick(ms, brickingBad);
     }
 

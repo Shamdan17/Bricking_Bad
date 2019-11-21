@@ -90,8 +90,8 @@ public class MainFrame extends JFrame {
 
     public static void main(String args[]){
         BrickingBad bb = new BrickingBad();
-        bb.addBrick(new Position(0,0));
-        bb.addBrick(new Position(4,6));
+        bb.addBrick(new Position(4,4));
+        bb.addBrick(new Position(100,100));
         new MainFrame(bb);
     }
 

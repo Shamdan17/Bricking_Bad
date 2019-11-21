@@ -32,9 +32,10 @@ public class BrickingBad {
   public List<MovableShape> getGameMovables() {
     return this.board.getMovables();
   }
-  public List<MovableShape> getMapEditorMoveables(){
+  public List<MovableShape> getMapEditorMovables(){
     return mapEditor.getMovables();
   }
+
   public boolean loginAttempt(String username, String password){
     // username and password must not be null
     if(username == null || password == null) {
@@ -58,11 +59,18 @@ public class BrickingBad {
 
   }
 
+  public void removeBrick(Position pos ){
+      boolean isRemoved = mapEditor.removeBrick(pos);
+      if(!isRemoved){
+        System.out.println("Remove failed");
+      }
+  }
+
   public void moveBrick(Position from, Position to){
     mapEditor.moveBrick(from,to);
   }
 
   public void addBrick(Position pos){
-    mapEditor.addBrick(Constants.SimpleBrick ,pos);
+    boolean isAdded = mapEditor.addBrick(Constants.SimpleBrick ,pos);
   }
 }
