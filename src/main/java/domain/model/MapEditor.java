@@ -8,7 +8,7 @@ import utils.Position;
 import java.util.List;
 
 
-public class MapEditor extends Board{
+public class MapEditor {
 
     private Map map;
 

@@ -1,6 +1,8 @@
 package ui;
 
 
+import domain.BrickingBad;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,14 +23,14 @@ public class MainFrame extends JFrame {
     private static final int LENGTH = 500;
     private static final int WIDTH = 500;
 
-    public MainFrame(){
+    public MainFrame(BrickingBad bb){
 
         mapEditorButton = new JButton(MAP_EDITOR_MODE);
         gamePlayButton = new JButton(GAME_PLAY_MODE);
         contPanel = new JPanel();
         mainPanel = new JPanel(new GridBagLayout());
-        mapEditorPanel = new MapEditorPanel();
-        gamePlayPanel = new GamePlayPanel();
+        mapEditorPanel = new MapEditorPanel(bb);
+        gamePlayPanel = new GamePlayPanel(bb);
         cardLayout = new CardLayout();
 
         contPanel.setLayout(cardLayout);
@@ -59,7 +61,6 @@ public class MainFrame extends JFrame {
                 cardLayout.show(contPanel,"edit");
             }
         });
-
         gamePlayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 cardLayout.show(contPanel,"game");
@@ -81,7 +82,8 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String args[]){
-        new MainFrame();
+        BrickingBad bb = new BrickingBad();
+        new MainFrame(bb);
     }
 
 

@@ -1,5 +1,4 @@
 import org.apache.log4j.Logger;
-import ui.GamePanel;
 import ui.LoginForm;
 
 public class Main {
