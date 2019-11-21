@@ -174,11 +174,11 @@ public final class PhysicsEngine {
         // TODO: find a way to improve this checking
         if(obj1.getType() == MovableShape.Type.Paddle){
             Position oldPos = obj2.getPosition();
-            logger.debug("Old Position: "+oldPos);
+            logger.debug("Old Position: " + oldPos);
             // Rotate the other object
             obj1.getPosition();
             Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
-            logger.debug("Old Position: "+newPos);
+            logger.debug("Old Position: " + newPos);
             // Set the updated (rotated position)
             obj2.setPosition(newPos);
             // Perform the check

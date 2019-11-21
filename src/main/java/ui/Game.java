@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 import java.util.List;
+import domain.model.shape.MovableShape;
 import utils.Position;
 import domain.BrickingBad;
 import domain.model.Movable;
@@ -16,7 +17,7 @@ public class Game extends JFrame {
   }
 
   public void drawFrame() {
-    List<Movable> movables = controller.getMovables();
+    List<MovableShape> movables = controller.getMovables();
     for(Movable m : movables) {
       // TODO, replace big string with .getType method, or find another solution
       drawMovable("we need getType on movable probably", m.getPosition());
