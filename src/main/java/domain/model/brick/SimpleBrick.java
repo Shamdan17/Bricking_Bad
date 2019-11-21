@@ -6,8 +6,8 @@ import utils.Velocity;
 
 public class SimpleBrick extends Brick {
 
-    public SimpleBrick(int length, int width) {
-        super(length, width);
+    public SimpleBrick(Position position, int length, int width) {
+        super(position, length, width);
     }
 
     @Override

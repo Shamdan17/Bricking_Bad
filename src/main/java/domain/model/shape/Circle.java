@@ -9,8 +9,8 @@ public abstract class Circle extends MovableShape{
         return Shape.Circle;
     }
 
-    public Circle(int radius){
-        super(2*radius, 2*radius);
+    public Circle(Position position, int radius){
+        super(position, 2*radius, 2*radius);
         this.radius = radius;
     }
 

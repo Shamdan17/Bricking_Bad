@@ -5,8 +5,8 @@ import utils.Position;
 
 public abstract class Brick extends Rectangle {
 
-    public Brick(int length, int width) {
-        super(length, width);
+    public Brick(Position position, int length, int width) {
+        super(position,length, width);
     }
 
     public final Type getType(){

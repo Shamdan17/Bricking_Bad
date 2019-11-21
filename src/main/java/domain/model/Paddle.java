@@ -7,7 +7,6 @@ import utils.Velocity;
 
 public class Paddle extends Rectangle {
 
-    private Position position;
     private int angle;
 
     @Override
@@ -22,8 +21,7 @@ public class Paddle extends Rectangle {
     boolean isTallerPaddle = false;
 
     public Paddle(Position position) {
-        super(Constants.paddleLength, Constants.paddleWidth);
-        this.position = position;
+        super(position, Constants.paddleLength, Constants.paddleWidth);
         this.angle = 0;
     }
 

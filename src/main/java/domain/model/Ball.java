@@ -7,8 +7,8 @@ import utils.Velocity;
 
 public class Ball extends Circle {
 
-    public Ball(int radius) {
-        super(radius);
+    public Ball(Position position, int radius) {
+        super(position, radius);
     }
 
     public void collide(MovableShape obj) {

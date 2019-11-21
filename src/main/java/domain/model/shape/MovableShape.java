@@ -51,13 +51,14 @@ public abstract class MovableShape implements Movable {
         this.velocity = Constants.defaultVelocity;
     }
 
-    MovableShape(int length, int width){
-        this.destroyed = false;
-        this.length = length;
-        this.width = width;
-        this.position = Constants.defaultPosition;
-        this.velocity = Constants.defaultVelocity;
-    }
+//    @Deprecated
+//    MovableShape(int length, int width){
+//        this.destroyed = false;
+//        this.length = length;
+//        this.width = width;
+//        this.position = Constants.defaultPosition;
+//        this.velocity = Constants.defaultVelocity;
+//    }
 
     public void destroy(){
         this.destroyed = false;

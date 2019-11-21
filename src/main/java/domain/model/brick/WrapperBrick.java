@@ -1,12 +1,13 @@
 package domain.model.brick;
 
 import domain.model.shape.MovableShape;
+import utils.Position;
 import utils.Velocity;
 
 public class WrapperBrick extends Brick {
     // TODO: Implement
-    public WrapperBrick(int length, int width) {
-        super(length, width);
+    public WrapperBrick(Position position, int length, int width) {
+        super(position, length, width);
     }
 
 
