@@ -61,9 +61,7 @@ public class BrickingBad {
 
   public void removeBrick(Position pos ){
       boolean isRemoved = mapEditor.removeBrick(pos);
-      if(!isRemoved){
-        System.out.println("Remove failed");
-      }
+
   }
 
   public void moveBrick(Position from, Position to){

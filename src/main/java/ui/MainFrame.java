@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
         this.add(contPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
-        this.setSize(LENGTH,WIDTH);
+        this.setSize(800,800);
         this.setVisible(true);
 
     }

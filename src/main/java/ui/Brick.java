@@ -45,7 +45,6 @@ public class Brick implements Drawable , MouseListener {
         int wid = ms.getWidth();
         boolean flag = (x <= myX + wid && x >= myX ) && (y >= myY && y <= myY + len);
         if(flag && removeFlag){
-            System.out.println("Click spotted");
             brickingBad.removeBrick(new Position(myX,myY));
         }
 
