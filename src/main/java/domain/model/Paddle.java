@@ -20,7 +20,7 @@ public class Paddle extends Rectangle {
     boolean isTallerPaddle = false;
 
     public Paddle(Position position) {
-        super(position, Constants.paddleLength, Constants.paddleWidth);
+        super(position, Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
         super.setAngle(0);
     }
 
