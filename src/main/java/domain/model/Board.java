@@ -1,15 +1,17 @@
 package domain.model;
 
+import utils.Position;
+
 import java.util.List;
 import java.util.ArrayList;
 
 // Board contains all movables
 public class Board {
-  List<Movable> movables;
+  private List<Movable> movables;
 
   public Board() {
-    movables = new ArrayList<Movable>();
-    movables.add(new Ball(10));
+    movables = new ArrayList<>();
+    movables.add(new Ball(new Position(50,50),10));
   }
 
   public void animate() {
