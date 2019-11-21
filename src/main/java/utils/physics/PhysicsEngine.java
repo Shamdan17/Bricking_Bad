@@ -51,7 +51,7 @@ public final class PhysicsEngine {
         logger.debug("Old Position: "+oldPos);
         // Rotate the other object
         Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
-        logger.debug("Old Position: "+newPos);
+        logger.debug("New Position: "+newPos);
         // Set the updated (rotated position)
         obj2.setPosition(newPos);
         // Perform the calculations

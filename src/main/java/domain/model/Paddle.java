@@ -87,4 +87,10 @@ public class Paddle extends Rectangle {
     public void setTallerPaddle(boolean tallerPaddle) {
         isTallerPaddle = tallerPaddle;
     }
+
+    @Override
+    public String toString() {
+        return "Paddle with " + getPosition().toString();
+    }
+
 }

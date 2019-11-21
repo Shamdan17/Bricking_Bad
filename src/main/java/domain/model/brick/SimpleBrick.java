@@ -22,6 +22,13 @@ public class SimpleBrick extends Brick {
     }
 
     public void collide(MovableShape obj) {
-        super.destroy();
+        if (obj.getType() == Type.Ball)
+            super.destroy();
+        //TODO if collide with another brick, change direction in order to move to the other way
+    }
+
+    @Override
+    public String toString() {
+        return "Simple brick with " + super.getPosition();
     }
 }

@@ -40,4 +40,9 @@ public class Ball extends Circle {
     public final Type getType() {
         return Type.Ball;
     }
+
+    @Override
+    public String toString() {
+        return "Ball with " + getPosition().toString();
+    }
 }

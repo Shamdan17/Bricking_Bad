@@ -28,7 +28,7 @@ class PhysicsEngineTest {
     @Test
     void testCalculateNewVelocity(){
         //Paddle with ball
-        Position p1 = new Position(0,0);
+        Position p1 = new Position(0,-8);
         Circle b1 = new Ball(p1,5);
         Position p2 = new Position(0,0);
         Paddle pd = new Paddle(p2);
@@ -37,13 +37,12 @@ class PhysicsEngineTest {
         Velocity v1 = new Velocity(0,-10);
         b1.setVelocity(v1);
 
-        physicsEngine.isCollided(b1,pd);
-        for (int i=-45; i<45; i++){
-            pd.setAngle(i);
-            physicsEngine.calculateNewVelocity(b1, pd);
-            logger.debug("Current angle: " + i);
-            logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
-        }
+        //physicsEngine.isCollided(b1,pd);
+        pd.setAngle(45);
+        physicsEngine.calculateNewVelocity(b1, pd);
+        //logger.debug("Current angle: " + i);
+        logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
+
         //logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd) + physicsEngine.isCollided(b1,brck));
     }
 

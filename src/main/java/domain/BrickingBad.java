@@ -4,6 +4,7 @@ import domain.account.Account;
 import domain.account.AccountManager;
 import domain.model.Board;
 import domain.model.Movable;
+import domain.model.shape.MovableShape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,10 @@ public class BrickingBad {
   }
 
   public void animate() {
-    this.board.animate();
+    this.board.advance();
   }
 
-  public List<Movable> getMovables() {
+  public List<MovableShape> getMovables() {
     return this.board.getMovables();
   }
 
