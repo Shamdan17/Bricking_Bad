@@ -29,11 +29,14 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void run(){
-        try{
-            repaint();
-            Thread.sleep(30);
-        }catch(Exception e){
-            e.printStackTrace();
+        while(true){
+            try{
+                repaint();
+                Thread.sleep(30);
+                brickingBad.animate();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
