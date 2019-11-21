@@ -26,18 +26,21 @@ public class Position {
         this.y = y;
     }
 
-    public Position incrementX(int dx){
-        this.x += dx;
-        return this;
-    }
-
     public Position incrementX(double dx){
-        this.x += dx;
-        return this;
+        int difx = (int)Math.round(dx);
+        return new Position(x+difx, y);
     }
 
     public Position incrementY(double dy){
-        this.y += dy;
-        return this;
+        int dify = (int)Math.round(dy);
+        return new Position(x, y+dify);
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

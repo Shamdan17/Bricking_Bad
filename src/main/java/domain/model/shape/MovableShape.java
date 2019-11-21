@@ -12,6 +12,7 @@ import java.util.Objects;
 public abstract class MovableShape implements Movable {
     // Object dimensions
     private int length, width;
+    private double angle;
     // Parameters
     private Position position;
     private Velocity velocity;
@@ -22,7 +23,6 @@ public abstract class MovableShape implements Movable {
 
     public abstract Type getType();
     public abstract Shape getShape();
-
 
     public enum Type {
         Ball,
@@ -118,4 +118,17 @@ public abstract class MovableShape implements Movable {
     public int hashCode() {
         return Objects.hash(length, width);
     }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public void incrementAngle(double dif) {
+        this.angle += dif;
+    }
+
 }

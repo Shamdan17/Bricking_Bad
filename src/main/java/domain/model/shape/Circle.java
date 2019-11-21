@@ -33,4 +33,13 @@ public abstract class Circle extends MovableShape{
     public void setLength(int width){
         setRadius(width/2);
     }
+
+    @Override
+    public double getAngle() {
+        return 0;
+    }
+
+    @Override
+    // Does nothing since angles are not well defined for circles
+    public void setAngle(double angle) {}
 }

@@ -13,4 +13,17 @@ public abstract class Brick extends Rectangle {
         return Type.Brick;
     }
 
+    @Override
+    // Bricks can't rotate so angle is always 0
+    public final double getAngle() {
+        return 0;
+    }
+
+    @Override
+    // SetAngle meaningless
+    public final void setAngle(double angle) {}
+
+    @Override
+    // increment angle meaningless
+    public final void incrementAngle(double dif){}
 }
