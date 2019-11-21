@@ -29,6 +29,23 @@ public class Paddle extends Rectangle {
         return;
     }
 
+    public void moveLeft() {
+      setPosition(new Position(getPosition().getX()-10, getPosition().getY()));
+    }
+
+    public void moveRight() {
+      setPosition(new Position(getPosition().getX()+10, getPosition().getY()));
+    }
+
+    public void rotateRight() {
+      setAngle(getAngle()+10);
+    }
+
+    public void rotateLeft() {
+      setAngle(getAngle()-10);
+    }
+
+
 
     // Since paddles don't move on collision the method is not used
     public void setVelocity(Velocity ps) {

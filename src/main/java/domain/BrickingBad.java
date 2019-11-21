@@ -59,6 +59,22 @@ public class BrickingBad {
 
   }
 
+  public void movePaddleLeft() {
+    board.movePaddleLeft();
+  }
+
+  public void movePaddleRight() {
+    board.movePaddleRight();
+  }
+
+  public void rotatePaddleRight() {
+    board.rotatePaddleRight();
+  }
+
+  public void rotatePaddleLeft() {
+    board.rotatePaddleLeft();
+  }
+
   public void removeBrick(Position pos ){
       boolean isRemoved = mapEditor.removeBrick(pos);
 
