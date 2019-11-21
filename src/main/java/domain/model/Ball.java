@@ -7,25 +7,32 @@ import utils.Velocity;
 
 public class Ball extends Circle {
 
-    public Ball(int radius) {
-        super(radius);
+    public Ball(Position position, int radius) {
+        super(position, radius);
+
+        // TODO we need to remove constants, also we need to check every place
+        // where we initialize variable, we don't want null thingies
+        // (for example by design any setter should not accept null, contractors
+        // should not accept null, etc..)
+        setVelocity(new Velocity(10, 10));
     }
 
     public void collide(MovableShape obj) {
-        //TODO Implement this
-//        if (obj.getType() == bottomWall) {
-//            destroy();
-//        }
+       // TODO Implement this
+       // if (obj.getType() == bottomWall) {
+       //     destroy();
+       // }
     }
 
     @Override
     public void move() {
         // Get parameters
+        // TODO probability of future null thingy here
         Position oldPos = getPosition();
-        Velocity velocity = getVelocity();
 
         // Calculate new position
-        Position newPos = oldPos.incrementX(velocity.getX()).incrementY(velocity.getY());
+        // Do we really need this (maybe we can provide oldPos.move(dx, dy)?
+        Position newPos = oldPos.incrementX(getVelocity().getX()).incrementY(getVelocity().getY());
         setPosition(newPos);
     }
 

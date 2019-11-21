@@ -1,6 +1,7 @@
 package domain.model.shape;
 
 import domain.model.Movable;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 public abstract class MovableShape implements Movable {
     // Object dimensions
     private int length, width;
+    private double angle;
     // Parameters
     private Position position;
     private Velocity velocity;
@@ -21,7 +23,6 @@ public abstract class MovableShape implements Movable {
 
     public abstract Type getType();
     public abstract Shape getShape();
-
 
     public enum Type {
         Ball,
@@ -34,11 +35,30 @@ public abstract class MovableShape implements Movable {
         Rectangle,
     }
 
-    MovableShape(int length, int width){
+    MovableShape(Position position, Velocity velocity, int length, int width){
         this.destroyed = false;
         this.length = length;
         this.width = width;
+        this.position = position;
+        this.velocity = velocity;
     }
+
+    MovableShape(Position position, int length, int width){
+        this.destroyed = false;
+        this.length = length;
+        this.width = width;
+        this.position = position;
+        this.velocity = Constants.defaultVelocity;
+    }
+
+//    @Deprecated
+//    MovableShape(int length, int width){
+//        this.destroyed = false;
+//        this.length = length;
+//        this.width = width;
+//        this.position = Constants.defaultPosition;
+//        this.velocity = Constants.defaultVelocity;
+//    }
 
     public void destroy(){
         this.destroyed = false;
@@ -98,4 +118,17 @@ public abstract class MovableShape implements Movable {
     public int hashCode() {
         return Objects.hash(length, width);
     }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public void incrementAngle(double dif) {
+        this.angle += dif;
+    }
+
 }

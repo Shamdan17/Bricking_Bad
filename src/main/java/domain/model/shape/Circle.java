@@ -9,8 +9,8 @@ public abstract class Circle extends MovableShape{
         return Shape.Circle;
     }
 
-    public Circle(int radius){
-        super(2*radius, 2*radius);
+    public Circle(Position position, int radius){
+        super(position, 2*radius, 2*radius);
         this.radius = radius;
     }
 
@@ -33,4 +33,13 @@ public abstract class Circle extends MovableShape{
     public void setLength(int width){
         setRadius(width/2);
     }
+
+    @Override
+    public double getAngle() {
+        return 0;
+    }
+
+    @Override
+    // Does nothing since angles are not well defined for circles
+    public void setAngle(double angle) {}
 }

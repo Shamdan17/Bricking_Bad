@@ -7,10 +7,7 @@ public abstract class Rectangle extends MovableShape{
         return Shape.Rectangle;
     }
 
-    private Position position;
-
-    public Rectangle(int length, int width){
-        super(length, width);
+    public Rectangle(Position position, int length, int width){
+        super(position,length, width);
     }
-
 }

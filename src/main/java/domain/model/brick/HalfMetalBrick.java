@@ -1,13 +1,14 @@
 package domain.model.brick;
 
 import domain.model.shape.MovableShape;
+import utils.Position;
 import utils.Velocity;
 
 public class HalfMetalBrick extends Brick {
 
     // TODO: Implement
-    public HalfMetalBrick(int length, int width) {
-        super(length, width);
+    public HalfMetalBrick(Position position, int length, int width) {
+        super(position, length, width);
     }
 
     @Override

@@ -5,21 +5,25 @@ import utils.Position;
 
 public abstract class Brick extends Rectangle {
 
-    public Brick(int length, int width) {
-        super(length, width);
+    public Brick(Position position, int length, int width) {
+        super(position,length, width);
     }
 
     public final Type getType(){
         return Type.Brick;
     }
 
-    public abstract void move();
-
-    public Position getPosition() {
-        return super.getPosition();
+    @Override
+    // Bricks can't rotate so angle is always 0
+    public final double getAngle() {
+        return 0;
     }
 
-    public void setPosition(Position position) {
-        super.setPosition(position);
-    }
+    @Override
+    // SetAngle meaningless
+    public final void setAngle(double angle) {}
+
+    @Override
+    // increment angle meaningless
+    public final void incrementAngle(double dif){}
 }
