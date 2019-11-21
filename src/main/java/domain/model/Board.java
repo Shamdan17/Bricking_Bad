@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import utils.Position;
 import utils.physics.PhysicsEngine;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,16 +37,17 @@ public class Board {
 
     // Constructor
     public Board() {
-        // assumed res is 960*640 we need to define global variables and parametrize them
-        paddle = new Paddle(new Position(430,610)); // 10px above from bottom paddle length = 100
-        ball = new Ball(new Position(10,20), 8); //todo diameter of ball is 17px. need to change radius definition
-
-        movables.add(paddle);
-        movables.add(ball);
-
-        for (int i = 0; i < 10; i++) {
-            movables.add(new SimpleBrick(new Position(i * 25 + 10, 50), 20,20)); // need to get from map
-        }
+        movables = new ArrayList<>();
+//        // assumed res is 960*640 we need to define global variables and parametrize them
+//        paddle = new Paddle(new Position(430,610)); // 10px above from bottom paddle length = 100
+//        ball = new Ball(new Position(10,20), 8); //todo diameter of ball is 17px. need to change radius definition
+//
+//        movables.add(paddle);
+//        movables.add(ball);
+//
+//        for (int i = 0; i < 10; i++) {
+//            movables.add(new SimpleBrick(new Position(i * 25 + 10, 50), 20,20)); // need to get from map
+//        }
 
         //TODO game might start with a button press ? on the upper level ?
     }
@@ -112,10 +114,13 @@ public class Board {
 
     }
 
+    public void addMovable(MovableShape mshape){
+        movables.add(mshape);
+    }
 
 
-  public List<MovableShape> getMovables() {
-    // TODO: Do not return the original, return an immutable copy
-    return movables;
-  }
+    public List<MovableShape> getMovables() {
+        // TODO: Do not return the original, return an immutable copy
+        return movables;
+    }
 }
