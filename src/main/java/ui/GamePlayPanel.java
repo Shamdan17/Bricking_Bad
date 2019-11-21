@@ -5,9 +5,11 @@ import domain.model.shape.MovableShape;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
-public class GamePlayPanel extends JPanel implements Runnable {
+public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
 
     public JButton backToMain;
     private BrickingBad brickingBad;
@@ -21,7 +23,9 @@ public class GamePlayPanel extends JPanel implements Runnable {
         saveButton = new JButton("save");
         loadButton = new JButton("load");
         this.add(backToMain);
-        //(new Thread(this)).start();
+        this.add(saveButton);
+        this.add(loadButton);
+        (new Thread(this)).start();
     }
 
     public void run(){
@@ -33,8 +37,8 @@ public class GamePlayPanel extends JPanel implements Runnable {
         }
     }
 
-    public void paint(Graphics g){
-        List<MovableShape> drawables = brickingBad.getMovables();
+    public void paintComponent(Graphics g){
+        List<MovableShape> drawables = brickingBad.getGameMovables();
         for(MovableShape ms : drawables){
             Drawable d = getDrawable(ms);
             d.draw(g);
@@ -43,11 +47,27 @@ public class GamePlayPanel extends JPanel implements Runnable {
 
     public Drawable getDrawable(MovableShape ms){
         if(ms.getType() == MovableShape.Type.Brick)
-            return new Brick(ms);
+            return new Brick(ms, brickingBad);
         if(ms.getType() == MovableShape.Type.Paddle)
             return new Paddle(ms);
         if(ms.getType() == MovableShape.Type.Ball)
             return new Ball(ms);
-        return null;
+        return new Brick(ms, brickingBad);
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
     }
 }

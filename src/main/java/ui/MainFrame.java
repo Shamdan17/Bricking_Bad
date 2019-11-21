@@ -2,6 +2,7 @@ package ui;
 
 
 import domain.BrickingBad;
+import utils.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,23 +48,28 @@ public class MainFrame extends JFrame {
         mapEditorPanel.backToMain.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 cardLayout.show(contPanel,"main");
+                repaint();
             }
         });
 
         gamePlayPanel.backToMain.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 cardLayout.show(contPanel,"main");
+                repaint();
             }
         });
 
         mapEditorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 cardLayout.show(contPanel,"edit");
+                repaint();
             }
         });
+
         gamePlayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 cardLayout.show(contPanel,"game");
+                repaint();
             }
         });
 
@@ -73,6 +79,7 @@ public class MainFrame extends JFrame {
 
         cardLayout.show(contPanel,"main");
 
+        this.setTitle("BrickingBad");
         this.add(contPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -83,6 +90,8 @@ public class MainFrame extends JFrame {
 
     public static void main(String args[]){
         BrickingBad bb = new BrickingBad();
+        bb.addBrick(new Position(0,0));
+        bb.addBrick(new Position(4,6));
         new MainFrame(bb);
     }
 

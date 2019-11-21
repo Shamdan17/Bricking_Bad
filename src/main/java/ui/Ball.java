@@ -4,7 +4,7 @@ import domain.model.shape.MovableShape;
 
 import java.awt.*;
 
-public class Ball implements Drawable{
+public class Ball implements Drawable {
 
     MovableShape ms;
 
@@ -14,6 +14,7 @@ public class Ball implements Drawable{
 
     public void draw(Graphics g){
         g.setColor(Color.RED);
+        g.fillOval(ms.getPosition().getX(),ms.getPosition().getY(),ms.getLength(),ms.getWidth());
         g.drawOval(ms.getPosition().getX(),ms.getPosition().getY(),ms.getLength(),ms.getWidth());
     }
 }
