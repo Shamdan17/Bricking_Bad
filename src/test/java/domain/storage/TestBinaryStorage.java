@@ -13,7 +13,7 @@ class TestBinaryStorage {
   void testStoragePut(){
     human john = new human("john", 32);
 
-    BinaryStorage bs = new BinaryStorage();
+    BinaryStorage bs = new BinaryStorage("test");
     bs.put("key", john);
     assertEquals((human) bs.get("key"), john);
   }
