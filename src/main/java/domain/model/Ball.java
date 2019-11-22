@@ -14,7 +14,6 @@ public class Ball extends Circle {
         // where we initialize variable, we don't want null thingies
         // (for example by design any setter should not accept null, contractors
         // should not accept null, etc..)
-        setVelocity(new Velocity(1, 1));
     }
 
     public void collide(MovableShape obj) {

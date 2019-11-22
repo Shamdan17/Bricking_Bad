@@ -15,6 +15,7 @@ public class CollisionRuleEngine {
             // Set the new velocities
             obj1.setVelocity(v1);
             obj2.setVelocity(v2);
+
         }
     }
 }

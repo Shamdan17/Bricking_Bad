@@ -11,4 +11,6 @@ public final class Constants {
     public static final Velocity defaultVelocity = new Velocity(0,0);
 
     public static final String SimpleBrick = "SimpleBrick";
+
+    //public static final defaultBoard
 }
