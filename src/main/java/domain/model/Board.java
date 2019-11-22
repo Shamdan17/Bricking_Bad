@@ -28,6 +28,7 @@ public class Board {
   private ArrayList<MovableShape> movables;
   private StorageManager sm;
   private Paddle paddle;
+  private Ball bll;
 
   long unixTimestamp;
 
@@ -59,7 +60,7 @@ public class Board {
 
     paddle = new Paddle(new Position(300, 700));
     movables.add(paddle);
-    Ball bll = new Ball(new Position(310, 300), 12);
+    bll = new Ball(new Position(310, 300), 12);
     bll.setVelocity(new Velocity(0,8));
     movables.add(bll);
   }
@@ -129,6 +130,7 @@ public class Board {
       MovableShape c;
       if (m.getType() == Type.Ball) {
         c = new Ball(m.getPosition(), m.getWidth()/2);
+        c.setVelocity(bll.getVelocity());
       } else if(m.getType() == Type.Brick) {
         c = new SimpleBrick(m.getPosition(), 60, 20);
       } else if(m.getType() == Type.Paddle) {
@@ -147,12 +149,18 @@ public class Board {
 
   public void load() {
     if (sm.get(unixTimestamp) == null) {
-      System.out.println("noooooooooooooooooooooooooooooooooooooooo");
       return;
     }
 
-    System.out.println("Getting for real");
-
     movables = (ArrayList<MovableShape>) sm.get(unixTimestamp);
+
+    for (MovableShape m : movables) {
+      if (m.getType() == Type.Paddle) {
+        paddle = (Paddle) m;
+      }
+      if (m.getType() == Type.Ball) {
+        bll = (Ball) m;
+      }
+    }
   }
 }

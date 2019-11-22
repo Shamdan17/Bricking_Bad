@@ -42,7 +42,7 @@ public class BrickingBad {
   }
 
   public void load() {
-    // board.load();
+    board.load();
   }
 
 
