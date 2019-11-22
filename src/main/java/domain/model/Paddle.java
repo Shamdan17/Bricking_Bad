@@ -18,18 +18,45 @@ public class Paddle extends Rectangle {
         return Type.Paddle;
     }
 
-    boolean isTallerPaddle = false;
+    private boolean isTallerPaddle = false;
+    private boolean tiltLeft = false;
+    private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(position, Constants.paddleLength, Constants.paddleWidth);
+        super(position, Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
         super.setAngle(0);
     }
 
     @Override
     public void move() {
-        return;
+        if(tiltLeft){
+            setAngle(getAngle()-6);
+        }else if(tiltRight){
+            setAngle(getAngle()+6);
+        }else{
+            normalizeAngle(0.5);
+        }
+        tiltRight=false;
+        tiltLeft=false;
     }
 
+    public void moveLeft() {
+      setPosition(new Position(super.getPosition().getX()-10, super.getPosition().getY()));
+    }
+
+    public void moveRight() {
+      setPosition(new Position(super.getPosition().getX()+10, super.getPosition().getY()));
+    }
+
+    public void rotateRight() {
+      tiltRight=true;
+      //setAngle(getAngle()+10);
+    }
+
+    public void rotateLeft() {
+      tiltLeft = true;
+      //setAngle(getAngle()+10);
+    }
 
     // Since paddles don't move on collision the method is not used
     public void setVelocity(Velocity ps) {
@@ -74,7 +101,7 @@ public class Paddle extends Rectangle {
         if (getAngle() < 0) {
             //Need to rotate the paddle relative to the top right corner
             Position origin = super.getPosition().incrementX(super.getLength());
-            Position currentTopLeft = Rotation.rotate(origin, super.getPosition(), getAngle());
+            Position currentTopLeft = Rotation.rotate(origin, super.getPosition(), -getAngle());
             return currentTopLeft;
         } else {
             return super.getPosition();

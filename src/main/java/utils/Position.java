@@ -1,6 +1,8 @@
 package utils;
 
-public class Position {
+import java.io.Serializable;
+
+public class Position implements Serializable{
 
     private double x;
     private double y;
@@ -42,5 +44,9 @@ public class Position {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public boolean equals(Position pos){
+        return x == pos.getX() && y == pos.getY();
     }
 }

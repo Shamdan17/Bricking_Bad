@@ -1,7 +1,9 @@
 package domain.model;
 
+import domain.model.shape.MovableShape.Type;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
@@ -14,7 +16,6 @@ public class Ball extends Circle {
         // where we initialize variable, we don't want null thingies
         // (for example by design any setter should not accept null, contractors
         // should not accept null, etc..)
-        setVelocity(new Velocity(10, 10));
     }
 
     public void collide(MovableShape obj) {
@@ -33,7 +34,23 @@ public class Ball extends Circle {
         // Calculate new position
         // Do we really need this (maybe we can provide oldPos.move(dx, dy)?
         Position newPos = oldPos.incrementX(getVelocity().getX()).incrementY(getVelocity().getY());
+        ensureBallIsInBounds();
         setPosition(newPos);
+    }
+
+    //TODO: Move this out of ball
+    public void ensureBallIsInBounds(){
+        Velocity oldVelocity = getVelocity();
+        if(getPosition().getX()+getLength() > Constants.maxX){
+            oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if(getPosition().getX() < 0){
+            oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if(getPosition().getY() < 0){
+            oldVelocity = new Velocity(oldVelocity.getY(), Math.abs(oldVelocity.getY()));
+        }
+        setVelocity(oldVelocity);
     }
 
     @Override
