@@ -43,4 +43,8 @@ public class Position {
                 ", y=" + y +
                 '}';
     }
+
+    public boolean equals(Position pos){
+        return x == pos.getX() && y == pos.getY();
+    }
 }

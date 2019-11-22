@@ -14,8 +14,8 @@ public class Paddle implements Drawable {
 
     public void draw(Graphics g){
 
-        double sina = Math.sin(Math.toRadians(ms.getAngle()));
-        double cosa = Math.cos(Math.toRadians(ms.getAngle()));
+        double sina = Math.sin(Math.toRadians(ms.getAngle() - 90));
+        double cosa = Math.cos(Math.toRadians(ms.getAngle() - 90));
 
         int px = ms.getPosition().getX();
         int py = ms.getPosition().getY();
@@ -34,7 +34,8 @@ public class Paddle implements Drawable {
                 py + (int) Math.round(width*sina) +(int) Math.round(length*cosa),
                 py + (int) Math.round(length*cosa)
         };
-
+        g.fillPolygon(x,y,4);
+        g.setColor(Color.GRAY);
         g.drawPolygon(x,y,4);
     }
 

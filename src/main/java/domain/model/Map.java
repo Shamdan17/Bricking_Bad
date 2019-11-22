@@ -24,14 +24,12 @@ public class Map {
             if(pEngine.isCollided(msh,objects.get(i)))
                 return false;
         }
-
         objects.add(msh);
 
         return true;
     }
 
     public boolean remove(Position pos){
-
         for(int i = 0 ; i < objects.size() ; ++i){
             if(pos.equals(objects.get(i).getPosition())){
                 objects.remove(i);
