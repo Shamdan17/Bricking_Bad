@@ -18,10 +18,10 @@ public class Ball extends Circle {
     }
 
     public void collide(MovableShape obj) {
-       // TODO Implement this
-       // if (obj.getType() == bottomWall) {
-       //     destroy();
-       // }
+        // TODO Implement this
+        // if (obj.getType() == bottomWall) {
+        //     destroy();
+        // }
     }
 
     @Override

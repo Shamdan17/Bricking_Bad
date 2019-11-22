@@ -7,6 +7,6 @@ public final class Constants {
     public static final int paddleLength = 100;
 
 
-    public static final Position defaultPosition = new Position(0,0);
-    public static final Velocity defaultVelocity = new Velocity(0,0);
+    public static final Position defaultPosition = new Position(0, 0);
+    public static final Velocity defaultVelocity = new Velocity(0, 0);
 }

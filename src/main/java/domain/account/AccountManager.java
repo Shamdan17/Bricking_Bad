@@ -15,29 +15,27 @@ public class AccountManager {
 
     public static AccountManager accountManager = new AccountManager();
 
-    public AccountManager(){
+    public AccountManager() {
         accounts.add(new Account("Hello", "World"));
     }
 
-    public void Register(String username, String password){
-        if(Account.isValid(username, password)){
+    public void Register(String username, String password) {
+        if (Account.isValid(username, password)) {
             accounts.add(new Account(username, password));
         }
     }
 
-    public Account Authenticate(String Username, String Password){
-        for(Account acc : accounts){
-            if(acc.getUsername().equals(Username)){
-                if(acc.getPassword().equals(Password)){
+    public Account Authenticate(String Username, String Password) {
+        for (Account acc : accounts) {
+            if (acc.getUsername().equals(Username)) {
+                if (acc.getPassword().equals(Password)) {
                     logger.info("User " + acc.getUsername() + " successfully logged in");
                     return acc;
-                }else{
+                } else {
                     return null;
                 }
             }
         }
         return null;
     }
-
-
 }

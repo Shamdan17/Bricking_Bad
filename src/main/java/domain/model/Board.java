@@ -1,11 +1,7 @@
 package domain.model;
 
-import domain.model.brick.Brick;
-import domain.model.brick.SimpleBrick;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
-import utils.Position;
-import utils.Velocity;
 import utils.physics.PhysicsEngine;
 
 import java.util.ArrayList;
@@ -53,15 +49,15 @@ public class Board {
 
     private void moveAllMovables() {
         // move all objects once
-        for(MovableShape movableShape : movables) {
+        for (MovableShape movableShape : movables) {
             movableShape.move();
         }
     }
 
     private void checkCollisions() {
         // check all movables pair-wise whether they are collided or not
-        for (int i = 0; i < movables.size(); i++){
-            for (int j = i + 1; j < movables.size(); j++){
+        for (int i = 0; i < movables.size(); i++) {
+            for (int j = i + 1; j < movables.size(); j++) {
                 CollisionRuleEngine.collide(movables.get(i), movables.get(j));
             }
         }
@@ -73,10 +69,10 @@ public class Board {
                 logger.debug(movableShape + " is destroyed.");
             return movableShape.isDestroyed();
         });
-        logger.debug("# of remaining movables: " +  movables.size());
+        logger.debug("# of remaining movables: " + movables.size());
     }
 
-    public void addMovable(MovableShape mshape){
+    public void addMovable(MovableShape mshape) {
         movables.add(mshape);
     }
 

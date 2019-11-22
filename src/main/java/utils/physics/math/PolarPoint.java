@@ -13,61 +13,61 @@ public class PolarPoint {
     public PolarPoint(double radius, double angle) {
         this.radius = radius;
         this.angle = angle;
-        this.origin = new Position(0,0);
+        this.origin = new Position(0, 0);
     }
 
     public PolarPoint(Velocity vc) {
         double newY = vc.getY();
         double newX = vc.getX();
-        this.radius = Math.sqrt(newY*newY + newX*newX);
-        if(newX!=0){
-            this.angle = Math.toDegrees(Math.atan(newY/newX));
-            if(newX < 0){
+        this.radius = Math.sqrt(newY * newY + newX * newX);
+        if (newX != 0) {
+            this.angle = Math.toDegrees(Math.atan(newY / newX));
+            if (newX < 0) {
                 this.angle += 180;
             }
-        }else{
-            if(newY>0){
+        } else {
+            if (newY > 0) {
                 this.angle = 90;
-            }else{
+            } else {
                 this.angle = -90;
             }
         }
     }
 
-    public PolarPoint(Position origin, Position point){
+    public PolarPoint(Position origin, Position point) {
         double newY = point.getY() - origin.getY();
         double newX = point.getX() - origin.getX();
-        this.radius = Math.sqrt(newY*newY + newX*newX);
-        if(newX!=0){
-            this.angle = Math.toDegrees(Math.atan(newY/newX));
-            if(newX < 0){
+        this.radius = Math.sqrt(newY * newY + newX * newX);
+        if (newX != 0) {
+            this.angle = Math.toDegrees(Math.atan(newY / newX));
+            if (newX < 0) {
                 this.angle += 180;
             }
-        }else{
-            if(newY>0){
+        } else {
+            if (newY > 0) {
                 this.angle = 90;
-            }else{
+            } else {
                 this.angle = -90;
             }
         }
         this.origin = origin;
     }
 
-    public void rotate(double dif){
+    public void rotate(double dif) {
         this.angle += dif;
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         double x = origin.getX();
         double y = origin.getY();
         y += radius * Math.sin(Math.toRadians(angle));
         x += radius * Math.cos(Math.toRadians(angle));
-        return new Position(x,y);
+        return new Position(x, y);
     }
 
-    public Velocity getVelocity(){
+    public Velocity getVelocity() {
         double x = radius * Math.cos(Math.toRadians(angle));
         double y = radius * Math.sin(Math.toRadians(angle));
-        return new Velocity(x,y);
+        return new Velocity(x, y);
     }
 }

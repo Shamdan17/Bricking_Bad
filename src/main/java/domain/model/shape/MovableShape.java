@@ -22,6 +22,7 @@ public abstract class MovableShape implements Movable {
     public abstract void collide(MovableShape obj);
 
     public abstract Type getType();
+
     public abstract Shape getShape();
 
     public enum Type {
@@ -35,7 +36,7 @@ public abstract class MovableShape implements Movable {
         Rectangle,
     }
 
-    MovableShape(Position position, Velocity velocity, int length, int width){
+    MovableShape(Position position, Velocity velocity, int length, int width) {
         this.destroyed = false;
         this.length = length;
         this.width = width;
@@ -43,7 +44,7 @@ public abstract class MovableShape implements Movable {
         this.velocity = velocity;
     }
 
-    MovableShape(Position position, int length, int width){
+    MovableShape(Position position, int length, int width) {
         this.destroyed = false;
         this.length = length;
         this.width = width;
@@ -60,12 +61,12 @@ public abstract class MovableShape implements Movable {
 //        this.velocity = Constants.defaultVelocity;
 //    }
 
-    public void destroy(){
+    public void destroy() {
         if (!this.destroyed)
             this.destroyed = true;
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
 

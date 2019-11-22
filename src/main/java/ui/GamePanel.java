@@ -3,7 +3,6 @@ package ui;
 import domain.model.Paddle;
 
 import javax.swing.*;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
