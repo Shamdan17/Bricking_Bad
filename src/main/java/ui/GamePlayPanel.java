@@ -28,14 +28,20 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
     this.add(saveButton);
     this.add(loadButton);
     (new Thread(this)).start();
+
     saveButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         bb.save();
+        saveButton.setFocusable(false);
+        loadButton.setFocusable(false);
       }
     });
+
     loadButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         bb.load();
+        loadButton.setFocusable(false);
+        saveButton.setFocusable(false);
       }
     });
   }
