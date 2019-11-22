@@ -2,7 +2,6 @@ package ui;
 
 import domain.BrickingBad;
 import domain.GameEngine;
-import domain.PropertyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,9 +16,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class LoginForm extends JFrame implements PropertyListener {
+public class LoginForm extends JFrame {
 
-    private static BrickingBad brickingBad = BrickingBad.getInstance();
+    private static BrickingBad brickingBad = new BrickingBad();
     private JPanel contentPane;
     private JTextField textField;
     private JPasswordField passwordField;
@@ -91,7 +90,11 @@ public class LoginForm extends JFrame implements PropertyListener {
             public void actionPerformed(ActionEvent arg0) {
                 String username = textField.getText();
                 String password = String.valueOf(passwordField.getPassword());
-                brickingBad.loginAttempt(username, password);
+                if (brickingBad.loginAttempt(username, password)) {
+                  System.out.println("attempt successed");
+                } else {
+                  System.out.println("attempt failed");
+                }
             }
         });
         GridBagConstraints gbc_confirmBtn = new GridBagConstraints();
@@ -100,14 +103,5 @@ public class LoginForm extends JFrame implements PropertyListener {
         gbc_confirmBtn.gridx = 1;
         gbc_confirmBtn.gridy = 2;
         contentPane.add(confirmBtn, gbc_confirmBtn);
-        brickingBad.addPropertyListener(this);
-    }
-
-
-    @Override
-    public void onPropertyEvent(String source, String name, String value) {
-        if(name.equals("login")){
-            System.out.println("Login: "+value);
-        }
     }
 }

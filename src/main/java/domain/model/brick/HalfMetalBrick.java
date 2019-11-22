@@ -1,8 +1,39 @@
 package domain.model.brick;
 
+import domain.model.shape.MovableShape;
+import utils.Position;
+import utils.Velocity;
+
 public class HalfMetalBrick extends Brick {
-    @Override
-    public void onHit() {
-        //todo implementation
+
+    // TODO: Implement
+    public HalfMetalBrick(Position position, int length, int width) {
+        super(position, length, width);
     }
+
+    @Override
+    public void collide(MovableShape obj) {
+        //TODO: Implement
+    }
+
+    @Override
+    public void move() {
+        //TODO: Implement
+    }
+
+    @Override
+    public Velocity getVelocity() {
+        return null;
+    }
+
+    @Override
+    public void setVelocity(Velocity ps) {
+        //TODO: Implement
+    }
+
+    @Override
+    public String toString() {
+        return "Half Metal Brick with "; //TODO add position.toString here;
+    }
+
 }

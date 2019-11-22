@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Paddle;
+import domain.model.Paddle;
 
 import javax.swing.*;
 

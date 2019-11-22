@@ -2,6 +2,9 @@ package domain;
 
 import domain.account.Account;
 import domain.account.AccountManager;
+import domain.model.Board;
+import domain.model.Movable;
+import domain.model.shape.MovableShape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,30 +12,36 @@ import java.util.List;
 //BrickingBad is the main controller
 public class BrickingBad {
 
-    private List<PropertyListener> listeners = new ArrayList<PropertyListener>();
-    private AccountManager accountManager = AccountManager.getInstance();
-    private static BrickingBad brickingBad = new BrickingBad();
+  private AccountManager accountManager;
+  private Board board;
 
-    public static BrickingBad getInstance(){
-        return brickingBad;
+  public BrickingBad() {
+    this.board = new Board();
+    this.accountManager = new AccountManager();
+  }
+
+  public void animate() {
+    this.board.advance();
+  }
+
+  public List<MovableShape> getMovables() {
+    return this.board.getMovables();
+  }
+
+  public boolean loginAttempt(String username, String password){
+    // username and password must not be null
+    if(username == null || password == null) {
+      return false;
     }
 
-    public void addPropertyListener(PropertyListener pl){
-        listeners.add(pl);
+    Account acc = accountManager.Authenticate(username, password);
+
+    // if account does not exist fail
+    if(acc == null){
+      return false;
     }
 
-    private void onPropertyEvent(String name, String value){
-        for(PropertyListener pl : listeners){
-            pl.onPropertyEvent("domain.GameEngine", name, value);
-        }
-    }
-
-    public void loginAttempt(String username, String password){
-        Account acc = accountManager.Authenticate(username, password);
-        if(acc == null){
-            onPropertyEvent("login", "failed");
-        }else{
-            onPropertyEvent("login", "success");
-        }
-    }
+    // otherwise confirm authintication
+    return true;
+  }
 }

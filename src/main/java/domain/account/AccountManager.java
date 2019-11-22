@@ -19,10 +19,6 @@ public class AccountManager {
         accounts.add(new Account("Hello", "World"));
     }
 
-    public static AccountManager getInstance(){
-        return accountManager;
-    }
-
     public void Register(String username, String password){
         if(Account.isValid(username, password)){
             accounts.add(new Account(username, password));
