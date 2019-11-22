@@ -1,10 +1,7 @@
 package utils.physics;
 
-import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
-import domain.model.shape.Rectangle;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;
@@ -32,9 +29,10 @@ public final class PhysicsEngine {
         }
 
         // Handle possible rotated paddle collision logic
-        if(obj2.getType()== MovableShape.Type.Paddle){
-            calculateObjectWithPaddleVelocity(obj2,obj1);
-        }
+//TODO: Fix paddle collisions
+//        if(obj2.getType()== MovableShape.Type.Paddle){
+//            return calculateObjectWithPaddleVelocity(obj2,obj1);
+//        }
 
         Slope collisionWallSlope = calculateCollisionSlope(obj1, obj2);
 
@@ -51,7 +49,7 @@ public final class PhysicsEngine {
         logger.debug("Old Position: "+oldPos);
         // Rotate the other object
         Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
-        logger.debug("Old Position: "+newPos);
+        logger.debug("New Position: "+newPos);
         // Set the updated (rotated position)
         obj2.setPosition(newPos);
         // Perform the calculations
@@ -87,7 +85,7 @@ public final class PhysicsEngine {
             case Circle:
                 return calculateCircleCollisionSlope(obj1, obj2);
             case Rectangle:
-                return calculateRectVelocity(obj1, obj2);
+                return calculateRectCollisionSlope(obj1, obj2);
         }
         return null;
     }
@@ -102,7 +100,7 @@ public final class PhysicsEngine {
         return null;
     }
 
-    private Slope calculateRectVelocity(MovableShape obj1, MovableShape obj2){
+    private Slope calculateRectCollisionSlope(MovableShape obj1, MovableShape obj2){
         switch(obj2.getShape()){
             case Circle:
                 return calculateRectOnCircleCollisionSlope(obj1, obj2);
@@ -124,7 +122,7 @@ public final class PhysicsEngine {
 
     private Slope calculateCircleOnRectCollisionSlope(MovableShape obj1, MovableShape obj2){
         Position circleCenter = getCircleCenter(obj1);
-        int cx = circleCenter.getX(), cy = circleCenter.getY();
+        double cx = circleCenter.getX(), cy = circleCenter.getY();
 
         Position rectPos = obj2.getPosition();
 
@@ -172,24 +170,24 @@ public final class PhysicsEngine {
      */
     public boolean isCollided(MovableShape obj1, MovableShape obj2){
         // TODO: find a way to improve this checking
-        if(obj1.getType() == MovableShape.Type.Paddle){
-            Position oldPos = obj2.getPosition();
-            logger.debug("Old Position: "+oldPos);
-            // Rotate the other object
-            obj1.getPosition();
-            Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
-            logger.debug("Old Position: "+newPos);
-            // Set the updated (rotated position)
-            obj2.setPosition(newPos);
-            // Perform the check
-            boolean result = isRectCollided(obj1, obj2);
-            // Return the position back to normal
-            obj2.setPosition(oldPos);
-            // The result
-            return result;
-        }else if(obj2.getType() == MovableShape.Type.Paddle){
-            return isCollided(obj2, obj1);
-        }
+
+//TODO: Fix paddle collisions
+//        if(obj1.getType() == MovableShape.Type.Paddle){
+//            Position oldPos = obj2.getPosition();
+//            // Rotate the other object
+//            obj1.getPosition();
+//            Position newPos = Rotation.rotate(obj1.getPosition(), oldPos, obj1.getAngle());
+//            // Set the updated (rotated position)
+//            obj2.setPosition(newPos);
+//            // Perform the check
+//            boolean result = isRectCollided(obj1, obj2);
+//            // Return the position back to normal
+//            obj2.setPosition(oldPos);
+//            // The result
+//            return result;
+//        }else if(obj2.getType() == MovableShape.Type.Paddle){
+//            return isCollided(obj2, obj1);
+//        }
         // End of block to fix
 
         switch(obj1.getShape()){
@@ -226,8 +224,8 @@ public final class PhysicsEngine {
         Position pos2 = obj2.getPosition();
 
 
-        int x1, x2;
-        int y1, y2;
+        double x1, x2;
+        double y1, y2;
 
         x1 = pos1.getX();
         y1 = pos1.getY();
@@ -235,8 +233,8 @@ public final class PhysicsEngine {
         x2 = pos2.getX();
         y2 = pos2.getY();
 
-        int len1, len2;
-        int wid1, wid2;
+        double len1, len2;
+        double wid1, wid2;
 
         len1 = obj1.getLength();
         len2 = obj2.getLength();

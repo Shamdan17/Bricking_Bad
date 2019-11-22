@@ -12,5 +12,8 @@ public final class Constants {
 
     public static final String SimpleBrick = "SimpleBrick";
 
+
+    public static int maxX = 500;
+    public static int maxY = 500;
     //public static final defaultBoard
 }

@@ -61,7 +61,8 @@ public abstract class MovableShape implements Movable {
 //    }
 
     public void destroy(){
-        this.destroyed = false;
+        if (!this.destroyed)
+            this.destroyed = true;
     }
 
     public boolean isDestroyed(){
@@ -130,5 +131,7 @@ public abstract class MovableShape implements Movable {
     public void incrementAngle(double dif) {
         this.angle += dif;
     }
+
+    public abstract String toString();
 
 }

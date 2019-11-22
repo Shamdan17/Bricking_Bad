@@ -1,6 +1,7 @@
 package ui;
 
 import domain.model.shape.MovableShape;
+import utils.physics.math.util;
 
 import java.awt.*;
 
@@ -17,22 +18,22 @@ public class Paddle implements Drawable {
         double sina = Math.sin(Math.toRadians(ms.getAngle() - 90));
         double cosa = Math.cos(Math.toRadians(ms.getAngle() - 90));
 
-        int px = ms.getPosition().getX();
-        int py = ms.getPosition().getY();
+        int px = util.round(ms.getPosition().getX());
+        int py = util.round(ms.getPosition().getY());
         double width = ms.getWidth();
         double length = ms.getLength();
 
         int[] x = {
                 px,
-                px - (int) Math.round(width*cosa),
-                px + (int) Math.round(length*sina) - (int) Math.round(width*cosa),
-                px + (int) Math.round(length*sina)
+                px - util.round(width*cosa),
+                px + util.round(length*sina) - util.round(width*cosa),
+                px + util.round(length*sina)
         };
         int[] y = {
                 py,
-                py + (int) Math.round(width*sina),
-                py + (int) Math.round(width*sina) +(int) Math.round(length*cosa),
-                py + (int) Math.round(length*cosa)
+                py + util.round(width*sina),
+                py + util.round(width*sina) +util.round(length*cosa),
+                py + util.round(length*cosa)
         };
         g.fillPolygon(x,y,4);
         g.setColor(Color.GRAY);

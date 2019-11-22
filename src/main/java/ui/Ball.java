@@ -1,6 +1,7 @@
 package ui;
 
 import domain.model.shape.MovableShape;
+import utils.physics.math.util;
 
 import java.awt.*;
 
@@ -14,7 +15,7 @@ public class Ball implements Drawable {
 
     public void draw(Graphics g){
         g.setColor(Color.RED);
-        g.fillOval(ms.getPosition().getX(),ms.getPosition().getY(),ms.getLength(),ms.getWidth());
-        g.drawOval(ms.getPosition().getX(),ms.getPosition().getY(),ms.getLength(),ms.getWidth());
+        g.fillOval(util.round(ms.getPosition().getX()),util.round(ms.getPosition().getY()),ms.getLength(),ms.getWidth());
+        g.drawOval(util.round(ms.getPosition().getX()),util.round(ms.getPosition().getY()),ms.getLength(),ms.getWidth());
     }
 }

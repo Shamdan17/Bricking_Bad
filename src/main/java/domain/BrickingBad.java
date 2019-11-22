@@ -8,6 +8,7 @@ import domain.model.Movable;
 import domain.model.shape.MovableShape;
 import utils.Constants;
 import utils.Position;
+import domain.model.shape.MovableShape;
 
 import java.util.ArrayList;
 import java.util.List;

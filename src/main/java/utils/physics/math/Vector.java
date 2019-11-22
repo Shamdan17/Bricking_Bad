@@ -4,9 +4,9 @@ import utils.Position;
 
 // Vector defines a vector struct, which has an x magnitude and a y magnitude.
 public class Vector {
-    int x, y;
+    double x, y;
 
-    public Vector(int x, int y){
+    public Vector(double x, double y){
         this.x = x;
         this.y = y;
     }
@@ -40,19 +40,19 @@ public class Vector {
         return this.x > 0;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 }

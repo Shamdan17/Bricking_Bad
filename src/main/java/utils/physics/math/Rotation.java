@@ -13,7 +13,7 @@ public class Rotation {
     }
 
     public static Velocity rotate(Velocity vc, double angle) {
-        PolarPoint ppt = new PolarPoint(vc.getX(), vc.getY());
+        PolarPoint ppt = new PolarPoint(vc);
         ppt.rotate(angle);
         return ppt.getVelocity();
     }

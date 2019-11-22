@@ -20,8 +20,8 @@ public class Brick implements Drawable , MouseListener {
     }
 
     public void draw(Graphics g){
-        int x = ms.getPosition().getX();
-        int y = ms.getPosition().getY();
+        int x = (int)Math.round(ms.getPosition().getX());
+        int y = (int)Math.round(ms.getPosition().getY());
         int length = ms.getLength();
         int width = ms.getWidth();
         g.fillRect(x,y,length,width);
@@ -39,8 +39,8 @@ public class Brick implements Drawable , MouseListener {
 
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
-        int myX = ms.getPosition().getX();
-        int myY = ms.getPosition().getY();
+        int myX = (int)Math.round(ms.getPosition().getX());
+        int myY = (int)Math.round(ms.getPosition().getY());
         int len = ms.getLength();
         int wid = ms.getWidth();
         boolean flag = (x <= myX + wid && x >= myX ) && (y >= myY && y <= myY + len);

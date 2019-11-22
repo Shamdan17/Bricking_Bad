@@ -24,4 +24,11 @@ public class WrapperBrick extends Brick {
     public void setVelocity(Velocity ps) {
         //TODO: Implement
     }
+
+    @Override
+    public String toString() {
+        return "Wrapper brick with "; //TODO add position info
+    }
+
+
 }
