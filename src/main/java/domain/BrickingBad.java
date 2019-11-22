@@ -21,7 +21,7 @@ public class BrickingBad {
   private Board board;
 
   public BrickingBad() {
-    this.board = new Board();
+    this.board = new Board("demo");
     this.mapEditor = new MapEditor();
     this.accountManager = new AccountManager();
   }
@@ -37,7 +37,16 @@ public class BrickingBad {
     return mapEditor.getMovables();
   }
 
-  public boolean loginAttempt(String username, String password){
+  public void save() {
+    board.save();
+  }
+
+  public void load() {
+    // board.load();
+  }
+
+
+  public boolean loginAttempt(String username, String password) {
     // username and password must not be null
     if(username == null || password == null) {
       return false;

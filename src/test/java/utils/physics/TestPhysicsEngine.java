@@ -145,7 +145,6 @@ class PhysicsEngineTest {
 
         for(int i=-45; i<=45;i++){
             pd.setAngle(i);
-            System.out.println(physicsEngine.isCollided(pd, b1));
         }
     }
 

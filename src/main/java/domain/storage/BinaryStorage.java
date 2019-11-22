@@ -12,6 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class BinaryStorage implements StorageManager {
   private HashMap<Serializable, Serializable> DataLinks;
@@ -20,7 +23,7 @@ public class BinaryStorage implements StorageManager {
 
   public BinaryStorage(String storageName) throws IllegalArgumentException {
     if (storageName == null) {
-      throw new IllegalArgumentException("storage name may not be null");
+      throw new IllegalArgumentException("storage name may not be null: " + storageName);
     }
 
     this.DataLinks = new HashMap<>();
@@ -28,14 +31,17 @@ public class BinaryStorage implements StorageManager {
   }
 
   public void put(Serializable key, Serializable value) throws IllegalArgumentException {
+    System.out.println("putting " + storageName);
     if (key == null || value == null) {
       throw new IllegalArgumentException("storage name may not be null");
     }
-
     this.DataLinks.put(key,value);
+
+    save();
   }
 
   public Object get(Serializable key) throws IllegalArgumentException {
+    System.out.println("Getting " + storageName);
     if (key == null) {
       throw new IllegalArgumentException("storage name may not be null");
     }
@@ -43,7 +49,12 @@ public class BinaryStorage implements StorageManager {
     return this.DataLinks.get(key);
   }
 
-  public void save() {
+  public List<Object> getRecords() {
+    return new ArrayList<>(DataLinks.keySet());
+  }
+
+  private void save() {
+    System.out.println("Saving " + storageName);
     Path filepath = Paths.get(System.getProperty("user.dir"), storageName);
     try {
       FileOutputStream fileOut = new FileOutputStream(filepath.toString());
@@ -56,6 +67,7 @@ public class BinaryStorage implements StorageManager {
   }
 
   public void load() {
+    System.out.println("Loading " + storageName);
     Path filepath = Paths.get(System.getProperty("user.dir"), storageName);
 
     try {
@@ -67,4 +79,10 @@ public class BinaryStorage implements StorageManager {
       e.printStackTrace();
     }
   }
+
+  @Override protected void finalize() throws Throwable {
+  save();
+  super.finalize();
+  }
 }
+

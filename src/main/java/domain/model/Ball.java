@@ -1,5 +1,6 @@
 package domain.model;
 
+import domain.model.shape.MovableShape.Type;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import utils.Constants;
