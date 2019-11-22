@@ -25,15 +25,15 @@ public class Paddle implements Drawable {
 
         int[] x = {
                 px,
-                px - util.round(width*cosa),
-                px + util.round(length*sina) - util.round(width*cosa),
-                px + util.round(length*sina)
+                px + util.round(width*cosa),
+                px - util.round(length*sina) + util.round(width*cosa),
+                px - util.round(length*sina)
         };
         int[] y = {
                 py,
-                py + util.round(width*sina),
-                py + util.round(width*sina) +util.round(length*cosa),
-                py + util.round(length*cosa)
+                py - util.round(width*sina),
+                py - util.round(width*sina) -util.round(length*cosa),
+                py - util.round(length*cosa)
         };
         g.fillPolygon(x,y,4);
         g.setColor(Color.GRAY);

@@ -131,11 +131,11 @@ class MKeyListener extends KeyAdapter {
         bb.movePaddleLeft();
     }
 
-    if(event.getKeyCode() == KeyEvent.VK_UP) {
+    if(event.getKeyCode() == KeyEvent.VK_A) {
         bb.rotatePaddleLeft();
     }
 
-    if(event.getKeyCode() == KeyEvent.VK_DOWN) {
+    if(event.getKeyCode() == KeyEvent.VK_D) {
         bb.rotatePaddleRight();
     }
   }

@@ -23,6 +23,7 @@ public class Board {
   private List<MovableShape> movables;
   private Paddle paddle;
 
+
   public Board() {
 //    movables = new ArrayList<>();
 //    movables.add(new Ball(new Position(50,50),10));
@@ -34,16 +35,16 @@ public class Board {
 
   private List<MovableShape> defaultMovables(){
     List<MovableShape> lst = new ArrayList<>();
-    for(int i=0;i<5;i++){
-      for(int j=0;j<3;j++){
+    for(int i=0;i<10;i++){
+      for(int j=0;j<6;j++){
         Position curpos = new Position(80*i+20, 40*j+10);
         lst.add(new SimpleBrick(curpos, 60, 20));
       }
     }
-    paddle = new Paddle(new Position(300, 400));
+    paddle = new Paddle(new Position(300, 700));
     lst.add(paddle);
-    Ball bll = new Ball(new Position(310, 200), 5);
-    bll.setVelocity(new Velocity(-2,5));
+    Ball bll = new Ball(new Position(310, 300), 12);
+    bll.setVelocity(new Velocity(0,8));
     lst.add(bll);
     return lst;
   }
