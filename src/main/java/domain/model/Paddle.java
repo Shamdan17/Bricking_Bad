@@ -29,33 +29,33 @@ public class Paddle extends Rectangle {
 
     @Override
     public void move() {
-        if(tiltLeft){
-            setAngle(getAngle()-6);
-        }else if(tiltRight){
-            setAngle(getAngle()+6);
-        }else{
+        if (tiltLeft) {
+            setAngle(getAngle() - 6);
+        } else if (tiltRight) {
+            setAngle(getAngle() + 6);
+        } else {
             normalizeAngle(0.5);
         }
-        tiltRight=false;
-        tiltLeft=false;
+        tiltRight = false;
+        tiltLeft = false;
     }
 
     public void moveLeft() {
-      setPosition(new Position(super.getPosition().getX()-10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() - 10, super.getPosition().getY()));
     }
 
     public void moveRight() {
-      setPosition(new Position(super.getPosition().getX()+10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() + 10, super.getPosition().getY()));
     }
 
     public void rotateRight() {
-      tiltRight=true;
-      //setAngle(getAngle()+10);
+        tiltRight = true;
+        //setAngle(getAngle()+10);
     }
 
     public void rotateLeft() {
-      tiltLeft = true;
-      //setAngle(getAngle()+10);
+        tiltLeft = true;
+        //setAngle(getAngle()+10);
     }
 
     // Since paddles don't move on collision the method is not used

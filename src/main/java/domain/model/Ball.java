@@ -1,6 +1,5 @@
 package domain.model;
 
-import domain.model.shape.MovableShape.Type;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import utils.Constants;
@@ -39,15 +38,15 @@ public class Ball extends Circle {
     }
 
     //TODO: Move this out of ball
-    public void ensureBallIsInBounds(){
+    public void ensureBallIsInBounds() {
         Velocity oldVelocity = getVelocity();
-        if(getPosition().getX()+getLength() > Constants.maxX){
+        if (getPosition().getX() + getLength() > Constants.maxX) {
             oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
-        if(getPosition().getX() < 0){
+        if (getPosition().getX() < 0) {
             oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
-        if(getPosition().getY() < 0){
+        if (getPosition().getY() < 0) {
             oldVelocity = new Velocity(oldVelocity.getY(), Math.abs(oldVelocity.getY()));
         }
         setVelocity(oldVelocity);

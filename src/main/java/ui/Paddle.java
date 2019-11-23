@@ -7,13 +7,13 @@ import java.awt.*;
 
 public class Paddle implements Drawable {
 
-    MovableShape ms ;
+    MovableShape ms;
 
-    public Paddle(MovableShape ms){
+    public Paddle(MovableShape ms) {
         this.ms = ms;
     }
 
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
 
         double sina = Math.sin(Math.toRadians(ms.getAngle() - 90));
         double cosa = Math.cos(Math.toRadians(ms.getAngle() - 90));
@@ -25,19 +25,19 @@ public class Paddle implements Drawable {
 
         int[] x = {
                 px,
-                px + util.round(width*cosa),
-                px - util.round(length*sina) + util.round(width*cosa),
-                px - util.round(length*sina)
+                px + util.round(width * cosa),
+                px - util.round(length * sina) + util.round(width * cosa),
+                px - util.round(length * sina)
         };
         int[] y = {
                 py,
-                py - util.round(width*sina),
-                py - util.round(width*sina) -util.round(length*cosa),
-                py - util.round(length*cosa)
+                py - util.round(width * sina),
+                py - util.round(width * sina) - util.round(length * cosa),
+                py - util.round(length * cosa)
         };
-        g.fillPolygon(x,y,4);
+        g.fillPolygon(x, y, 4);
         g.setColor(Color.GRAY);
-        g.drawPolygon(x,y,4);
+        g.drawPolygon(x, y, 4);
     }
 
 }

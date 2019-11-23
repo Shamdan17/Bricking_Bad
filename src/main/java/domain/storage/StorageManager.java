@@ -1,13 +1,14 @@
-package domain;
+package domain.storage;
 
 import java.io.Serializable;
 import java.util.List;
 
 public interface StorageManager {
-   public void   put(Serializable key, Serializable value);
-   public Object get(Serializable key);
+    public void put(Serializable key, Serializable value);
 
-   public List<Object> getRecords();
+    public Object get(Serializable key);
 
-   public void   load();
+    public List<Object> getRecords();
+
+    public void load();
 }

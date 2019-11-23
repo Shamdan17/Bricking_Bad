@@ -12,29 +12,29 @@ public class MapEditor {
 
     private Map map;
 
-    public MapEditor(){
+    public MapEditor() {
         map = new Map();
     }
 
-    public boolean addBrick(String type, Position pos){
+    public boolean addBrick(String type, Position pos) {
 
-        Brick brick = BrickFactory.get(type,pos);
-        boolean isAdded = map.add(brick,pos);
+        Brick brick = BrickFactory.get(type, pos);
+        boolean isAdded = map.add(brick, pos);
 
         return isAdded;
     }
 
-    public boolean removeBrick(Position pos){
+    public boolean removeBrick(Position pos) {
         boolean isRemoved = map.remove(pos);
         return isRemoved;
     }
 
-    public boolean moveBrick(Position from, Position to){
-        boolean isMoved = map.move(from,to);
+    public boolean moveBrick(Position from, Position to) {
+        boolean isMoved = map.move(from, to);
         return isMoved;
     }
 
-    public List<MovableShape> getMovables(){
+    public List<MovableShape> getMovables() {
         return map.getMovables();
     }
 

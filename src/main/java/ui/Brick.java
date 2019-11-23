@@ -4,31 +4,31 @@ import domain.BrickingBad;
 import domain.model.shape.MovableShape;
 import utils.Position;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Brick implements Drawable , MouseListener {
+public class Brick implements Drawable, MouseListener {
 
     private MovableShape ms;
     private BrickingBad brickingBad;
     private static boolean removeFlag = false;
 
-    public Brick(MovableShape ms, BrickingBad bb){
+    public Brick(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
         brickingBad = bb;
     }
 
-    public void draw(Graphics g){
-        int x = (int)Math.round(ms.getPosition().getX());
-        int y = (int)Math.round(ms.getPosition().getY());
+    public void draw(Graphics g) {
+        int x = (int) Math.round(ms.getPosition().getX());
+        int y = (int) Math.round(ms.getPosition().getY());
         int length = ms.getLength();
         int width = ms.getWidth();
-        g.fillRect(x,y,length,width);
-        g.drawRect(x,y,length,width);
+        g.fillRect(x, y, length, width);
+        g.drawRect(x, y, length, width);
     }
 
-    public static void setRemoveFlag(boolean state){
+    public static void setRemoveFlag(boolean state) {
         removeFlag = state;
     }
 
@@ -39,13 +39,13 @@ public class Brick implements Drawable , MouseListener {
 
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
-        int myX = (int)Math.round(ms.getPosition().getX());
-        int myY = (int)Math.round(ms.getPosition().getY());
+        int myX = (int) Math.round(ms.getPosition().getX());
+        int myY = (int) Math.round(ms.getPosition().getY());
         int len = ms.getLength();
         int wid = ms.getWidth();
-        boolean flag = (x <= myX + len && x >= myX ) && (y >= myY && y <= myY + wid);
-        if(flag && removeFlag){
-            brickingBad.removeBrick(new Position(myX,myY));
+        boolean flag = (x <= myX + len && x >= myX) && (y >= myY && y <= myY + wid);
+        if (flag && removeFlag) {
+            brickingBad.removeBrick(new Position(myX, myY));
         }
 
     }

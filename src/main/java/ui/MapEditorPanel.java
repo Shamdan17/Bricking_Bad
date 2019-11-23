@@ -1,15 +1,15 @@
 package ui;
 
 import domain.BrickingBad;
-import domain.model.Movable;
 import domain.model.shape.MovableShape;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-public class MapEditorPanel extends JPanel implements Runnable , ActionListener {
+public class MapEditorPanel extends JPanel implements Runnable, ActionListener {
 
 
     public JButton backToMain;
@@ -17,7 +17,7 @@ public class MapEditorPanel extends JPanel implements Runnable , ActionListener 
     private JCheckBox deleteBlock;
     private JButton saveButton;
 
-    public MapEditorPanel(BrickingBad bb){
+    public MapEditorPanel(BrickingBad bb) {
         backToMain = new JButton("Back to Main");
         saveButton = new JButton("Save");
         deleteBlock = new JCheckBox("delete by click");
@@ -30,38 +30,38 @@ public class MapEditorPanel extends JPanel implements Runnable , ActionListener 
         (new Thread(this)).start();
     }
 
-    public void run(){
-        while(true){
-            try{
+    public void run() {
+        while (true) {
+            try {
                 repaint();
                 Thread.sleep(30);
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         List<MovableShape> drawables = brickingBad.getMapEditorMovables();
-        for(MovableShape ms : drawables){
+        for (MovableShape ms : drawables) {
             Drawable d = getDrawable(ms);
-            this.addMouseListener((Brick)d);
+            this.addMouseListener((Brick) d);
             d.draw(g);
         }
     }
 
-    public Drawable getDrawable(MovableShape ms){
-        if(ms.getType() == MovableShape.Type.Brick)
+    public Drawable getDrawable(MovableShape ms) {
+        if (ms.getType() == MovableShape.Type.Brick)
             return new Brick(ms, brickingBad);
         return new Brick(ms, brickingBad);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Save")){
+        if (e.getActionCommand().equals("Save")) {
             brickingBad.saveMap();
         }
-        if(e.getActionCommand().equals("delete by click")){
+        if (e.getActionCommand().equals("delete by click")) {
             Brick.setRemoveFlag(deleteBlock.isSelected());
         }
     }

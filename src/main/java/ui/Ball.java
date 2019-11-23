@@ -13,9 +13,9 @@ public class Ball implements Drawable {
         this.ms = ms;
     }
 
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
         g.setColor(Color.RED);
-        g.fillOval(util.round(ms.getPosition().getX()),util.round(ms.getPosition().getY()),ms.getLength(),ms.getWidth());
-        g.drawOval(util.round(ms.getPosition().getX()),util.round(ms.getPosition().getY()),ms.getLength(),ms.getWidth());
+        g.fillOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
+        g.drawOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
     }
 }

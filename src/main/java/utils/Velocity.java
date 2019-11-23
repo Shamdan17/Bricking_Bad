@@ -1,7 +1,7 @@
 package utils;
 
-import java.util.Objects;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Velocity implements Serializable {
     private double vx, vy;

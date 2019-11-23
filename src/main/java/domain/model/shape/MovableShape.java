@@ -6,12 +6,11 @@ import utils.Position;
 import utils.Velocity;
 
 import java.io.Serializable;
-
 import java.util.Objects;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
-public abstract class MovableShape implements Movable, Serializable{
+public abstract class MovableShape implements Movable, Serializable {
     // Object dimensions
     private int length, width;
     private double angle;

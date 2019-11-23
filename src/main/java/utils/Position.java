@@ -2,7 +2,7 @@ package utils;
 
 import java.io.Serializable;
 
-public class Position implements Serializable{
+public class Position implements Serializable {
 
     private double x;
     private double y;
@@ -46,7 +46,7 @@ public class Position implements Serializable{
                 '}';
     }
 
-    public boolean equals(Position pos){
+    public boolean equals(Position pos) {
         return x == pos.getX() && y == pos.getY();
     }
 }
