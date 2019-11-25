@@ -8,6 +8,7 @@ import domain.model.brick.SimpleBrick;
 import domain.model.shape.MovableShape;
 import domain.model.shape.MovableShape.Type;
 import org.apache.log4j.Logger;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
@@ -61,7 +62,7 @@ public class Board {
     paddle = new Paddle(new Position(300, 700));
     movables.add(paddle);
     bll = new Ball(new Position(310, 300), 12);
-    bll.setVelocity(new Velocity(0,8));
+    bll.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
     movables.add(bll);
   }
 
@@ -77,6 +78,12 @@ public class Board {
     // move all objects once
     for(MovableShape movableShape : movables) {
       movableShape.move();
+      if(movableShape.getType() == Type.Ball){
+        if(movableShape.getPosition().getY()>Constants.maxY){
+          movableShape.setPosition(paddle.getPosition().incrementY(-100).incrementX(paddle.getLength()/2));
+          movableShape.setVelocity(Constants.defaultRespawnVelocity);
+        }
+      }
     }
   }
 

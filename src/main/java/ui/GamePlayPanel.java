@@ -2,6 +2,7 @@ package ui;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
+import utils.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
     while(true){
       try{
         repaint();
-        Thread.sleep(30);
+        Thread.sleep(Constants.SLEEP_TIME);
       }catch(Exception e){
         e.printStackTrace();
       }
