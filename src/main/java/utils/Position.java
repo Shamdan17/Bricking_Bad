@@ -1,6 +1,8 @@
 package utils;
 
-public class Position {
+import java.io.Serializable;
+
+public class Position implements Serializable {
 
     private double x;
     private double y;
@@ -26,14 +28,14 @@ public class Position {
         this.y = y;
     }
 
-    public Position incrementX(double dx){
-        int difx = (int)Math.round(dx);
-        return new Position(x+difx, y);
+    public Position incrementX(double dx) {
+        int difx = (int) Math.round(dx);
+        return new Position(x + difx, y);
     }
 
-    public Position incrementY(double dy){
-        int dify = (int)Math.round(dy);
-        return new Position(x, y+dify);
+    public Position incrementY(double dy) {
+        int dify = (int) Math.round(dy);
+        return new Position(x, y + dify);
     }
 
     @Override
@@ -42,5 +44,9 @@ public class Position {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public boolean equals(Position pos) {
+        return x == pos.getX() && y == pos.getY();
     }
 }

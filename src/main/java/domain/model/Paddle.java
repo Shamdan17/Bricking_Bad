@@ -1,4 +1,5 @@
 package domain.model;
+
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import utils.Constants;
@@ -13,22 +14,49 @@ public class Paddle extends Rectangle {
         return;
     }
 
-    public Type getType(){
+    public Type getType() {
         return Type.Paddle;
     }
 
-    boolean isTallerPaddle = false;
+    private boolean isTallerPaddle = false;
+    private boolean tiltLeft = false;
+    private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(position, Constants.paddleLength, Constants.paddleWidth);
+        super(position, Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
         super.setAngle(0);
     }
 
     @Override
     public void move() {
-        return;
+        if (tiltLeft) {
+            setAngle(getAngle() - 6);
+        } else if (tiltRight) {
+            setAngle(getAngle() + 6);
+        } else {
+            normalizeAngle(0.5);
+        }
+        tiltRight = false;
+        tiltLeft = false;
     }
 
+    public void moveLeft() {
+        setPosition(new Position(super.getPosition().getX() - 10, super.getPosition().getY()));
+    }
+
+    public void moveRight() {
+        setPosition(new Position(super.getPosition().getX() + 10, super.getPosition().getY()));
+    }
+
+    public void rotateRight() {
+        tiltRight = true;
+        //setAngle(getAngle()+10);
+    }
+
+    public void rotateLeft() {
+        tiltLeft = true;
+        //setAngle(getAngle()+10);
+    }
 
     // Since paddles don't move on collision the method is not used
     public void setVelocity(Velocity ps) {
@@ -46,22 +74,22 @@ public class Paddle extends Rectangle {
         double curAngle = super.getAngle();
         double delta = Math.abs(angle);
         double newAngle;
-        if (delta > Math.abs(curAngle)){
-            newAngle=0;
-        }else{
+        if (delta > Math.abs(curAngle)) {
+            newAngle = 0;
+        } else {
             //If the angle is more than zero, make delta negative so it normalizes the angle back to 0
-            if(super.getAngle()>0){
-                delta*=-1;
+            if (super.getAngle() > 0) {
+                delta *= -1;
             }
             newAngle = curAngle + delta;
         }
         setAngle(newAngle);
     }
 
-    private double getValidAngle(double angle){
-        if(angle<-45){
+    private double getValidAngle(double angle) {
+        if (angle < -45) {
             angle = -45;
-        }else if(angle > 45){
+        } else if (angle > 45) {
             angle = 45;
         }
         return angle;
@@ -69,13 +97,13 @@ public class Paddle extends Rectangle {
 
     @Override
     //Returns the position of the top left corner of the rectangle, keeping in mind the paddle's angle
-    public Position getPosition(){
-        if(getAngle()<0){
+    public Position getPosition() {
+        if (getAngle() < 0) {
             //Need to rotate the paddle relative to the top right corner
             Position origin = super.getPosition().incrementX(super.getLength());
-            Position currentTopLeft = Rotation.rotate(origin, super.getPosition(), getAngle());
+            Position currentTopLeft = Rotation.rotate(origin, super.getPosition(), -getAngle());
             return currentTopLeft;
-        }else{
+        } else {
             return super.getPosition();
         }
     }

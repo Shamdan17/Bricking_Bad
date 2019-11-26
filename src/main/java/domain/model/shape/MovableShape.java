@@ -5,11 +5,12 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
-public abstract class MovableShape implements Movable {
+public abstract class MovableShape implements Movable, Serializable {
     // Object dimensions
     private int length, width;
     private double angle;
@@ -22,6 +23,7 @@ public abstract class MovableShape implements Movable {
     public abstract void collide(MovableShape obj);
 
     public abstract Type getType();
+
     public abstract Shape getShape();
 
     public enum Type {
@@ -35,7 +37,7 @@ public abstract class MovableShape implements Movable {
         Rectangle,
     }
 
-    MovableShape(Position position, Velocity velocity, int length, int width){
+    MovableShape(Position position, Velocity velocity, int length, int width) {
         this.destroyed = false;
         this.length = length;
         this.width = width;
@@ -43,7 +45,7 @@ public abstract class MovableShape implements Movable {
         this.velocity = velocity;
     }
 
-    MovableShape(Position position, int length, int width){
+    MovableShape(Position position, int length, int width) {
         this.destroyed = false;
         this.length = length;
         this.width = width;
@@ -60,12 +62,12 @@ public abstract class MovableShape implements Movable {
 //        this.velocity = Constants.defaultVelocity;
 //    }
 
-    public void destroy(){
+    public void destroy() {
         if (!this.destroyed)
             this.destroyed = true;
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
 

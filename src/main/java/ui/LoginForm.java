@@ -1,20 +1,12 @@
 package ui;
 
 import domain.BrickingBad;
-import domain.GameEngine;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 public class LoginForm extends JFrame {
 
@@ -91,9 +83,9 @@ public class LoginForm extends JFrame {
                 String username = textField.getText();
                 String password = String.valueOf(passwordField.getPassword());
                 if (brickingBad.loginAttempt(username, password)) {
-                  System.out.println("attempt successed");
+                    System.out.println("attempt successed");
                 } else {
-                  System.out.println("attempt failed");
+                    System.out.println("attempt failed");
                 }
             }
         });

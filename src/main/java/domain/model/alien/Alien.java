@@ -1,10 +1,9 @@
 package domain.model.alien;
 
-import domain.model.shape.MovableShape;
 import utils.Position;
 
 //TODO: Implement
-public abstract class Alien{
+public abstract class Alien {
 
     private Position position;
 

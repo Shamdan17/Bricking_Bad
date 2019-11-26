@@ -1,24 +1,25 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Velocity {
+public class Velocity implements Serializable {
     private double vx, vy;
 
-    public Velocity(double vx, double vy){
+    public Velocity(double vx, double vy) {
         this.vx = vx;
         this.vy = vy;
     }
 
-    public double getX(){
+    public double getX() {
         return vx;
     }
 
-    public double getY(){
+    public double getY() {
         return vy;
     }
 
-    public void updateSpeed(int vx, int vy){
+    public void updateSpeed(int vx, int vy) {
         this.vx = vx;
         this.vy = vy;
     }

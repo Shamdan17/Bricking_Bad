@@ -6,10 +6,10 @@ import utils.Position;
 public abstract class Brick extends Rectangle {
 
     public Brick(Position position, int length, int width) {
-        super(position,length, width);
+        super(position, length, width);
     }
 
-    public final Type getType(){
+    public final Type getType() {
         return Type.Brick;
     }
 
@@ -21,9 +21,11 @@ public abstract class Brick extends Rectangle {
 
     @Override
     // SetAngle meaningless
-    public final void setAngle(double angle) {}
+    public final void setAngle(double angle) {
+    }
 
     @Override
     // increment angle meaningless
-    public final void incrementAngle(double dif){}
+    public final void incrementAngle(double dif) {
+    }
 }
