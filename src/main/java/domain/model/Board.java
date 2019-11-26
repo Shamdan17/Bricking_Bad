@@ -60,12 +60,12 @@ public class Board {
             //brick list ?
         }
 
-        paddle = new Paddle(new Position(300, 700));
-        movables.add(paddle);
-        bll = new Ball(new Position(310, 300), Constants.BALL_DIAMETER/2);
-        bll.setVelocity(new Velocity(0, 8));
-        movables.add(bll);
-    }
+    paddle = new Paddle(new Position(300, 700));
+    movables.add(paddle);
+    bll = new Ball(new Position(310, 300), Constants.BALL_DIAMETER/2);
+    bll.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+    movables.add(bll);
+  }
 
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
@@ -75,12 +75,18 @@ public class Board {
         //TODO need to check whether ball is dropped or not then check remaining lives
     }
 
-    private void moveAllMovables() {
-        // move all objects once
-        for (MovableShape movableShape : movables) {
-            movableShape.move();
+  private void moveAllMovables() {
+    // move all objects once
+    for(MovableShape movableShape : movables) {
+      movableShape.move();
+      if(movableShape.getType() == Type.Ball){
+        if(movableShape.getPosition().getY()>Constants.maxY){
+          movableShape.setPosition(paddle.getPosition().incrementY(-100).incrementX(paddle.getLength()/2));
+          movableShape.setVelocity(Constants.defaultRespawnVelocity);
         }
+      }
     }
+  }
 
     private void checkCollisions() {
         // check all movables pair-wise whether they are collided or not
