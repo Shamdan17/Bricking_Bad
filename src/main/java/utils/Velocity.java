@@ -24,8 +24,7 @@ public class Velocity implements Serializable {
         this.vy = vy;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public boolean equals(Velocity o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Velocity velocity = (Velocity) o;

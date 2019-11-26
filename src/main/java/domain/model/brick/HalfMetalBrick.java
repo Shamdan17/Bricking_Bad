@@ -13,27 +13,26 @@ public class HalfMetalBrick extends Brick {
 
     @Override
     public void collide(MovableShape obj) {
-        //TODO: Implement
+        if(obj.getCenter().getY()<this.getCenter().getY()){
+            this.destroy();
+        }
     }
 
     @Override
     public void move() {
         //TODO: Implement
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return null;
+        return;
     }
 
     @Override
     public void setVelocity(Velocity ps) {
         //TODO: Implement
+        return;
     }
 
     @Override
     public String toString() {
-        return "Half Metal Brick with "; //TODO add position.toString here;
+        return "Half Metal Brick at " + getPosition().toString(); //TODO add position.toString here;
     }
 
 }

@@ -1,11 +1,13 @@
 package domain.model;
 
+import domain.model.brick.HalfMetalBrick;
 import domain.model.brick.SimpleBrick;
 import domain.model.shape.MovableShape;
 import domain.model.shape.MovableShape.Type;
 import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
 import org.apache.log4j.Logger;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
@@ -51,7 +53,8 @@ public class Board {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 6; j++) {
                 Position curpos = new Position(80 * i + 20, 40 * j + 10);
-                movables.add(new SimpleBrick(curpos, 60, 20));
+                if(i%2==1)movables.add(new SimpleBrick(curpos, 60, 20));
+                else movables.add(new HalfMetalBrick(curpos, 60, 20));
             }
             //private Map map;
             //brick list ?
@@ -59,7 +62,7 @@ public class Board {
 
         paddle = new Paddle(new Position(300, 700));
         movables.add(paddle);
-        bll = new Ball(new Position(310, 300), 12);
+        bll = new Ball(new Position(310, 300), Constants.BALL_DIAMETER/2);
         bll.setVelocity(new Velocity(0, 8));
         movables.add(bll);
     }

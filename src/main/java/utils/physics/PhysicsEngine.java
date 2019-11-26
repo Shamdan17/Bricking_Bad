@@ -115,8 +115,8 @@ public final class PhysicsEngine {
     }
 
     private Slope calculateCircleOnCircleCollisionSlope(MovableShape obj1, MovableShape obj2) {
-        Position center1 = getCircleCenter(obj1);
-        Position center2 = getCircleCenter(obj2);
+        Position center1 = obj1.getPosition();
+        Position center2 = obj2.getPosition();
 
         // Calculate the normal of the collision wall
         Slope m = new Slope(center1, center2);
@@ -125,7 +125,7 @@ public final class PhysicsEngine {
     }
 
     private Slope calculateCircleOnRectCollisionSlope(MovableShape obj1, MovableShape obj2) {
-        Position circleCenter = getCircleCenter(obj1);
+        Position circleCenter = obj1.getPosition();
         double cx = circleCenter.getX(), cy = circleCenter.getY();
 
         Position rectPos = obj2.getPosition();
@@ -257,7 +257,7 @@ public final class PhysicsEngine {
         len = obj1.getLength();
         wid = obj1.getWidth();
 
-        Position cnt = getCircleCenter(obj2);
+        Position cnt = obj2.getCenter();
         int radius = getRadius(obj2);
 
         // if the circle center is between the X bounds of the rect
@@ -286,8 +286,8 @@ public final class PhysicsEngine {
     }
 
     private boolean isCircleCollidedWithCircle(MovableShape obj1, MovableShape obj2) {
-        Position cnt1 = getCircleCenter(obj1);
-        Position cnt2 = getCircleCenter(obj2);
+        Position cnt1 = obj1.getPosition();
+        Position cnt2 = obj2.getPosition();
 
         int radius1 = getRadius(obj1);
         int radius2 = getRadius(obj2);
@@ -315,8 +315,8 @@ public final class PhysicsEngine {
      * @return Up if the center of obj1 is above the center of obj2, Down otherwise
      */
     public direction relativeYDirection(MovableShape obj1, MovableShape obj2) {
-        Position c1 = getCenter(obj1);
-        Position c2 = getCenter(obj2);
+        Position c1 = obj1.getCenter();
+        Position c2 = obj2.getCenter();
         Vector v = new Vector(c1, c2);
         if (v.pointsUp()) {
             return direction.Up;
@@ -335,8 +335,8 @@ public final class PhysicsEngine {
      * @return Left if the center of obj1 is to the left of the center of obj2, Right otherwise
      */
     public direction relativeXDirection(MovableShape obj1, MovableShape obj2) {
-        Position c1 = getCenter(obj1);
-        Position c2 = getCenter(obj2);
+        Position c1 = obj1.getCenter();
+        Position c2 = obj2.getCenter();
         Vector v = new Vector(c1, c2);
         if (v.pointsLeft()) {
             return direction.Left;
@@ -348,33 +348,6 @@ public final class PhysicsEngine {
     // Helper functions
     private double getDistance(Position pt1, Position pt2) {
         return Math.sqrt(Math.pow(pt2.getX() - pt1.getX(), 2) + Math.pow(pt2.getY() - pt1.getY(), 2));
-    }
-
-    private Position getCenter(MovableShape obj) {
-        switch (obj.getShape()) {
-            case Rectangle:
-                return getRectCenter(obj);
-            case Circle:
-                return getCircleCenter(obj);
-        }
-        return null;
-    }
-
-    private Position getRectCenter(MovableShape obj) {
-        Position rectPos = obj.getPosition();
-        int length = obj.getLength();
-        int width = obj.getWidth();
-        return rectPos.incrementX(length / 2).incrementY(width / 2);
-    }
-
-    private Position getCircleCenter(MovableShape obj) {
-        // Get the radius
-        int radius = getRadius(obj);
-
-        // Get the top left corner and add the offset (radius) to get the center
-        Position center = obj.getPosition().incrementX(radius).incrementY(radius);
-
-        return center;
     }
 
     // Since circles have their length and width as their diameters, this returns the radius

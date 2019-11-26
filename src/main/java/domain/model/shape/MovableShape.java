@@ -62,7 +62,7 @@ public abstract class MovableShape implements Movable, Serializable {
 //        this.velocity = Constants.defaultVelocity;
 //    }
 
-    public void destroy() {
+    protected void destroy() {
         if (!this.destroyed)
             this.destroyed = true;
     }
@@ -85,6 +85,10 @@ public abstract class MovableShape implements Movable, Serializable {
 
     public void setWidth(int width) {
         this.width = width;
+    }
+
+    public Position getCenter(){
+        return getPosition().incrementX(getLength()/2.0).incrementY(getWidth()/2.0);
     }
 
     @Override

@@ -5,6 +5,8 @@ public final class Constants {
     public static final int PADDLE_WIDTH = 30;
     //todo width should be %10 of the screen width and not a constant
     public static final int PADDLE_LENGTH = 200;
+    public static final int BALL_DIAMETER = 17;
+
 
 
     public static final Position defaultPosition = new Position(0, 0);

@@ -47,7 +47,7 @@ public class Ball extends Circle {
             oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
         if (getPosition().getY() < 0) {
-            oldVelocity = new Velocity(oldVelocity.getY(), Math.abs(oldVelocity.getY()));
+            oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
         }
         setVelocity(oldVelocity);
     }
