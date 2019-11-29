@@ -1,7 +1,6 @@
 package domain.model.shape;
 
-import domain.model.Movable;
-import utils.Constants;
+import domain.model.movement.MovementBehavior;
 import utils.Position;
 import utils.Velocity;
 
@@ -10,13 +9,12 @@ import java.util.Objects;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
-public abstract class MovableShape implements Movable, Serializable {
+public abstract class MovableShape implements Serializable {
     // Object dimensions
     private int length, width;
     private double angle;
     // Parameters
-    private Position position;
-    private Velocity velocity;
+    private MovementBehavior movBehavior;
     // A flag that signals whether a shape is destroyed due to a collision and needs to be removed
     private boolean destroyed;
 
@@ -25,6 +23,10 @@ public abstract class MovableShape implements Movable, Serializable {
     public abstract Type getType();
 
     public abstract Shape getShape();
+
+    public void move(){
+        this.movBehavior.getNextPosition();
+    }
 
     public enum Type {
         Ball,
@@ -37,20 +39,11 @@ public abstract class MovableShape implements Movable, Serializable {
         Rectangle,
     }
 
-    MovableShape(Position position, Velocity velocity, int length, int width) {
+    public MovableShape(MovementBehavior mb, int length, int width) {
         this.destroyed = false;
         this.length = length;
         this.width = width;
-        this.position = position;
-        this.velocity = velocity;
-    }
-
-    MovableShape(Position position, int length, int width) {
-        this.destroyed = false;
-        this.length = length;
-        this.width = width;
-        this.position = position;
-        this.velocity = Constants.defaultVelocity;
+        this.movBehavior = mb;
     }
 
 //    @Deprecated
@@ -87,43 +80,43 @@ public abstract class MovableShape implements Movable, Serializable {
         this.width = width;
     }
 
+    public void setMovementBehavior(MovementBehavior movBeh){
+        this.movBehavior = movBeh;
+    }
+
+
     public Position getCenter(){
         return getPosition().incrementX(getLength()/2.0).incrementY(getWidth()/2.0);
     }
 
-    @Override
     public Position getPosition() {
-        return position;
+        return movBehavior.getCurrentPosition();
     }
 
-    @Override
     public void setPosition(Position position) {
-        this.position = position;
+        movBehavior.setPosition(position);
     }
 
-    @Override
     public Velocity getVelocity() {
-        return velocity;
+        return movBehavior.getCurrentVelocity();
     }
 
-    @Override
     public void setVelocity(Velocity velocity) {
-        this.velocity = velocity;
+        movBehavior.setVelocity(velocity);
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MovableShape shape = (MovableShape) o;
+    public boolean equals(MovableShape shape) {
+        if (this == shape) return true;
+        if (shape == null) return false;
         return length == shape.length &&
-                width == shape.width;
+                width == shape.width &&
+                this.getPosition().equals(shape.getPosition());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(length, width);
+        return Objects.hash(length, width, getPosition());
     }
 
     public double getAngle() {

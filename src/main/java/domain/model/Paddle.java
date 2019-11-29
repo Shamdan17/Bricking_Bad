@@ -1,5 +1,6 @@
 package domain.model;
 
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import utils.Constants;
@@ -23,7 +24,7 @@ public class Paddle extends Rectangle {
     private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(position, Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
+        super(new NoMovement(position), Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
         super.setAngle(0);
     }
 

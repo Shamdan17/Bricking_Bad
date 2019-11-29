@@ -1,5 +1,6 @@
 package domain.model.brick;
 
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
 import utils.Velocity;
@@ -7,7 +8,7 @@ import utils.Velocity;
 public class WrapperBrick extends Brick {
     // TODO: Implement
     public WrapperBrick(Position position, int length, int width) {
-        super(position, length, width);
+        super(new NoMovement(position), length, width);
     }
 
 

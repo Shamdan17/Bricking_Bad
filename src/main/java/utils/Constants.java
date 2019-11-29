@@ -18,6 +18,8 @@ public final class Constants {
     public static final Velocity defaultVelocity = new Velocity(0,0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0,BALL_INITIAL_VY);
 
+    public static final double Brick_Velocity = PADDLE_LENGTH/4;
+
     public static final String SimpleBrick = "SimpleBrick";
 
 

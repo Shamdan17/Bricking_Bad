@@ -1,28 +1,38 @@
 package domain.model.brick;
 
-import domain.model.Movable;
+import domain.model.movement.CircularMovement;
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
 import utils.Velocity;
 
 public class MineBrick extends Brick {
 
-    public MineBrick(Position position, int length, int width) {
-        super(position, length, width);
+    public MineBrick(Position position) {
+        super(new CircularMovement(position, 50), 50,50);
+    }
+
+    // Did we crash into another object (to stop movement)
+    private boolean crashed = false;
+
+    @Override
+    public Shape getShape() {
+        return Shape.Circle;
     }
 
     @Override
     public void collide(MovableShape obj) {
-        //TODO: Implement
-    }
-
-    public void collide(Movable obj) {
-        //TODO: Implement
+        if(obj.getType() == Type.Ball){
+            super.destroy();
+        }else{
+            crashed = true;
+        }
     }
 
     @Override
     public void move() {
         //TODO: Implement
+        if(!crashed) super.move();
     }
 
     @Override

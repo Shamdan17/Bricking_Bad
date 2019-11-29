@@ -53,8 +53,18 @@ public class PolarPoint {
         this.origin = origin;
     }
 
+    public PolarPoint(Position origin, int radius, double angle) {
+        this.radius = radius;
+        this.angle = angle;
+        this.origin = origin;
+    }
+
     public void rotate(double dif) {
         this.angle += dif;
+    }
+
+    public double getAngle(){
+        return angle;
     }
 
     public Position getPosition() {

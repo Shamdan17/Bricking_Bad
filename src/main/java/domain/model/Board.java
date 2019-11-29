@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.model.brick.HalfMetalBrick;
+import domain.model.brick.MineBrick;
 import domain.model.brick.SimpleBrick;
 import domain.model.shape.MovableShape;
 import domain.model.shape.MovableShape.Type;
@@ -56,6 +57,7 @@ public class Board {
                 if(i%2==1)movables.add(new SimpleBrick(curpos, 60, 20));
                 else movables.add(new HalfMetalBrick(curpos, 60, 20));
             }
+            if(i%3 == 2) movables.add(new MineBrick(new Position(80*i+20, 500)));
             //private Map map;
             //brick list ?
         }
@@ -103,7 +105,7 @@ public class Board {
                 logger.debug(movableShape + " is destroyed.");
             return movableShape.isDestroyed();
         });
-        logger.debug("# of remaining movables: " + movables.size());
+        //logger.debug("# of remaining movables: " + movables.size());
     }
 
     public void addMovable(MovableShape mshape) {
