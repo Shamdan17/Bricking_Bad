@@ -19,23 +19,28 @@ public class Paddle extends Rectangle {
         return Type.Paddle;
     }
 
+    @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.Paddle;
+    }
+
     private boolean isTallerPaddle = false;
     private boolean tiltLeft = false;
     private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(new NoMovement(position), Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
+        super(new NoMovement(position), Constants.L, Constants.PADDLE_WIDTH);
         super.setAngle(0);
     }
 
     @Override
     public void move() {
         if (tiltLeft) {
-            setAngle(getAngle() - 6);
+            setAngle(getAngle() - 2);
         } else if (tiltRight) {
-            setAngle(getAngle() + 6);
+            setAngle(getAngle() + 2);
         } else {
-            normalizeAngle(0.5);
+            normalizeAngle(0.2);
         }
         tiltRight = false;
         tiltLeft = false;

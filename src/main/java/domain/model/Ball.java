@@ -60,6 +60,11 @@ public class Ball extends Circle {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.Ball;
+    }
+
+    @Override
     public String toString() {
         return "Ball with " + getPosition().toString();
     }

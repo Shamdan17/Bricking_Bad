@@ -32,6 +32,11 @@ public class HalfMetalBrick extends Brick {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.HalfMetalBrick;
+    }
+
+    @Override
     public String toString() {
         return "Half Metal Brick at " + getPosition().toString(); //TODO add position.toString here;
     }

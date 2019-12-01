@@ -3,6 +3,7 @@ package domain.model.shape;
 import domain.model.movement.MovementBehavior;
 import utils.Position;
 import utils.Velocity;
+import utils.physics.math.util;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,8 +25,19 @@ public abstract class MovableShape implements Serializable {
 
     public abstract Shape getShape();
 
+    public abstract SpecificType getSpecificType();
+
     public void move(){
         this.movBehavior.getNextPosition();
+    }
+
+    public enum SpecificType {
+        Ball,
+        Paddle,
+        SimpleBrick,
+        MineBrick,
+        HalfMetalBrick,
+        WrapperBrick,
     }
 
     public enum Type {
@@ -45,15 +57,6 @@ public abstract class MovableShape implements Serializable {
         this.width = width;
         this.movBehavior = mb;
     }
-
-//    @Deprecated
-//    MovableShape(int length, int width){
-//        this.destroyed = false;
-//        this.length = length;
-//        this.width = width;
-//        this.position = Constants.defaultPosition;
-//        this.velocity = Constants.defaultVelocity;
-//    }
 
     protected void destroy() {
         if (!this.destroyed)
@@ -84,6 +87,9 @@ public abstract class MovableShape implements Serializable {
         this.movBehavior = movBeh;
     }
 
+    public Position stepBack(){
+        return movBehavior.stepBack();
+    }
 
     public Position getCenter(){
         return getPosition().incrementX(getLength()/2.0).incrementY(getWidth()/2.0);
@@ -125,6 +131,14 @@ public abstract class MovableShape implements Serializable {
 
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+
+    // Makes the object of radius newRadius and the same center
+    protected void setRadius(double newRadius){
+        Position cnt = this.getCenter();
+        setPosition(cnt.incrementX(-newRadius).incrementY(-newRadius));
+        setWidth(util.round(2*newRadius));
+        setLength(util.round(2*newRadius));
     }
 
     public void incrementAngle(double dif) {

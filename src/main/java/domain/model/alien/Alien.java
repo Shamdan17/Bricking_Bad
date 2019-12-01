@@ -16,14 +16,4 @@ public abstract class Alien {
     public void setPosition(Position position) {
         this.position = position;
     }
-
-//    @Override
-//    // Bricks can't rotate so angle is always 0
-//    public final double getAngle() {
-//        return 0;
-//    }
-//
-//    @Override
-//    // SetAngle meaningless
-//    public final void setAngle(double angle) {}
 }

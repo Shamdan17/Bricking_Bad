@@ -28,7 +28,12 @@ public class Slope {
     public Slope(Position a, Position b) {
         double dx = a.getX() - b.getX();
         double dy = a.getY() - b.getY();
-        new Slope(dx, dy);
+        if (dx == 0) {
+            vertical = true;
+        } else {
+            m = dy / dx;
+            vertical = false;
+        }
     }
 
     public static final Slope inverse(Slope slope) {
@@ -45,6 +50,6 @@ public class Slope {
     }
 
     public boolean isVertical() {
-        return false;
+        return vertical;
     }
 }

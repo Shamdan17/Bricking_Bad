@@ -1,6 +1,7 @@
 package ui;
 
 import domain.BrickingBad;
+import domain.model.brick.MineBrick;
 import domain.model.shape.MovableShape;
 import utils.Constants;
 
@@ -71,7 +72,9 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
   }
 
   public Drawable getDrawable(MovableShape ms){
-    if(ms.getType() == MovableShape.Type.Brick)
+    if(ms instanceof MineBrick)
+      return new Ball(ms);
+    if(ms.getType() == MovableShape.Type.Brick && !(ms instanceof MineBrick))
       return new Brick(ms, brickingBad);
     if(ms.getType() == MovableShape.Type.Paddle)
       return new Paddle(ms);

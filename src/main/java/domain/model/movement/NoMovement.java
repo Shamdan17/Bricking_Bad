@@ -3,7 +3,9 @@ package domain.model.movement;
 import utils.Position;
 import utils.Velocity;
 
-public class NoMovement implements MovementBehavior{
+import java.io.Serializable;
+
+public class NoMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
@@ -25,6 +27,11 @@ public class NoMovement implements MovementBehavior{
     @Override
     public Position getCurrentPosition() {
         return curpos;
+    }
+
+    @Override
+    public Position stepBack() {
+        return getCurrentPosition();
     }
 
     @Override

@@ -13,7 +13,7 @@ public abstract class Brick extends MovableShape {
         super(movBeh, length, width);
     }
 
-    public final MovableShape.Type getType() {
+    public MovableShape.Type getType() {
         return MovableShape.Type.Brick;
     }
 

@@ -29,7 +29,13 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.SimpleBrick;
+    }
+
+    @Override
     public String toString() {
         return "Simple brick with " + super.getPosition();
     }
+
 }

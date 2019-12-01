@@ -3,7 +3,9 @@ package domain.model.movement;
 import utils.Position;
 import utils.Velocity;
 
-public class LinearMovement implements MovementBehavior {
+import java.io.Serializable;
+
+public class LinearMovement implements MovementBehavior, Serializable {
 
     Position curpos;
     Velocity curvel;
@@ -19,6 +21,8 @@ public class LinearMovement implements MovementBehavior {
         return curpos;
     }
 
+
+
     @Override
     public Velocity getCurrentVelocity() {
         return curvel;
@@ -27,6 +31,16 @@ public class LinearMovement implements MovementBehavior {
     @Override
     public Position getCurrentPosition() {
         return curpos;
+    }
+
+    @Override
+    // Goes back 1/10 of the velocity
+    public Position stepBack() {
+        Velocity curvel = getCurrentVelocity();
+        double dx = -curvel.getX()/Math.PI;
+        double dy = -curvel.getY()/Math.PI;
+        curpos = getCurrentPosition().incrementX(dx).incrementY(dy);
+        return getCurrentPosition();
     }
 
     @Override

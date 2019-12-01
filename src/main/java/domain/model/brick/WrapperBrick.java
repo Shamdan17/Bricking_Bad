@@ -27,6 +27,11 @@ public class WrapperBrick extends Brick {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.WrapperBrick;
+    }
+
+    @Override
     public String toString() {
         return "Wrapper brick with "; //TODO add position info
     }

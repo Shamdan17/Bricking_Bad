@@ -1,19 +1,20 @@
 package domain.model.brick;
 
 import domain.model.movement.CircularMovement;
-import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
 public class MineBrick extends Brick {
 
     public MineBrick(Position position) {
-        super(new CircularMovement(position, 50), 50,50);
+        super(new CircularMovement(position, 1.5*Constants.L), 20,20);
     }
 
     // Did we crash into another object (to stop movement)
     private boolean crashed = false;
+
 
     @Override
     public Shape getShape() {
@@ -21,8 +22,23 @@ public class MineBrick extends Brick {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.MineBrick;
+    }
+
+    public Type getType(){
+        if(isDestroyed()){
+            return Type.Ball;
+        }else{
+            return Type.Brick;
+        }
+    }
+
+    @Override
     public void collide(MovableShape obj) {
         if(obj.getType() == Type.Ball){
+            crashed = true;
+            setRadius(2*Constants.L);
             super.destroy();
         }else{
             crashed = true;

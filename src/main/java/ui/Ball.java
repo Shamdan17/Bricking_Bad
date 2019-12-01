@@ -17,5 +17,8 @@ public class Ball implements Drawable {
         g.setColor(Color.RED);
         g.fillOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
         g.drawOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
+        g.setColor(Color.black);
+        g.fillOval(util.round(ms.getCenter().getX())-2, util.round(ms.getCenter().getY())-2, 4, 4);
+        g.drawOval(util.round(ms.getCenter().getX())-2, util.round(ms.getCenter().getY())-2, 4, 4);
     }
 }
