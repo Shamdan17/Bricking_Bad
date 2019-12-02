@@ -46,8 +46,8 @@ class PhysicsEngineTest {
 
     @Test
     void testCalculatePostCollisionVelocity() {
-        // Vertical wall
-        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope()));
+        // Horizontal wall
+        assertEquals(new Velocity(-10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope()));
         // Slanted wall collisions
         // Wall: (y = -x)
         assertEquals(new Velocity(-1, 3), physicsEngine.calculatePostCollisionVelocity(new Velocity(-3, 1), new Slope(1, 1)));
@@ -55,9 +55,9 @@ class PhysicsEngineTest {
         // Wall: (y = x)
         assertEquals(new Velocity(5, 0), physicsEngine.calculatePostCollisionVelocity(new Velocity(0, 5), new Slope(-1, 1)));
         assertEquals(new Velocity(4, 2), physicsEngine.calculatePostCollisionVelocity(new Velocity(2, 4), new Slope(-1, 1)));
-        // Horizontal wall
-        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope(0, 1)));
-        assertEquals(new Velocity(10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, -10), new Slope(0, 1)));
+        // Vertical wall
+        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope(1, 0)));
+        assertEquals(new Velocity(10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, -10), new Slope(1, 0)));
     }
 
     @Test
