@@ -14,6 +14,9 @@ public final class Constants {
     public static final int BALL_INITIAL_VY = 2;
     public static final int BALL_DIAMETER = 17;
 
+    public static final double PADDLE_TURNING_SPEED = 2;
+    public static final double PADDLE_RESTORING_SPEED = 0.2;
+
 
     public static final int STEP_BACK_THRESHOLD = 5;
 

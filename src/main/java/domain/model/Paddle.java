@@ -8,6 +8,8 @@ import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;
 
+import static utils.Constants.*;
+
 public class Paddle extends Rectangle {
 
     @Override
@@ -29,18 +31,18 @@ public class Paddle extends Rectangle {
     private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(new NoMovement(position), Constants.L, Constants.PADDLE_WIDTH);
+        super(new NoMovement(position), L, PADDLE_WIDTH);
         super.setAngle(0);
     }
 
     @Override
     public void move() {
         if (tiltLeft) {
-            setAngle(getAngle() - 2);
+            setAngle(getAngle() - PADDLE_TURNING_SPEED);
         } else if (tiltRight) {
-            setAngle(getAngle() + 2);
+            setAngle(getAngle() + PADDLE_TURNING_SPEED);
         } else {
-            normalizeAngle(0.2);
+            normalizeAngle(PADDLE_RESTORING_SPEED);
         }
         tiltRight = false;
         tiltLeft = false;
