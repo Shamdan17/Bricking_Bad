@@ -49,11 +49,11 @@ public class Paddle extends Rectangle {
     }
 
     public void moveLeft() {
-        setPosition(new Position(super.getPosition().getX() - 10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
     }
 
     public void moveRight() {
-        setPosition(new Position(super.getPosition().getX() + 10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
     }
 
     public void rotateRight() {
