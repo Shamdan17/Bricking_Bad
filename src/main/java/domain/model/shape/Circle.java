@@ -1,6 +1,6 @@
 package domain.model.shape;
 
-import utils.Position;
+import domain.model.movement.MovementBehavior;
 
 public abstract class Circle extends MovableShape {
     int radius;
@@ -9,8 +9,8 @@ public abstract class Circle extends MovableShape {
         return Shape.Circle;
     }
 
-    public Circle(Position position, int radius) {
-        super(position, 2 * radius, 2 * radius);
+    public Circle(MovementBehavior movBeh, int radius) {
+        super(movBeh, 2 * radius, 2 * radius);
         this.radius = radius;
     }
 

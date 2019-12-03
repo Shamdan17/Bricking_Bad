@@ -1,5 +1,7 @@
 package utils;
 
+import utils.physics.math.util;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,13 +26,19 @@ public class Velocity implements Serializable {
         this.vy = vy;
     }
 
+    public boolean equals(Velocity o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        return util.equal(o.getX(),getX()) && util.equal(getY(),o.getY());
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Velocity velocity = (Velocity) o;
-        return Double.compare(velocity.vx, vx) == 0 &&
-                Double.compare(velocity.vy, vy) == 0;
+        if(o == null) return false;
+        if(!(o instanceof Velocity)){
+            return false;
+        }
+        return equals((Velocity) o);
     }
 
     @Override

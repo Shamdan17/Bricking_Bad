@@ -1,16 +1,20 @@
 package domain.model.brick;
 
-import domain.model.shape.Rectangle;
+import domain.model.movement.MovementBehavior;
+import domain.model.shape.MovableShape;
 import utils.Position;
 
-public abstract class Brick extends Rectangle {
-
-    public Brick(Position position, int length, int width) {
-        super(position, length, width);
+public abstract class Brick extends MovableShape {
+    public Shape getShape() {
+        return Shape.Rectangle;
     }
 
-    public final Type getType() {
-        return Type.Brick;
+    public Brick(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
+    }
+
+    public MovableShape.Type getType() {
+        return MovableShape.Type.Brick;
     }
 
     @Override

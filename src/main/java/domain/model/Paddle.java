@@ -1,11 +1,14 @@
 package domain.model;
 
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;
+
+import static utils.Constants.*;
 
 public class Paddle extends Rectangle {
 
@@ -18,34 +21,39 @@ public class Paddle extends Rectangle {
         return Type.Paddle;
     }
 
+    @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.Paddle;
+    }
+
     private boolean isTallerPaddle = false;
     private boolean tiltLeft = false;
     private boolean tiltRight = false;
 
     public Paddle(Position position) {
-        super(position, Constants.PADDLE_LENGTH, Constants.PADDLE_WIDTH);
+        super(new NoMovement(position), L, PADDLE_WIDTH);
         super.setAngle(0);
     }
 
     @Override
     public void move() {
         if (tiltLeft) {
-            setAngle(getAngle() - 6);
+            setAngle(getAngle() - PADDLE_TURNING_SPEED);
         } else if (tiltRight) {
-            setAngle(getAngle() + 6);
+            setAngle(getAngle() + PADDLE_TURNING_SPEED);
         } else {
-            normalizeAngle(0.5);
+            normalizeAngle(PADDLE_RESTORING_SPEED);
         }
         tiltRight = false;
         tiltLeft = false;
     }
 
     public void moveLeft() {
-        setPosition(new Position(super.getPosition().getX() - 10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
     }
 
     public void moveRight() {
-        setPosition(new Position(super.getPosition().getX() + 10, super.getPosition().getY()));
+        setPosition(new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
     }
 
     public void rotateRight() {

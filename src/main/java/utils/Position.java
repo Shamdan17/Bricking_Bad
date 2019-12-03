@@ -1,5 +1,7 @@
 package utils;
 
+import utils.physics.math.util;
+
 import java.io.Serializable;
 
 public class Position implements Serializable {
@@ -29,13 +31,11 @@ public class Position implements Serializable {
     }
 
     public Position incrementX(double dx) {
-        int difx = (int) Math.round(dx);
-        return new Position(x + difx, y);
+        return new Position(x + dx, y);
     }
 
     public Position incrementY(double dy) {
-        int dify = (int) Math.round(dy);
-        return new Position(x, y + dify);
+        return new Position(x, y + dy);
     }
 
     @Override
@@ -47,6 +47,6 @@ public class Position implements Serializable {
     }
 
     public boolean equals(Position pos) {
-        return x == pos.getX() && y == pos.getY();
+        return util.equal(x,pos.getX()) && util.equal(y,pos.getY());
     }
 }

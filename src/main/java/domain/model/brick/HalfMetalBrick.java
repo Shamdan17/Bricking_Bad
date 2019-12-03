@@ -1,5 +1,6 @@
 package domain.model.brick;
 
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
 import utils.Velocity;
@@ -8,32 +9,36 @@ public class HalfMetalBrick extends Brick {
 
     // TODO: Implement
     public HalfMetalBrick(Position position, int length, int width) {
-        super(position, length, width);
+        super(new NoMovement(position), length, width);
     }
 
     @Override
     public void collide(MovableShape obj) {
-        //TODO: Implement
+        if(obj.getCenter().getY()<this.getCenter().getY()){
+            this.destroy();
+        }
     }
 
     @Override
     public void move() {
         //TODO: Implement
-    }
-
-    @Override
-    public Velocity getVelocity() {
-        return null;
+        return;
     }
 
     @Override
     public void setVelocity(Velocity ps) {
         //TODO: Implement
+        return;
+    }
+
+    @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.HalfMetalBrick;
     }
 
     @Override
     public String toString() {
-        return "Half Metal Brick with "; //TODO add position.toString here;
+        return "Half Metal Brick at " + super.getPosition().toString(); //TODO add position.toString here;
     }
 
 }

@@ -1,5 +1,6 @@
 package utils.physics;
 
+import domain.model.brick.SimpleBrick;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Position;
@@ -32,7 +33,7 @@ public final class PhysicsEngine {
         }
 
         // Handle possible rotated paddle collision logic
-//TODO: Fix paddle collisions
+        //TODO: Fix paddle collisions
         if (obj2.getType() == MovableShape.Type.Paddle) {
             return calculateObjectWithPaddleVelocity(obj2, obj1);
         }
@@ -115,17 +116,17 @@ public final class PhysicsEngine {
     }
 
     private Slope calculateCircleOnCircleCollisionSlope(MovableShape obj1, MovableShape obj2) {
-        Position center1 = getCircleCenter(obj1);
-        Position center2 = getCircleCenter(obj2);
+        Position center1 = obj1.getCenter();
+        Position center2 = obj2.getCenter();
 
         // Calculate the normal of the collision wall
         Slope m = new Slope(center1, center2);
-
+        System.out.println(m.getSlope());
         return m;//calculatePostCollisionVelocity(obj1.getVelocity(),m);
     }
 
     private Slope calculateCircleOnRectCollisionSlope(MovableShape obj1, MovableShape obj2) {
-        Position circleCenter = getCircleCenter(obj1);
+        Position circleCenter = obj1.getCenter();
         double cx = circleCenter.getX(), cy = circleCenter.getY();
 
         Position rectPos = obj2.getPosition();
@@ -141,15 +142,15 @@ public final class PhysicsEngine {
 
         //Identifying the normal vector
         if (cx < rectPos.getX()) {
-            dx = -1;
+            dy = -1;
         } else if (cx > rectPos.getX() + length) {
-            dx = 1;
+            dy = 1;
         }
 
         if (cy < rectPos.getY()) {
-            dy = -1;
+            dx = -1;
         } else if (cy > rectPos.getY() + width) {
-            dy = 1;
+            dx = 1;
         }
 
         return new Slope(dx, dy);//calculatePostCollisionVelocity(obj1.getVelocity(), m);
@@ -257,21 +258,19 @@ public final class PhysicsEngine {
         len = obj1.getLength();
         wid = obj1.getWidth();
 
-        Position cnt = getCircleCenter(obj2);
+        Position cnt = obj2.getCenter();
         int radius = getRadius(obj2);
 
         // if the circle center is between the X bounds of the rect
         // This means the circle is either above or below the rectangle
         if (cnt.getX() >= rect.getX() && cnt.getX() <= rect.getX() + len) {
-            //check if the center differs from the y bounds by less than R
-            return (Math.abs(rect.getY() - cnt.getY()) <= radius) || (Math.abs(rect.getY() + wid - cnt.getY()) <= radius);
+            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY()-radius);
         }
 
         // if the circle center is between the Y bounds of the rect
         // This means the circle is on either side of the rectangle
         if (cnt.getY() >= rect.getY() && cnt.getY() <= rect.getY() + wid) {
-            //check if the center differs from the x bounds by less than R
-            return (Math.abs(rect.getX() - cnt.getX()) <= radius) || (Math.abs(rect.getX() + len - cnt.getX()) <= radius);
+            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX()-radius);
         }
 
         // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
@@ -286,8 +285,8 @@ public final class PhysicsEngine {
     }
 
     private boolean isCircleCollidedWithCircle(MovableShape obj1, MovableShape obj2) {
-        Position cnt1 = getCircleCenter(obj1);
-        Position cnt2 = getCircleCenter(obj2);
+        Position cnt1 = obj1.getCenter();
+        Position cnt2 = obj2.getCenter();
 
         int radius1 = getRadius(obj1);
         int radius2 = getRadius(obj2);
@@ -315,8 +314,8 @@ public final class PhysicsEngine {
      * @return Up if the center of obj1 is above the center of obj2, Down otherwise
      */
     public direction relativeYDirection(MovableShape obj1, MovableShape obj2) {
-        Position c1 = getCenter(obj1);
-        Position c2 = getCenter(obj2);
+        Position c1 = obj1.getCenter();
+        Position c2 = obj2.getCenter();
         Vector v = new Vector(c1, c2);
         if (v.pointsUp()) {
             return direction.Up;
@@ -335,8 +334,8 @@ public final class PhysicsEngine {
      * @return Left if the center of obj1 is to the left of the center of obj2, Right otherwise
      */
     public direction relativeXDirection(MovableShape obj1, MovableShape obj2) {
-        Position c1 = getCenter(obj1);
-        Position c2 = getCenter(obj2);
+        Position c1 = obj1.getCenter();
+        Position c2 = obj2.getCenter();
         Vector v = new Vector(c1, c2);
         if (v.pointsLeft()) {
             return direction.Left;
@@ -350,33 +349,6 @@ public final class PhysicsEngine {
         return Math.sqrt(Math.pow(pt2.getX() - pt1.getX(), 2) + Math.pow(pt2.getY() - pt1.getY(), 2));
     }
 
-    private Position getCenter(MovableShape obj) {
-        switch (obj.getShape()) {
-            case Rectangle:
-                return getRectCenter(obj);
-            case Circle:
-                return getCircleCenter(obj);
-        }
-        return null;
-    }
-
-    private Position getRectCenter(MovableShape obj) {
-        Position rectPos = obj.getPosition();
-        int length = obj.getLength();
-        int width = obj.getWidth();
-        return rectPos.incrementX(length / 2).incrementY(width / 2);
-    }
-
-    private Position getCircleCenter(MovableShape obj) {
-        // Get the radius
-        int radius = getRadius(obj);
-
-        // Get the top left corner and add the offset (radius) to get the center
-        Position center = obj.getPosition().incrementX(radius).incrementY(radius);
-
-        return center;
-    }
-
     // Since circles have their length and width as their diameters, this returns the radius
     private int getRadius(MovableShape obj) {
         return obj.getLength() / 2;
@@ -388,7 +360,7 @@ public final class PhysicsEngine {
     protected Velocity calculatePostCollisionVelocity(Velocity oldVelocity, Slope normalSlope) {
         if (normalSlope.isVertical()) {
             //Simply invert the y velocity
-            return new Velocity(oldVelocity.getX(), -oldVelocity.getY());
+            return new Velocity(-oldVelocity.getX(), oldVelocity.getY());
         }
         double oldX = oldVelocity.getX();
         double oldY = oldVelocity.getY();

@@ -5,7 +5,7 @@ import utils.Position;
 
 public class BrickFactory {
 
-    private static final int LENGTH = Constants.PADDLE_LENGTH / 2;
+    private static final int LENGTH = Constants.L / 2;
     private static final int WIDTH = 20;
     private static final int RADIUS = 10;
 

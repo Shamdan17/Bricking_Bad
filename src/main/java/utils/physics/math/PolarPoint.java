@@ -6,9 +6,9 @@ import utils.Velocity;
 
 // A PolarPoint is a coordinate on a polar coordinate plane
 public class PolarPoint {
-    double radius;
-    double angle;
-    Position origin;
+    private double radius;
+    private double angle;
+    private Position origin;
 
     public PolarPoint(double radius, double angle) {
         this.radius = radius;
@@ -53,8 +53,26 @@ public class PolarPoint {
         this.origin = origin;
     }
 
+    public PolarPoint(Position origin, double radius, double angle) {
+        this.radius = radius;
+        this.angle = angle;
+        this.origin = origin;
+    }
+
     public void rotate(double dif) {
         this.angle += dif;
+    }
+
+    public double getAngle(){
+        return angle;
+    }
+
+    public Position getOrigin(){
+        return origin;
+    }
+
+    public void setOrigin(Position pos){
+        this.origin = pos;
     }
 
     public Position getPosition() {

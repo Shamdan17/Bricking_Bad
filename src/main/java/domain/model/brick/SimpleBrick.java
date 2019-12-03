@@ -1,5 +1,6 @@
 package domain.model.brick;
 
+import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
 import utils.Velocity;
@@ -7,7 +8,7 @@ import utils.Velocity;
 public class SimpleBrick extends Brick {
 
     public SimpleBrick(Position position, int length, int width) {
-        super(position, length, width);
+        super(new NoMovement(position), length, width);
     }
 
     @Override
@@ -28,7 +29,13 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.SimpleBrick;
+    }
+
+    @Override
     public String toString() {
         return "Simple brick with " + super.getPosition();
     }
+
 }

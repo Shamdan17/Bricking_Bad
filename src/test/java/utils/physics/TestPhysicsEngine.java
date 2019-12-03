@@ -2,6 +2,7 @@ package utils.physics;
 
 import domain.model.Ball;
 import domain.model.Paddle;
+import domain.model.brick.Brick;
 import domain.model.brick.SimpleBrick;
 import domain.model.shape.Circle;
 import domain.model.shape.Rectangle;
@@ -45,8 +46,8 @@ class PhysicsEngineTest {
 
     @Test
     void testCalculatePostCollisionVelocity() {
-        // Vertical wall
-        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope()));
+        // Horizontal wall
+        assertEquals(new Velocity(-10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope()));
         // Slanted wall collisions
         // Wall: (y = -x)
         assertEquals(new Velocity(-1, 3), physicsEngine.calculatePostCollisionVelocity(new Velocity(-3, 1), new Slope(1, 1)));
@@ -54,9 +55,9 @@ class PhysicsEngineTest {
         // Wall: (y = x)
         assertEquals(new Velocity(5, 0), physicsEngine.calculatePostCollisionVelocity(new Velocity(0, 5), new Slope(-1, 1)));
         assertEquals(new Velocity(4, 2), physicsEngine.calculatePostCollisionVelocity(new Velocity(2, 4), new Slope(-1, 1)));
-        // Horizontal wall
-        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope(0, 1)));
-        assertEquals(new Velocity(10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, -10), new Slope(0, 1)));
+        // Vertical wall
+        assertEquals(new Velocity(10, -10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, 10), new Slope(1, 0)));
+        assertEquals(new Velocity(10, 10), physicsEngine.calculatePostCollisionVelocity(new Velocity(10, -10), new Slope(1, 0)));
     }
 
     @Test
@@ -79,7 +80,7 @@ class PhysicsEngineTest {
         // Collided
         // Test 1
         p1 = new Position(10, 10);
-        Rectangle r1 = new SimpleBrick(p1, 5, 5);
+        Brick r1 = new SimpleBrick(p1, 5, 5);
         p2 = new Position(10, 10);
         b1 = new Ball(p2, 10);
         assertTrue(physicsEngine.isCollided(b1, r1));
@@ -112,7 +113,7 @@ class PhysicsEngineTest {
         p1 = new Position(10, 10);
         r1 = new SimpleBrick(p1, 5, 5);
         p2 = new Position(14, 14);
-        Rectangle r2 = new SimpleBrick(p2, 5, 5);
+        Brick r2 = new SimpleBrick(p2, 5, 5);
         assertTrue(physicsEngine.isCollided(r1, r2));
         assertTrue(physicsEngine.isCollided(r2, r1));
 

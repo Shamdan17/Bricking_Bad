@@ -1,5 +1,6 @@
 package domain.model.shape;
 
+import domain.model.movement.MovementBehavior;
 import utils.Position;
 
 public abstract class Rectangle extends MovableShape {
@@ -7,7 +8,7 @@ public abstract class Rectangle extends MovableShape {
         return Shape.Rectangle;
     }
 
-    public Rectangle(Position position, int length, int width) {
-        super(position, length, width);
+    public Rectangle(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
     }
 }

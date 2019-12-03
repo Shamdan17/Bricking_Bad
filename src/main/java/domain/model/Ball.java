@@ -1,5 +1,7 @@
 package domain.model;
 
+import domain.model.movement.LinearMovement;
+import domain.model.movement.MovementBehavior;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import utils.Constants;
@@ -8,8 +10,8 @@ import utils.Velocity;
 
 public class Ball extends Circle {
 
-    public Ball(Position position, int radius) {
-        super(position, radius);
+    public Ball(Position pos, int radius) {
+        super(new LinearMovement(pos, Constants.defaultRespawnVelocity), radius);
 
         // TODO we need to remove constants, also we need to check every place
         // where we initialize variable, we don't want null thingies
@@ -55,6 +57,11 @@ public class Ball extends Circle {
     @Override
     public final Type getType() {
         return Type.Ball;
+    }
+
+    @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.Ball;
     }
 
     @Override
