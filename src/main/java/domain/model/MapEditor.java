@@ -19,6 +19,9 @@ public class MapEditor {
     public boolean addBrick(String type, Position pos) {
 
         Brick brick = BrickFactory.get(type, pos);
+        if (brick == null)
+            return false;
+
         boolean isAdded = map.add(brick, pos);
 
         return isAdded;
