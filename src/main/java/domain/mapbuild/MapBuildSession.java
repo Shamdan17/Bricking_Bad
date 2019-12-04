@@ -30,9 +30,12 @@ public class MapBuildSession {
    * @return true if addition was successful, or false otherwise
    */
   public boolean addBrick(SpecificType type, Position pos) {
+    boolean isAdded = false;
 
-    Brick brick = bf.get(type, pos);
-    boolean isAdded = map.add(brick, pos);
+    if (type != null) {
+      Brick brick = bf.get(type, pos);
+      isAdded = map.add(brick, pos);
+    }
 
     return isAdded;
   }

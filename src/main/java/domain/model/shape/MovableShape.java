@@ -62,6 +62,10 @@ public abstract class MovableShape implements Serializable {
         return destroyed;
     }
 
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
     public int getLength() {
         return length;
     }
