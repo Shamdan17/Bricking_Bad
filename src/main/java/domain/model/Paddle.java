@@ -3,7 +3,6 @@ package domain.model;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
-import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;

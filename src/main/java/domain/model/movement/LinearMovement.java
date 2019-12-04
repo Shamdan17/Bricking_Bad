@@ -34,7 +34,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
     }
 
     @Override
-    // Goes back 1/10 of the velocity
+    // Goes back 1/Pi of the velocity
     public Position stepBack() {
         Velocity curvel = getCurrentVelocity();
         double dx = -curvel.getX()/Math.PI;
