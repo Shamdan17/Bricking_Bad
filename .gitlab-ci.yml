@@ -1,3 +1,5 @@
+image: maven:3-jdk-7
+
 stages:
   - build
   - test
