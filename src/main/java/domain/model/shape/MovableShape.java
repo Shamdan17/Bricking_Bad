@@ -34,7 +34,7 @@ public abstract class MovableShape implements Serializable {
 
     public abstract SpecificType getSpecificType();
 
-    public void move(){
+    public void move() {
         this.movBehavior.getNextPosition();
     }
 
@@ -62,6 +62,10 @@ public abstract class MovableShape implements Serializable {
         return destroyed;
     }
 
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
+
     public int getLength() {
         return length;
     }
@@ -78,7 +82,7 @@ public abstract class MovableShape implements Serializable {
         this.width = width;
     }
 
-    public void setMovementBehavior(MovementBehavior movBeh){
+    public void setMovementBehavior(MovementBehavior movBeh) {
         this.movBehavior = movBeh;
     }
 
@@ -90,8 +94,8 @@ public abstract class MovableShape implements Serializable {
         return movBehavior.stepBack();
     }
 
-    public Position getCenter(){
-        return getPosition().incrementX(getLength()/2.0).incrementY(getWidth()/2.0);
+    public Position getCenter() {
+        return getPosition().incrementX(getLength() / 2.0).incrementY(getWidth() / 2.0);
     }
 
     public Position getPosition() {
@@ -133,11 +137,11 @@ public abstract class MovableShape implements Serializable {
     }
 
     // Makes the object of radius newRadius and the same center
-    protected void setRadius(double newRadius){
+    protected void setRadius(double newRadius) {
         Position cnt = this.getCenter();
         setPosition(cnt.incrementX(-newRadius).incrementY(-newRadius));
-        setWidth(util.round(2*newRadius));
-        setLength(util.round(2*newRadius));
+        setWidth(util.round(2 * newRadius));
+        setLength(util.round(2 * newRadius));
     }
 
     public void incrementAngle(double dif) {

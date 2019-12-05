@@ -2,13 +2,17 @@ package domain.model.alien;
 
 import domain.model.SpecificType;
 import domain.model.Type;
-import domain.model.movement.MovementBehavior;
+import domain.model.movement.LinearMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
+import utils.Constants;
+import utils.Position;
+import utils.Velocity;
 
 public class ProtectingAlien extends Alien {
-    public ProtectingAlien(MovementBehavior movBeh, int length, int width) {
-        super(movBeh, length, width);
+
+    public ProtectingAlien(Position position, int length, int width) {
+        super(new LinearMovement(position, new Velocity(3 * Constants.L / 150, 0)), length, width);
     }
 
     @Override
@@ -16,28 +20,37 @@ public class ProtectingAlien extends Alien {
         //todo implementation
     }
 
+
     @Override
     public void collide(MovableShape obj) {
-
+        if (obj.getCenter().getY() < this.getCenter().getY()) {
+            this.destroy();
+        }
     }
 
     @Override
     public Type getType() {
-        return null;
+        return Type.Alien;
     }
 
     @Override
     public Shape getShape() {
-        return null;
+        return Shape.Rectangle;
     }
 
     @Override
     public SpecificType getSpecificType() {
-        return null;
+        return SpecificType.ProtectingAlien;
+    }
+
+    @Override
+    // Since simple bricks don't move the method is not used
+    public void setVelocity(Velocity ps) {
+        return;
     }
 
     @Override
     public String toString() {
-        return null;
+        return "Protecting Alien at " + super.getPosition() + " with velocity " + super.getVelocity();
     }
 }

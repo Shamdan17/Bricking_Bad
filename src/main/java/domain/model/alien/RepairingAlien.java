@@ -7,8 +7,9 @@ import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 
 public class RepairingAlien extends Alien {
-    public RepairingAlien(MovementBehavior movBeh, int length, int width) {
-        super(movBeh, length, width);
+    //TODO change constructor
+    public RepairingAlien(MovementBehavior movementBehavior, int length, int width) {
+        super(movementBehavior, length, width);
     }
 
     @Override

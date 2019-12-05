@@ -4,12 +4,13 @@ import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import utils.Position;
 
-//TODO: Implement fully
+//TODO: Implement
 public abstract class Alien extends MovableShape {
+
     private Position position;
 
-    public Alien(MovementBehavior movBeh, int length, int width){
-        super(movBeh,length,width);
+    public Alien(MovementBehavior movementBehavior, int length, int width) {
+        super(movementBehavior, length, width);
     }
 
     public abstract void behave();
