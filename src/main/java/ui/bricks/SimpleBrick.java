@@ -1,20 +1,21 @@
-package ui;
+package ui.bricks;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
+import ui.Drawable;
 import utils.Position;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Brick implements Drawable, MouseListener {
+public class SimpleBrick implements Drawable, MouseListener {
 
     private MovableShape ms;
     private BrickingBad brickingBad;
     private static boolean removeFlag = false;
 
-    public Brick(MovableShape ms, BrickingBad bb) {
+    public SimpleBrick(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
         brickingBad = bb;
     }

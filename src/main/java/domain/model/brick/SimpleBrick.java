@@ -1,5 +1,7 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
+import domain.model.Type;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
@@ -36,6 +38,13 @@ public class SimpleBrick extends Brick {
     @Override
     public String toString() {
         return "Simple brick with " + super.getPosition();
+    }
+
+    @Override
+    public MovableShape copy(){
+        Brick copyBrick = BrickFactory.get(SpecificType.SimpleBrick,getPosition());
+        copyBrick.setVelocity(getVelocity());
+        return copyBrick;
     }
 
 }

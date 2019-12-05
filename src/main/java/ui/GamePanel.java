@@ -1,8 +1,13 @@
 package ui;
 
 import domain.BrickingBad;
-import domain.model.brick.MineBrick;
+import domain.game.GameData;
+import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
+import ui.bricks.HalfMetalBrick;
+import ui.bricks.MineBrick;
+import ui.bricks.SimpleBrick;
+import ui.bricks.WrapperBrick;
 import utils.Constants;
 
 import javax.swing.*;
@@ -12,10 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
+public class GamePanel extends JPanel implements Runnable, KeyListener {
 
   public JButton backToMain;
   private BrickingBad brickingBad;
@@ -23,7 +26,7 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
   private JButton loadButton;
 
 
-  public GamePlayPanel(BrickingBad bb){
+  public GamePanel(BrickingBad bb){
     backToMain = new JButton("Back to Main");
     brickingBad = bb;
     saveButton = new JButton("save");
@@ -35,7 +38,7 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
 
     saveButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
-        bb.save();
+        bb.saveGame();
         saveButton.setFocusable(false);
         loadButton.setFocusable(false);
       }
@@ -43,7 +46,7 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
 
     loadButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
-        bb.load();
+        bb.loadGame();
         loadButton.setFocusable(false);
         saveButton.setFocusable(false);
       }
@@ -62,9 +65,15 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
   }
 
   public void paintComponent(Graphics g){
-    brickingBad.animate();
+    brickingBad.nextStep();
     super.paintComponent(g);
-    List<MovableShape> drawables = brickingBad.getGameMovables();
+    GameData gameData = brickingBad.getGameData();
+    Paddle paddle = new Paddle(gameData.getPaddle(),brickingBad);
+    Ball ball = new Ball(gameData.getBall());
+    List<MovableShape> drawables = gameData.getMovables();
+    paddle.draw(g);
+    ball.draw(g);
+
     for(MovableShape ms : drawables){
       Drawable d = getDrawable(ms);
       d.draw(g);
@@ -72,17 +81,19 @@ public class GamePlayPanel extends JPanel implements Runnable, KeyListener {
   }
 
   public Drawable getDrawable(MovableShape ms){
-    if(ms instanceof MineBrick)
-      return new Ball(ms);
-    if(ms.getType() == MovableShape.Type.Brick && !(ms instanceof MineBrick))
-      return new Brick(ms, brickingBad);
-    if(ms.getType() == MovableShape.Type.Paddle)
-      return new Paddle(ms);
-    if(ms.getType() == MovableShape.Type.Ball)
-      return new Ball(ms);
-    // TODO: add a dummy default value
-    // default return value
-    return new Brick(ms, brickingBad);
+      switch(ms.getSpecificType()){
+         case SimpleBrick:
+                return new SimpleBrick(ms,brickingBad);
+            case MineBrick:
+                return new MineBrick(ms,brickingBad);
+            case HalfMetalBrick:
+                return new HalfMetalBrick(ms,brickingBad);
+            case WrapperBrick:
+                return new WrapperBrick(ms,brickingBad);
+          default:
+              return new DummyDrawable();
+      }
+
   }
 
 

@@ -1,20 +1,22 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
 import utils.Constants;
 import utils.Position;
 
 public class BrickFactory {
 
-    private static final int LENGTH = Constants.L / 2;
-    private static final int WIDTH = 20;
-    private static final int RADIUS = 10;
 
-    public static Brick get(String type, Position pos) {
+    public static Brick get(SpecificType type, Position pos) {
         switch (type) {
-            case Constants.SimpleBrick:
-                return new SimpleBrick(pos, LENGTH, WIDTH);
+            case SimpleBrick:
+                return new SimpleBrick(pos, Constants.LENGTH, Constants.WIDTH);
+            case MineBrick:
+                return new MineBrick(pos);
+            case HalfMetalBrick:
+                return new HalfMetalBrick(pos,Constants.LENGTH,Constants.WIDTH);
             default:
-                return null;
+               throw new IllegalArgumentException("not brick type supplied");
         }
     }
 

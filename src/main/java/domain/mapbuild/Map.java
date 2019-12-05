@@ -1,6 +1,8 @@
-package domain.model;
+package domain.mapbuild;
 
 import domain.model.shape.MovableShape;
+import domain.storage.BinaryStorage;
+import domain.storage.StorageManager;
 import utils.Position;
 import utils.physics.PhysicsEngine;
 
@@ -13,6 +15,8 @@ public class Map {
 
     List<MovableShape> objects;
     PhysicsEngine pEngine = PhysicsEngine.getInstance();
+    StorageManager storageManager;
+
 
     public Map() {
         objects = new ArrayList();
@@ -71,6 +75,11 @@ public class Map {
 
     public List<MovableShape> getMovables() {
         return objects;
+    }
+
+    public MapBuildData getData(){
+        MapBuildData data = new MapBuildData(objects);
+        return data;
     }
 
 

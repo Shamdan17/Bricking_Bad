@@ -1,7 +1,6 @@
 package domain.model.shape;
 
 import domain.model.movement.MovementBehavior;
-import utils.Position;
 
 public abstract class Rectangle extends MovableShape {
     public final Shape getShape() {

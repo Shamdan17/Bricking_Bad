@@ -2,97 +2,99 @@ package domain;
 
 import domain.account.Account;
 import domain.account.AccountManager;
-import domain.model.Board;
-import domain.model.MapEditor;
-import domain.model.shape.MovableShape;
-import utils.Constants;
+import domain.game.Board;
+import domain.game.GameData;
+import domain.game.GameSession;
+import domain.mapbuild.MapBuildData;
+import domain.mapbuild.MapBuildSession;
+import domain.model.SpecificType;
 import utils.Position;
 
-import java.util.List;
-
-//BrickingBad is the main controller
+// BrickingBad is the main controller
 public class BrickingBad {
 
-    private AccountManager accountManager;
-    private MapEditor mapEditor;
-    private Board board;
+  private AccountManager accountManager;
+  private MapBuildSession mapBuildSession;
+  private GameSession gameSession;
 
-    public BrickingBad() {
-        this.board = new Board("demo");
-        this.mapEditor = new MapEditor();
-        this.accountManager = new AccountManager();
+  public BrickingBad() {
+    this.mapBuildSession = new MapBuildSession();
+    this.gameSession = new GameSession("demo");
+    this.accountManager = new AccountManager();
+  }
+
+  public void nextStep() {
+    gameSession.nextStep();
+  }
+
+  public GameData getGameData() {
+    return gameSession.getGameData();
+  }
+
+  public MapBuildData getMapBuildData() {
+
+    return mapBuildSession.getData();
+  }
+
+  // TODO: this should be updated later to get user name information
+  public void saveGame() {
+    gameSession.save();
+  }
+
+  public void loadGame() {
+    gameSession.load();
+  }
+
+  // TODO: implement
+  public void saveMap() {
+    mapBuildSession.save();
+  }
+
+  // TODO: implement
+  public void loadMap() {}
+
+  public boolean loginAttempt(String username, String password) {
+    // username and password must not be null
+    if (username == null || password == null) {
+      return false;
     }
 
-    public void animate() {
-        this.board.animate();
+    Account acc = accountManager.Authenticate(username, password);
+
+    // if account does not exist fail
+    if (acc == null) {
+      return false;
     }
 
-    public List<MovableShape> getGameMovables() {
-        return this.board.getMovables();
-    }
+    // otherwise confirm authintication
+    return true;
+  }
 
-    public List<MovableShape> getMapEditorMovables() {
-        return mapEditor.getMovables();
-    }
+  public void movePaddleLeft() {
+   gameSession.movePaddleLeft();
+  }
 
-    public void save() {
-        board.save();
-    }
+  public void movePaddleRight() {
+   gameSession.movePaddleRight();
+  }
 
-    public void load() {
-        board.load();
-    }
+  public void rotatePaddleRight() {
+    gameSession.rotatePaddleRight();
+  }
 
+  public void rotatePaddleLeft() {
+    gameSession.rotatePaddleLeft();
+  }
 
-    public boolean loginAttempt(String username, String password) {
-        // username and password must not be null
-        if (username == null || password == null) {
-            return false;
-        }
+  public void removeBrick(Position pos) {
+    boolean isRemoved = mapBuildSession.removeBrick(pos);
+  }
 
-        Account acc = accountManager.Authenticate(username, password);
+  public void moveBrick(Position from, Position to) {
+    mapBuildSession.moveBrick(from, to);
+  }
 
-        // if account does not exist fail
-        if (acc == null) {
-            return false;
-        }
-
-        // otherwise confirm authintication
-        return true;
-    }
-
-
-    // TODO: implment save map in approporiate place
-    public void saveMap() {
-
-    }
-
-    public void movePaddleLeft() {
-        board.movePaddleLeft();
-    }
-
-    public void movePaddleRight() {
-        board.movePaddleRight();
-    }
-
-    public void rotatePaddleRight() {
-        board.rotatePaddleRight();
-    }
-
-    public void rotatePaddleLeft() {
-        board.rotatePaddleLeft();
-    }
-
-    public void removeBrick(Position pos) {
-        boolean isRemoved = mapEditor.removeBrick(pos);
-
-    }
-
-    public void moveBrick(Position from, Position to) {
-        mapEditor.moveBrick(from, to);
-    }
-
-    public void addBrick(Position pos) {
-        boolean isAdded = mapEditor.addBrick(Constants.SimpleBrick, pos);
-    }
+  public void addBrick(Position pos) {
+    boolean isAdded = mapBuildSession.addBrick(SpecificType.SimpleBrick, pos);
+  }
 }

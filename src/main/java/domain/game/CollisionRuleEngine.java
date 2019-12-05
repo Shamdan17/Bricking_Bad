@@ -1,20 +1,18 @@
-package domain.model;
+package domain.game;
 
-import domain.model.brick.MineBrick;
+import domain.model.Type;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
 
-import javax.sound.sampled.FloatControl;
-
 public class CollisionRuleEngine {
     private static PhysicsEngine physics = PhysicsEngine.getInstance();
     private static final Logger logger = Logger.getLogger(CollisionRuleEngine.class);
 
     public static void collide(MovableShape obj1, MovableShape obj2) {
-        if(obj1.getType() == MovableShape.Type.Ball && obj2.getType() == MovableShape.Type.Ball) return;
+        if(obj1.getType() == Type.Ball && obj2.getType() == Type.Ball) return;
         if (physics.isCollided(obj1, obj2)) {
             logger.debug("Collision detected between " + obj1 + " and " + obj2);
             // Calculate the new velocities
@@ -29,8 +27,8 @@ public class CollisionRuleEngine {
 
             int cnt = 0;
             while(physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)){
-                if(obj2.getType() == MovableShape.Type.Paddle && obj1.getVelocity().getY()<0
-                 ||obj1.getType() == MovableShape.Type.Paddle && obj2.getVelocity().getY()<0) break;
+                if(obj2.getType() == Type.Paddle && obj1.getVelocity().getY()<0
+                 ||obj1.getType() == Type.Paddle && obj2.getVelocity().getY()<0) break;
                 obj1.stepBack();
                 obj2.stepBack();
             }

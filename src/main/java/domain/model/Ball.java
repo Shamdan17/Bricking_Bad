@@ -1,7 +1,6 @@
 package domain.model;
 
 import domain.model.movement.LinearMovement;
-import domain.model.movement.MovementBehavior;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import utils.Constants;
@@ -52,6 +51,20 @@ public class Ball extends Circle {
             oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
         }
         setVelocity(oldVelocity);
+    }
+
+    /**
+     * This method return a copy of the current ball
+     * Crucial info to copy includes:
+     * - position
+     * - velocity
+     * @return a copy of current ball
+     */
+    @Override
+    public MovableShape copy(){
+        Ball copyBall = new Ball(this.getPosition(),this.getRadius());
+        copyBall.setVelocity(this.getVelocity());
+        return copyBall;
     }
 
     @Override

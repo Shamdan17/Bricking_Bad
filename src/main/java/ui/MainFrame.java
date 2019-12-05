@@ -17,8 +17,8 @@ public class MainFrame extends JFrame {
     private JButton gamePlayButton;
     private JPanel contPanel;
     private JPanel mainPanel;
-    private MapEditorPanel mapEditorPanel;
-    private GamePlayPanel gamePlayPanel;
+    private MapBuildPanel mapBuildPanel;
+    private GamePanel gamePanel;
     private CardLayout cardLayout;
 
     private static final String MAP_EDITOR_MODE = "Map Editor Mode";
@@ -32,15 +32,15 @@ public class MainFrame extends JFrame {
         gamePlayButton = new JButton(GAME_PLAY_MODE);
         contPanel = new JPanel();
         mainPanel = new JPanel(new GridBagLayout());
-        mapEditorPanel = new MapEditorPanel(bb);
-        gamePlayPanel = new GamePlayPanel(bb);
+        mapBuildPanel = new MapBuildPanel(bb);
+        gamePanel = new GamePanel(bb);
         cardLayout = new CardLayout();
 
         contPanel.setLayout(cardLayout);
 
-        gamePlayPanel.setFocusable(true);
-        gamePlayPanel.addKeyListener(new MKeyListener(bb));
-        mapEditorPanel.addKeyListener(new MKeyListener(bb));
+        gamePanel.setFocusable(true);
+        gamePanel.addKeyListener(new MKeyListener(bb));
+        mapBuildPanel.addKeyListener(new MKeyListener(bb));
         mainPanel.addKeyListener(new MKeyListener(bb));
         contPanel.addKeyListener(new MKeyListener(bb));
         this.addKeyListener(new MKeyListener(bb));
@@ -56,14 +56,14 @@ public class MainFrame extends JFrame {
         gbc.gridy = 1;
         mainPanel.add(gamePlayButton);
 
-        mapEditorPanel.backToMain.addActionListener(new ActionListener() {
+        mapBuildPanel.backToMain.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(contPanel, "main");
                 repaint();
             }
         });
 
-        gamePlayPanel.backToMain.addActionListener(new ActionListener() {
+        gamePanel.backToMain.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(contPanel, "main");
                 repaint();
@@ -85,8 +85,8 @@ public class MainFrame extends JFrame {
         });
 
         contPanel.add(mainPanel, "main");
-        contPanel.add(mapEditorPanel, "edit");
-        contPanel.add(gamePlayPanel, "game");
+        contPanel.add(mapBuildPanel, "edit");
+        contPanel.add(gamePanel, "game");
 
         cardLayout.show(contPanel, "main");
 
@@ -101,12 +101,7 @@ public class MainFrame extends JFrame {
 
     }
 
-    public static void main(String args[]) {
-        BrickingBad bb = new BrickingBad();
-        bb.addBrick(new Position(4, 4));
-        bb.addBrick(new Position(100, 100));
-        new MainFrame(bb);
-    }
+
 }
 
 

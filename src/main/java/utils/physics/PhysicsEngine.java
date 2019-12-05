@@ -1,6 +1,6 @@
 package utils.physics;
 
-import domain.model.brick.SimpleBrick;
+import domain.model.Type;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Position;
@@ -34,7 +34,7 @@ public final class PhysicsEngine {
 
         // Handle possible rotated paddle collision logic
         //TODO: Fix paddle collisions
-        if (obj2.getType() == MovableShape.Type.Paddle) {
+        if (obj2.getType() == Type.Paddle) {
             return calculateObjectWithPaddleVelocity(obj2, obj1);
         }
 
@@ -178,7 +178,7 @@ public final class PhysicsEngine {
         // TODO: find a way to improve this checking
 
 //TODO: Fix paddle collisions
-        if (obj1.getType() == MovableShape.Type.Paddle) {
+        if (obj1.getType() == Type.Paddle) {
             Position oldPos = obj2.getPosition();
             // Rotate the other object
             obj1.getPosition();
@@ -191,7 +191,7 @@ public final class PhysicsEngine {
             obj2.setPosition(oldPos);
             // The result
             return result;
-        } else if (obj2.getType() == MovableShape.Type.Paddle) {
+        } else if (obj2.getType() == Type.Paddle) {
             return isCollided(obj2, obj1);
         }
         // End of block to fix

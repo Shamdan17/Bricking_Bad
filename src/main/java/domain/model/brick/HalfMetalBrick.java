@@ -1,5 +1,6 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
@@ -39,6 +40,12 @@ public class HalfMetalBrick extends Brick {
     @Override
     public String toString() {
         return "Half Metal Brick at " + super.getPosition().toString(); //TODO add position.toString here;
+    }
+    @Override
+    public MovableShape copy(){
+        Brick metalBrick = BrickFactory.get(SpecificType.HalfMetalBrick,getPosition());
+        metalBrick.setVelocity(getVelocity());
+        return metalBrick;
     }
 
 }

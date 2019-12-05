@@ -1,5 +1,6 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import utils.Position;
@@ -36,5 +37,11 @@ public class WrapperBrick extends Brick {
         return "Wrapper brick with "; //TODO add position info
     }
 
+    @Override
+    public MovableShape copy(){
+        Brick copyBrick = BrickFactory.get(SpecificType.WrapperBrick,getPosition());
+        copyBrick.setVelocity(getVelocity());
+        return copyBrick;
+    }
 
 }

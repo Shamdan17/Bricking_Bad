@@ -1,11 +1,13 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
+import domain.model.Type;
 import domain.model.movement.CircularMovement;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
+import domain.model.shape.Shape;
 import utils.Constants;
 import utils.Position;
-import utils.Velocity;
 
 public class MineBrick extends Brick {
 
@@ -44,5 +46,12 @@ public class MineBrick extends Brick {
     @Override
     public String toString() {
         return "Mine brick with"; //TODO add position info
+    }
+
+    @Override
+    public MovableShape copy(){
+        Brick copyBrick = BrickFactory.get(SpecificType.MineBrick,getPosition());
+        copyBrick.setVelocity(getVelocity());
+        return this;
     }
 }

@@ -1,8 +1,9 @@
 package domain.model.brick;
 
+import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
-import utils.Position;
+import domain.model.shape.Shape;
 
 public abstract class Brick extends MovableShape {
     public Shape getShape() {
@@ -13,9 +14,15 @@ public abstract class Brick extends MovableShape {
         super(movBeh, length, width);
     }
 
-    public MovableShape.Type getType() {
-        return MovableShape.Type.Brick;
+    public Type getType() {
+        return Type.Brick;
     }
+
+    /**
+     * Crucial information for copy:
+     * - position
+     * @return a copy of current brick
+     */
 
     @Override
     // Bricks can't rotate so angle is always 0

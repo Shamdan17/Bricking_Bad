@@ -9,6 +9,11 @@ public final class Constants {
     public static final int L = maxX/6;
     public static final long SLEEP_TIME = 5;
 
+    // TODO: reorganize this file
+    public static final int LENGTH = 60;
+    public static final int WIDTH = 20;
+    public static final int RADIUS = 10;
+
 
     public static final int BALL_INITIAL_VX = 0;
     public static final int BALL_INITIAL_VY = 2;
@@ -29,5 +34,6 @@ public final class Constants {
     public static final double Brick_Velocity = L /4;
 
     public static final String SimpleBrick = "SimpleBrick";
+    public static final String MineBrick = "MineBrick";
     //public static final defaultBoard
 }
