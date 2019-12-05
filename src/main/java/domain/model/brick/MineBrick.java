@@ -12,7 +12,11 @@ import utils.Position;
 public class MineBrick extends Brick {
 
     public MineBrick(Position position) {
-        super(new CircularMovement(position, 1.5*Constants.L), 20,20);
+        super(new CircularMovement(position, 30), 20,20);
+    }
+
+    public MineBrick(Position position, double angle){
+        super(new CircularMovement(position,1.5 * Constants.L, angle),20,20);
     }
 
     @Override
@@ -50,8 +54,8 @@ public class MineBrick extends Brick {
 
     @Override
     public MovableShape copy(){
-        Brick copyBrick = BrickFactory.get(SpecificType.MineBrick,getPosition());
-        copyBrick.setVelocity(getVelocity());
-        return this;
+        Brick copyBrick = BrickFactory.get(SpecificType.MineBrick, super.getPosition());
+        copyBrick.setPosition(super.getPosition());
+        return copyBrick;
     }
 }

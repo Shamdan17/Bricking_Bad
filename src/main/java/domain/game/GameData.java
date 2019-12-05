@@ -11,9 +11,9 @@ public class GameData implements Serializable {
 
     // This class wraps all information that can be saved or sent to UI
 
-    private List<MovableShape> movables;
-    private Paddle paddle;
-    private Ball ball;
+    private final List<MovableShape> movables;
+    private final Paddle paddle;
+    private final Ball ball;
 
     private int livesLeft;
 
@@ -36,11 +36,11 @@ public class GameData implements Serializable {
     }
 
     public Paddle getPaddle(){
-        return paddle;
+        return (Paddle)paddle.copy();
     }
 
     public Ball getBall(){
-        return ball;
+        return (Ball)ball.copy();
     }
 
 }

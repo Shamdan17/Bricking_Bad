@@ -14,12 +14,4 @@ public class Main {
         new MainFrame(bb);
     }
 
-//    public static void main(String[] args) {
-//
-//
-//
-//        logger.info("The game is running");
-//        LoginForm loginForm = new LoginForm();
-//        loginForm.setVisible(true);
-//    }
 }

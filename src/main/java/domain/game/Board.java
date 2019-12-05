@@ -5,6 +5,7 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.brick.BrickFactory;
 import domain.model.brick.HalfMetalBrick;
+import domain.model.brick.MineBrick;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -44,7 +45,7 @@ public class Board {
   private void defaultMovables() {
     for (int i = 0; i < 10; i++) {
       if (i % 3 == 2)
-        movables.add(BrickFactory.get(SpecificType.MineBrick, new Position(10 * i - 100, 300)));
+        movables.add(BrickFactory.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
     }
     // TODO: remove constants from here
     ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
@@ -131,7 +132,7 @@ public class Board {
     Ball b = (Ball) ball.copy();
     List<MovableShape> movableList = new ArrayList<>();
     for (MovableShape ms : movables) {
-      movableList.add(ms.copy());
+        movableList.add(ms.copy());
     }
     return new GameData(p, b, movableList);
   }
