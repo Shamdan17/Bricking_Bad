@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO move all movable objects - ones has hasNextPosition() == true
-// check all movable objects whether they are collided or not
-// remove all collided objects
 
 // Board contains all movables, paddle and ball
 public class Board {
@@ -26,8 +24,12 @@ public class Board {
   private List<MovableShape> movables;
   private Paddle paddle;
   private Ball ball;
-  private int bricksLeft; // TODO get this from list
 
+  /**
+   * This constructor is used to create a board with a given data
+   *
+   * @param data an object that contains necessary data to load a board
+   */
   public Board(GameData data) {
     if (data == null) {
       throw new IllegalArgumentException();
@@ -39,11 +41,17 @@ public class Board {
     movables.add(paddle);
   }
 
+  /**
+   * This constrcutor is used to start a board with initial configuration
+   *
+   * @throws IllegalArgumentException
+   */
   public Board() throws IllegalArgumentException {
     movables = new ArrayList<>();
     defaultMovables();
   }
 
+  /** Adds default data to board */
   private void defaultMovables() {
     for (int i = 0; i < 10; i++) {
       if (i % 3 == 2)
@@ -67,6 +75,11 @@ public class Board {
     }
   }
 
+  /**
+   * this function moves the cycle of the game 1 step by making each object move according to its
+   * velocity and then it checks collisions between objects and then removes destroyed objects as a
+   * result of previous steps
+   */
   public void animate() {
     // advance all movables one step and check collisions and remove collided ones
     moveBall();
@@ -76,6 +89,10 @@ public class Board {
     // TODO need to check whether ball is dropped or not then check remaining lives
   }
 
+  /**
+   * This function is responsible for ball movements, and it checks extra logic related to ball like
+   * respawning etc..
+   */
   private void moveBall() {
     ball.move();
     if (ball.getPosition().getY() > Constants.maxY) {
@@ -84,6 +101,7 @@ public class Board {
     }
   }
 
+  /** This function iterates over movables and calls move() function on each */
   private void moveAllMovables() {
     // move all objects once
     for (MovableShape movableShape : movables) {
@@ -91,6 +109,7 @@ public class Board {
     }
   }
 
+  /** This function checks pairwise collisions between movable objects inside movables list */
   private void checkCollisions() {
     // check all movables pair-wise whether they are collided or not
     for (int i = 0; i < movables.size(); i++) {
@@ -100,6 +119,7 @@ public class Board {
     }
   }
 
+  /** This function iterates over movables and removes destroyed objects */
   private void removeDestroyedMovables() {
     movables.removeIf(
         movableShape -> {
@@ -109,26 +129,31 @@ public class Board {
     // logger.debug("# of remaining movables: " + movables.size());
   }
 
-  public void addMovable(MovableShape mshape) {
-    movables.add(mshape);
-  }
-
+  /** This function moves the paddle to the left */
   public void movePaddleLeft() {
     paddle.moveLeft();
   }
 
+  /** This function moves the paddle to the right */
   public void movePaddleRight() {
     paddle.moveRight();
   }
 
+  /** This function rotates the paddle to the right */
   public void rotatePaddleRight() {
     paddle.rotateRight();
   }
 
+  /** This function rotates the paddle to the left */
   public void rotatePaddleLeft() {
     paddle.rotateLeft();
   }
 
+  /**
+   * This function wraps board data into a GameData type and returns it
+   *
+   * @return a GameData instance containing copies of movables in this board
+   */
   // TODO: check copy behavior
   public GameData getData() {
     Paddle p = (Paddle) paddle.copy();

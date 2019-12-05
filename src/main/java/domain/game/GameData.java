@@ -11,26 +11,14 @@ import java.util.List;
 public class GameData implements Serializable {
 
   // This class wraps all information that can be saved or sent to UI
-
   private final List<MovableShape> movables;
   private final Paddle paddle;
   private final Ball ball;
-
-  private int livesLeft;
 
   public GameData(Paddle p, Ball b, List<MovableShape> ms) {
     this.paddle = p;
     this.ball = b;
     this.movables = ms;
-  }
-
-  public int getLivesLeft() {
-    return livesLeft;
-  }
-
-  public void setLivesLeft(int newlivesLeft) {
-
-    livesLeft = newlivesLeft;
   }
 
   public List<MovableShape> getMovables() {
