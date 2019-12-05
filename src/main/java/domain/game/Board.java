@@ -3,9 +3,9 @@ package domain.game;
 import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
+import domain.model.Type;
 import domain.model.brick.BrickFactory;
 import domain.model.brick.HalfMetalBrick;
-import domain.model.brick.MineBrick;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -35,6 +35,8 @@ public class Board {
     paddle = data.getPaddle();
     ball = data.getBall();
     movables = data.getMovables();
+    movables.add(ball);
+    movables.add(paddle);
   }
 
   public Board() throws IllegalArgumentException {
@@ -53,8 +55,8 @@ public class Board {
     paddle = new Paddle(new Position(300, 700));
 
     // TODO: ball and paddle are added to movables for now for sake of collision checking
-      movables.add(ball);
-      movables.add(paddle);
+    movables.add(ball);
+    movables.add(paddle);
 
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 6; j++) {
@@ -126,13 +128,15 @@ public class Board {
   public void rotatePaddleLeft() {
     paddle.rotateLeft();
   }
+
   // TODO: check copy behavior
   public GameData getData() {
     Paddle p = (Paddle) paddle.copy();
     Ball b = (Ball) ball.copy();
     List<MovableShape> movableList = new ArrayList<>();
     for (MovableShape ms : movables) {
-        movableList.add(ms.copy());
+      if (ms.getType() == Type.Paddle || ms.getType() == Type.Ball) continue;
+      movableList.add(ms.copy());
     }
     return new GameData(p, b, movableList);
   }

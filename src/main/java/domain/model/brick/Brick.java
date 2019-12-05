@@ -5,6 +5,8 @@ import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 
+import java.io.Serializable;
+
 public abstract class Brick extends MovableShape {
     public Shape getShape() {
         return Shape.Rectangle;

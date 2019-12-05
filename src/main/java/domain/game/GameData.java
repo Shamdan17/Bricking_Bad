@@ -5,42 +5,45 @@ import domain.model.Paddle;
 import domain.model.shape.MovableShape;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameData implements Serializable {
 
-    // This class wraps all information that can be saved or sent to UI
+  // This class wraps all information that can be saved or sent to UI
 
-    private final List<MovableShape> movables;
-    private final Paddle paddle;
-    private final Ball ball;
+  private final List<MovableShape> movables;
+  private final Paddle paddle;
+  private final Ball ball;
 
-    private int livesLeft;
+  private int livesLeft;
 
-    public GameData(Paddle p, Ball b, List<MovableShape> ms) {
-        this.paddle = p;
-        this.ball = b;
-        this.movables = ms;
-    }
+  public GameData(Paddle p, Ball b, List<MovableShape> ms) {
+    this.paddle = p;
+    this.ball = b;
+    this.movables = ms;
+  }
 
-    public void setLivesLeft(int newlivesLeft){
+  public int getLivesLeft() {
+    return livesLeft;
+  }
 
-        livesLeft = newlivesLeft;
-    }
+  public void setLivesLeft(int newlivesLeft) {
 
-    public int getLivesLeft(){
-        return livesLeft;
-    }
-    public List<MovableShape> getMovables(){
-        return movables;
-    }
+    livesLeft = newlivesLeft;
+  }
 
-    public Paddle getPaddle(){
-        return (Paddle)paddle.copy();
-    }
+  public List<MovableShape> getMovables() {
+    List<MovableShape> list = new ArrayList<>();
+    for (MovableShape ms : movables) list.add(ms.copy());
+    return list;
+  }
 
-    public Ball getBall(){
-        return (Ball)ball.copy();
-    }
+  public Paddle getPaddle() {
+    return (Paddle) paddle.copy();
+  }
 
+  public Ball getBall() {
+    return (Ball) ball.copy();
+  }
 }

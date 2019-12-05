@@ -4,8 +4,11 @@ import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
+
+import java.io.Serializable;
 
 public class SimpleBrick extends Brick {
 
@@ -42,8 +45,7 @@ public class SimpleBrick extends Brick {
 
     @Override
     public MovableShape copy(){
-        Brick copyBrick = BrickFactory.get(SpecificType.SimpleBrick,getPosition());
-        copyBrick.setVelocity(getVelocity());
+        Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }
 

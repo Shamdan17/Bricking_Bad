@@ -8,6 +8,9 @@ import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 import utils.Constants;
 import utils.Position;
+import org.apache.commons.lang3.SerializationUtils;
+
+import java.io.Serializable;
 
 public class MineBrick extends Brick {
 
@@ -54,8 +57,7 @@ public class MineBrick extends Brick {
 
     @Override
     public MovableShape copy(){
-        Brick copyBrick = BrickFactory.get(SpecificType.MineBrick, super.getPosition());
-        copyBrick.setPosition(super.getPosition());
+        Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }
 }

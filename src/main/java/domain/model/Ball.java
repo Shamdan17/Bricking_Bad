@@ -3,6 +3,7 @@ package domain.model;
 import domain.model.movement.LinearMovement;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -62,8 +63,7 @@ public class Ball extends Circle {
      */
     @Override
     public MovableShape copy(){
-        Ball copyBall = new Ball(this.getPosition(),this.getRadius());
-        copyBall.setVelocity(this.getVelocity());
+        Ball copyBall = SerializationUtils.clone(this);
         return copyBall;
     }
 

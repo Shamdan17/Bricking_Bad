@@ -3,6 +3,7 @@ package domain.model;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;
@@ -18,6 +19,11 @@ public class Paddle extends Rectangle {
   public Paddle(Position position) {
     super(new NoMovement(position), L, PADDLE_WIDTH);
     super.setAngle(0);
+  }
+
+  public Paddle(Position position, double angle){
+      super(new NoMovement(position),L,PADDLE_WIDTH);
+      super.setAngle(angle);
   }
 
   @Override
@@ -138,10 +144,7 @@ public class Paddle extends Rectangle {
      */
     @Override
   public MovableShape copy() {
-    Paddle copyPaddle = new Paddle(this.getPosition());
-    copyPaddle.setAngle(this.getAngle());
-    copyPaddle.setTallerPaddle(this.isTallerPaddle());
-    copyPaddle.setVelocity(this.getVelocity());
+    Paddle copyPaddle = SerializationUtils.clone(this);
     return copyPaddle;
   }
 
