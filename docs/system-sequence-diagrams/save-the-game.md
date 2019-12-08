@@ -6,8 +6,8 @@ participant User
 participant Game
 Game-->> User: showPauseMenu
 User->> Game: clickSave
-Game-->>User: enterSaveName
+Game-->>User: getSaveNamePrompt
 User->> Game: submitSaveName
-Game-->>User: printSaveSuccessful
+Game-->>User: showSaveSuccessful
 
 ```
