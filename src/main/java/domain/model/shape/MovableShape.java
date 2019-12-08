@@ -1,5 +1,7 @@
 package domain.model.shape;
 
+import domain.model.SpecificType;
+import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import utils.Position;
 import utils.Velocity;
@@ -29,26 +31,6 @@ public abstract class MovableShape implements Serializable {
 
     public void move(){
         this.movBehavior.getNextPosition();
-    }
-
-    public enum SpecificType {
-        Ball,
-        Paddle,
-        SimpleBrick,
-        MineBrick,
-        HalfMetalBrick,
-        WrapperBrick,
-    }
-
-    public enum Type {
-        Ball,
-        Paddle,
-        Brick,
-    }
-
-    public enum Shape {
-        Circle,
-        Rectangle,
     }
 
     public MovableShape(MovementBehavior mb, int length, int width) {
@@ -146,5 +128,7 @@ public abstract class MovableShape implements Serializable {
     }
 
     public abstract String toString();
+
+    public abstract MovableShape copy();
 
 }

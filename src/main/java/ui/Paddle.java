@@ -1,16 +1,22 @@
 package ui;
 
+import domain.BrickingBad;
 import domain.model.shape.MovableShape;
 import utils.physics.math.util;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Paddle implements Drawable {
 
     MovableShape ms;
+    BrickingBad brickingBad;
 
-    public Paddle(MovableShape ms) {
+    public Paddle(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
+        this.brickingBad = bb;
     }
 
     public void draw(Graphics g) {
@@ -39,5 +45,6 @@ public class Paddle implements Drawable {
         g.setColor(Color.GRAY);
         g.drawPolygon(x, y, 4);
     }
+
 
 }

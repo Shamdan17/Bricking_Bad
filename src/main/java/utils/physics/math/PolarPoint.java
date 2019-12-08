@@ -4,8 +4,10 @@ package utils.physics.math;
 import utils.Position;
 import utils.Velocity;
 
+import java.io.Serializable;
+
 // A PolarPoint is a coordinate on a polar coordinate plane
-public class PolarPoint {
+public class PolarPoint implements Serializable {
     private double radius;
     private double angle;
     private Position origin;

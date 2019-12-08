@@ -1,15 +1,20 @@
 package ui;
 
 import domain.BrickingBad;
+import domain.mapbuild.MapBuildData;
+import domain.model.Type;
 import domain.model.shape.MovableShape;
+import ui.bricks.HalfMetalBrick;
+import ui.bricks.MineBrick;
+import ui.bricks.SimpleBrick;
+import ui.bricks.WrapperBrick;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-public class MapEditorPanel extends JPanel implements Runnable, ActionListener {
+public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
 
 
     public JButton backToMain;
@@ -17,7 +22,7 @@ public class MapEditorPanel extends JPanel implements Runnable, ActionListener {
     private JCheckBox deleteBlock;
     private JButton saveButton;
 
-    public MapEditorPanel(BrickingBad bb) {
+    public MapBuildPanel(BrickingBad bb) {
         backToMain = new JButton("Back to Main");
         saveButton = new JButton("Save");
         deleteBlock = new JCheckBox("delete by click");
@@ -43,18 +48,27 @@ public class MapEditorPanel extends JPanel implements Runnable, ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        List<MovableShape> drawables = brickingBad.getMapEditorMovables();
-        for (MovableShape ms : drawables) {
+        MapBuildData mapBuildData = brickingBad.getMapBuildData();
+        for (MovableShape ms : mapBuildData.getMovables()) {
             Drawable d = getDrawable(ms);
-            this.addMouseListener((Brick) d);
+            this.addMouseListener((SimpleBrick) d);
             d.draw(g);
         }
     }
-
+    // TODO: this code fragment is repeated, define a brick factory to shortcut it.
     public Drawable getDrawable(MovableShape ms) {
-        if (ms.getType() == MovableShape.Type.Brick)
-            return new Brick(ms, brickingBad);
-        return new Brick(ms, brickingBad);
+        switch(ms.getSpecificType()){
+            case SimpleBrick:
+                return new SimpleBrick(ms,brickingBad);
+            case MineBrick:
+                return new MineBrick(ms,brickingBad);
+            case HalfMetalBrick:
+                return new HalfMetalBrick(ms,brickingBad);
+            case WrapperBrick:
+                return new WrapperBrick(ms,brickingBad);
+            default:
+                throw new IllegalArgumentException("provided type not supported");
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -62,7 +76,7 @@ public class MapEditorPanel extends JPanel implements Runnable, ActionListener {
             brickingBad.saveMap();
         }
         if (e.getActionCommand().equals("delete by click")) {
-            Brick.setRemoveFlag(deleteBlock.isSelected());
+            SimpleBrick.setRemoveFlag(deleteBlock.isSelected());
         }
     }
 

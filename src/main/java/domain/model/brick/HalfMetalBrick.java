@@ -1,9 +1,13 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
+
+import java.io.Serializable;
 
 public class HalfMetalBrick extends Brick {
 
@@ -39,6 +43,11 @@ public class HalfMetalBrick extends Brick {
     @Override
     public String toString() {
         return "Half Metal Brick at " + super.getPosition().toString(); //TODO add position.toString here;
+    }
+    @Override
+    public MovableShape copy(){
+        Brick copyBrick = SerializationUtils.clone(this);
+        return copyBrick;
     }
 
 }

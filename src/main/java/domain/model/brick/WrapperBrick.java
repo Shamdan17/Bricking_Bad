@@ -1,7 +1,9 @@
 package domain.model.brick;
 
+import domain.model.SpecificType;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
 
@@ -36,5 +38,10 @@ public class WrapperBrick extends Brick {
         return "Wrapper brick with "; //TODO add position info
     }
 
+    @Override
+    public MovableShape copy(){
+        Brick copyBrick = SerializationUtils.clone(this);
+        return copyBrick;
+    }
 
 }

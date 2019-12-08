@@ -5,7 +5,6 @@ import domain.model.Paddle;
 import domain.model.brick.Brick;
 import domain.model.brick.SimpleBrick;
 import domain.model.shape.Circle;
-import domain.model.shape.Rectangle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Position;

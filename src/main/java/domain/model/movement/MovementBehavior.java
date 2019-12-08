@@ -3,8 +3,6 @@ package domain.model.movement;
 import utils.Position;
 import utils.Velocity;
 
-import java.io.Serializable;
-
 // MovementBehavior defines an interface which all movement behaviors of different
 // objects implement
 public interface MovementBehavior {

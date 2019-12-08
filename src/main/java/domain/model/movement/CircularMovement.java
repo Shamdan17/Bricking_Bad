@@ -22,7 +22,7 @@ public class CircularMovement implements MovementBehavior, Serializable {
         dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
     }
 
-    public CircularMovement(Position pos, int radius, double initAngle){
+    public CircularMovement(Position pos, double radius, double initAngle){
         position = new PolarPoint(pos, radius, initAngle);
         // Calculate dTheta
         dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
