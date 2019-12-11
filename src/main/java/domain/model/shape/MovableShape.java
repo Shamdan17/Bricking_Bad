@@ -8,7 +8,9 @@ import utils.Velocity;
 import utils.physics.math.util;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
@@ -20,6 +22,9 @@ public abstract class MovableShape implements Serializable {
     private MovementBehavior movBehavior;
     // A flag that signals whether a shape is destroyed due to a collision and needs to be removed
     private boolean destroyed;
+
+    // This queue contains the MovableShapes that this object wants to add to the container it is in
+    private Queue<MovableShape> queue = new LinkedList<>();
 
     public abstract void collide(MovableShape obj);
 
@@ -38,6 +43,14 @@ public abstract class MovableShape implements Serializable {
         this.length = length;
         this.width = width;
         this.movBehavior = mb;
+    }
+
+    public void setQueue(Queue<MovableShape> queue) {
+        this.queue = queue;
+    }
+
+    protected void addToQueue(MovableShape shape){
+        queue.add(shape);
     }
 
     protected void destroy() {
@@ -67,6 +80,10 @@ public abstract class MovableShape implements Serializable {
 
     public void setMovementBehavior(MovementBehavior movBeh){
         this.movBehavior = movBeh;
+    }
+
+    protected MovementBehavior getMovementBehavior(){
+        return this.movBehavior;
     }
 
     public Position stepBack(){

@@ -6,8 +6,8 @@ public final class Constants {
     //paddleWidth (thickness) should be 20 pixels
     public static final int PADDLE_WIDTH = 30;
     //todo width should be %10 of the screen width and not a constant
-    public static final int L = maxX/6;
-    public static final long SLEEP_TIME = 5;
+    public static final double L = maxX/6;
+    public static final long SLEEP_TIME = 10;
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;
@@ -31,7 +31,9 @@ public final class Constants {
     public static final Velocity defaultVelocity = new Velocity(0,0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0,BALL_INITIAL_VY);
 
-    public static final double Brick_Velocity = L /4;
+    public static final double Brick_Velocity = L /(4 * (1000/SLEEP_TIME));
+
+    public static final double movingProbability = 0.9;
 
     public static final String SimpleBrick = "SimpleBrick";
     public static final String MineBrick = "MineBrick";

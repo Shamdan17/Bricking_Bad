@@ -1,6 +1,8 @@
 package domain.model.brick;
 
 import domain.model.SpecificType;
+import domain.model.Type;
+import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
@@ -12,27 +14,15 @@ import java.io.Serializable;
 public class HalfMetalBrick extends Brick {
 
     // TODO: Implement
-    public HalfMetalBrick(Position position, int length, int width) {
-        super(new NoMovement(position), length, width);
+    public HalfMetalBrick(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
     }
 
     @Override
     public void collide(MovableShape obj) {
-        if(obj.getCenter().getY()<this.getCenter().getY()){
+        if(obj.getType() == Type.Ball && obj.getCenter().getY()<this.getCenter().getY()){
             this.destroy();
         }
-    }
-
-    @Override
-    public void move() {
-        //TODO: Implement
-        return;
-    }
-
-    @Override
-    public void setVelocity(Velocity ps) {
-        //TODO: Implement
-        return;
     }
 
     @Override

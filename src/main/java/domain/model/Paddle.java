@@ -7,6 +7,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.math.Rotation;
+import utils.physics.math.util;
 
 import static utils.Constants.*;
 
@@ -17,12 +18,12 @@ public class Paddle extends Rectangle {
   private boolean tiltRight = false;
 
   public Paddle(Position position) {
-    super(new NoMovement(position), L, PADDLE_WIDTH);
+    super(new NoMovement(position), util.round(L), PADDLE_WIDTH);
     super.setAngle(0);
   }
 
   public Paddle(Position position, double angle){
-      super(new NoMovement(position),L,PADDLE_WIDTH);
+      super(new NoMovement(position),util.round(L),PADDLE_WIDTH);
       super.setAngle(angle);
   }
 

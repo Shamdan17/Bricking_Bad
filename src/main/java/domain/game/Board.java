@@ -1,5 +1,7 @@
 package domain.game;
 
+import domain.game.collisionrules.CollisionRule;
+import domain.game.collisionrules.CollisionRuleFactory;
 import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
@@ -11,9 +13,12 @@ import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
+import utils.physics.PhysicsEngine;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 // TODO move all movable objects - ones has hasNextPosition() == true
 
@@ -24,6 +29,10 @@ public class Board {
   private List<MovableShape> movables;
   private Paddle paddle;
   private Ball ball;
+  private Queue<MovableShape> objectQueue = new LinkedList<>();
+  private BrickFactory bf = new BrickFactory(objectQueue);
+  private PhysicsEngine ps = PhysicsEngine.getInstance();
+  private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
 
   /**
    * This constructor is used to create a board with a given data
@@ -39,6 +48,7 @@ public class Board {
     movables = data.getMovables();
     movables.add(ball);
     movables.add(paddle);
+    bindMovables();
   }
 
   /**
@@ -49,13 +59,14 @@ public class Board {
   public Board() throws IllegalArgumentException {
     movables = new ArrayList<>();
     defaultMovables();
+    bindMovables();
   }
 
   /** Adds default data to board */
   private void defaultMovables() {
     for (int i = 0; i < 10; i++) {
       if (i % 3 == 2)
-        movables.add(BrickFactory.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
+        movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
     }
     // TODO: remove constants from here
     ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
@@ -66,11 +77,11 @@ public class Board {
     movables.add(ball);
     movables.add(paddle);
 
-    for (int i = 0; i < 10; i++) {
-      for (int j = 0; j < 6; j++) {
+    for (int i = 0; i < 10; i+=4) {
+      for (int j = 3; j < 6; j+=10) {
         Position curpos = new Position(80 * i + 20, 40 * j + 10);
-        if (i % 2 == 1) movables.add(BrickFactory.get(SpecificType.SimpleBrick, curpos));
-        else movables.add(new HalfMetalBrick(curpos, 60, 20));
+        if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
+        else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
       }
     }
   }
@@ -82,12 +93,51 @@ public class Board {
    */
   public void animate() {
     // advance all movables one step and check collisions and remove collided ones
+    if(Math.random()<0.01){
+      objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random()*600, Math.random()*600)));
+    }
+    if(Math.random()<0.0005){
+      objectQueue.add(bf.get(SpecificType.MineBrick, new Position(Math.random()*600, Math.random()*600)));
+    }
+    if(Math.random()<0.01){
+      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
+    }
     moveBall();
     moveAllMovables();
     checkCollisions();
     removeDestroyedMovables();
+    handleQueue();
     // TODO need to check whether ball is dropped or not then check remaining lives
   }
+
+  /*
+    Bind movables gives a reference of the local queue to all the movables
+   */
+  private void bindMovables(){
+    for(MovableShape ms : movables){
+      ms.setQueue(objectQueue);
+    }
+  }
+
+    /*
+    handleQueue handles the objects in the queue, only adding them to the board if they are in a valid position
+   */
+  private void handleQueue(){
+    while(!objectQueue.isEmpty()){
+      MovableShape cur = objectQueue.remove();
+      if(cur.getType() == Type.Powerup || cur.getType() == Type.Alien || cur.getType() == Type.Ball){
+        movables.add(cur);
+      }else{
+        for(MovableShape ms : movables){
+          if(ps.isCollided(cur, ms)){
+            return;
+          }
+        }
+        movables.add(cur);
+      }
+    }
+  }
+
 
   /**
    * This function is responsible for ball movements, and it checks extra logic related to ball like
@@ -114,7 +164,7 @@ public class Board {
     // check all movables pair-wise whether they are collided or not
     for (int i = 0; i < movables.size(); i++) {
       for (int j = i + 1; j < movables.size(); j++) {
-        CollisionRuleEngine.collide(movables.get(i), movables.get(j));
+        collisionRule.collide(movables.get(i), movables.get(j));
       }
     }
   }

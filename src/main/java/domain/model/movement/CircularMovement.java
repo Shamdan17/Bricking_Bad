@@ -13,19 +13,20 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     private PolarPoint position;
     private double dTheta;
-    private Velocity defaultVelocityVector = new Velocity(0,Constants.Brick_Velocity);
+    private Velocity defaultVelocityVector = new Velocity(0,0);
 
 
     public CircularMovement(Position pos, double radius){
         position = new PolarPoint(pos, radius, 0);
         // Calculate dTheta
-        dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
+        dTheta = Constants.Brick_Velocity ;//* 360;
+        //defaultVelocityVector = new Velocity(0, Constants.Brick_Velocity/(2*Math.PI));
     }
 
     public CircularMovement(Position pos, double radius, double initAngle){
         position = new PolarPoint(pos, radius, initAngle);
         // Calculate dTheta
-        dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
+        dTheta = Constants.Brick_Velocity;//* 360;
     }
 
     @Override

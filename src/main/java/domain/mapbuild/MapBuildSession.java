@@ -14,6 +14,7 @@ public class MapBuildSession {
   private Map map;
   private StorageManager storageManager;
   private long unixTimestamp;
+  private BrickFactory bf= new BrickFactory();
 
   public MapBuildSession() {
     map = new Map();
@@ -30,7 +31,7 @@ public class MapBuildSession {
    */
   public boolean addBrick(SpecificType type, Position pos) {
 
-    Brick brick = BrickFactory.get(type, pos);
+    Brick brick = bf.get(type, pos);
     boolean isAdded = map.add(brick, pos);
 
     return isAdded;
