@@ -28,6 +28,7 @@ public final class PhysicsEngine {
      * @return The new velocity of obj1 after it collides with obj2 if it does so
      */
     public Velocity calculateNewVelocity(MovableShape obj1, MovableShape obj2) {
+
         if (!isCollided(obj1, obj2)) {
             return obj1.getVelocity();
         }
@@ -45,7 +46,12 @@ public final class PhysicsEngine {
             return null;
         }
 
-        return calculatePostCollisionVelocity(obj1.getVelocity(), collisionWallSlope);
+        Velocity firstInitialVelocity = obj1.getVelocity();
+        Velocity secondInitialVelocity = obj2.getVelocity();
+        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX()-secondInitialVelocity.getX(),
+                                                firstInitialVelocity.getY()-secondInitialVelocity.getY());
+
+        return calculatePostCollisionVelocity(relativeVelocity, collisionWallSlope);
     }
 
     private Velocity calculateObjectWithPaddleVelocity(MovableShape obj1, MovableShape obj2) {
