@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
@@ -18,6 +19,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
     @Override
     public Position getNextPosition() {
         curpos = curpos.incrementX(curvel.getX()).incrementY(curvel.getY());
+        ensureObjectInBounds(curpos, curvel);
         return curpos;
     }
 
@@ -51,6 +53,25 @@ public class LinearMovement implements MovementBehavior, Serializable {
     @Override
     public void setPosition(Position newPos) {
         this.curpos = newPos;
+    }
+
+    @Override
+    public void inverse() {
+        this.curvel = new Velocity(-curvel.getX(), -curvel.getY());
+    }
+
+    public void ensureObjectInBounds(Position position, Velocity velocity) {
+        Velocity oldVelocity = velocity;
+        if (position.getX() > Constants.maxX) {
+            oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if (position.getX() < 0) {
+            oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if (position.getY() < 0) {
+            oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
+        }
+        setVelocity(oldVelocity);
     }
 
 }

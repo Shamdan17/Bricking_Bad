@@ -19,4 +19,6 @@ public interface MovementBehavior {
     public void setVelocity(Velocity newVel);
     // setVelocity sets the position of the object to the new position, if possible
     public void setPosition(Position newPos);
+    // reverse inverses the path of the object
+    public void inverse();
 }

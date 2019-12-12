@@ -64,4 +64,8 @@ public class CircularMovement implements MovementBehavior, Serializable {
         Position newOrigin = this.position.getOrigin().incrementX(dx).incrementY(dy);
         this.position.setOrigin(newOrigin);
     }
+
+    public void inverse(){
+        this.dTheta*=-1;
+    }
 }

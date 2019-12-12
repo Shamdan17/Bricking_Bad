@@ -43,4 +43,9 @@ public class NoMovement implements MovementBehavior, Serializable {
     public void setPosition(Position newPos) {
         this.curpos = newPos;
     }
+
+    @Override
+    public void inverse() {
+        // Do nothing
+    }
 }
