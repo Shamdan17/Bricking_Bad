@@ -34,4 +34,14 @@ public class GameData implements Serializable {
   public Ball getBall() {
     return (Ball) ball.copy();
   }
+
+  public boolean equals(GameData data){
+    if(movables.size() != data.getMovables().size())
+        return false;
+    for(int i=0 ; i<movables.size() ; ++i)
+        if(!movables.get(i).equals(data.getMovables().get(i)))
+            return false;
+      return paddle.equals(data.getPaddle()) &&
+              ball.equals(data.getBall());
+  }
 }
