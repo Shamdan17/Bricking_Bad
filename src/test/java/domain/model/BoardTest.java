@@ -4,78 +4,148 @@ import domain.game.Board;
 import domain.game.GameData;
 import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
+import domain.model.shape.MovableShape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.Constants;
 import utils.Position;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import static domain.model.SpecificType.MineBrick;
 import static domain.model.SpecificType.SimpleBrick;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
-    private Board board;
-    private BrickFactory brickFactory;
+  private Board board;
+  private Paddle paddle;
+  private Ball ball;
+  private BrickFactory brickFactory;
 
-    @Test
-    void boardConstructorWithNullArgumentShouldThrowException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            board = new Board(new GameData(null, null, null));
+  @Test
+  void boardConstructorWithNullArgumentShouldThrowException() {
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          board = new Board(new GameData(null, null, null));
         });
-        assertThrows(IllegalArgumentException.class, () -> {
-            board = new Board(null);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          board = new Board(null);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
-            board = new Board(new GameData(null, new Ball(new Position(10, 10), 17), null));
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          board = new Board(new GameData(null, new Ball(new Position(10, 10), 17), null));
         });
-    }
+  }
 
-    @BeforeEach
-    void setUp() {
-        board = new Board();
-        brickFactory = new BrickFactory();
-    }
+  @BeforeEach
+  void setUp() {
+    brickFactory = new BrickFactory();
+    paddle = new Paddle(new Position(300, 700));
+    ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
+  }
 
-    @Test
-    void boardConstructorShouldInitializeDefaultMovables() {
-        //default movables size = 65
-        assertEquals(6, board.getData().getMovables().size());
-    }
+  @Test
+  void checkCollisionsWithCollidedMovablesShouldReturn() {}
 
-    @Test
-    void checkCollisionsWithCollidedMovablesShouldReturn() {
+  @Test
+  void removeDestroyedMovables()
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    List<MovableShape> movables = new ArrayList<>();
+    for (int i = 0; i < 3; ++i) {
+      Brick brick = brickFactory.get(SimpleBrick, new Position(1, 2));
+      if (i % 2 == 0) brick.setDestroyed(true);
+      movables.add(brick);
     }
+    GameData data = new GameData(paddle, ball, movables);
+    Board board = new Board(data);
+    Class cls = board.getClass();
+    Method destroyMovables = cls.getDeclaredMethod("removeDestroyedMovables");
+    destroyMovables.setAccessible(true);
+    destroyMovables.invoke(board);
+    assertEquals(1, board.getData().getMovables().size(), "not correct movables size");
+  }
 
-    @Test
-    void animateShouldRemoveDestroyedMovables() {
-        assertEquals(6, board.getData().getMovables().size());
-        Brick simpleBrick = brickFactory.get(SimpleBrick, new Position(1000, 1000));
-        simpleBrick.setDestroyed(true);
-        List movableShapes = board.getData().getMovables();
-        movableShapes.add(simpleBrick);
-        GameData gameData = new GameData(board.getData().getPaddle(), board.getData().getBall(), movableShapes);
-        board = new Board(gameData);
-        assertEquals(7, board.getData().getMovables().size());
-        board.animate();
-        assertEquals(6, board.getData().getMovables().size());
+  @Test
+  void testGetData() {
+    List<MovableShape> movables = new ArrayList<>();
+    for (int i = 0; i < 3; ++i) {
+      Brick brick = brickFactory.get(SimpleBrick, new Position(1, 1));
+      movables.add(brick);
     }
+    GameData data = new GameData(paddle, ball, movables);
+    Board board = new Board(data);
 
-    @Test
-    void addMovablesShouldAddMovablesIfThereIsNoCollision() {
-        assertEquals(6, board.getData().getMovables().size());
-        Brick simpleBrick = brickFactory.get(SimpleBrick, new Position(1000, 1000));
-        board.addMovable(simpleBrick);
-        assertEquals(7, board.getData().getMovables().size());
+    GameData testedData = board.getData();
+
+    assertTrue(testedData.equals(data), "wrong paddle returned");
+  }
+
+  @Test
+  void testMoveAllMovables()
+      throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    List<MovableShape> movables = new ArrayList<>();
+    List<MovableShape> list = new ArrayList<>();
+    Random rand = new Random();
+    for (int i = 0; i < 3; ++i) {
+      int x = 50 + rand.nextInt(100);
+      int y = 50 + rand.nextInt(100);
+      Brick brick = brickFactory.get(MineBrick, new Position(x, y));
+      movables.add(brick.copy());
+      list.add(brick);
     }
+    GameData data = new GameData(paddle, ball, movables);
+    Board board = new Board(data);
 
-    @Test
-    void addMovablesShouldNotAddMovablesIfThereIsCollision() {
-        assertEquals(6, board.getData().getMovables().size());
-        Brick simpleBrick = brickFactory.get(SimpleBrick, new Position(20, 130));
-        board.addMovable(simpleBrick);
-        assertEquals(6, board.getData().getMovables().size());
+    Class cls = board.getClass();
+    Method moveAllMovables = cls.getDeclaredMethod("moveAllMovables");
+    moveAllMovables.setAccessible(true);
+    moveAllMovables.invoke(board);
+
+    List<MovableShape> testedList = board.getData().getMovables();
+
+    for (int i = 0; i < list.size(); ++i) {
+      list.get(i).move();
+      assertTrue(list.get(i).equals(testedList.get(i)));
     }
+  }
 
+  @Test
+  void testPaddleMovement() {
+    List<MovableShape> movables = new ArrayList<>();
+    GameData data = new GameData((Paddle) paddle.copy(), ball, movables);
+    Board board = new Board(data);
+
+    board.movePaddleLeft();
+    paddle.moveLeft();
+    assertTrue(paddle.equals(board.getData().getPaddle()));
+
+    board.movePaddleRight();
+    paddle.moveRight();
+    assertTrue(paddle.equals(board.getData().getPaddle()));
+
+    board.rotatePaddleLeft();
+    paddle.rotateLeft();
+    assertTrue(paddle.equals(board.getData().getPaddle()));
+
+    board.rotatePaddleRight();
+    paddle.rotateRight();
+    assertTrue(paddle.equals(board.getData().getPaddle()));
+
+
+    board.movePaddleRight();
+    board.movePaddleRight();
+    paddle.moveRight();
+
+    assertFalse(paddle.equals(board.getData().getPaddle()));
+
+  }
 }

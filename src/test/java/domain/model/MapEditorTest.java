@@ -1,7 +1,6 @@
 package domain.model;
 
 import domain.mapbuild.MapBuildSession;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.Position;
