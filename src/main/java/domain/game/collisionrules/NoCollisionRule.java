@@ -25,7 +25,7 @@ public class NoCollisionRule implements CollisionRule{
         }
 
         // Aliens only collide with the ball
-        if(obj1.getType() == Type.Alien && obj2.getType() == Type.Ball){
+        if(obj1.getType() == Type.Alien && obj2.getType() != Type.Ball){
             return true;
         }
 

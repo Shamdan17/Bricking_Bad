@@ -10,6 +10,8 @@ public class AlienFactory {
         switch(type){
             case CooperativeAlien:
         return new CooperativeAlien(pos, Constants.LENGTH,Constants.WIDTH);
+            case ProtectingAlien:
+                return new ProtectingAlien(pos, Constants.LENGTH, Constants.WIDTH);
             default:
                 throw new IllegalArgumentException("not alien type supplied");
         }

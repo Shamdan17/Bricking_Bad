@@ -6,6 +6,9 @@ import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.Alien;
+import domain.model.alien.AlienFactory;
+import domain.model.alien.ProtectingAlien;
 import domain.model.brick.BrickFactory;
 import domain.model.brick.HalfMetalBrick;
 import domain.model.shape.MovableShape;
@@ -64,10 +67,13 @@ public class Board {
 
   /** Adds default data to board */
   private void defaultMovables() {
-    for (int i = 0; i < 10; i++) {
+    movables.add(AlienFactory.get(SpecificType.ProtectingAlien, new Position(400,400)));
+    for (int i = 0; i < 20; i++) {
       if (i % 3 == 2)
+      movables.add(AlienFactory.get(SpecificType.ProtectingAlien, new Position(i*40,100*i-100)));
         movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
     }
+
     // TODO: remove constants from here
     ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
     ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
@@ -76,7 +82,7 @@ public class Board {
     // TODO: ball and paddle are added to movables for now for sake of collision checking
     movables.add(ball);
     movables.add(paddle);
-
+/*
     for (int i = 0; i < 10; i+=4) {
       for (int j = 3; j < 6; j+=10) {
         Position curpos = new Position(80 * i + 20, 40 * j + 10);
@@ -84,6 +90,8 @@ public class Board {
         else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
       }
     }
+
+ */
   }
 
   /**
@@ -93,6 +101,7 @@ public class Board {
    */
   public void animate() {
     // advance all movables one step and check collisions and remove collided ones
+    /*
     if(Math.random()<0.01){
       objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random()*600, Math.random()*600)));
     }
@@ -101,7 +110,7 @@ public class Board {
     }
     if(Math.random()<0.01){
       objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
-    }
+    }*/
     moveBall();
     moveAllMovables();
     checkCollisions();

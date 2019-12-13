@@ -43,11 +43,6 @@ public class ProtectingAlien extends Alien {
         return SpecificType.ProtectingAlien;
     }
 
-    @Override
-    // Since simple bricks don't move the method is not used
-    public void setVelocity(Velocity ps) {
-        return;
-    }
 
     @Override
     public String toString() {

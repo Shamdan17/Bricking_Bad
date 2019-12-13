@@ -90,6 +90,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
                 return new HalfMetalBrick(ms,brickingBad);
             case WrapperBrick:
                 return new WrapperBrick(ms,brickingBad);
+        case ProtectingAlien:
+          return new SimpleBrick(ms, brickingBad);
           default:
               return new DummyDrawable();
       }
