@@ -9,6 +9,10 @@ import utils.physics.math.Rotation;
 import utils.physics.math.Slope;
 import utils.physics.math.Vector;
 
+
+// Overview: PhysicsEngine is responsible for handling the physics of collisions between objects.
+// it has methods for calculating post collision velocities, slopes, and whether objects are collided
+// or not.
 public final class PhysicsEngine {
 
     final static Logger logger = Logger.getLogger(PhysicsEngine.class);

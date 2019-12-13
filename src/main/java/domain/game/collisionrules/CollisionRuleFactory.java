@@ -6,7 +6,8 @@ public final class CollisionRuleFactory {
 
         // Add the default rules
         rule.addCollisionRule(new NoCollisionRule());
-        rule.addCollisionRule(new DefaultCollisionRule());
+        rule.addCollisionRule(new LazyCollisionRule());
+        rule.addCollisionRule(new AdvancedCollisionRule());
 
         return rule;
     }
