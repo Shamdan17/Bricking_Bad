@@ -27,7 +27,8 @@ public class Map {
    * @return true if addition is successful, or false otherwise
    */
   public boolean add(MovableShape msh, Position pos) {
-
+    if(pos.getX() < 0 || pos.getY() < 0)
+        return false;
     for (int i = 0; i < objects.size(); ++i) {
       if (pEngine.isCollided(msh, objects.get(i))) return false;
     }
