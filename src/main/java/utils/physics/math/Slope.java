@@ -2,6 +2,8 @@ package utils.physics.math;
 
 import utils.Position;
 
+import java.util.Objects;
+
 public class Slope {
     private double m;
     // If the line is vertical then its slope is undefined, so we use this boolean instead
@@ -51,5 +53,22 @@ public class Slope {
 
     public boolean isVertical() {
         return vertical;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Slope slope = (Slope) o;
+        return util.equal(slope.m, m) &&
+                vertical == slope.vertical;
+    }
+
+    @Override
+    public String toString() {
+        return "Slope{" +
+                "m=" + m +
+                ", vertical=" + vertical +
+                '}';
     }
 }

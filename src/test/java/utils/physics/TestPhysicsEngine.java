@@ -5,6 +5,7 @@ import domain.model.Paddle;
 import domain.model.brick.Brick;
 import domain.model.brick.SimpleBrick;
 import domain.model.shape.Circle;
+import domain.model.shape.Rectangle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.Position;
@@ -25,23 +26,77 @@ class PhysicsEngineTest {
 
     @Test
     void testCalculateNewVelocity(){
-        //Paddle with ball
-        Position p1 = new Position(0,-8);
+        //Paddle with ball hitting on the side
+        Position p1 = new Position(10,10);
         Circle b1 = new Ball(p1,5);
-        Position p2 = new Position(0,0);
+        b1.setVelocity(new Velocity(0,10));
+        Position p2 = new Position(5,19);
         Paddle pd = new Paddle(p2);
         pd.setLength(100);
-        Rectangle brck = new SimpleBrick(p2,100,5);
-        Velocity v1 = new Velocity(0,-10);
-        b1.setVelocity(v1);
 
-        //physicsEngine.isCollided(b1,pd);
-        pd.setAngle(45);
-        physicsEngine.calculateNewVelocity(b1, pd);
-        //logger.debug("Current angle: " + i);
-        logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
+        assertEquals(new Velocity(0,-10), physicsEngine.calculateNewVelocity(b1, pd));
+        assertEquals(new Velocity(0,0), physicsEngine.calculateNewVelocity(pd, b1));
 
-        //logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd) + physicsEngine.isCollided(b1,brck));
+        //Paddle with ball corner
+        p1 = new Position(10,10);
+        b1 = new Ball(p1,5);
+        b1.setVelocity(new Velocity(4,6));
+        p2 = new Position(17,17);
+        pd = new Paddle(p2);
+        pd.setLength(100);
+
+        assertEquals( new Velocity(-6,-4), physicsEngine.calculateNewVelocity(b1, pd));
+        assertEquals(new Velocity(0,0), physicsEngine.calculateNewVelocity(pd, b1));
+    }
+
+        @Test
+    void testCalculateNewRelativeVelocity(){
+        //Paddle with ball hitting on the side
+        Position p1 = new Position(10,10);
+        Circle b1 = new Ball(p1,5);
+        b1.setVelocity(new Velocity(0,10));
+        Position p2 = new Position(5,19);
+        Paddle pd = new Paddle(p2);
+        pd.setLength(100);
+
+        assertEquals(new Velocity(0,-10), physicsEngine.calculateNewRelativeVelocity(b1, pd));
+        assertEquals(new Velocity(0,10), physicsEngine.calculateNewRelativeVelocity(pd, b1));
+
+        //Paddle with ball corner
+        p1 = new Position(10,10);
+        b1 = new Ball(p1,5);
+        b1.setVelocity(new Velocity(4,6));
+        p2 = new Position(17,17);
+        pd = new Paddle(p2);
+        pd.setLength(100);
+
+        assertEquals( new Velocity(-6,-4), physicsEngine.calculateNewRelativeVelocity(b1, pd));
+        assertEquals(new Velocity(6,4), physicsEngine.calculateNewRelativeVelocity(pd, b1));
+    }
+
+    @Test
+    void testCalculateCollisionSlope(){
+        //Paddle with ball hitting on the side
+        Position p1 = new Position(10,10);
+        Circle b1 = new Ball(p1,5);
+        b1.setVelocity(new Velocity(0,10));
+        Position p2 = new Position(5,19);
+        Paddle pd = new Paddle(p2);
+        pd.setLength(100);
+
+        assertEquals(new Slope(1,0), physicsEngine.calculateCollisionSlope(b1, pd));
+        assertEquals(new Slope(1,0), physicsEngine.calculateCollisionSlope(pd, b1));
+
+        //Paddle with ball corner
+        p1 = new Position(10,10);
+        b1 = new Ball(p1,5);
+        b1.setVelocity(new Velocity(4,6));
+        p2 = new Position(17,17);
+        pd = new Paddle(p2);
+        pd.setLength(100);
+
+        assertEquals(new Slope(1,1), physicsEngine.calculateCollisionSlope(b1, pd));
+        assertEquals(new Slope(1,1), physicsEngine.calculateCollisionSlope(pd, b1));
     }
 
     @Test
