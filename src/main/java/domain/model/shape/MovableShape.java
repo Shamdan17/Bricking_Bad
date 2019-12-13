@@ -50,6 +50,7 @@ public abstract class MovableShape implements Serializable {
     }
 
     protected void addToQueue(MovableShape shape){
+        shape.setQueue(queue);
         queue.add(shape);
     }
 

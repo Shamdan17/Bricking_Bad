@@ -13,6 +13,10 @@ public class CooperativeAlien extends Alien {
         super(new NoMovement(pos), length, width);
     }
 
+    public CooperativeAlien(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
+    }
+
     @Override
     public void behave() {
         //todo implementation

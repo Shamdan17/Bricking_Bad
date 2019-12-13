@@ -1,7 +1,9 @@
 package domain.model.alien;
 
+import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
+import domain.model.shape.Shape;
 import utils.Position;
 import utils.Velocity;
 
@@ -21,8 +23,24 @@ public abstract class Alien extends MovableShape {
     }
 
     @Override
+    public void move(){
+        super.move();
+        behave();
+    }
+
+    @Override
     public MovableShape copy(){
         Alien copyAlien = AlienFactory.get(this.getSpecificType(),this.getPosition());
         return copyAlien;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.Alien;
+    }
+
+    @Override
+    public Shape getShape() {
+        return Shape.Rectangle;
     }
 }

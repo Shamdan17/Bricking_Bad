@@ -67,10 +67,9 @@ public class Board {
 
   /** Adds default data to board */
   private void defaultMovables() {
-    movables.add(AlienFactory.get(SpecificType.ProtectingAlien, new Position(400,400)));
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 5; i++) {
+        movables.add(AlienFactory.get(SpecificType.RepairingAlien, new Position(40,50*i)));
       if (i % 3 == 2)
-      movables.add(AlienFactory.get(SpecificType.ProtectingAlien, new Position(i*40,100*i-100)));
         movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
     }
 
@@ -134,6 +133,7 @@ public class Board {
   private void handleQueue(){
     while(!objectQueue.isEmpty()){
       MovableShape cur = objectQueue.remove();
+      logger.debug("Handling: " + cur);
       if(cur.getType() == Type.Powerup || cur.getType() == Type.Alien || cur.getType() == Type.Ball){
         movables.add(cur);
       }else{

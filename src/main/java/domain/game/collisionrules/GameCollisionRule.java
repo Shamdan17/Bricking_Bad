@@ -1,6 +1,8 @@
 package domain.game.collisionrules;
 
+import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
+import utils.physics.PhysicsEngine;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,11 @@ public class GameCollisionRule implements CollisionRule{
 
     @Override
     public void collide(MovableShape obj1, MovableShape obj2) {
+        if(obj1.getSpecificType() == SpecificType.SimpleBrick
+        && obj2.getSpecificType() == SpecificType.SimpleBrick
+        && PhysicsEngine.getInstance().isCollided(obj1, obj2)){
+            System.out.println("No");
+        }
         for(CollisionRule rule : rules){
             if(rule.ruleApplies(obj1, obj2)){
                 rule.collide(obj1, obj2);

@@ -2,7 +2,10 @@ package domain.model.alien;
 
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.brick.Brick;
+import domain.model.brick.BrickFactory;
 import domain.model.movement.LinearMovement;
+import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 import utils.Constants;
@@ -11,11 +14,12 @@ import utils.Velocity;
 
 public class ProtectingAlien extends Alien {
 
-    public ProtectingAlien(Position position, int length, int width) {
-        super(new LinearMovement(position, new Velocity(3 * Constants.L / 150, 0)), length, width);
+    public ProtectingAlien(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
     }
 
     @Override
+
     public void behave() {
         //todo implementation
     }
