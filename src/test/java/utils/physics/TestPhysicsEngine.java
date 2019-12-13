@@ -12,6 +12,7 @@ import utils.Velocity;
 import utils.physics.math.Slope;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static utils.physics.PhysicsEngine.direction.*;
 
 class PhysicsEngineTest {
 
@@ -22,26 +23,26 @@ class PhysicsEngineTest {
         physicsEngine = PhysicsEngine.getInstance();
     }
 
-//    @Test
-//    void testCalculateNewVelocity(){
-//        //Paddle with ball
-//        Position p1 = new Position(0,-8);
-//        Circle b1 = new Ball(p1,5);
-//        Position p2 = new Position(0,0);
-//        Paddle pd = new Paddle(p2);
-//        pd.setLength(100);
-//        Rectangle brck = new SimpleBrick(p2,100,5);
-//        Velocity v1 = new Velocity(0,-10);
-//        b1.setVelocity(v1);
-//
-//        //physicsEngine.isCollided(b1,pd);
-//        pd.setAngle(45);
-//        physicsEngine.calculateNewVelocity(b1, pd);
-//        //logger.debug("Current angle: " + i);
-//        logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
-//
-//        //logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd) + physicsEngine.isCollided(b1,brck));
-//    }
+    @Test
+    void testCalculateNewVelocity(){
+        //Paddle with ball
+        Position p1 = new Position(0,-8);
+        Circle b1 = new Ball(p1,5);
+        Position p2 = new Position(0,0);
+        Paddle pd = new Paddle(p2);
+        pd.setLength(100);
+        Rectangle brck = new SimpleBrick(p2,100,5);
+        Velocity v1 = new Velocity(0,-10);
+        b1.setVelocity(v1);
+
+        //physicsEngine.isCollided(b1,pd);
+        pd.setAngle(45);
+        physicsEngine.calculateNewVelocity(b1, pd);
+        //logger.debug("Current angle: " + i);
+        logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd));
+
+        //logger.debug("new velocity: "+ physicsEngine.calculateNewVelocity(b1, pd) + physicsEngine.isCollided(b1,pd) + physicsEngine.isCollided(b1,brck));
+    }
 
     @Test
     void testCalculatePostCollisionVelocity() {
@@ -132,17 +133,44 @@ class PhysicsEngineTest {
     }
 
     @Test
-    void testIsCollidedWithRotation() {
-        //Paddle with ball
-        Position p1 = new Position(10, 0);
-        Circle b1 = new Ball(p1, 5);
-        Position p2 = new Position(0, 0);
-        Paddle pd = new Paddle(p2);
-        pd.setLength(20);
+    void testRelativeXDirection(){
+        Position p1 = new Position(10, 10);
+        Position p2 = new Position(15, 15);
 
-        for (int i = -45; i <= 45; i++) {
-            pd.setAngle(i);
-        }
+        // Rects with rects
+        // int positions
+        Brick r1 = new SimpleBrick(p1, 5, 5);
+        Brick r2 = new SimpleBrick(p2, 5, 5);
+        assertEquals(physicsEngine.relativeXDirection(r1, r2), Right);
+        assertEquals(physicsEngine.relativeXDirection(r2, r1), Left);
+
+        // slight difference of position as double
+        p1 = new Position(3.8, 5);
+        p2 = new Position(3.2, 5);
+        r1 = new SimpleBrick(p1, 5, 5);
+        r2 = new SimpleBrick(p2, 5, 5);
+        assertEquals(physicsEngine.relativeXDirection(r1, r2), Left);
+        assertEquals(physicsEngine.relativeXDirection(r2, r1), Right);
+    }
+
+    @Test
+    void testRelativeYDirection(){
+        Position p1 = new Position(10, 10);
+        Position p2 = new Position(15, 15);
+
+        // int positions
+        Brick r1 = new SimpleBrick(p1, 5, 5);
+        Brick r2 = new SimpleBrick(p2, 5, 5);
+        assertEquals(physicsEngine.relativeYDirection(r1, r2), Up);
+        assertEquals(physicsEngine.relativeYDirection(r2, r1), Down);
+
+        // slight difference of position as double
+        p1 = new Position(3.8, 5.01);
+        p2 = new Position(3.2, 5);
+        r1 = new SimpleBrick(p1, 5, 5);
+        r2 = new SimpleBrick(p2, 5, 5);
+        assertEquals(physicsEngine.relativeYDirection(r1, r2), Down);
+        assertEquals(physicsEngine.relativeYDirection(r2, r1), Up);
     }
 
 
