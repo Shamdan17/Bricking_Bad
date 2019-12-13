@@ -14,7 +14,6 @@ import domain.account.AccountManager;
 public class BinaryStorage implements StorageManager {
 	private HashMap<Serializable, Serializable> DataLinks;
 	private String storageName;
-	
 
 	public BinaryStorage(String storageName) throws IllegalArgumentException {
 		if (storageName == null) {
@@ -46,7 +45,7 @@ public class BinaryStorage implements StorageManager {
 		if (key == null) {
 			throw new IllegalArgumentException("null key cannot be exist in storage");
 		}
-		
+
 		return this.DataLinks.containsKey(key);
 	}
 

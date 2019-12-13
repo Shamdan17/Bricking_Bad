@@ -8,7 +8,7 @@ public interface StorageManager {
 
     public Object get(Serializable key);
     
-    public boolean contains(Serializable key);
+	public boolean contains(Serializable key);
 
     public List<Object> getRecords();
 
