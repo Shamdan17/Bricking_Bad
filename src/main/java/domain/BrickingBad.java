@@ -7,6 +7,7 @@ import domain.game.GameSession;
 import domain.mapbuild.MapBuildData;
 import domain.mapbuild.MapBuildSession;
 import domain.model.SpecificType;
+import domain.storage.BinaryStorage;
 import utils.Position;
 
 // BrickingBad is the main controller
@@ -19,7 +20,7 @@ public class BrickingBad {
   public BrickingBad() {
     this.mapBuildSession = new MapBuildSession();
     this.gameSession = new GameSession("demo");
-    this.accountManager = new AccountManager("account-manager-data");
+    this.accountManager = new AccountManager(new BinaryStorage("account-manager-data"));
   }
 
   /** launches the next step in the game */

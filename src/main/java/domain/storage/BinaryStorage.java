@@ -31,7 +31,7 @@ public class BinaryStorage implements StorageManager {
 		}
 		this.DataLinks.put(key, value);
 
-		save();
+		// save();
 	}
 
 	public Object get(Serializable key) throws IllegalArgumentException {
