@@ -19,7 +19,7 @@ public class BrickingBad {
   public BrickingBad() {
     this.mapBuildSession = new MapBuildSession();
     this.gameSession = new GameSession("demo");
-    this.accountManager = new AccountManager();
+    this.accountManager = new AccountManager("account-manager-data");
   }
 
   /** launches the next step in the game */
