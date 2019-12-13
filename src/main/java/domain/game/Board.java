@@ -169,6 +169,15 @@ public class Board {
     }
   }
 
+  /** This function add movable shape if it is not colliding with any object already in movables  */
+  public void addMovable(MovableShape mshape) {
+    for (MovableShape movableShape : movables) {
+      if (ps.isCollided(movableShape, mshape))
+        return;
+    }
+    movables.add(mshape);
+  }
+
   /** This function iterates over movables and removes destroyed objects */
   private void removeDestroyedMovables() {
     movables.removeIf(
