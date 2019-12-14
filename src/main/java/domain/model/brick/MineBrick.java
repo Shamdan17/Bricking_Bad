@@ -43,7 +43,7 @@ public class MineBrick extends Brick {
     public void collide(MovableShape obj) {
         if(obj.getType() == Type.Ball){
             //super.setRadius(2*Constants.L);
-            super.addToQueue(new Explosion(getPosition()));
+            super.addToQueue(new Explosion(getCenter()));
             super.destroy();
         }
     }

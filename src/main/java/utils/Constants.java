@@ -14,6 +14,8 @@ public final class Constants {
     public static final int WIDTH = 20;
     public static final int RADIUS = 10;
 
+    public static final int explosion_radius_factor = 2;
+
 
     public static final int BALL_INITIAL_VX = 0;
     public static final int BALL_INITIAL_VY = 2;

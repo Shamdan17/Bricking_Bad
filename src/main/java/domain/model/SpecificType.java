@@ -11,4 +11,5 @@ public enum SpecificType {
     ProtectingAlien,
     RepairingAlien,
     Explosion,
+    Laser,
 }
