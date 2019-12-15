@@ -14,21 +14,29 @@ public class Map {
   List<MovableShape> objects;
   PhysicsEngine pEngine = PhysicsEngine.getInstance();
 
+  /**
+   * OVERVIEW: constructor for Map
+   * MODIFIES: objects
+   * EFFECTS: construct a map instance
+   */
   public Map() {
     objects = new ArrayList();
   }
 
   /**
-   * Adds a new object to map, before addition it checks if the given object collides with any of
-   * the existing objects
+   * OVERVIEW: Adds a new object to map, before addition it checks if the given object collides with
+   * any of the existing objects
+   *
+   * MODIFIES: objects
+   * EFFECT: if given position is positive and does not collide with any other
+   * object then add it to list of objects
    *
    * @param msh the object to be added
    * @param pos the positoin of addition of that object
    * @return true if addition is successful, or false otherwise
    */
   public boolean add(MovableShape msh, Position pos) {
-    if(pos.getX() < 0 || pos.getY() < 0)
-        return false;
+    if (pos.getX() < 0 || pos.getY() < 0) return false;
     for (int i = 0; i < objects.size(); ++i) {
       if (pEngine.isCollided(msh, objects.get(i))) return false;
     }
@@ -38,7 +46,10 @@ public class Map {
   }
 
   /**
-   * Removes an object at a particulare position
+   * OVERVIEW: Removes an object at a particular position
+   * MODIFIES: objects
+   * EFFECT: if there is an
+   * object with given position, then remove it from object list
    *
    * @param pos the position of the object to be removed
    * @return true if removal was successful, or false otherwise
@@ -55,7 +66,11 @@ public class Map {
   }
 
   /**
-   * moves an object from a place to another
+   * OVERVIEW: moves an object from a place to another
+   * MODIFIES: objects, movableShape that exists
+   * in from
+   * EFFECT: if object exists at position from, then move it to position to if it does not
+   * collide with any object at the new position
    *
    * @param from original place of object
    * @param to destination of object
@@ -89,10 +104,20 @@ public class Map {
     return true;
   }
 
+  /**
+   * OVERVIEW: getter for movables
+   *
+   * @return list of movables contained in the map
+   */
   public List<MovableShape> getMovables() {
     return objects;
   }
 
+    /**
+     * OVERVIEW: wraps objects in a MapBuildData instance
+     * EFFECT: creates a new MapBuildData instance and returns it
+     * @return a MapBuildData instance
+     */
   public MapBuildData getData() {
     MapBuildData data = new MapBuildData(objects);
     return data;

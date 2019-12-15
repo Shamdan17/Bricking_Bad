@@ -35,7 +35,9 @@ public class Board {
   private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
 
   /**
-   * This constructor is used to create a board with a given data
+   * OVERVIEW: constructor for Board
+   * MODIFIES: paddle, ball, movables
+   * EFFECT: creates new instance of Board using a given data instance
    *
    * @param data an object that contains necessary data to load a board
    */
@@ -52,8 +54,9 @@ public class Board {
   }
 
   /**
-   * This constrcutor is used to start a board with initial configuration
-   *
+   * OVERVIEW: Constructor for Board
+   * MODIFIES: ball, paddle, movables
+   * EFFECT: creates new instance of Board using Default hardcoded values
    * @throws IllegalArgumentException
    */
   public Board() throws IllegalArgumentException {
@@ -62,7 +65,11 @@ public class Board {
     bindMovables();
   }
 
-  /** Adds default data to board */
+  /** OVERVIEW: Adds default data to board
+   *  MODIFIES: ball, paddle, movables
+   *  EFFECTS: creates new objects using hardcoded values
+   *
+   */
   private void defaultMovables() {
     for (int i = 0; i < 10; i++) {
       if (i % 3 == 2)
@@ -87,7 +94,9 @@ public class Board {
   }
 
   /**
-   * this function moves the cycle of the game 1 step by making each object move according to its
+   * OVERVIEW: moves the game 1 cycle
+   * MODIFIES: paddle, ball, movables
+   * EFFECT: moves the cycle of the game 1 step by making each object move according to its
    * velocity and then it checks collisions between objects and then removes destroyed objects as a
    * result of previous steps
    */
@@ -110,8 +119,10 @@ public class Board {
     // TODO need to check whether ball is dropped or not then check remaining lives
   }
 
-  /*
-    Bind movables gives a reference of the local queue to all the movables
+  /**
+   * OVERVIEW: Bind movables gives a reference of the local queue to all the movables
+   * MODIFIES: movables
+   * EFFECT: gives an instance of the objectQueue to each movable
    */
   private void bindMovables(){
     for(MovableShape ms : movables){
@@ -119,8 +130,10 @@ public class Board {
     }
   }
 
-    /*
-    handleQueue handles the objects in the queue, only adding them to the board if they are in a valid position
+  /**
+   * OVERVIEW: handleQueue handles the objects in the queue, only adding them to the board if they are in a valid position
+   * MODIFIES: movables
+   * EFFECT: takes objects from the queue, checks if adding them violates any game rule, and if not adds it to list of movables
    */
   private void handleQueue(){
     while(!objectQueue.isEmpty()){
@@ -140,8 +153,11 @@ public class Board {
 
 
   /**
-   * This function is responsible for ball movements, and it checks extra logic related to ball like
+   *
+   * OVERVIEW: This function is responsible for ball movements, and it checks extra logic related to ball like
    * respawning etc..
+   * MODIFIES: ball,
+   * EFFECT: calls move function for ball and handles respawning in case ball falls down
    */
   private void moveBall() {
     ball.move();
@@ -151,7 +167,11 @@ public class Board {
     }
   }
 
-  /** This function iterates over movables and calls move() function on each */
+  /**
+   * OVERVIEW: This function iterates over movables and calls move() function on each
+   * MODIFIES: movables
+   * EFFECT: calls move function for each movable inside movables
+   * */
   private void moveAllMovables() {
     // move all objects once
     for (MovableShape movableShape : movables) {
@@ -159,7 +179,11 @@ public class Board {
     }
   }
 
-  /** This function checks pairwise collisions between movable objects inside movables list */
+  /**
+   * OVERVIEW: This function checks pairwise collisions between movable objects inside movables list
+   * MODIFIES: movables
+   * EFFECT: calls collide function for each movable if it collides with another object
+   * */
   private void checkCollisions() {
     // check all movables pair-wise whether they are collided or not
     for (int i = 0; i < movables.size(); i++) {
@@ -169,7 +193,11 @@ public class Board {
     }
   }
 
-  /** This function add movable shape if it is not colliding with any object already in movables  */
+  /**
+   * OVERVIEW: adds a new movable to movables
+   * MODIFIES: movables
+   * EFFECT: This function add movable shape if it is not colliding with any object already in movables
+   * */
   public void addMovable(MovableShape mshape) {
     for (MovableShape movableShape : movables) {
       if (ps.isCollided(movableShape, mshape))
@@ -178,7 +206,11 @@ public class Board {
     movables.add(mshape);
   }
 
-  /** This function iterates over movables and removes destroyed objects */
+  /**
+   * OVERVIEW: This function iterates over movables and removes destroyed objects
+   * MODIFIES: movables
+   * EFFECT: if an object return true for isDistroyed(), then remove it from movables
+   * */
   private void removeDestroyedMovables() {
     movables.removeIf(
         movableShape -> {
@@ -188,32 +220,44 @@ public class Board {
     // logger.debug("# of remaining movables: " + movables.size());
   }
 
-  /** This function moves the paddle to the left */
+  /**
+   * OVERVIEW: This function moves the paddle to the left
+   * MODIFIES: paddle
+   * */
   public void movePaddleLeft() {
     paddle.moveLeft();
   }
 
-  /** This function moves the paddle to the right */
+  /**
+   * OVERVIEW: This function moves the paddle to the right
+   * MODIFIES: paddle
+   * */
   public void movePaddleRight() {
     paddle.moveRight();
   }
 
-  /** This function rotates the paddle to the right */
+  /**
+   * OVERVIEW: This function rotates the paddle to the right
+   * MODIFIES: paddle
+   * */
   public void rotatePaddleRight() {
     paddle.rotateRight();
   }
 
-  /** This function rotates the paddle to the left */
+  /**
+   * OVERVIEW: This function rotates the paddle to the left
+   * MODIFIES: paddle
+   * */
   public void rotatePaddleLeft() {
     paddle.rotateLeft();
   }
 
   /**
-   * This function wraps board data into a GameData type and returns it
-   *
+   * OVERVIEW: This function wraps board data into a GameData type and returns it
+   * EFFECT: creates a copy of each movable and wraps them inside a GameData instance
+   * and returns it
    * @return a GameData instance containing copies of movables in this board
    */
-  // TODO: check copy behavior
   public GameData getData() {
     Paddle p = (Paddle) paddle.copy();
     Ball b = (Ball) ball.copy();
