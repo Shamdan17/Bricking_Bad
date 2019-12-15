@@ -152,4 +152,10 @@ public abstract class MovableShape implements Serializable {
 
     public abstract MovableShape copy();
 
+    public boolean repOK(){
+        return this.movBehavior!=null &&
+                length>=0 &&
+                width>= 0 &&
+                queue!=null;
+    }
 }
