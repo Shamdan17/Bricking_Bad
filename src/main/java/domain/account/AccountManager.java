@@ -1,8 +1,6 @@
 package domain.account;
 
-import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
-import org.apache.log4j.Logger;
 
 /**
  * AccountManager is responsible for adding, authenticating and removing users
@@ -14,7 +12,10 @@ public class AccountManager {
 	private StorageManager accounts;
 
 	/**
-	 * Creates an AccountManager with the specified name.
+	 *
+	 * OVERVIEW: Creates an AccountManager with the specified name. MODIFIES:
+	 * accounts EFFECT: constructs a new AccountManager with new Accounts Storage
+	 * and adds default admin user
 	 * 
 	 * @param dataName The name of the saved accounts entry on the storage layer
 	 */
@@ -28,7 +29,9 @@ public class AccountManager {
 	}
 
 	/**
-	 * Adds a new account
+	 * OVERVIEW: Registers (sign up) a new user to the account management system
+	 * MODIFIES: accounts EFFECT: creates new Account instance for the new user and
+	 * inserts it to the storage
 	 * 
 	 * @param username The username of the new account (must be uniqe)
 	 * @param password The password of the new account TODO: Turn password into
@@ -49,7 +52,9 @@ public class AccountManager {
 	}
 
 	/**
-	 * Verifies that the username and password matches
+	 * 
+	 * OVERVIEW: Verifies that the username and password matches MODIFIES: Nothing
+	 * EFFECT: Checks if the given user credentials are valid
 	 * 
 	 * @param username
 	 * @param password
@@ -74,6 +79,12 @@ public class AccountManager {
 		return null;
 	}
 
+	/**
+	 * 
+	 * OVERVIEW: Verifies the representation of the AccountManager class MODIFIES:
+	 * Nothing EFFECT: verifies if the accounts storage exists
+	 *
+	 */
 	public boolean repOK() {
 		// keep if for future tests
 		if (this.accounts == null) {
