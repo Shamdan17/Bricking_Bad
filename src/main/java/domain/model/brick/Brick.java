@@ -49,7 +49,7 @@ public abstract class Brick extends MovableShape {
     }
 
     public boolean RepOk() {
-        if(getShape() != Shape.Rectangle || getType() != Type.Brick)
+        if( getType() != Type.Brick)
             return false;
         if(getLength() <= 0 || getWidth() <= 0 || getAngle() != 0)
             return false;
