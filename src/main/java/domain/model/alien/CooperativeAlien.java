@@ -2,7 +2,6 @@ package domain.model.alien;
 
 import domain.model.SpecificType;
 import domain.model.Type;
-import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;

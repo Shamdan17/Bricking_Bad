@@ -9,9 +9,9 @@ public class NoMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
-    public NoMovement(Position initial){
+    public NoMovement(Position initial) {
         curpos = initial;
-        curvel = new Velocity(0,0);
+        curvel = new Velocity(0, 0);
     }
 
     @Override

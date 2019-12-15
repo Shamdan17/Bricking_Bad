@@ -39,7 +39,7 @@ public class WrapperBrick extends Brick {
     }
 
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }

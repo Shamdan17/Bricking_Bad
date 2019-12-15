@@ -1,7 +1,7 @@
 package domain.game.collisionrules;
 
 public final class CollisionRuleFactory {
-    public static CollisionRule getCollisionRule(){
+    public static CollisionRule getCollisionRule() {
         GameCollisionRule rule = new GameCollisionRule();
 
         // Add the default rules

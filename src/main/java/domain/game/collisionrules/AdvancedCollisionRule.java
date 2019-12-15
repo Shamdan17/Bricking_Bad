@@ -9,7 +9,7 @@ import utils.physics.PhysicsEngine;
 
 // Advanced Collisions are collisions in which the new velocity of the objects needs be calculated relatively.
 // For example: balls colliding with aliens need to take into consideration the relative velocities of objects
-public class AdvancedCollisionRule implements CollisionRule{
+public class AdvancedCollisionRule implements CollisionRule {
 
     private static PhysicsEngine physics = PhysicsEngine.getInstance();
     private static final Logger logger = Logger.getLogger(AdvancedCollisionRule.class);
@@ -20,7 +20,7 @@ public class AdvancedCollisionRule implements CollisionRule{
         Type t1 = obj1.getType();
         Type t2 = obj2.getType();
         return (t1 == Type.Ball && t2 == Type.Alien ||
-                t2 == Type.Ball && t1 == Type.Alien );
+                t2 == Type.Ball && t1 == Type.Alien);
     }
 
     @Override
@@ -37,9 +37,9 @@ public class AdvancedCollisionRule implements CollisionRule{
             obj2.collide(obj1);
 
             int cnt = 0;
-            while(physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)){
-                if(obj2.getType() == Type.Paddle && obj1.getVelocity().getY()<0
-                        ||obj1.getType() == Type.Paddle && obj2.getVelocity().getY()<0) break;
+            while (physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)) {
+                if (obj2.getType() == Type.Paddle && obj1.getVelocity().getY() < 0
+                        || obj1.getType() == Type.Paddle && obj2.getVelocity().getY() < 0) break;
                 obj1.stepBack();
                 obj2.stepBack();
             }

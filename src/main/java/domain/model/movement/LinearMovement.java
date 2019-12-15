@@ -11,7 +11,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
-    public LinearMovement(Position initial, Velocity velocity){
+    public LinearMovement(Position initial, Velocity velocity) {
         curpos = initial;
         curvel = velocity;
     }
@@ -22,7 +22,6 @@ public class LinearMovement implements MovementBehavior, Serializable {
         ensureObjectInBounds(curpos, curvel);
         return curpos;
     }
-
 
 
     @Override
@@ -39,8 +38,8 @@ public class LinearMovement implements MovementBehavior, Serializable {
     // Goes back 1/10 of the velocity
     public Position stepBack() {
         Velocity curvel = getCurrentVelocity();
-        double dx = -curvel.getX()/Math.PI;
-        double dy = -curvel.getY()/Math.PI;
+        double dx = -curvel.getX() / Math.PI;
+        double dy = -curvel.getY() / Math.PI;
         curpos = getCurrentPosition().incrementX(dx).incrementY(dy);
         return getCurrentPosition();
     }

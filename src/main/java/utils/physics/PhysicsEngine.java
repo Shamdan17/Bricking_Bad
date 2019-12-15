@@ -85,8 +85,8 @@ public final class PhysicsEngine {
 
         Velocity firstInitialVelocity = obj1.getVelocity();
         Velocity secondInitialVelocity = obj2.getVelocity();
-        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX()-secondInitialVelocity.getX(),
-                                                firstInitialVelocity.getY()-secondInitialVelocity.getY());
+        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX() - secondInitialVelocity.getX(),
+                firstInitialVelocity.getY() - secondInitialVelocity.getY());
 
         return calculatePostCollisionVelocity(relativeVelocity, collisionWallSlope);
     }
@@ -305,13 +305,13 @@ public final class PhysicsEngine {
         // if the circle center is between the X bounds of the rect
         // This means the circle is either above or below the rectangle
         if (cnt.getX() >= rect.getX() && cnt.getX() <= rect.getX() + len) {
-            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY()-radius);
+            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY() - radius);
         }
 
         // if the circle center is between the Y bounds of the rect
         // This means the circle is on either side of the rectangle
         if (cnt.getY() >= rect.getY() && cnt.getY() <= rect.getY() + wid) {
-            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX()-radius);
+            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX() - radius);
         }
 
         // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
