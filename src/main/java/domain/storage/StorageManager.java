@@ -3,14 +3,30 @@ package domain.storage;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * StorageManager represents a key value store that the game can use to have
+ * persistent storage
+ */
 public interface StorageManager {
-    public void put(Serializable key, Serializable value);
-
-    public Object get(Serializable key);
+	
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 */
+    public void   put(Serializable key, Serializable value);
     
+    /**
+     * 
+     * @param key
+     * @return
+     */
+    public Object get(Serializable key);
+
+    /**
+     * 
+     * @param key
+     * @return
+     */
 	public boolean contains(Serializable key);
-
-    public List<Object> getRecords();
-
-    public void load();
 }
