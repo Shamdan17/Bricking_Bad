@@ -3,13 +3,8 @@ package domain.model.brick;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.movement.MovementBehavior;
-import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
-import utils.Position;
-import utils.Velocity;
-
-import java.io.Serializable;
 
 public class HalfMetalBrick extends Brick {
 
@@ -20,7 +15,7 @@ public class HalfMetalBrick extends Brick {
 
     @Override
     public void collide(MovableShape obj) {
-        if(obj.getType() == Type.Ball && obj.getCenter().getY()<this.getCenter().getY()){
+        if (obj.getType() == Type.Ball && obj.getCenter().getY() < this.getCenter().getY()) {
             this.destroy();
         }
     }
@@ -34,8 +29,9 @@ public class HalfMetalBrick extends Brick {
     public String toString() {
         return "Half Metal Brick at " + super.getPosition().toString(); //TODO add position.toString here;
     }
+
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }

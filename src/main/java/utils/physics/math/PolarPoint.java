@@ -65,15 +65,15 @@ public class PolarPoint implements Serializable {
         this.angle += dif;
     }
 
-    public double getAngle(){
+    public double getAngle() {
         return angle;
     }
 
-    public Position getOrigin(){
+    public Position getOrigin() {
         return origin;
     }
 
-    public void setOrigin(Position pos){
+    public void setOrigin(Position pos) {
         this.origin = pos;
     }
 

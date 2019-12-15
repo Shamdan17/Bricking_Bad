@@ -16,36 +16,36 @@ public class BrickFactory {
 
     private Queue<MovableShape> movQueue;
 
-    public BrickFactory(){
+    public BrickFactory() {
 
     }
 
-    public BrickFactory(Queue<MovableShape> movQueue){
+    public BrickFactory(Queue<MovableShape> movQueue) {
         this.movQueue = movQueue;
     }
 
     public Brick get(SpecificType type, Position pos) {
-        boolean moving = Math.random()< Constants.movingProbability;
+        boolean moving = Math.random() < Constants.movingProbability;
         MovementBehavior movBeh = new NoMovement(pos);
         Brick result;
         switch (type) {
             case SimpleBrick:
-                if(moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity,0));
+                if (moving)
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
                 result = new SimpleBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
                 break;
             case MineBrick:
-                if(moving)
+                if (moving)
                     movBeh = new CircularMovement(pos, 30);
                 result = new MineBrick(movBeh);
                 break;
             case HalfMetalBrick:
-                if(moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity,0));
-                result = new HalfMetalBrick(movBeh,Constants.LENGTH,Constants.WIDTH);
+                if (moving)
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
+                result = new HalfMetalBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
                 break;
             default:
-               throw new IllegalArgumentException("not brick type supplied");
+                throw new IllegalArgumentException("not brick type supplied");
         }
         result.setQueue(movQueue);
         return result;

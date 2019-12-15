@@ -12,7 +12,7 @@ public class Laser extends MovableShape {
 
     Position initialSource;
 
-    public Laser(Position source){
+    public Laser(Position source) {
         // Make the length of the laser extend from the top of the screen to the source
         super(new NoMovement(new Position(source.getX(), 0)), 5, util.round(source.getY()));
         initialSource = source;
@@ -24,7 +24,7 @@ public class Laser extends MovableShape {
     }
 
     @Override
-    public Position getCenter(){
+    public Position getCenter() {
         //Return the source of the laser as the center
         return initialSource;
     }

@@ -7,9 +7,6 @@ import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
-import utils.Velocity;
-
-import java.io.Serializable;
 
 public class SimpleBrick extends Brick {
 
@@ -38,7 +35,7 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }

@@ -8,8 +8,8 @@ import utils.Position;
 public abstract class Alien extends MovableShape {
     private Position position;
 
-    public Alien(MovementBehavior movBeh, int length, int width){
-        super(movBeh,length,width);
+    public Alien(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
     }
 
     public abstract void behave();
@@ -23,8 +23,8 @@ public abstract class Alien extends MovableShape {
     }
 
     @Override
-    public MovableShape copy(){
-        Alien copyAlien = AlienFactory.get(this.getSpecificType(),this.getPosition());
+    public MovableShape copy() {
+        Alien copyAlien = AlienFactory.get(this.getSpecificType(), this.getPosition());
         return copyAlien;
     }
 }

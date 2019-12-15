@@ -15,7 +15,7 @@ public class WrapperBrick implements Drawable, MouseListener {
     private BrickingBad brickingBad;
     private static boolean removeFlag = false;
 
-    public WrapperBrick(MovableShape ms, BrickingBad bb){
+    public WrapperBrick(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
         this.brickingBad = bb;
     }

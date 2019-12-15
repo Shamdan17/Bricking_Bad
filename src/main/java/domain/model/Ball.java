@@ -59,10 +59,11 @@ public class Ball extends Circle {
      * Crucial info to copy includes:
      * - position
      * - velocity
+     *
      * @return a copy of current ball
      */
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Ball copyBall = SerializationUtils.clone(this);
         return copyBall;
     }

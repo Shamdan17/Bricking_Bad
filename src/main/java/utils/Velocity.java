@@ -29,13 +29,13 @@ public class Velocity implements Serializable {
     public boolean equals(Velocity o) {
         if (this == o) return true;
         if (o == null) return false;
-        return util.equal(o.getX(),getX()) && util.equal(getY(),o.getY());
+        return util.equal(o.getX(), getX()) && util.equal(getY(), o.getY());
     }
 
     @Override
     public boolean equals(Object o) {
-        if(o == null) return false;
-        if(!(o instanceof Velocity)){
+        if (o == null) return false;
+        if (!(o instanceof Velocity)) {
             return false;
         }
         return equals((Velocity) o);
