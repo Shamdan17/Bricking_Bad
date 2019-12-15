@@ -1,4 +1,4 @@
-package domain.game;
+package domain.game.collisionrules;
 
 import domain.model.Type;
 import domain.model.shape.MovableShape;
@@ -7,12 +7,18 @@ import utils.Constants;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
 
-public class CollisionRuleEngine {
-    private static PhysicsEngine physics = PhysicsEngine.getInstance();
-    private static final Logger logger = Logger.getLogger(CollisionRuleEngine.class);
+public class DefaultCollisionRule implements CollisionRule {
 
-    public static void collide(MovableShape obj1, MovableShape obj2) {
-        if(obj1.getType() == Type.Ball && obj2.getType() == Type.Ball) return;
+    private static PhysicsEngine physics = PhysicsEngine.getInstance();
+    private static final Logger logger = Logger.getLogger(DefaultCollisionRule.class);
+
+    @Override
+    public boolean ruleApplies(MovableShape obj1, MovableShape obj2) {
+        return true;
+    }
+
+    @Override
+    public void collide(MovableShape obj1, MovableShape obj2) {
         if (physics.isCollided(obj1, obj2)) {
             logger.debug("Collision detected between " + obj1 + " and " + obj2);
             // Calculate the new velocities
@@ -26,9 +32,9 @@ public class CollisionRuleEngine {
             obj2.collide(obj1);
 
             int cnt = 0;
-            while(physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)){
-                if(obj2.getType() == Type.Paddle && obj1.getVelocity().getY()<0
-                 ||obj1.getType() == Type.Paddle && obj2.getVelocity().getY()<0) break;
+            while (physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)) {
+                if (obj2.getType() == Type.Paddle && obj1.getVelocity().getY() < 0
+                        || obj1.getType() == Type.Paddle && obj2.getVelocity().getY() < 0) break;
                 obj1.stepBack();
                 obj2.stepBack();
             }

@@ -9,9 +9,9 @@ public class NoMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
-    public NoMovement(Position initial){
+    public NoMovement(Position initial) {
         curpos = initial;
-        curvel = new Velocity(0,0);
+        curvel = new Velocity(0, 0);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class NoMovement implements MovementBehavior, Serializable {
     @Override
     public void setPosition(Position newPos) {
         this.curpos = newPos;
+    }
+
+    @Override
+    public void inverse() {
+        // Do nothing
     }
 }

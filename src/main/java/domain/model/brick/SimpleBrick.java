@@ -2,29 +2,20 @@ package domain.model.brick;
 
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
-import utils.Velocity;
-
-import java.io.Serializable;
 
 public class SimpleBrick extends Brick {
 
-    public SimpleBrick(Position position, int length, int width) {
-        super(new NoMovement(position), length, width);
+    public SimpleBrick(MovementBehavior movBeh, int length, int width) {
+        super(movBeh, length, width);
     }
 
-    @Override
-    public void move() {
-        return;
-    }
-
-    @Override
-    // Since simple bricks don't move the method is not used
-    public void setVelocity(Velocity ps) {
-        return;
+    public SimpleBrick(Position pos, int length, int width) {
+        super(new NoMovement(pos), length, width);
     }
 
     public void collide(MovableShape obj) {
@@ -44,7 +35,7 @@ public class SimpleBrick extends Brick {
     }
 
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }

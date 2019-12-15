@@ -9,6 +9,10 @@ import utils.physics.math.Rotation;
 import utils.physics.math.Slope;
 import utils.physics.math.Vector;
 
+
+// Overview: PhysicsEngine is responsible for handling the physics of collisions between objects.
+// it has methods for calculating post collision velocities, slopes, and whether objects are collided
+// or not.
 public final class PhysicsEngine {
 
     final static Logger logger = Logger.getLogger(PhysicsEngine.class);
@@ -20,14 +24,48 @@ public final class PhysicsEngine {
     }
 
     /**
+     * REQUIRES: objects in collision
+     * EFFECTS: Returns new velocity of obj1 after collision with obj2, treating obj2 as a static object
      * Calculates the new Velocity of the first object if it is in collision with the second, returns the
-     * same velocity if it not in collision
+     * same velocity if it not in collision. Assumes the other object is static
      *
      * @param obj1 The movable shape of which the new velocity will be calculated
      * @param obj2 The movable shape that obj1 collided with
      * @return The new velocity of obj1 after it collides with obj2 if it does so
      */
     public Velocity calculateNewVelocity(MovableShape obj1, MovableShape obj2) {
+
+        if (!isCollided(obj1, obj2)) {
+            return obj1.getVelocity();
+        }
+
+        // Handle possible rotated paddle collision logic
+        if (obj2.getType() == Type.Paddle) {
+            return calculateObjectWithPaddleVelocity(obj2, obj1);
+        }
+
+        Slope collisionWallSlope = calculateCollisionSlope(obj1, obj2);
+
+        // Encountered unsupported object type
+        if (collisionWallSlope == null) {
+            return null;
+        }
+
+        return calculatePostCollisionVelocity(obj1.getVelocity(), collisionWallSlope);
+    }
+
+    /**
+     * REQUIRES: objects in collision
+     * EFFECTS: Returns new velocity of obj1 after collision with obj2, treating obj2 as a dynamic object
+     * Calculates the new Velocity of the first object if it is in collision with the second, returns the
+     * same velocity if it not in collision. Looks at the velocity of the first object relative to the other object
+     *
+     * @param obj1 The movable shape of which the new velocity will be calculated
+     * @param obj2 The movable shape that obj1 collided with
+     * @return The new velocity of obj1 after it collides with obj2 if it does so
+     */
+    public Velocity calculateNewRelativeVelocity(MovableShape obj1, MovableShape obj2) {
+
         if (!isCollided(obj1, obj2)) {
             return obj1.getVelocity();
         }
@@ -45,7 +83,12 @@ public final class PhysicsEngine {
             return null;
         }
 
-        return calculatePostCollisionVelocity(obj1.getVelocity(), collisionWallSlope);
+        Velocity firstInitialVelocity = obj1.getVelocity();
+        Velocity secondInitialVelocity = obj2.getVelocity();
+        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX() - secondInitialVelocity.getX(),
+                firstInitialVelocity.getY() - secondInitialVelocity.getY());
+
+        return calculatePostCollisionVelocity(relativeVelocity, collisionWallSlope);
     }
 
     private Velocity calculateObjectWithPaddleVelocity(MovableShape obj1, MovableShape obj2) {
@@ -77,8 +120,8 @@ public final class PhysicsEngine {
     }
 
     /**
-     * Calculates the slope (normal of the line) of the collision wall if it is in collision with the second
-     * Required: Two objects that are collided, the method does not perform this check
+     * EFFECTS: Calculates the slope (normal of the line) of the collision wall if it is in collision with the second
+     * REQUIRES: Two objects that are collided, the method does not perform this check
      * If you want to check whether two objects are collided, use utils/physics/PhysicsEngine.java:134
      *
      * @param obj1 The first movable object
@@ -161,14 +204,14 @@ public final class PhysicsEngine {
         return new Slope(0, 0);
     }
 
-    // TODO: implement this
     private Slope calculateRectOnCircleCollisionSlope(MovableShape obj1, MovableShape obj2) {
         // switch arguments and proceed
         return calculateCircleOnRectCollisionSlope(obj2, obj1);
     }
 
     /**
-     * checks whether two MovableShapes are in collision
+     * Requires: valid non-null movable shapes
+     * Effects: Returns true if the two MovableShapes are in collision
      *
      * @param obj1
      * @param obj2
@@ -176,8 +219,6 @@ public final class PhysicsEngine {
      */
     public boolean isCollided(MovableShape obj1, MovableShape obj2) {
         // TODO: find a way to improve this checking
-
-//TODO: Fix paddle collisions
         if (obj1.getType() == Type.Paddle) {
             Position oldPos = obj2.getPosition();
             // Rotate the other object
@@ -264,13 +305,13 @@ public final class PhysicsEngine {
         // if the circle center is between the X bounds of the rect
         // This means the circle is either above or below the rectangle
         if (cnt.getX() >= rect.getX() && cnt.getX() <= rect.getX() + len) {
-            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY()-radius);
+            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY() - radius);
         }
 
         // if the circle center is between the Y bounds of the rect
         // This means the circle is on either side of the rectangle
         if (cnt.getY() >= rect.getY() && cnt.getY() <= rect.getY() + wid) {
-            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX()-radius);
+            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX() - radius);
         }
 
         // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
@@ -305,7 +346,8 @@ public final class PhysicsEngine {
     //Collision direction functions
 
     /**
-     * returns the relative direct of obj1 with respect to obj2
+     * Requires: valid non-null movable shapes
+     * Effects: returns the relative Y direction of obj1 with respect to obj2
      * if function returns Down, then that means that obj1 is under obj2
      * objects are compared relative to their centers
      *
@@ -325,8 +367,9 @@ public final class PhysicsEngine {
     }
 
     /**
-     * returns the relative direct of obj1 with respect to obj2
-     * if function returns Left, then that means that obj1 is to the left of (x1<x2) of obj2
+     * Requires: valid non-null movable shapes
+     * Effects: returns the relative X direction of obj1 with respect to obj2
+     * if function returns Left, then that means that obj1 is to the left of (x1 is less than x2) of obj2
      * objects are compared relative to their centers
      *
      * @param obj1

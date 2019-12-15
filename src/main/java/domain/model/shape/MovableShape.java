@@ -8,7 +8,9 @@ import utils.Velocity;
 import utils.physics.math.util;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
@@ -21,6 +23,9 @@ public abstract class MovableShape implements Serializable {
     // A flag that signals whether a shape is destroyed due to a collision and needs to be removed
     private boolean destroyed;
 
+    // This queue contains the MovableShapes that this object wants to add to the container it is in
+    private Queue<MovableShape> queue = new LinkedList<>();
+
     public abstract void collide(MovableShape obj);
 
     public abstract Type getType();
@@ -29,7 +34,7 @@ public abstract class MovableShape implements Serializable {
 
     public abstract SpecificType getSpecificType();
 
-    public void move(){
+    public void move() {
         this.movBehavior.getNextPosition();
     }
 
@@ -40,6 +45,14 @@ public abstract class MovableShape implements Serializable {
         this.movBehavior = mb;
     }
 
+    public void setQueue(Queue<MovableShape> queue) {
+        this.queue = queue;
+    }
+
+    protected void addToQueue(MovableShape shape) {
+        queue.add(shape);
+    }
+
     protected void destroy() {
         if (!this.destroyed)
             this.destroyed = true;
@@ -47,6 +60,10 @@ public abstract class MovableShape implements Serializable {
 
     public boolean isDestroyed() {
         return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
     }
 
     public int getLength() {
@@ -65,16 +82,20 @@ public abstract class MovableShape implements Serializable {
         this.width = width;
     }
 
-    public void setMovementBehavior(MovementBehavior movBeh){
+    public void setMovementBehavior(MovementBehavior movBeh) {
         this.movBehavior = movBeh;
     }
 
-    public Position stepBack(){
+    protected MovementBehavior getMovementBehavior() {
+        return this.movBehavior;
+    }
+
+    public Position stepBack() {
         return movBehavior.stepBack();
     }
 
-    public Position getCenter(){
-        return getPosition().incrementX(getLength()/2.0).incrementY(getWidth()/2.0);
+    public Position getCenter() {
+        return getPosition().incrementX(getLength() / 2.0).incrementY(getWidth() / 2.0);
     }
 
     public Position getPosition() {
@@ -116,11 +137,11 @@ public abstract class MovableShape implements Serializable {
     }
 
     // Makes the object of radius newRadius and the same center
-    protected void setRadius(double newRadius){
+    protected void setRadius(double newRadius) {
         Position cnt = this.getCenter();
         setPosition(cnt.incrementX(-newRadius).incrementY(-newRadius));
-        setWidth(util.round(2*newRadius));
-        setLength(util.round(2*newRadius));
+        setWidth(util.round(2 * newRadius));
+        setLength(util.round(2 * newRadius));
     }
 
     public void incrementAngle(double dif) {
@@ -131,4 +152,10 @@ public abstract class MovableShape implements Serializable {
 
     public abstract MovableShape copy();
 
+    public boolean repOK() {
+        return this.movBehavior != null &&
+                length >= 0 &&
+                width >= 0 &&
+                queue != null;
+    }
 }

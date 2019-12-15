@@ -4,8 +4,7 @@ import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
-
-import java.io.Serializable;
+import utils.Velocity;
 
 public abstract class Brick extends MovableShape {
     public Shape getShape() {
@@ -23,6 +22,7 @@ public abstract class Brick extends MovableShape {
     /**
      * Crucial information for copy:
      * - position
+     *
      * @return a copy of current brick
      */
 
@@ -40,5 +40,19 @@ public abstract class Brick extends MovableShape {
     @Override
     // increment angle meaningless
     public final void incrementAngle(double dif) {
+    }
+
+    @Override
+    public void setVelocity(Velocity v) {
+        super.getMovementBehavior().inverse();
+    }
+
+    public boolean repOk() {
+        if( getType() != Type.Brick)
+            return false;
+        if(getLength() <= 0 || getWidth() <= 0 || getAngle() != 0)
+            return false;
+
+        return true;
     }
 }

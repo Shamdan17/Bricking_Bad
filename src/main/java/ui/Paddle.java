@@ -5,9 +5,6 @@ import domain.model.shape.MovableShape;
 import utils.physics.math.util;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class Paddle implements Drawable {
 

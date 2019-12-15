@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
@@ -10,7 +11,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
-    public LinearMovement(Position initial, Velocity velocity){
+    public LinearMovement(Position initial, Velocity velocity) {
         curpos = initial;
         curvel = velocity;
     }
@@ -18,9 +19,9 @@ public class LinearMovement implements MovementBehavior, Serializable {
     @Override
     public Position getNextPosition() {
         curpos = curpos.incrementX(curvel.getX()).incrementY(curvel.getY());
+        ensureObjectInBounds(curpos, curvel);
         return curpos;
     }
-
 
 
     @Override
@@ -37,8 +38,8 @@ public class LinearMovement implements MovementBehavior, Serializable {
     // Goes back 1/10 of the velocity
     public Position stepBack() {
         Velocity curvel = getCurrentVelocity();
-        double dx = -curvel.getX()/Math.PI;
-        double dy = -curvel.getY()/Math.PI;
+        double dx = -curvel.getX() / Math.PI;
+        double dy = -curvel.getY() / Math.PI;
         curpos = getCurrentPosition().incrementX(dx).incrementY(dy);
         return getCurrentPosition();
     }
@@ -51,6 +52,25 @@ public class LinearMovement implements MovementBehavior, Serializable {
     @Override
     public void setPosition(Position newPos) {
         this.curpos = newPos;
+    }
+
+    @Override
+    public void inverse() {
+        this.curvel = new Velocity(-curvel.getX(), -curvel.getY());
+    }
+
+    public void ensureObjectInBounds(Position position, Velocity velocity) {
+        Velocity oldVelocity = velocity;
+        if (position.getX() > Constants.maxX) {
+            oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if (position.getX() < 0) {
+            oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        }
+        if (position.getY() < 0) {
+            oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
+        }
+        setVelocity(oldVelocity);
     }
 
 }

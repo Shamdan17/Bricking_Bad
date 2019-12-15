@@ -10,7 +10,7 @@ public final class util {
         return (int) Math.round(a);
     }
 
-    public static boolean equal(double a, double b){
-        return Math.abs(a-b) < eps;
+    public static boolean equal(double a, double b) {
+        return Math.abs(a - b) < eps;
     }
 }

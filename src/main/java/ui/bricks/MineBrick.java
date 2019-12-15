@@ -16,7 +16,7 @@ public class MineBrick implements Drawable, MouseListener {
     private BrickingBad brickingBad;
     private static boolean removeFlag = false;
 
-    public MineBrick(MovableShape ms, BrickingBad bb){
+    public MineBrick(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
         this.brickingBad = bb;
     }

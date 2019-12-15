@@ -2,7 +2,6 @@ package ui;
 
 
 import domain.BrickingBad;
-import utils.Position;
 
 import javax.swing.*;
 import java.awt.*;

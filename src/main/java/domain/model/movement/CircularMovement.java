@@ -13,19 +13,20 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     private PolarPoint position;
     private double dTheta;
-    private Velocity defaultVelocityVector = new Velocity(0,Constants.Brick_Velocity);
+    private Velocity defaultVelocityVector = new Velocity(0, 0);
 
 
-    public CircularMovement(Position pos, double radius){
+    public CircularMovement(Position pos, double radius) {
         position = new PolarPoint(pos, radius, 0);
         // Calculate dTheta
-        dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
+        dTheta = Constants.Brick_Velocity;//* 360;
+        //defaultVelocityVector = new Velocity(0, Constants.Brick_Velocity/(2*Math.PI));
     }
 
-    public CircularMovement(Position pos, double radius, double initAngle){
+    public CircularMovement(Position pos, double radius, double initAngle) {
         position = new PolarPoint(pos, radius, initAngle);
         // Calculate dTheta
-        dTheta = Constants.Brick_Velocity/(2 * Math.PI * radius) ;//* 360;
+        dTheta = Constants.Brick_Velocity;//* 360;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     @Override
     public Position stepBack() {
-        position.rotate(dTheta/Math.PI);
+        position.rotate(dTheta / Math.PI);
         return position.getPosition();
     }
 
@@ -62,5 +63,9 @@ public class CircularMovement implements MovementBehavior, Serializable {
         double dy = newPos.getY() - getCurrentPosition().getY();
         Position newOrigin = this.position.getOrigin().incrementX(dx).incrementY(dy);
         this.position.setOrigin(newOrigin);
+    }
+
+    public void inverse() {
+        this.dTheta *= -1;
     }
 }

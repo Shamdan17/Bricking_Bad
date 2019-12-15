@@ -4,4 +4,6 @@ public enum Type {
     Ball,
     Paddle,
     Brick,
+    Powerup,
+    Alien,
 }
