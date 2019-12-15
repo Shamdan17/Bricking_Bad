@@ -47,4 +47,13 @@ public class Position implements Serializable {
     public boolean equals(Position pos) {
         return util.equal(x, pos.getX()) && util.equal(y, pos.getY());
     }
+
+
+    public boolean repOK() {
+        if(this.x < 0 || this.y < 0) {
+            return false;
+        }
+
+        return true;
+    }
 }
