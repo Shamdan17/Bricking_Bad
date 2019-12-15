@@ -91,7 +91,7 @@ public class MapTest {
         assertEquals(2, map.getMovables().size());
     }
     @Test
-    void getMovables(){
+    void testgetMovables(){
         List<MovableShape> list = new ArrayList<>();
         for(int i=0 ; i<3 ; ++i){
             Position pos = new Position(50 + 50 * i,50 + 50 * i);
