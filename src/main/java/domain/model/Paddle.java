@@ -155,12 +155,12 @@ public class Paddle extends Rectangle {
         return "Paddle with " + getPosition().toString();
     }
 
-    public boolean RepOK(){
+    public boolean repOK() {
         if(getType()!= Type.Paddle || getSpecificType() != SpecificType.Paddle)
             return false;
         if(getAngle() < -45 || getAngle() > 45)
             return false;
-        if(getLength() <= 0 || getWidth() <= 0)
+        if (getLength() < 0 || getWidth() < 0)
             return false;
 
         return true;
