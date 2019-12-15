@@ -47,4 +47,13 @@ public abstract class Brick extends MovableShape {
     public void setVelocity(Velocity v){
         super.getMovementBehavior().inverse();
     }
+
+    public boolean RepOk() {
+        if(getShape() != Shape.Rectangle || getType() != Type.Brick)
+            return false;
+        if(getLength() <= 0 || getWidth() <= 0 || getAngle() != 0)
+            return false;
+
+        return true;
+    }
 }
