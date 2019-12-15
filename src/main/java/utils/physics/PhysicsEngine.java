@@ -369,7 +369,7 @@ public final class PhysicsEngine {
     /**
      * Requires: valid non-null movable shapes
      * Effects: returns the relative X direction of obj1 with respect to obj2
-     * if function returns Left, then that means that obj1 is to the left of (x1<x2) of obj2
+     * if function returns Left, then that means that obj1 is to the left of (x1 is less than x2) of obj2
      * objects are compared relative to their centers
      *
      * @param obj1
