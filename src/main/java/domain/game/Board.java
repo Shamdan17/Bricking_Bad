@@ -22,7 +22,7 @@ import java.util.Queue;
 
 // TODO move all movable objects - ones has hasNextPosition() == true
 
-// Board contains all movables, paddle and ball
+// Overview: Board contains all movables, paddle and ball
 public class Board {
 
   static final Logger logger = Logger.getLogger(Board.class);
@@ -267,5 +267,9 @@ public class Board {
       movableList.add(ms.copy());
     }
     return new GameData(p, b, movableList);
+  }
+
+  public boolean repOK(){
+    return paddle!=null && this.movables!=null && this.objectQueue != null;
   }
 }
