@@ -75,7 +75,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         System.out.println();
       }
     }
-    paddle.draw(g);
 
     for (MovableShape ms : drawables) {
       Drawable d = getDrawable(ms);
@@ -85,6 +84,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
   public Drawable getDrawable(MovableShape ms) {
     switch (ms.getSpecificType()) {
+        case Paddle:
+            return new Paddle(ms, brickingBad);
         case Ball:
             return new Ball(ms);
       case Laser:

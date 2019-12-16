@@ -106,7 +106,7 @@ public class Board {
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
         if (Math.random() < 0.02) {
-            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
+            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
         }
         if (Math.random() < 0.0005) {
             objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
@@ -118,6 +118,7 @@ public class Board {
         checkCollisions();
         removeDestroyedMovables();
         handleQueue();
+        checkNumBalls();
         // TODO need to check whether ball is dropped or not then check remaining lives
     }
 
@@ -129,6 +130,21 @@ public class Board {
     private void bindMovables() {
         for (MovableShape ms : movables) {
             ms.setQueue(objectQueue);
+        }
+    }
+
+    /**
+     * Checks the number of balls on in the board, respawns a ball if non left.
+     */
+    private void checkNumBalls() {
+        int numBalls = 0;
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Ball) {
+                numBalls++;
+            }
+        }
+        if (numBalls == 0) {
+            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.RADIUS));
         }
     }
 
@@ -163,8 +179,7 @@ public class Board {
     private void moveBall(MovableShape ball) {
         ball.move();
         if (ball.getPosition().getY() > Constants.maxY) {
-            ball.setPosition(paddle.getPosition().incrementY(-100).incrementX(paddle.getLength() / 2));
-            ball.setVelocity(Constants.defaultRespawnVelocity);
+            ball.setDestroyed(true);
         }
     }
 
