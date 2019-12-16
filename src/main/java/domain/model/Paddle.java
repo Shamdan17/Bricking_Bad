@@ -1,5 +1,6 @@
 package domain.model;
 
+import domain.model.misc.Laser;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
@@ -16,14 +17,17 @@ public class Paddle extends Rectangle {
     private boolean isTallerPaddle = false;
     private boolean tiltLeft = false;
     private boolean tiltRight = false;
+    private int laser_count;
 
     public Paddle(Position position) {
         super(new NoMovement(position), util.round(L), PADDLE_WIDTH);
+        laser_count = 0;
         super.setAngle(0);
     }
 
     public Paddle(Position position, double angle) {
         super(new NoMovement(position), util.round(L), PADDLE_WIDTH);
+        laser_count = 0;
         super.setAngle(angle);
     }
 
@@ -43,6 +47,10 @@ public class Paddle extends Rectangle {
 
     @Override
     public void move() {
+        if (Math.random() < 0.05) {
+            applyLaserPowerup();
+            shootLaser();
+        }
         if (tiltLeft) {
             setAngle(getAngle() - PADDLE_TURNING_SPEED);
         } else if (tiltRight) {
@@ -72,6 +80,17 @@ public class Paddle extends Rectangle {
     public void rotateLeft() {
         tiltLeft = true;
         // setAngle(getAngle()+10);
+    }
+
+    public void applyLaserPowerup() {
+        laser_count += 5;
+    }
+
+    public void shootLaser() {
+        Laser leftLaser = new Laser(getPosition());
+        Laser rightLaser = new Laser(getPosition().incrementX(getLength() - leftLaser.getLength()));
+        super.addToQueue(leftLaser);
+        super.addToQueue(rightLaser);
     }
 
     // Since paddles don't move on collision the method is not used

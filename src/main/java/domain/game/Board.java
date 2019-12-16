@@ -7,6 +7,7 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.brick.BrickFactory;
+import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -32,6 +33,7 @@ public class Board {
     private BrickFactory bf = new BrickFactory(objectQueue);
     private PhysicsEngine ps = PhysicsEngine.getInstance();
     private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
+    private Inventory inventory;
 
     /**
      * OVERVIEW: constructor for Board
@@ -47,6 +49,7 @@ public class Board {
         paddle = data.getPaddle();
         ball = data.getBall();
         movables = data.getMovables();
+        inventory = new Inventory(this);
         movables.add(ball);
         movables.add(paddle);
         bindMovables();
@@ -61,6 +64,7 @@ public class Board {
      */
     public Board() throws IllegalArgumentException {
         movables = new ArrayList<>();
+        inventory = new Inventory(this);
         defaultMovables();
         bindMovables();
     }
@@ -211,11 +215,21 @@ public class Board {
      * EFFECT: if an object return true for isDistroyed(), then remove it from movables
      */
     private void removeDestroyedMovables() {
-        movables.removeIf(
-                movableShape -> {
-                    if (movableShape.isDestroyed()) logger.debug(movableShape + " is destroyed.");
-                    return movableShape.isDestroyed();
-                });
+        for (int i = 0; i < movables.size(); i++) {
+            MovableShape ms = movables.get(i);
+            if (ms.isDestroyed()) {
+                if (ms.getType() == Type.Powerup) {
+                    inventory.addPowerup((PowerUp) ms);
+                }
+                movables.remove(ms);
+                i--;
+            }
+        }
+//        movables.removeIf(
+//                movableShape -> {
+//                    if (movableShape.isDestroyed()) logger.debug(movableShape + " is destroyed.");
+//                    return movableShape.isDestroyed();
+//                });
         // logger.debug("# of remaining movables: " + movables.size());
     }
 
@@ -249,6 +263,19 @@ public class Board {
      */
     public void rotatePaddleLeft() {
         paddle.rotateLeft();
+    }
+
+    /**
+     * Shoot laser
+     *
+     * @return
+     */
+    public void shootLaser() {
+        paddle.shootLaser();
+    }
+
+    public Paddle getPaddle() {
+        return paddle;
     }
 
     /**

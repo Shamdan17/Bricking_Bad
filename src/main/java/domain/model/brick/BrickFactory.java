@@ -10,14 +10,16 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 public class BrickFactory {
 
     private Queue<MovableShape> movQueue;
-
+    private ArrayList<MovableShape> WrapperBrickItems;
     public BrickFactory() {
-
+        WrapperBrickItems = new ArrayList<>();
+        //WrapperBrickItems.add(new GangOfBalls());
     }
 
     public BrickFactory(Queue<MovableShape> movQueue) {
@@ -44,11 +46,19 @@ public class BrickFactory {
                     movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
                 result = new HalfMetalBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
                 break;
+            case WrapperBrick:
+                //MovableShape containedObject =
             default:
                 throw new IllegalArgumentException("not brick type supplied");
         }
         result.setQueue(movQueue);
         return result;
+    }
+
+    private int numWrapperBricksCreated = 0;
+
+    private MovableShape getNextWrapperBrickItem(Position pos) {
+        return null;
     }
 
 }
