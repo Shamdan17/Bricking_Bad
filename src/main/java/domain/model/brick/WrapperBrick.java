@@ -12,6 +12,7 @@ public class WrapperBrick extends Brick {
 
     public WrapperBrick(MovementBehavior movBeh, int length, int width, MovableShape ms) {
         super(new NoMovement(movBeh.getCurrentPosition()), length, width);
+        ms.setPosition(getPosition());
         this.ms = ms;
     }
 

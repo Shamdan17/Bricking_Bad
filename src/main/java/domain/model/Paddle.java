@@ -47,10 +47,6 @@ public class Paddle extends Rectangle {
 
     @Override
     public void move() {
-        if (Math.random() < 0.05) {
-            applyLaserPowerup();
-            shootLaser();
-        }
         if (tiltLeft) {
             setAngle(getAngle() - PADDLE_TURNING_SPEED);
         } else if (tiltRight) {

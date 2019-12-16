@@ -47,7 +47,6 @@ public class Board {
             throw new IllegalArgumentException();
         }
         paddle = data.getPaddle();
-        ball = data.getBall();
         movables = data.getMovables();
         inventory = new Inventory(this);
         movables.add(ball);
@@ -77,7 +76,7 @@ public class Board {
     private void defaultMovables() {
         for (int i = 0; i < 10; i++) {
             if (i % 3 == 2)
-                movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
+                movables.add(bf.get(SpecificType.WrapperBrick, new Position(100 * i - 100, 300)));
         }
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
@@ -107,15 +106,14 @@ public class Board {
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
         if (Math.random() < 0.02) {
-            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
+            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
         }
         if (Math.random() < 0.0005) {
-            objectQueue.add(bf.get(SpecificType.MineBrick, new Position(Math.random() * 600, Math.random() * 600)));
+            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
         }
 //    if(Math.random()<0.01){
 //      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
 //    }
-        moveBall();
         moveAllMovables();
         checkCollisions();
         removeDestroyedMovables();
@@ -146,7 +144,7 @@ public class Board {
                 movables.add(cur);
             } else {
                 for (MovableShape ms : movables) {
-                    if (ps.isCollided(cur, ms)) {
+                    if (collisionRule.isCollided(cur, ms)) {
                         return;
                     }
                 }
@@ -162,7 +160,7 @@ public class Board {
      * MODIFIES: ball,
      * EFFECT: calls move function for ball and handles respawning in case ball falls down
      */
-    private void moveBall() {
+    private void moveBall(MovableShape ball) {
         ball.move();
         if (ball.getPosition().getY() > Constants.maxY) {
             ball.setPosition(paddle.getPosition().incrementY(-100).incrementX(paddle.getLength() / 2));
@@ -178,7 +176,8 @@ public class Board {
     private void moveAllMovables() {
         // move all objects once
         for (MovableShape movableShape : movables) {
-            movableShape.move();
+            if (movableShape.getSpecificType() == SpecificType.Ball) moveBall(movableShape);
+            else movableShape.move();
         }
     }
 
@@ -287,13 +286,11 @@ public class Board {
      */
     public GameData getData() {
         Paddle p = (Paddle) paddle.copy();
-        Ball b = (Ball) ball.copy();
         List<MovableShape> movableList = new ArrayList<>();
         for (MovableShape ms : movables) {
-            if (ms.getType() == Type.Paddle || ms.getType() == Type.Ball) continue;
             movableList.add(ms.copy());
         }
-        return new GameData(p, b, movableList);
+        return new GameData(p, movableList);
     }
 
     public boolean repOK() {

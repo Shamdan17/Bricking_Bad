@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.model.movement.LinearMovement;
+import domain.model.movement.MovementBehavior;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
@@ -12,6 +13,15 @@ public class Ball extends Circle {
 
     public Ball(Position pos, int radius) {
         super(new LinearMovement(pos, Constants.defaultRespawnVelocity), radius);
+
+        // TODO we need to remove constants, also we need to check every place
+        // where we initialize variable, we don't want null thingies
+        // (for example by design any setter should not accept null, contractors
+        // should not accept null, etc..)
+    }
+
+    public Ball(MovementBehavior movBeh, int radius) {
+        super(movBeh, radius);
 
         // TODO we need to remove constants, also we need to check every place
         // where we initialize variable, we don't want null thingies

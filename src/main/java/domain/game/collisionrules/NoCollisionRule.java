@@ -36,4 +36,8 @@ public class NoCollisionRule implements CollisionRule {
     public void collide(MovableShape obj1, MovableShape obj2) {
         // do nothing
     }
+
+    public boolean isCollided(MovableShape obj1, MovableShape obj2) {
+        return false;
+    }
 }

@@ -8,4 +8,7 @@ public interface Activatable {
     // returns true if its activated. All effects are on the given instance of
     // the board
     public boolean activate(SpecificType type, Board board);
+
+    // isInstant returns true if the powerup is instantly activatable
+    public boolean isInstant();
 }

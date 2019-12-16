@@ -10,11 +10,16 @@ public class Inventory {
     private ArrayList<PowerUp> powerUps;
 
     public Inventory(Board b) {
+        powerUps = new ArrayList<>();
         this.board = b;
     }
 
     // Adds a powerup to the given powerups
     public void addPowerup(PowerUp p) {
+        if (p.isInstant()) {
+            p.activate(p.getSpecificType(), board);
+            return;
+        }
         powerUps.add(p);
     }
 

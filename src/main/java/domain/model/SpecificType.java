@@ -13,4 +13,5 @@ public enum SpecificType {
     Explosion,
     Laser,
     DestructiveLaserGun,
+    GangOfBallsPowerup,
 }

@@ -9,4 +9,8 @@ public interface CollisionRule {
     // handles the collisions between these objects
     // @Requires: the rule applies to these objects
     public void collide(MovableShape obj1, MovableShape obj2);
+
+    // returns true if there is a collision between these objects
+    // @Requires: the rule applies to these objects
+    public boolean isCollided(MovableShape obj1, MovableShape obj2);
 }

@@ -32,6 +32,11 @@ public class DestructiveLaserGun extends PowerUp {
     }
 
     @Override
+    public boolean isInstant() {
+        return true;
+    }
+
+    @Override
     public SpecificType getSpecificType() {
         return SpecificType.DestructiveLaserGun;
     }

@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.physics.math.util;
 
 import java.io.Serializable;
@@ -44,6 +45,10 @@ public class Velocity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(vx, vy);
+    }
+
+    public Velocity copy() {
+        return SerializationUtils.clone(this);
     }
 
     @Override
