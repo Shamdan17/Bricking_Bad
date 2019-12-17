@@ -134,6 +134,15 @@ class MKeyListener extends KeyAdapter {
         if (event.getKeyCode() == KeyEvent.VK_T) {
             bb.activateTallerPaddle();
         }
+
+        if (event.getKeyCode() == KeyEvent.VK_M) {
+            bb.activateMagnet();
+        }
+
+        if (event.getKeyCode() == KeyEvent.VK_W) {
+            bb.throwBall();
+        }
+
     }
 }
 

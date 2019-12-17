@@ -76,6 +76,14 @@ public class GameSession {
         board.activateTallerPaddle();
     }
 
+    public void activateMagnet() {
+        board.activateMagnet();
+    }
+
+    public void throwBall() {
+        board.throwBall();
+    }
+
     /**
      * saves current game
      */

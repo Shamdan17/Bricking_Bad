@@ -280,10 +280,33 @@ public class Board {
      */
     public void activateTallerPaddle() {
         inventory.activatePowerup(SpecificType.TallerPaddlePowerup);
+        inventory.removePowerup(SpecificType.TallerPaddlePowerup);
+
+    }
+    /**
+     * Activate Magnet Power-up
+     *
+     * @return
+     */
+    public void activateMagnet() {
+        inventory.activatePowerup(SpecificType.MagnetPowerup);
+        inventory.removePowerup(SpecificType.MagnetPowerup);
+    }
+
+    public void throwBall() {
+        if (paddle.isMagnet()) {
+            paddle.setMagnet(false);
+            ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        }
+
     }
 
     public Paddle getPaddle() {
         return paddle;
+    }
+
+    public Ball getBall() {
+        return ball;
     }
 
     /**

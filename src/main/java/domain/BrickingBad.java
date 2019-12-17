@@ -135,6 +135,14 @@ public class BrickingBad {
         gameSession.activateTallerPaddle();
     }
 
+    public void activateMagnet() {
+        gameSession.activateMagnet();
+    }
+
+    public void throwBall() {
+        gameSession.throwBall();
+    }
+
     /**
      * remove a brick from building mode
      *

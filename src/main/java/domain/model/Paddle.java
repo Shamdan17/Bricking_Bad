@@ -18,6 +18,9 @@ public class Paddle extends Rectangle {
     private boolean tiltLeft = false;
     private boolean tiltRight = false;
     private int laser_count;
+    private Ball ball;
+    private boolean isMagnet = false;
+
 
     public Paddle(Position position) {
         super(new NoMovement(position), util.round(L), PADDLE_WIDTH);
@@ -59,13 +62,29 @@ public class Paddle extends Rectangle {
     }
 
     public void moveLeft() {
-        setPosition(
-                new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
+        if (isMagnet) {
+            ball.setVelocity(new Velocity(0, 0));
+            setPosition(
+                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
+            ball.setPosition(
+                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY() - ball.getRadius()));
+        } else {
+            setPosition(
+                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
+        }
     }
 
     public void moveRight() {
-        setPosition(
-                new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
+        if (isMagnet) {
+            ball.setVelocity(new Velocity(0, 0));
+            setPosition(
+                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
+            ball.setPosition(
+                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY() - ball.getRadius()));
+        } else {
+            setPosition(
+                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
+        }
     }
 
     public void rotateRight() {
@@ -97,6 +116,21 @@ public class Paddle extends Rectangle {
         Laser rightLaser = new Laser(getPosition().incrementX(getLength() - leftLaser.getLength()));
         super.addToQueue(leftLaser);
         super.addToQueue(rightLaser);
+    }
+
+    public void applyMagnetPowerup(Ball ball) {
+        if (ball != null) {
+            this.ball = ball;
+            isMagnet = true;
+        }
+    }
+
+    public boolean isMagnet() {
+        return isMagnet;
+    }
+
+    public void setMagnet(boolean magnet) {
+        isMagnet = magnet;
     }
 
     // Since paddles don't move on collision the method is not used

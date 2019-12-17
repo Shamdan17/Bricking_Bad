@@ -31,4 +31,14 @@ public class Inventory {
             }
         }
     }
+
+    public void removePowerup(SpecificType type) {
+        powerUps.removeIf(powerUp -> {
+            if (powerUp.getSpecificType() == type)
+                return true;
+            return false;
+        });
+    }
+
+
 }
