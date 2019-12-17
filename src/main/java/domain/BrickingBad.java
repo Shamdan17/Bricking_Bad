@@ -11,6 +11,7 @@ import domain.storage.BinaryStorage;
 import utils.Position;
 
 import java.util.List;
+import java.util.UUID;
 
 // BrickingBad is the main controller
 public class BrickingBad {
@@ -137,20 +138,20 @@ public class BrickingBad {
     /**
      * remove a brick from building mode
      *
-     * @param pos position of brick to be removed
+     * @param ID ID of brick to be removed
      */
-    public void removeBrick(Position pos) {
-        boolean isRemoved = mapBuildSession.removeBrick(pos);
+    public void removeBrick(UUID ID) {
+        boolean isRemoved = mapBuildSession.removeBrick(ID);
     }
 
     /**
      * changes the location of a brick in build mode
      *
-     * @param from original location of brick
+     * @param ID ID of brick to be moved
      * @param to   destination of brick
      */
-    public void moveBrick(Position from, Position to) {
-        mapBuildSession.moveBrick(from, to);
+    public void moveBrick(UUID ID, Position to) {
+        mapBuildSession.moveBrick(ID, to);
     }
 
     /**

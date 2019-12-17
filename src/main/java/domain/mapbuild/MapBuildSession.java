@@ -9,6 +9,7 @@ import utils.Constants;
 import utils.Position;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public class MapBuildSession {
 
@@ -99,11 +100,11 @@ public class MapBuildSession {
    * OVERVIEW: removes a brick located at a given position MODIFIES: map REQUIRES: map not null
    * EFFECT: remove a brick from map that exists in the given position
    *
-   * @param pos position of brick to be removed
+   * @param ID ID of brick to be removed
    * @return true if removal was successful, or false otherwise
    */
-  public boolean removeBrick(Position pos) {
-    boolean isRemoved = map.remove(pos);
+  public boolean removeBrick(UUID ID) {
+    boolean isRemoved = map.remove(ID);
     return isRemoved;
   }
 
@@ -111,12 +112,12 @@ public class MapBuildSession {
    * OVERVIEW: moves a brick to another location MODIFIES: map REQUIRES: map not null EFFECT: change
    * position of a brick to a given position
    *
-   * @param from original position of brick
+   * @param ID ID of brick to be removed
    * @param to destination of brick
    * @return true if move was successful, or false otherwise
    */
-  public boolean moveBrick(Position from, Position to) {
-    boolean isMoved = map.move(from, to);
+  public boolean moveBrick(UUID ID, Position to) {
+    boolean isMoved = map.move(ID, to);
     return isMoved;
   }
 

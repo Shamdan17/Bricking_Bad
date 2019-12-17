@@ -46,7 +46,7 @@ public class SimpleBrick implements Drawable, MouseListener {
         int wid = ms.getWidth();
         boolean flag = (x <= myX + len && x >= myX) && (y >= myY && y <= myY + wid);
         if (flag && removeFlag) {
-            brickingBad.removeBrick(ms.getPosition());
+            brickingBad.removeBrick(ms.getID());
         }
     }
 

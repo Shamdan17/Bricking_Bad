@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.UUID;
 
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
@@ -18,6 +19,7 @@ public abstract class MovableShape implements Serializable {
     // Object dimensions
     private int length, width;
     private double angle;
+    private UUID ID;
     // Parameters
     private MovementBehavior movBehavior;
     // A flag that signals whether a shape is destroyed due to a collision and needs to be removed
@@ -43,6 +45,7 @@ public abstract class MovableShape implements Serializable {
         this.length = length;
         this.width = width;
         this.movBehavior = mb;
+        this.ID = UUID.randomUUID();
     }
 
     public void setQueue(Queue<MovableShape> queue) {
@@ -56,6 +59,10 @@ public abstract class MovableShape implements Serializable {
     protected void destroy() {
         if (!this.destroyed)
             this.destroyed = true;
+    }
+
+    public UUID getID(){
+        return ID;
     }
 
     public boolean isDestroyed() {

@@ -6,6 +6,7 @@ import utils.physics.PhysicsEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Map {
 
@@ -55,12 +56,12 @@ public class Map {
      * EFFECT: if there is an
      * object with given position, then remove it from object list
      *
-     * @param pos the position of the object to be removed
+     * @param ID ID of object to be removed
      * @return true if removal was successful, or false otherwise
      */
-    public boolean remove(Position pos) {
+    public boolean remove(UUID ID) {
         for (int i = 0; i < objects.size(); ++i) {
-            if (pos.equals(objects.get(i).getPosition())) {
+            if (ID.equals(objects.get(i).getID())) {
                 objects.remove(i);
                 return true;
             }
@@ -76,16 +77,16 @@ public class Map {
      * EFFECT: if object exists at position from, then move it to position to if it does not
      * collide with any object at the new position
      *
-     * @param from original place of object
+     * @param ID ID of object
      * @param to   destination of object
      * @return true if moving is successful, or false otherwise
      */
-    public boolean move(Position from, Position to) {
+    public boolean move(UUID ID, Position to) {
 
         MovableShape msh = null;
         // check if object exists in movables
         for (int i = 0; i < objects.size(); ++i) {
-            if (from.equals(objects.get(i).getPosition())) {
+            if (ID.equals(objects.get(i).getID())) {
                 msh = objects.remove(i);
                 break;
             }

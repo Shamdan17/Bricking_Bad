@@ -60,34 +60,38 @@ public class MapTest {
 
     @Test
     void existingMovableShapeShouldBeRemoved() {
-        map.add(brickFactory.get(SimpleBrick, new Position(10, 10)), new Position(10, 10));
+        Brick brick = brickFactory.get(SimpleBrick, new Position(10, 10));
+        map.add(brick, new Position(10, 10));
         assertEquals(1, map.getMovables().size());
-        assertTrue(map.remove(new Position(10, 10)));
+        assertTrue(map.remove(brick.getID()));
         assertEquals(0, map.getMovables().size());
     }
 
     @Test
     void nonExistingMovableShapeShouldNotChangeMovablesContainer() {
-        map.add(brickFactory.get(SimpleBrick, new Position(10, 10)), new Position(10, 10));
+        Brick brick = brickFactory.get(SimpleBrick, new Position(10, 10));
+        map.add(brick, new Position(10, 10));
         assertEquals(1, map.getMovables().size());
-        assertFalse(map.remove(new Position(100, 100)));
+        assertFalse(map.remove(brick.getID()));
         assertEquals(1, map.getMovables().size());
     }
 
     @Test
     void movableShapeShouldBeMovedIfThereIsNoCollision() {
-        map.add(brickFactory.get(SimpleBrick, new Position(10, 10)), new Position(10, 10));
+        Brick brick = brickFactory.get(SimpleBrick, new Position(10, 10));
+        map.add(brick, new Position(10, 10));
         assertEquals(1, map.getMovables().size());
-        assertTrue(map.move(new Position(10, 10), new Position(100, 100)));
+        assertTrue(map.move(brick.getID(), new Position(100, 100)));
         assertEquals(1, map.getMovables().size());
     }
 
     @Test
     void movableShapeShouldNotBeMovedIfThereIsCollision() {
-        map.add(brickFactory.get(SimpleBrick, new Position(10, 10)), new Position(10, 10));
+        Brick brick = brickFactory.get(SimpleBrick, new Position(10, 10));
+        map.add(brick, new Position(10, 10));
         map.add(brickFactory.get(SimpleBrick, new Position(100, 100)), new Position(100, 100));
         assertEquals(2, map.getMovables().size());
-        assertFalse(map.move(new Position(10, 10), new Position(100, 100)));
+        assertFalse(map.move(brick.getID(), new Position(100, 100)));
         assertEquals(2, map.getMovables().size());
     }
     @Test
