@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
@@ -115,6 +116,10 @@ public class MapBuildPanel extends JPanel
     for (int i = 0; i < list.length; ++i) {
       this.removeMouseListener(list[i]);
     }
+      MouseMotionListener[] motionListeners = this.getMouseMotionListeners();
+    for(int i=0 ; i<motionListeners.length ; ++i){
+        this.removeMouseMotionListener(motionListeners[i]);
+    }
     MapBuildData mapBuildData = brickingBad.getMapBuildData();
     Map<UUID, MovableShape> IDMap = mapBuildData.getMovablesIDMap();
     List<MovableShape> movables = mapBuildData.getMovables();
@@ -131,12 +136,14 @@ public class MapBuildPanel extends JPanel
         Brick d = (Brick) drawables.get(ms.getID());
         d.setMovable(ms);
         this.addMouseListener(d);
+        this.addMouseMotionListener(d);
         d.draw(g);
       } else {
         Drawable d = BrickFactory.getDrawable(ms, brickingBad);
         drawables.put(ms.getID(), d);
         d.draw(g);
         this.addMouseListener((Brick) d);
+        this.addMouseMotionListener((Brick) d);
       }
     }
   }

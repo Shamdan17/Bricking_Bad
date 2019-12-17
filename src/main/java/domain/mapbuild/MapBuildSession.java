@@ -121,6 +121,10 @@ public class MapBuildSession {
     return isMoved;
   }
 
+  public void dragBrick(UUID ID,Position to){
+      map.drag(ID,to);
+  }
+
   /**
    * OVERVIEW: saves map to storage MODIFIES: storageManager, unixTimestamp REQUIRES: saveManager
    * not null EFFECT: stores a MapBuildData instance in storage manager with unixTimestamp as key

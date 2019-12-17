@@ -154,6 +154,10 @@ public class BrickingBad {
         return mapBuildSession.moveBrick(ID, to);
     }
 
+    public void dragBrick(UUID ID, Position to){
+        mapBuildSession.dragBrick(ID,to);
+    }
+
     /**
      * add brick to build mode
      *

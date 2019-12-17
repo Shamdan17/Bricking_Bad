@@ -8,9 +8,10 @@ import utils.Position;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.UUID;
 
-public abstract class Brick implements Drawable, MouseListener {
+public abstract class Brick implements Drawable, MouseListener, MouseMotionListener {
 
 
     protected MovableShape ms;
@@ -52,6 +53,12 @@ public abstract class Brick implements Drawable, MouseListener {
 
     @Override
     public abstract void mouseExited(MouseEvent mouseEvent);
+
+    @Override
+    public abstract void mouseDragged(MouseEvent mouseEvent);
+
+    @Override
+    public abstract void mouseMoved(MouseEvent mouseEvent);
 
     public abstract boolean isInside(double x, double y);
 }

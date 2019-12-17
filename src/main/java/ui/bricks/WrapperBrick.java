@@ -60,43 +60,48 @@ public class WrapperBrick extends Brick {
 
     }
 
-        @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        if(!isInside(mouseEvent.getX(),mouseEvent.getY()))
-            return;
-        if(!isDragged){
-            isDragged = true;
-            oldPos = new Position(ms.getPosition().getX(),ms.getPosition().getY());
-            dx = (mouseEvent.getX() - oldPos.getX());
-            dy = (mouseEvent.getY() - oldPos.getY());
-        }else {
-            Position newPos = new Position(mouseEvent.getX(),mouseEvent.getY());
-            ms.setPosition(newPos);
-        }
+    @Override
+  public void mousePressed(MouseEvent mouseEvent) {
+    if (!isInside(mouseEvent.getX(), mouseEvent.getY())) return;
+    if (!isDragged) {
+        double x = ms.getPosition().getX();
+        double y = ms.getPosition().getY();
+        dx = mouseEvent.getX() - x;
+        dy = mouseEvent.getY() - y;
+      oldPos = new Position(ms.getPosition().getX(), ms.getPosition().getY());
+      isDragged = true;
     }
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent mouseEvent) {
+    if (isDragged) {
+      Position newPos = new Position(mouseEvent.getX() - dx, mouseEvent.getY() - dy);
+      boolean isMoved = brickingBad.moveBrick(ms.getID(), newPos);
+      if (!isMoved) {
+        brickingBad.moveBrick(ms.getID(),oldPos);
+      }
+      isDragged = false;
+    }
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent mouseEvent) {}
+
+  @Override
+  public void mouseExited(MouseEvent mouseEvent) {}
+
+  @Override
+  public void mouseDragged(MouseEvent mouseEvent) {
+      if(!isDragged)
+          return ;
+      int x = mouseEvent.getX(), y = mouseEvent.getY();
+      brickingBad.dragBrick(ms.getID(),new Position(x - dx,y - dy));
+
+  }
 
     @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if(isDragged){
-            Position newPos = new Position(mouseEvent.getX() - dx,mouseEvent.getY() - dy);
-            boolean isMoved = brickingBad.moveBrick(ms.getID(),newPos);
-            if(!isMoved){
-                System.out.println("not moved");
-                ms.setPosition(oldPos);
-            }
-            isDragged = false;
-            dx = 0;
-            dy = 0;
-        }
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
+    public void mouseMoved(MouseEvent mouseEvent) {
 
     }
 }

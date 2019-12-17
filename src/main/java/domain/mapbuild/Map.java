@@ -84,10 +84,13 @@ public class Map {
     public boolean move(UUID ID, Position to) {
 
         MovableShape msh = null;
+        Position originalPos = new Position(0,0);
         // check if object exists in movables
-        for (int i = 0; i < objects.size(); ++i) {
-            if (ID.equals(objects.get(i).getID())) {
-                msh = objects.remove(i);
+        for (MovableShape ms : objects) {
+            if (ID.equals(ms.getID())) {
+                originalPos = new Position(ms.getPosition().getX(),ms.getPosition().getY());
+                ms.setPosition(to);
+                msh = ms;
                 break;
             }
         }
@@ -95,18 +98,21 @@ public class Map {
         if (msh == null) return false;
 
         // check if destination does not collide with any other object
-        MovableShape newMsh = msh;
-        newMsh.setPosition(to);
-        for (int i = 0; i < objects.size(); ++i) {
-            if (pEngine.isCollided(newMsh, objects.get(i))) {
-                objects.add(msh);
+        for (MovableShape ms : objects) {
+            if(ms.getID().equals(msh.getID()))continue;
+            if (pEngine.isCollided(msh, ms)) {
+                msh.setPosition(originalPos);
                 return false;
             }
         }
 
-        objects.add(newMsh);
-
         return true;
+    }
+
+    public void drag(UUID ID, Position to){
+        for(MovableShape ms : objects){
+            if(ms.getID().equals(ID))ms.setPosition(to);
+        }
     }
 
     /**
