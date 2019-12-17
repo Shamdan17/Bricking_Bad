@@ -105,12 +105,12 @@ public class Board {
      */
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
-        if (Math.random() < 0.02) {
+/*        if (Math.random() < 0.02) {
             objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
         }
         if (Math.random() < 0.0005) {
             objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
+        }*/
 //    if(Math.random()<0.01){
 //      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
 //    }

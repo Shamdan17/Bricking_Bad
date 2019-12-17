@@ -7,6 +7,7 @@ import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
 import domain.model.powerup.DestructiveLaserGun;
 import domain.model.powerup.GangOfBalls;
+import domain.model.powerup.TallerPaddle;
 import domain.model.shape.MovableShape;
 import utils.Constants;
 import utils.Position;
