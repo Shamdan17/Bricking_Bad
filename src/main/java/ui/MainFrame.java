@@ -143,6 +143,10 @@ class MKeyListener extends KeyAdapter {
             bb.throwBall();
         }
 
+
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            bb.shootLaser();
+        }
     }
 }
 
