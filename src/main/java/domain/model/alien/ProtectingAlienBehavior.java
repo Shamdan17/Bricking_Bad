@@ -12,9 +12,9 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
-public class ProtectingAlien extends Alien {
+public class ProtectingAlienBehavior extends Alien {
 
-    public ProtectingAlien(MovementBehavior movBeh, int length, int width) {
+    public ProtectingAlienBehavior(MovementBehavior movBeh, int length, int width) {
         super(movBeh, length, width);
     }
 
@@ -30,16 +30,6 @@ public class ProtectingAlien extends Alien {
         if (obj.getCenter().getY() < this.getCenter().getY()) {
             this.destroy();
         }
-    }
-
-    @Override
-    public Type getType() {
-        return Type.Alien;
-    }
-
-    @Override
-    public Shape getShape() {
-        return Shape.Rectangle;
     }
 
     @Override

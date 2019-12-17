@@ -9,20 +9,20 @@ import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 
-public class RepairingAlien extends Alien {
+public class RepairingAlienBehavior implements AlienBehavior {
     //TODO change constructor
-    public RepairingAlien(MovementBehavior movementBehavior, int length, int width) {
-        super(movementBehavior, length, width);
+    public RepairingAlienBehavior(MovementBehavior movementBehavior, int length, int width) {
+        //TODO
     }
 
     @Override
     public void behave() {
-        //todo implementation
+        /*//todo implementation
         BrickFactory bf = new BrickFactory();
         Brick br = bf.get(SpecificType.SimpleBrick, getPosition().incrementY(25));
         if(Math.random()<0.05){
             super.addToQueue(br);
-        }
+        }*/
     }
 
     @Override
@@ -37,6 +37,6 @@ public class RepairingAlien extends Alien {
 
     @Override
     public String toString() {
-        return "Repairing alien with " + getPosition();
+        return null;
     }
 }

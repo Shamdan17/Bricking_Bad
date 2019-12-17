@@ -8,12 +8,12 @@ import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 import utils.Position;
 
-public class CooperativeAlien extends Alien {
-    public CooperativeAlien(Position pos, int length, int width) {
+public class CooperativeAlienBehavior extends Alien {
+    public CooperativeAlienBehavior(Position pos, int length, int width) {
         super(new NoMovement(pos), length, width);
     }
 
-    public CooperativeAlien(MovementBehavior movBeh, int length, int width) {
+    public CooperativeAlienBehavior(MovementBehavior movBeh, int length, int width) {
         super(movBeh, length, width);
     }
 
@@ -28,22 +28,12 @@ public class CooperativeAlien extends Alien {
     }
 
     @Override
-    public Type getType() {
-        return null;
-    }
-
-    @Override
-    public Shape getShape() {
-        return null;
-    }
-
-    @Override
     public SpecificType getSpecificType() {
-        return null;
+        return SpecificType.CooperativeAlien;
     }
 
     @Override
     public String toString() {
-        return null;
+        return "Repairing Alien at " + super.getPosition() + " with velocity " + super.getVelocity();
     }
 }

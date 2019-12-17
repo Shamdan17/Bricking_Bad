@@ -13,11 +13,11 @@ public class AlienFactory {
         MovementBehavior movBeh = new LinearMovement(pos, new Velocity(3 * Constants.L / 150, 0));
         switch(type){
             case CooperativeAlien:
-                return new CooperativeAlien(movBeh, Constants.LENGTH,Constants.WIDTH);
+                return new CooperativeAlienBehavior(movBeh, Constants.LENGTH,Constants.WIDTH);
             case ProtectingAlien:
-                return new ProtectingAlien(movBeh, Constants.LENGTH, Constants.WIDTH);
+                return new ProtectingAlienBehavior(movBeh, Constants.LENGTH, Constants.WIDTH);
             case RepairingAlien:
-                return new RepairingAlien(movBeh, Constants.LENGTH, Constants.WIDTH);
+                //return new RepairingAlienBehavior(movBeh, Constants.LENGTH, Constants.WIDTH);
             default:
                 throw new IllegalArgumentException("not alien type supplied");
         }

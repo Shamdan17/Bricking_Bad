@@ -10,6 +10,8 @@ import utils.Velocity;
 //TODO: Implement
 public abstract class Alien extends MovableShape {
 
+    AlienBehavior alienBehavior;
+
     public Alien(MovementBehavior movementBehavior, int length, int width) {
         super(movementBehavior, length, width);
     }
