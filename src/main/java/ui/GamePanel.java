@@ -33,6 +33,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     this.add(backToMain);
     this.add(saveButton);
     this.add(loadButton);
+    setBackground(new Color(204, 229, 255));
+    setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
     (new Thread(this)).start();
 
     saveButton.addActionListener(new ActionListener() {

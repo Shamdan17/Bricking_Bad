@@ -14,6 +14,10 @@ public class Map {
     List<MovableShape> objects;
     PhysicsEngine pEngine = PhysicsEngine.getInstance();
 
+    public Map(MapBuildData data){
+        objects = data.getMovables();
+    }
+
     /**
      * OVERVIEW: constructor for Map
      * MODIFIES: objects
@@ -120,7 +124,11 @@ public class Map {
      * @return a MapBuildData instance
      */
     public MapBuildData getData() {
-        MapBuildData data = new MapBuildData(objects);
+        List<MovableShape> list = new ArrayList<>();
+        for(MovableShape ms : objects){
+            list.add(ms.copy());
+        }
+        MapBuildData data = new MapBuildData(list);
         return data;
     }
 }

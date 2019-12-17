@@ -38,7 +38,6 @@ public class SimpleBrick implements Drawable, MouseListener {
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
-
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
         int myX = (int) Math.round(ms.getPosition().getX());
@@ -47,9 +46,8 @@ public class SimpleBrick implements Drawable, MouseListener {
         int wid = ms.getWidth();
         boolean flag = (x <= myX + len && x >= myX) && (y >= myY && y <= myY + wid);
         if (flag && removeFlag) {
-            brickingBad.removeBrick(new Position(myX, myY));
+            brickingBad.removeBrick(ms.getPosition());
         }
-
     }
 
     @Override

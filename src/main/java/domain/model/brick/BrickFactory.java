@@ -32,7 +32,7 @@ public class BrickFactory {
             case SimpleBrick:
                 if (moving)
                     movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
-                result = new SimpleBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
+                result = new SimpleBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case MineBrick:
                 if (moving)
@@ -42,7 +42,10 @@ public class BrickFactory {
             case HalfMetalBrick:
                 if (moving)
                     movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
-                result = new HalfMetalBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
+                result = new HalfMetalBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
+                break;
+            case WrapperBrick:
+                result = new WrapperBrick(pos, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             default:
                 throw new IllegalArgumentException("not brick type supplied");

@@ -9,7 +9,7 @@ public class AlienFactory {
     public static Alien get(SpecificType type, Position pos) {
         switch (type) {
             case CooperativeAlien:
-                return new CooperativeAlien(pos, Constants.LENGTH, Constants.WIDTH);
+                return new CooperativeAlien(pos, Constants.ALIEN_LENGTH, Constants.ALIEN_WIDTH);
             default:
                 throw new IllegalArgumentException("not alien type supplied");
         }

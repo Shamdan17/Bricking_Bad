@@ -10,6 +10,8 @@ import domain.model.SpecificType;
 import domain.storage.BinaryStorage;
 import utils.Position;
 
+import java.util.List;
+
 // BrickingBad is the main controller
 public class BrickingBad {
 
@@ -49,6 +51,10 @@ public class BrickingBad {
         return mapBuildSession.getData();
     }
 
+    public boolean buildMap(int simple,int halfmetal,int mine,int wrapper){
+        return mapBuildSession.buildMap(simple,halfmetal,mine,wrapper);
+    }
+
     /**
      * saves the game
      */
@@ -70,12 +76,13 @@ public class BrickingBad {
         mapBuildSession.save();
     }
 
-    // TODO: implement
+    // TODO: Add save name support
 
     /**
      * loads map
      */
     public void loadMap() {
+        mapBuildSession.load();
     }
 
     /**

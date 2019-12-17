@@ -42,7 +42,7 @@ public class Ball extends Circle {
     //TODO: Move this out of ball
     public void ensureBallIsInBounds() {
         Velocity oldVelocity = getVelocity();
-        if (getPosition().getX() + getLength() > Constants.maxX) {
+        if (getPosition().getX() + getLength() > Constants.FRAME_WIDTH) {
             oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
         if (getPosition().getX() < 0) {

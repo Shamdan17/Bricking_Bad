@@ -78,7 +78,7 @@ public class Board {
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
-        paddle = new Paddle(new Position(300, 700));
+    paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
 
         // TODO: ball and paddle are added to movables for now for sake of collision checking
         movables.add(ball);
@@ -160,7 +160,7 @@ public class Board {
      */
     private void moveBall() {
         ball.move();
-        if (ball.getPosition().getY() > Constants.maxY) {
+        if (ball.getPosition().getY() > Constants.FRAME_HEIGHT) {
             ball.setPosition(paddle.getPosition().incrementY(-100).incrementX(paddle.getLength() / 2));
             ball.setVelocity(Constants.defaultRespawnVelocity);
         }
