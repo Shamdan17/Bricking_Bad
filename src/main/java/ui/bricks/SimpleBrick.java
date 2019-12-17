@@ -24,7 +24,7 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
     int y = (int) Math.round(ms.getPosition().getY());
     int length = ms.getLength();
     int width = ms.getWidth();
-    g.setColor(Color.darkGray);
+    g.setColor(Color.black);
     g.fillRect(x, y, length, width);
     g.drawRect(x, y, length, width);
   }

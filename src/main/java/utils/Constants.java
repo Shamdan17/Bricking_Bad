@@ -37,6 +37,10 @@ public final class Constants {
   public static final int BRICK_OFFSET_Y = BRICK_WIDTH  + (BRICK_WIDTH / 2);
   public static final int BRICK_START_X = 20;
   public static final int BRICK_START_Y = 80;
-
+  public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 4);
+  public static final int BRICK_LOWER_BOUND = FRAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
+  public static final int BRICK_UPPER_BOUND = 100;
+  public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH - BRICK_OFFSET_X;
+  public static final int HALF_METAL_BRICK_YLIMIT = FRAME_HEIGHT / 2;
   // public static final defaultBoard
 }
