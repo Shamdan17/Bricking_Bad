@@ -9,15 +9,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class HalfMetalBrick implements Drawable, MouseListener {
-
-    private static boolean removeFlag = false;
-    private MovableShape ms;
-    private BrickingBad brickingBad;
+public class HalfMetalBrick extends Brick {
 
     public HalfMetalBrick(MovableShape ms, BrickingBad bb) {
-        this.ms = ms;
-        this.brickingBad = bb;
+        super(ms,bb);
     }
 
     public static void setRemoveFlag(boolean state) {

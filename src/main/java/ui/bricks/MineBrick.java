@@ -10,25 +10,17 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MineBrick implements Drawable, MouseListener {
+public class MineBrick extends Brick {
 
-    private MovableShape ms;
-    private BrickingBad brickingBad;
-    private static boolean removeFlag = false;
 
     public MineBrick(MovableShape ms, BrickingBad bb) {
-        this.ms = ms;
-        this.brickingBad = bb;
+       super(ms,bb);
     }
 
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
         g.fillOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
         g.drawOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
-    }
-
-    public static void setRemoveFlag(boolean state) {
-        removeFlag = state;
     }
 
 

@@ -150,8 +150,8 @@ public class BrickingBad {
      * @param ID ID of brick to be moved
      * @param to   destination of brick
      */
-    public void moveBrick(UUID ID, Position to) {
-        mapBuildSession.moveBrick(ID, to);
+    public boolean moveBrick(UUID ID, Position to) {
+        return mapBuildSession.moveBrick(ID, to);
     }
 
     /**

@@ -9,15 +9,11 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class WrapperBrick implements Drawable, MouseListener {
+public class WrapperBrick extends Brick {
 
-    private MovableShape ms;
-    private BrickingBad brickingBad;
-    private static boolean removeFlag = false;
 
     public WrapperBrick(MovableShape ms, BrickingBad bb) {
-        this.ms = ms;
-        this.brickingBad = bb;
+      super(ms,bb);
     }
 
     public void draw(Graphics g) {

@@ -3,7 +3,8 @@ package ui;
 import domain.BrickingBad;
 import domain.mapbuild.MapBuildData;
 import domain.model.shape.MovableShape;
-import ui.bricks.*;
+import ui.bricks.Brick;
+import ui.bricks.BrickFactory;
 import utils.Constants;
 
 import javax.swing.*;
@@ -14,11 +15,14 @@ import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
+import java.util.List;
+import java.util.*;
 
 public class MapBuildPanel extends JPanel
     implements Runnable, ActionListener, PropertyChangeListener {
 
   public JButton backToMain;
+  private Map<UUID, Drawable> drawables;
   private BrickingBad brickingBad;
   private JCheckBox deleteBlock;
   private JButton saveButton;
@@ -37,6 +41,7 @@ public class MapBuildPanel extends JPanel
   private JPanel bottomPanel;
 
   public MapBuildPanel(BrickingBad bb) {
+    drawables = new HashMap<>();
     backToMain = new JButton("Back to Main");
     saveButton = new JButton("Save");
     loadButton = new JButton("Load");
@@ -97,7 +102,7 @@ public class MapBuildPanel extends JPanel
     while (true) {
       try {
         repaint();
-        Thread.sleep(30);
+        Thread.sleep(50);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -107,26 +112,41 @@ public class MapBuildPanel extends JPanel
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     MouseListener[] list = this.getMouseListeners();
-    for(int i = 0 ; i<list.length ; ++i){
-        this.removeMouseListener(list[i]);
+    for (int i = 0; i < list.length; ++i) {
+      this.removeMouseListener(list[i]);
     }
     MapBuildData mapBuildData = brickingBad.getMapBuildData();
-    for (MovableShape ms : mapBuildData.getMovables()) {
-      Drawable d = BrickFactory.getDrawable(ms,brickingBad, this);
-      d.draw(g);
+    Map<UUID, MovableShape> IDMap = mapBuildData.getMovablesIDMap();
+    List<MovableShape> movables = mapBuildData.getMovables();
+    List<UUID> removables = new ArrayList<>();
+    for (UUID ID : drawables.keySet()) {
+      if (!IDMap.containsKey(ID)) removables.add(ID);
+    }
+    for (UUID ID : removables) {
+      drawables.remove(ID);
+    }
+
+    for (MovableShape ms : movables) {
+      if (drawables.containsKey(ms.getID())) {
+        Brick d = (Brick) drawables.get(ms.getID());
+        d.setMovable(ms);
+        this.addMouseListener(d);
+        d.draw(g);
+      } else {
+        Drawable d = BrickFactory.getDrawable(ms, brickingBad);
+        drawables.put(ms.getID(), d);
+        d.draw(g);
+        this.addMouseListener((Brick) d);
+      }
     }
   }
-
 
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand().equals("Save")) {
       brickingBad.saveMap();
     }
     if (e.getActionCommand().equals("delete by click")) {
-      SimpleBrick.setRemoveFlag(deleteBlock.isSelected());
-      HalfMetalBrick.setRemoveFlag(deleteBlock.isSelected());
-      MineBrick.setRemoveFlag(deleteBlock.isSelected());
-      WrapperBrick.setRemoveFlag(deleteBlock.isSelected());
+      Brick.setRemoveFlag(deleteBlock.isSelected());
     }
     if (e.getActionCommand().equals("Load")) {
       brickingBad.loadMap();
@@ -136,7 +156,7 @@ public class MapBuildPanel extends JPanel
 
       Object simpleVal = simpleBrickField.getValue();
       if (simpleVal == null) {
-        String warning = "Simple Brick Fiels is empty";
+        String warning = "Simple Brick Field is empty";
         JOptionPane.showMessageDialog(null, warning);
       }
 
