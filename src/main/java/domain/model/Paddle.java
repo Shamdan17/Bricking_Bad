@@ -82,6 +82,16 @@ public class Paddle extends Rectangle {
         laser_count += 5;
     }
 
+    public void applyTallerPaddlePowerup() {
+        this.setTallerPaddle(true);
+        this.setLength(util.round(2 * L));
+    }
+
+    public void returnPaddleToDefault() {
+        this.setTallerPaddle(false);
+        this.setLength(util.round(L));
+    }
+
     public void shootLaser() {
         Laser leftLaser = new Laser(getPosition());
         Laser rightLaser = new Laser(getPosition().incrementX(getLength() - leftLaser.getLength()));
@@ -171,9 +181,9 @@ public class Paddle extends Rectangle {
     }
 
     public boolean repOK() {
-        if(getType()!= Type.Paddle || getSpecificType() != SpecificType.Paddle)
+        if (getType() != Type.Paddle || getSpecificType() != SpecificType.Paddle)
             return false;
-        if(getAngle() < -45 || getAngle() > 45)
+        if (getAngle() < -45 || getAngle() > 45)
             return false;
         if (getLength() < 0 || getWidth() < 0)
             return false;

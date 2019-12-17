@@ -30,9 +30,10 @@ public class BrickFactory {
     private ArrayList<MovableShape> defaultItems() {
         ArrayList<MovableShape> res = new ArrayList<>();
 
-        res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
-        res.add(new GangOfBalls(powerupMovBeh.copy()));
-
+        //res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
+        //res.add(new GangOfBalls(powerupMovBeh.copy()));
+        res.add(new TallerPaddle(powerupMovBeh.copy()));
+        
         Collections.shuffle(res);
         return res;
     }

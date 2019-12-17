@@ -72,6 +72,10 @@ public class GameSession {
         board.shootLaser();
     }
 
+    public void activateTallerPaddle() {
+        board.activateTallerPaddle();
+    }
+
     /**
      * saves current game
      */

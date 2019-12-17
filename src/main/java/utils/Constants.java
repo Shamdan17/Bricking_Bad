@@ -30,6 +30,7 @@ public final class Constants {
     public static final double PADDLE_MOVING_SPEED = 10;
     public static final double PADDLE_RESTORING_SPEED = 0.2;
 
+    public static final int POWERUP_TALLER_PADDLE_TIME = 30;
 
     public static final int STEP_BACK_THRESHOLD = 5;
 

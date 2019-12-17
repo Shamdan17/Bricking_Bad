@@ -273,6 +273,15 @@ public class Board {
         paddle.shootLaser();
     }
 
+    /**
+     * Activate Taller Paddle Power-up
+     *
+     * @return
+     */
+    public void activateTallerPaddle() {
+        inventory.activatePowerup(SpecificType.TallerPaddlePowerup);
+    }
+
     public Paddle getPaddle() {
         return paddle;
     }
