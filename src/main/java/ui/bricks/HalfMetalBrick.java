@@ -11,8 +11,14 @@ import java.awt.event.MouseListener;
 
 public class HalfMetalBrick extends Brick {
 
+    private boolean isDragged;
+    private Position oldPos;
+    private double dx;
+    private double dy;
+
     public HalfMetalBrick(MovableShape ms, BrickingBad bb) {
         super(ms,bb);
+        isDragged = false;
     }
 
     public static void setRemoveFlag(boolean state) {
@@ -33,6 +39,14 @@ public class HalfMetalBrick extends Brick {
         g.fillRect(x, y + (width / 2), length, width / 2);
         g.drawRect(x, y + (width / 2), length, width / 2);
     }
+    @Override
+    public boolean isInside(double x,double y){
+        double myX = ms.getPosition().getX();
+        double myY = ms.getPosition().getY();
+        double len = ms.getLength();
+        double wid = ms.getWidth();
+        return (x >= myX && x <= myX + len && y >= myY && y <= myY + wid);
+    }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -49,12 +63,34 @@ public class HalfMetalBrick extends Brick {
         }
     }
 
-    @Override
+        @Override
     public void mousePressed(MouseEvent mouseEvent) {
+        if(!isInside(mouseEvent.getX(),mouseEvent.getY()))
+            return;
+        if(!isDragged){
+            isDragged = true;
+            oldPos = new Position(ms.getPosition().getX(),ms.getPosition().getY());
+            dx = (mouseEvent.getX() - oldPos.getX());
+            dy = (mouseEvent.getY() - oldPos.getY());
+        }else {
+            Position newPos = new Position(mouseEvent.getX(),mouseEvent.getY());
+            ms.setPosition(newPos);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
+        if(isDragged){
+            Position newPos = new Position(mouseEvent.getX() - dx,mouseEvent.getY() - dy);
+            boolean isMoved = brickingBad.moveBrick(ms.getID(),newPos);
+            if(!isMoved){
+                System.out.println("not moved");
+                ms.setPosition(oldPos);
+            }
+            isDragged = false;
+            dx = 0;
+            dy = 0;
+        }
     }
 
     @Override

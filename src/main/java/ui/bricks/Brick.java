@@ -3,6 +3,7 @@ package ui.bricks;
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
 import ui.Drawable;
+import utils.Position;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.util.UUID;
 
 public abstract class Brick implements Drawable, MouseListener {
+
 
     protected MovableShape ms;
     protected BrickingBad brickingBad;
@@ -30,6 +32,7 @@ public abstract class Brick implements Drawable, MouseListener {
 
     public static void setRemoveFlag(boolean state) {
         removeFlag = state;
+
     }
 
     @Override
@@ -49,4 +52,6 @@ public abstract class Brick implements Drawable, MouseListener {
 
     @Override
     public abstract void mouseExited(MouseEvent mouseEvent);
+
+    public abstract boolean isInside(double x, double y);
 }

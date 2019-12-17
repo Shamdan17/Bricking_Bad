@@ -11,10 +11,12 @@ import java.awt.event.MouseListener;
 
 public class SimpleBrick extends Brick {
 
+
     private boolean isDragged;
     private Position oldPos;
     private double dx;
     private double dy;
+
     public SimpleBrick(MovableShape ms, BrickingBad bb) {
         super(ms,bb);
         isDragged = false;
@@ -29,10 +31,17 @@ public class SimpleBrick extends Brick {
         g.fillRect(x, y, length, width);
         g.drawRect(x, y, length, width);
     }
+    @Override
+    public boolean isInside(double x,double y){
+        double myX = ms.getPosition().getX();
+        double myY = ms.getPosition().getY();
+        double len = ms.getLength();
+        double wid = ms.getWidth();
+        return (x >= myX && x <= myX + len && y >= myY && y <= myY + wid);
+    }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
         int myX = (int) Math.round(ms.getPosition().getX());
@@ -44,15 +53,11 @@ public class SimpleBrick extends Brick {
             brickingBad.removeBrick(ms.getID());
         }
     }
-    @Override
+
+        @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        double x = mouseEvent.getX();
-        double y = mouseEvent.getY();
-        double myX = ms.getPosition().getX();
-        double myY = ms.getPosition().getY();
-        double len = ms.getLength();
-        double wid = ms.getWidth();
-        if(x < myX || x > myX + len || y < myY || y > myY + wid)return;
+        if(!isInside(mouseEvent.getX(),mouseEvent.getY()))
+            return;
         if(!isDragged){
             isDragged = true;
             oldPos = new Position(ms.getPosition().getX(),ms.getPosition().getY());

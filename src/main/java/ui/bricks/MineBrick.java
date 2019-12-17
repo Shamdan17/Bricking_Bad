@@ -12,9 +12,14 @@ import java.awt.event.MouseListener;
 
 public class MineBrick extends Brick {
 
+    private boolean isDragged;
+    private Position oldPos;
+    private double dx;
+    private double dy;
 
     public MineBrick(MovableShape ms, BrickingBad bb) {
        super(ms,bb);
+       isDragged = false;
     }
 
     public void draw(Graphics g) {
@@ -23,6 +28,13 @@ public class MineBrick extends Brick {
         g.drawOval(util.round(ms.getPosition().getX()), util.round(ms.getPosition().getY()), ms.getLength(), ms.getWidth());
     }
 
+    @Override
+    public boolean isInside(double x,double y){
+        double myX = ms.getCenter().getX();
+        double myY = ms.getCenter().getY();
+        double dist = Math.sqrt((myX - x) * (myX - x) + (myY - y) * (myY - y));
+        return dist <= (ms.getLength() / 2);
+    }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -40,14 +52,34 @@ public class MineBrick extends Brick {
 
     }
 
-    @Override
+        @Override
     public void mousePressed(MouseEvent mouseEvent) {
-
+        if(!isInside(mouseEvent.getX(),mouseEvent.getY()))
+            return;
+        if(!isDragged){
+            isDragged = true;
+            oldPos = new Position(ms.getPosition().getX(),ms.getPosition().getY());
+            dx = (mouseEvent.getX() - oldPos.getX());
+            dy = (mouseEvent.getY() - oldPos.getY());
+        }else {
+            Position newPos = new Position(mouseEvent.getX(),mouseEvent.getY());
+            ms.setPosition(newPos);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-
+        if(isDragged){
+            Position newPos = new Position(mouseEvent.getX() - dx,mouseEvent.getY() - dy);
+            boolean isMoved = brickingBad.moveBrick(ms.getID(),newPos);
+            if(!isMoved){
+                System.out.println("not moved");
+                ms.setPosition(oldPos);
+            }
+            isDragged = false;
+            dx = 0;
+            dy = 0;
+        }
     }
 
     @Override
