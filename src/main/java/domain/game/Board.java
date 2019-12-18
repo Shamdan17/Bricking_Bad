@@ -63,6 +63,7 @@ public class Board {
         paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
         movables.add(ball);
         movables.add(paddle);
+        bindMovables();
     }
 
     /**
