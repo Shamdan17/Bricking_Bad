@@ -1,9 +1,8 @@
-package ui.bricks;
+package ui.drawables.bricks;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
-import ui.Drawable;
-import utils.Position;
+import ui.drawables.Drawable;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

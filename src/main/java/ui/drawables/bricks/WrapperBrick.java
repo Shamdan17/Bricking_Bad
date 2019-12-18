@@ -1,13 +1,11 @@
-package ui.bricks;
+package ui.drawables.bricks;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
-import ui.Drawable;
 import utils.Position;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class WrapperBrick extends Brick {
 

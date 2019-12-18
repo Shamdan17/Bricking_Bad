@@ -1,12 +1,17 @@
-package ui;
+package ui.panels;
 
 import domain.BrickingBad;
 import domain.game.GameData;
 import domain.model.shape.MovableShape;
-import ui.bricks.HalfMetalBrick;
-import ui.bricks.MineBrick;
-import ui.bricks.SimpleBrick;
-import ui.bricks.WrapperBrick;
+import ui.MKeyListener;
+import ui.drawables.Ball;
+import ui.drawables.Drawable;
+import ui.drawables.DummyDrawable;
+import ui.drawables.Paddle;
+import ui.drawables.bricks.HalfMetalBrick;
+import ui.drawables.bricks.MineBrick;
+import ui.drawables.bricks.SimpleBrick;
+import ui.drawables.bricks.WrapperBrick;
 import ui.load.GameLoadPage;
 import ui.save.GameSavePage;
 import utils.Constants;
@@ -19,7 +24,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener, ActionListener {
+public class Game extends JPanel implements Runnable, KeyListener, ActionListener {
 
   public JButton menuButton;
   private BrickingBad brickingBad;
@@ -30,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, ActionLi
   private JButton saveButton;
   private JButton loadButton;
 
-  public GamePanel(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
+  public Game(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;

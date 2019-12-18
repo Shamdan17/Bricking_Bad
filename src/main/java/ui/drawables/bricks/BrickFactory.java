@@ -1,8 +1,8 @@
-package ui.bricks;
+package ui.drawables.bricks;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
-import ui.Drawable;
+import ui.drawables.Drawable;
 
 public class BrickFactory {
 

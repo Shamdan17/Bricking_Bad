@@ -1,7 +1,8 @@
-package ui;
+package ui.drawables;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
+import ui.drawables.Drawable;
 import utils.physics.math.util;
 
 import java.awt.*;

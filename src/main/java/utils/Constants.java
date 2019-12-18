@@ -74,4 +74,9 @@ public final class Constants {
     public static final String EMPTY_WRAPPER_BRICK_FIELD_WARNING = "Wrapper Brick field is empty";
     public static final String BRICK_NUMBER_WARNING = "Number of Bricks does not satisfy constraints";
 
+
+    public static final String PASSWORD_LABEL = "Password Label";
+    public static final String USERNAME_LABEL = "Username Label";
+    public static final String LOGIN_BUTTON = "Login Button";
+
 }

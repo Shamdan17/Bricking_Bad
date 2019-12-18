@@ -1,6 +1,7 @@
-package ui;
+package ui.panels;
 
 import domain.BrickingBad;
+import ui.MKeyListener;
 import ui.load.GameLoadPage;
 import utils.Constants;
 
@@ -15,7 +16,7 @@ public class Menu extends JPanel implements ActionListener {
   private CardLayout cardLayout;
   private JPanel contPanel;
 
-  private MapBuildPanel mapBuildPanel;
+  private MapBuild mapBuildPanel;
   private Help help;
   private GameLoadPage loadPage;
 
@@ -23,7 +24,6 @@ public class Menu extends JPanel implements ActionListener {
   private JButton loadGameButton;
   private JButton helpButton;
   private JButton exitButton;
-  private JButton menuButton;
   // this class represents the main menu
 
   public Menu(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
@@ -35,12 +35,10 @@ public class Menu extends JPanel implements ActionListener {
     this.loadGameButton = new JButton(Constants.LOAD_BUTTON);
     this.helpButton = new JButton(Constants.HELP_BUTTON);
     this.exitButton = new JButton(Constants.EXIT_BUTTON);
-    this.menuButton = new JButton(Constants.MENU_BUTTON);
     this.addKeyListener(new MKeyListener(brickingBad));
 
     addButtons();
 
-    menuButton.addActionListener(this);
     startGameButton.addActionListener(this);
     loadGameButton.addActionListener(this);
     helpButton.addActionListener(this);
@@ -64,12 +62,9 @@ public class Menu extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent actionEvent) {
-    if (actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)) {
-        cardLayout.show(contPanel,Constants.MENU_LABEL);
-    }
 
     if (actionEvent.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
-      mapBuildPanel = new MapBuildPanel(brickingBad, cardLayout, contPanel);
+      mapBuildPanel = new MapBuild(brickingBad, cardLayout, contPanel);
       contPanel.add(mapBuildPanel, Constants.MAP_BUILD_LABEL);
       cardLayout.show(contPanel, Constants.MAP_BUILD_LABEL);
     }
