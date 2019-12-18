@@ -25,7 +25,8 @@ public class GameSession {
     }
 
     public GameSession(MapBuildData data){
-        board = new Board(data);
+        this.board = new Board(data);
+        this.sm = new BinaryStorage("hi");
     }
 
     /**

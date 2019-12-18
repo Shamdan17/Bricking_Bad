@@ -21,18 +21,16 @@ import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener, ActionListener {
 
+  public JButton menuButton;
   private BrickingBad brickingBad;
   private JPanel contPanel;
   private CardLayout cardLayout;
-
   private GameSavePage savePage;
   private GameLoadPage loadPage;
-
-  public JButton menuButton;
   private JButton saveButton;
   private JButton loadButton;
 
-  public GamePanel(BrickingBad brickingBad,CardLayout cardLayout,JPanel contPanel) {
+  public GamePanel(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
@@ -41,10 +39,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, ActionLi
     this.saveButton = new JButton(Constants.SAVE_BUTTON);
     this.loadButton = new JButton(Constants.LOAD_BUTTON);
 
+    menuButton.addActionListener(this);
+    saveButton.addActionListener(this);
+    loadButton.addActionListener(this);
+
     this.add(menuButton);
     this.add(saveButton);
     this.add(loadButton);
-
     this.addKeyListener(new MKeyListener(brickingBad));
 
     setBackground(new Color(204, 229, 255));
@@ -86,46 +87,38 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, ActionLi
     switch (ms.getSpecificType()) {
       case SimpleBrick:
         return new SimpleBrick(ms, brickingBad);
-            case MineBrick:
-              return new MineBrick(ms, brickingBad);
-            case HalfMetalBrick:
-              return new HalfMetalBrick(ms, brickingBad);
-            case WrapperBrick:
-              return new WrapperBrick(ms, brickingBad);
+      case MineBrick:
+        return new MineBrick(ms, brickingBad);
+      case HalfMetalBrick:
+        return new HalfMetalBrick(ms, brickingBad);
+      case WrapperBrick:
+        return new WrapperBrick(ms, brickingBad);
       default:
         return new DummyDrawable();
     }
-
   }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-      if(actionEvent.getActionCommand().equals(Constants.SAVE_BUTTON)){
-          // TODO: modify this after having proper save load mechanisms
-          brickingBad.saveGame();
-      }
-      if(actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)){
-          // TODO: modify this after having proper save load mechanisms
-          brickingBad.loadGame();
-      }
-      if(actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)){
-          cardLayout.show(contPanel,Constants.MENU_LABEL);
-      }
+  @Override
+  public void actionPerformed(ActionEvent actionEvent) {
+    if (actionEvent.getActionCommand().equals(Constants.SAVE_BUTTON)) {
+      // TODO: modify this after having proper save load mechanisms
+      brickingBad.saveGame();
     }
-
-  @Override
-  public void keyTyped(KeyEvent keyEvent) {
-
+    if (actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)) {
+      // TODO: modify this after having proper save load mechanisms
+      brickingBad.loadGame();
+    }
+    if (actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)) {
+      cardLayout.show(contPanel, Constants.MENU_LABEL);
+    }
   }
 
   @Override
-  public void keyPressed(KeyEvent keyEvent) {
-
-  }
+  public void keyTyped(KeyEvent keyEvent) {}
 
   @Override
-  public void keyReleased(KeyEvent keyEvent) {
+  public void keyPressed(KeyEvent keyEvent) {}
 
-  }
-
+  @Override
+  public void keyReleased(KeyEvent keyEvent) {}
 }
