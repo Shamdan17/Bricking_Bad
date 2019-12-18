@@ -37,7 +37,7 @@ public class BoardTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> {
-          board = new Board(null);
+          board = new Board((GameData)null);
         });
     assertThrows(
         NullPointerException.class,

@@ -39,5 +39,39 @@ public final class Constants {
   public static final int BRICK_UPPER_BOUND = 100;
   public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
   public static final int HALF_METAL_BRICK_YLIMIT = 4 * FRAME_HEIGHT / 10;
-  // public static final defaultBoard
+
+
+    /**
+     * Constants for UI
+     */
+
+    public static final String MENU_LABEL = "main";
+    public static final String MAP_BUILD_LABEL = "mapbuild";
+    public static final String GAME_LABEL = "game";
+    public static final String LOAD_LABEL = "load";
+    public static final String SAVE_LABEL = "save";
+    public static final String HELP_LABEL = "help";
+
+    public static final String SAVE_BUTTON = "Save Button";
+    public static final String LOAD_BUTTON = "Load Button";
+    public static final String MENU_BUTTON = "Menu Button";
+    public static final String START_GAME_BUTTON = "Start Game Button";
+    public static final String ADD_BRICKS_BUTTON = "Add Bricks Button";
+    public static final String HELP_BUTTON = "Help Button";
+    public static final String EXIT_BUTTON = "Exit Button";
+    public static final String DELETE_BY_CLICK_LABEL = "Delete By Click";
+
+
+    public static final String SIMPLE_BRICK_LABEL = "Simple Brick Count";
+    public static final String HALF_METAL_BRICK_LABEL = "Half Metal Brick Count";
+    public static final String MINE_BRICK_LABEL = "Mine Brick Count";
+    public static final String WRAPPER_BRICK_LABEL = "Wrapper Brick Count";
+
+
+    public static final String EMPTY_SIMPLE_BRICK_FIELD_WARNING = "Simple Brick field is empty";
+    public static final String EMPTY_HALF_METAL_BRICK_FIELD_WARNING = "Half Metal brick field is empty";
+    public static final String EMPTY_MINE_BRICK_FIELD_WARNING = "Mine Brick field is empty";
+    public static final String EMPTY_WRAPPER_BRICK_FIELD_WARNING = "Wrapper Brick field is empty";
+    public static final String BRICK_NUMBER_WARNING = "Number of Bricks does not satisfy constraints";
+
 }

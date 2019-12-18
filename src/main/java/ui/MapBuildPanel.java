@@ -5,6 +5,8 @@ import domain.mapbuild.MapBuildData;
 import domain.model.shape.MovableShape;
 import ui.bricks.Brick;
 import ui.bricks.BrickFactory;
+import ui.load.MapLoadPage;
+import ui.save.MapSavePage;
 import utils.Constants;
 
 import javax.swing.*;
@@ -13,22 +15,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
-public class MapBuildPanel extends JPanel
-    implements Runnable, ActionListener, PropertyChangeListener {
+public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
 
-  public JButton backToMain;
-  private Map<UUID, Drawable> drawables;
+  public JButton menuButton;
+  public JButton startGameButton;
   private BrickingBad brickingBad;
+  private GamePanel gamePanel;
+  private CardLayout cardLayout;
+  private JPanel contPanel;
+  private JPanel bottomPanel;
   private JCheckBox deleteBlock;
   private JButton saveButton;
   private JButton loadButton;
-  private JButton createButton;
+  private JButton addBricksButton;
+  private Map<UUID, Drawable> drawables;
+
+  private MapSavePage savePage;
+  private MapLoadPage loadPage;
 
   private JFormattedTextField simpleBrickField;
   private JFormattedTextField halfMetalBrickField;
@@ -39,20 +46,25 @@ public class MapBuildPanel extends JPanel
   private JLabel mineBrickLabel;
   private JLabel wrapperBrickLabel;
   private NumberFormat numberFormat;
-  private JPanel bottomPanel;
 
-  public MapBuildPanel(BrickingBad bb) {
-    drawables = new HashMap<>();
-    backToMain = new JButton("Back to Main");
-    saveButton = new JButton("Save");
-    loadButton = new JButton("Load");
-    createButton = new JButton("Add Blocks");
-    deleteBlock = new JCheckBox("delete by click");
+  public MapBuildPanel(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
+    this.drawables = new HashMap<>();
+    this.menuButton = new JButton(Constants.MENU_BUTTON);
+    this.startGameButton = new JButton(Constants.START_GAME_BUTTON);
+    this.saveButton = new JButton(Constants.SAVE_BUTTON);
+    this.loadButton = new JButton(Constants.LOAD_BUTTON);
+    this.addBricksButton = new JButton(Constants.ADD_BRICKS_BUTTON);
+    this.deleteBlock = new JCheckBox(Constants.DELETE_BY_CLICK_LABEL);
+    this.brickingBad = brickingBad;
+    this.cardLayout = cardLayout;
+    this.contPanel = contPanel;
+
+    menuButton.addActionListener(this);
     loadButton.addActionListener(this);
     saveButton.addActionListener(this);
     deleteBlock.addActionListener(this);
-    createButton.addActionListener(this);
-    brickingBad = bb;
+    addBricksButton.addActionListener(this);
+    startGameButton.addActionListener(this);
 
     bottomPanel = new JPanel();
     bottomPanel.setBounds(0, 750, 750, 1500);
@@ -72,10 +84,10 @@ public class MapBuildPanel extends JPanel
     wrapperBrickField.setColumns(10);
     wrapperBrickField.setValue(Constants.MIN_WRAPPER_BRICK);
 
-    simpleBrickLabel = new JLabel("Simple Brick Count");
-    halfMetalBrickLabel = new JLabel("Half Metal Brick Count");
-    mineBrickLabel = new JLabel("Mine Brick Count");
-    wrapperBrickLabel = new JLabel("Wrapper Brick Count");
+    simpleBrickLabel = new JLabel(Constants.SIMPLE_BRICK_LABEL);
+    halfMetalBrickLabel = new JLabel(Constants.HALF_METAL_BRICK_LABEL);
+    mineBrickLabel = new JLabel(Constants.MINE_BRICK_LABEL);
+    wrapperBrickLabel = new JLabel(Constants.WRAPPER_BRICK_LABEL);
 
     bottomPanel.add(simpleBrickLabel);
     bottomPanel.add(simpleBrickField);
@@ -90,9 +102,10 @@ public class MapBuildPanel extends JPanel
     bottomPanel.add(wrapperBrickField);
 
     setLayout(new FlowLayout());
-    this.add(createButton);
+    this.add(startGameButton);
+    this.add(addBricksButton);
     this.add(bottomPanel);
-    this.add(backToMain);
+    this.add(menuButton);
     this.add(saveButton);
     this.add(loadButton);
     this.add(deleteBlock);
@@ -116,9 +129,9 @@ public class MapBuildPanel extends JPanel
     for (int i = 0; i < list.length; ++i) {
       this.removeMouseListener(list[i]);
     }
-      MouseMotionListener[] motionListeners = this.getMouseMotionListeners();
-    for(int i=0 ; i<motionListeners.length ; ++i){
-        this.removeMouseMotionListener(motionListeners[i]);
+    MouseMotionListener[] motionListeners = this.getMouseMotionListeners();
+    for (int i = 0; i < motionListeners.length; ++i) {
+      this.removeMouseMotionListener(motionListeners[i]);
     }
     MapBuildData mapBuildData = brickingBad.getMapBuildData();
     Map<UUID, MovableShape> IDMap = mapBuildData.getMovablesIDMap();
@@ -149,42 +162,45 @@ public class MapBuildPanel extends JPanel
   }
 
   public void actionPerformed(ActionEvent e) {
-    if (e.getActionCommand().equals("Save")) {
+    if (e.getActionCommand().equals(Constants.MENU_BUTTON)) {
+      cardLayout.show(contPanel, Constants.MENU_LABEL);
+    }
+    if (e.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
+      gamePanel = new GamePanel(brickingBad, cardLayout, contPanel);
+      contPanel.add(gamePanel, Constants.GAME_LABEL);
+      cardLayout.show(contPanel, Constants.GAME_LABEL);
+    }
+    if (e.getActionCommand().equals(Constants.SAVE_BUTTON)) {
       brickingBad.saveMap();
     }
-    if (e.getActionCommand().equals("delete by click")) {
+    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
       Brick.setRemoveFlag(deleteBlock.isSelected());
     }
-    if (e.getActionCommand().equals("Load")) {
+    if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
       brickingBad.loadMap();
     }
-    if (e.getActionCommand().equals("Add Blocks")) {
-      System.out.println("checkin");
+    if (e.getActionCommand().equals(Constants.ADD_BRICKS_BUTTON)) {
 
       Object simpleVal = simpleBrickField.getValue();
       if (simpleVal == null) {
-        String warning = "Simple Brick Field is empty";
-        JOptionPane.showMessageDialog(null, warning);
+        JOptionPane.showMessageDialog(null, Constants.EMPTY_SIMPLE_BRICK_FIELD_WARNING);
       }
 
       Object halfMetalVal = halfMetalBrickField.getValue();
       if (halfMetalVal == null) {
-        String warning = "Half Metal Brick Field is empty";
-        JOptionPane.showMessageDialog(null, warning);
+        JOptionPane.showMessageDialog(null, Constants.EMPTY_HALF_METAL_BRICK_FIELD_WARNING);
         return;
       }
 
       Object mineVal = mineBrickField.getValue();
       if (mineVal == null) {
-        String warning = "Mine Brick Field is empty";
-        JOptionPane.showMessageDialog(null, warning);
+        JOptionPane.showMessageDialog(null, Constants.EMPTY_MINE_BRICK_FIELD_WARNING);
         return;
       }
 
       Object wrapperVal = wrapperBrickField.getValue();
       if (wrapperVal == null) {
-        String warning = "Wrapper Brick Field is empty";
-        JOptionPane.showMessageDialog(null, warning);
+        JOptionPane.showMessageDialog(null, Constants.EMPTY_WRAPPER_BRICK_FIELD_WARNING);
         return;
       }
 
@@ -194,12 +210,8 @@ public class MapBuildPanel extends JPanel
       int wrapper = ((Number) wrapperVal).intValue();
       boolean success = brickingBad.buildMap(simple, halfMetal, mineCount, wrapper);
       if (!success) {
-        String warning = "Number of Bricks does not satisfy constraints";
-        JOptionPane.showMessageDialog(null, warning);
+        JOptionPane.showMessageDialog(null, Constants.BRICK_NUMBER_WARNING);
       }
     }
   }
-
-  @Override
-  public void propertyChange(PropertyChangeEvent propertyChangeEvent) {}
 }

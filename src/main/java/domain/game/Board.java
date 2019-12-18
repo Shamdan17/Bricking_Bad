@@ -2,6 +2,7 @@ package domain.game;
 
 import domain.game.collisionrules.CollisionRule;
 import domain.game.collisionrules.CollisionRuleFactory;
+import domain.mapbuild.MapBuildData;
 import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
@@ -52,6 +53,18 @@ public class Board {
         bindMovables();
     }
 
+    public Board(MapBuildData data){
+        if(data == null){
+            throw new IllegalArgumentException();
+        }
+        movables = data.getMovables();
+        ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
+        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
+        movables.add(ball);
+        movables.add(paddle);
+    }
+
     /**
      * OVERVIEW: Constructor for Board
      * MODIFIES: ball, paddle, movables
@@ -78,7 +91,7 @@ public class Board {
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
-    paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
+        paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
 
         // TODO: ball and paddle are added to movables for now for sake of collision checking
         movables.add(ball);

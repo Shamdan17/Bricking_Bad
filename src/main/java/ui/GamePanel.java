@@ -7,6 +7,8 @@ import ui.bricks.HalfMetalBrick;
 import ui.bricks.MineBrick;
 import ui.bricks.SimpleBrick;
 import ui.bricks.WrapperBrick;
+import ui.load.GameLoadPage;
+import ui.save.GameSavePage;
 import utils.Constants;
 
 import javax.swing.*;
@@ -17,41 +19,40 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener {
+public class GamePanel extends JPanel implements Runnable, KeyListener, ActionListener {
 
-  public JButton backToMain;
   private BrickingBad brickingBad;
+  private JPanel contPanel;
+  private CardLayout cardLayout;
+
+  private GameSavePage savePage;
+  private GameLoadPage loadPage;
+
+  public JButton menuButton;
   private JButton saveButton;
   private JButton loadButton;
 
+  public GamePanel(BrickingBad brickingBad,CardLayout cardLayout,JPanel contPanel) {
+    this.contPanel = contPanel;
+    this.cardLayout = cardLayout;
+    this.brickingBad = brickingBad;
 
-  public GamePanel(BrickingBad bb) {
-    backToMain = new JButton("Back to Main");
-    brickingBad = bb;
-    saveButton = new JButton("save");
-    loadButton = new JButton("load");
-    this.add(backToMain);
+    this.menuButton = new JButton(Constants.MENU_BUTTON);
+    this.saveButton = new JButton(Constants.SAVE_BUTTON);
+    this.loadButton = new JButton(Constants.LOAD_BUTTON);
+
+    this.add(menuButton);
     this.add(saveButton);
     this.add(loadButton);
+
+    this.addKeyListener(new MKeyListener(brickingBad));
+
     setBackground(new Color(204, 229, 255));
     setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
+
+    brickingBad.startGame();
+
     (new Thread(this)).start();
-
-    saveButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        bb.saveGame();
-        saveButton.setFocusable(false);
-        loadButton.setFocusable(false);
-      }
-    });
-
-    loadButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        bb.loadGame();
-        loadButton.setFocusable(false);
-        saveButton.setFocusable(false);
-      }
-    });
   }
 
   public void run() {
@@ -97,6 +98,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
   }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+      if(actionEvent.getActionCommand().equals(Constants.SAVE_BUTTON)){
+          // TODO: modify this after having proper save load mechanisms
+          brickingBad.saveGame();
+      }
+      if(actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)){
+          // TODO: modify this after having proper save load mechanisms
+          brickingBad.loadGame();
+      }
+      if(actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)){
+          cardLayout.show(contPanel,Constants.MENU_LABEL);
+      }
+    }
 
   @Override
   public void keyTyped(KeyEvent keyEvent) {
@@ -112,4 +127,5 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
   public void keyReleased(KeyEvent keyEvent) {
 
   }
+
 }

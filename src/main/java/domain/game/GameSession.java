@@ -1,9 +1,12 @@
 package domain.game;
 
+import domain.mapbuild.MapBuildData;
+import domain.model.shape.MovableShape;
 import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
 
 import java.time.Instant;
+import java.util.List;
 
 public class GameSession {
 
@@ -19,6 +22,10 @@ public class GameSession {
         this.username = username;
         this.sm = new BinaryStorage(username);
         this.board = new Board();
+    }
+
+    public GameSession(MapBuildData data){
+        board = new Board(data);
     }
 
     /**

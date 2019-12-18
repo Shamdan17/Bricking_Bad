@@ -56,6 +56,11 @@ public class BrickingBad {
         return mapBuildSession.buildMap(simple,halfmetal,mine,wrapper);
     }
 
+    public void startGame(){
+        MapBuildData data = mapBuildSession.getData();
+        gameSession = new GameSession(data);
+    }
+
     /**
      * saves the game
      */
