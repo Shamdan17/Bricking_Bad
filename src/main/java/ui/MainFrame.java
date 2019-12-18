@@ -45,9 +45,7 @@ public class MainFrame extends JFrame {
 
         addPanelButtons();
         addBackButtons();
-        //TODO: see if we can use this to make full screen
-//      Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-//      setSize((int)screenSize.getWidth(),(int)screenSize.getHeight());
+
         contPanel.add(mainPanel, "main");
         contPanel.add(mapBuildPanel, "edit");
         contPanel.add(gamePanel, "game");

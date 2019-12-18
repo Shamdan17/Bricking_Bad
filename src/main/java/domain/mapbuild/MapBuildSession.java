@@ -35,14 +35,14 @@ public class MapBuildSession {
     if (halfMetal < Constants.MIN_HALF_METAL_BRICK) return false;
     if (mine < Constants.MIN_MINE_BRICK) return false;
     if (wrapper < Constants.MIN_WRAPPER_BRICK) return false;
-
+    map = new Map();
     for (int i = 0; i < simple; ++i) {
         Random rand = new Random();
         int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-        int y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+        int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         while(!addBrick(SpecificType.SimpleBrick, new Position(x, y))){
             x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-            y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+            y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         }
     }
 
@@ -59,20 +59,20 @@ public class MapBuildSession {
     for (int i = 0; i < mine; ++i) {
       Random rand = new Random();
         int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-        int y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+        int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         while(!addBrick(SpecificType.MineBrick, new Position(x, y))){
             x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-            y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+            y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         }
     }
 
     for (int i = 0; i < wrapper; ++i) {
       Random rand = new Random();
-        int x = rand.nextInt(Constants.FRAME_WIDTH);
-        int y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+        int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
+        int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         while(!addBrick(SpecificType.WrapperBrick, new Position(x, y))){
             x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-            y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
+            y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
         }
     }
 
