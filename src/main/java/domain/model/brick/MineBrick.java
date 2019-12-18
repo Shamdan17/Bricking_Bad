@@ -25,17 +25,12 @@ public class MineBrick extends Brick {
     }
 
     public Type getType() {
-        if (isDestroyed()) {
-            return Type.Ball;
-        } else {
-            return Type.Brick;
-        }
+        return Type.Brick;
     }
 
     @Override
     public void collide(MovableShape obj) {
         if (obj.getType() == Type.Ball) {
-            //super.setRadius(2*Constants.L);
             super.addToQueue(new Explosion(getCenter()));
             super.destroy();
         }
