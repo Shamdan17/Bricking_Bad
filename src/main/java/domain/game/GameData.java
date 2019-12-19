@@ -1,6 +1,7 @@
 package domain.game;
 
 import domain.model.Paddle;
+import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class GameData implements Serializable {
     public GameData(Paddle p, List<MovableShape> ms) {
         this.paddle = p;
         this.movables = ms;
+        if (!containsPaddle()) movables.add(p);
     }
 
     public List<MovableShape> getMovables() {
@@ -35,5 +37,12 @@ public class GameData implements Serializable {
             if (!movables.get(i).equals(data.getMovables().get(i)))
                 return false;
         return paddle.equals(data.getPaddle());
+    }
+
+    private boolean containsPaddle() {
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Paddle) return true;
+        }
+        return false;
     }
 }

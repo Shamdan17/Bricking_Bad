@@ -71,7 +71,7 @@ public class BoardTest {
     Method destroyMovables = cls.getDeclaredMethod("removeDestroyedMovables");
     destroyMovables.setAccessible(true);
     destroyMovables.invoke(board);
-    assertEquals(1, board.getData().getMovables().size(), "not correct movables size");
+    assertEquals(2, board.getData().getMovables().size(), "not correct movables size");
   }
 
   @Test

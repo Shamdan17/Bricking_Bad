@@ -28,7 +28,6 @@ public class Board {
     static final Logger logger = Logger.getLogger(Board.class);
     private List<MovableShape> movables;
     private Paddle paddle;
-    private Ball ball;
     private Queue<MovableShape> objectQueue = new LinkedList<>();
     private BrickFactory bf = new BrickFactory(objectQueue);
     private PhysicsEngine ps = PhysicsEngine.getInstance();
@@ -49,8 +48,6 @@ public class Board {
         paddle = data.getPaddle();
         movables = data.getMovables();
         inventory = new Inventory(this);
-        movables.add(ball);
-        movables.add(paddle);
         bindMovables();
     }
 
@@ -79,7 +76,7 @@ public class Board {
                 movables.add(bf.get(SpecificType.WrapperBrick, new Position(100 * i - 100, 300)));
         }
         // TODO: remove constants from here
-        ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
+        Ball ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         paddle = new Paddle(new Position(300, 700));
 
