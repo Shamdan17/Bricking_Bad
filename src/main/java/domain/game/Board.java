@@ -45,8 +45,8 @@ public class Board {
         if (data == null) {
             throw new IllegalArgumentException();
         }
-        paddle = data.getPaddle();
         movables = data.getMovables();
+        paddle = getPaddle(movables);
         inventory = new Inventory(this);
         bindMovables();
     }
@@ -282,12 +282,20 @@ public class Board {
      * @return a GameData instance containing copies of movables in this board
      */
     public GameData getData() {
-        Paddle p = (Paddle) paddle.copy();
         List<MovableShape> movableList = new ArrayList<>();
         for (MovableShape ms : movables) {
             movableList.add(ms.copy());
         }
-        return new GameData(p, movableList);
+        return new GameData(movableList);
+    }
+
+    private Paddle getPaddle(List<MovableShape> movables) {
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Paddle) {
+                return (Paddle) ms;
+            }
+        }
+        return null;
     }
 
     public boolean repOK() {

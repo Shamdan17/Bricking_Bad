@@ -32,17 +32,12 @@ public class BoardTest {
     assertThrows(
         NullPointerException.class,
         () -> {
-          board = new Board(new GameData(null, null));
+          board = new Board(new GameData(null));
         });
     assertThrows(
         IllegalArgumentException.class,
         () -> {
           board = new Board(null);
-        });
-    assertThrows(
-        NullPointerException.class,
-        () -> {
-          board = new Board(new GameData(new Paddle(new Position(10, 10), 17), null));
         });
   }
 
@@ -60,12 +55,13 @@ public class BoardTest {
   void removeDestroyedMovables()
       throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     List<MovableShape> movables = new ArrayList<>();
+    movables.add(paddle);
     for (int i = 0; i < 3; ++i) {
       Brick brick = brickFactory.get(SimpleBrick, new Position(1, 2));
       if (i % 2 == 0) brick.setDestroyed(true);
       movables.add(brick);
     }
-    GameData data = new GameData(paddle, movables);
+    GameData data = new GameData(movables);
     Board board = new Board(data);
     Class cls = board.getClass();
     Method destroyMovables = cls.getDeclaredMethod("removeDestroyedMovables");
@@ -77,11 +73,12 @@ public class BoardTest {
   @Test
   void testGetData() {
     List<MovableShape> movables = new ArrayList<>();
+    movables.add(paddle);
     for (int i = 0; i < 3; ++i) {
       Brick brick = brickFactory.get(SimpleBrick, new Position(1, 1));
       movables.add(brick);
     }
-    GameData data = new GameData(paddle, movables);
+    GameData data = new GameData(movables);
     Board board = new Board(data);
 
     GameData testedData = board.getData();
@@ -102,7 +99,7 @@ public class BoardTest {
       movables.add(brick.copy());
       list.add(brick);
     }
-    GameData data = new GameData(paddle, movables);
+    GameData data = new GameData(movables);
     Board board = new Board(data);
 
     Class cls = board.getClass();
@@ -121,7 +118,8 @@ public class BoardTest {
   @Test
   void testPaddleMovement() {
     List<MovableShape> movables = new ArrayList<>();
-    GameData data = new GameData((Paddle) paddle.copy(), movables);
+    movables.add(paddle);
+    GameData data = new GameData(movables);
     Board board = new Board(data);
 
     board.movePaddleLeft();
