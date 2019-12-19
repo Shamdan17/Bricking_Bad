@@ -119,7 +119,8 @@ public class Paddle extends Rectangle {
     public void applyMagnetPowerup(Ball ball) {
         if (ball != null) {
             this.ball = ball;
-            ball.setMovementBehavior(new NoMovement(new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 + 1)));
+            ball.setMovementBehavior(new NoMovement(
+                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
             isMagnet = true;
         }
     }
