@@ -1,4 +1,4 @@
-package ui;
+package ui.panels;
 
 import utils.Constants;
 
@@ -20,6 +20,9 @@ public class Help extends JPanel implements ActionListener {
         this.contPanel = contPanel;
         this.backToMenu = new JButton(Constants.MENU_BUTTON);
         this.helpInfo = new JLabel("No Help Available now");
+
+        backToMenu.addActionListener(this);
+
         add(helpInfo,BorderLayout.CENTER);
         add(backToMenu);
     }

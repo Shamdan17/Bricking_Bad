@@ -1,10 +1,11 @@
-package ui;
+package ui.panels;
 
 import domain.BrickingBad;
 import domain.mapbuild.MapBuildData;
 import domain.model.shape.MovableShape;
-import ui.bricks.Brick;
-import ui.bricks.BrickFactory;
+import ui.drawables.Drawable;
+import ui.drawables.bricks.Brick;
+import ui.drawables.bricks.BrickFactory;
 import ui.load.MapLoadPage;
 import ui.save.MapSavePage;
 import utils.Constants;
@@ -19,12 +20,12 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
-public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
+public class MapBuild extends JPanel implements Runnable, ActionListener {
 
   public JButton menuButton;
   public JButton startGameButton;
   private BrickingBad brickingBad;
-  private GamePanel gamePanel;
+  private Game gamePanel;
   private CardLayout cardLayout;
   private JPanel contPanel;
   private JPanel bottomPanel;
@@ -47,7 +48,7 @@ public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
   private JLabel wrapperBrickLabel;
   private NumberFormat numberFormat;
 
-  public MapBuildPanel(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
+  public MapBuild(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.drawables = new HashMap<>();
     this.menuButton = new JButton(Constants.MENU_BUTTON);
     this.startGameButton = new JButton(Constants.START_GAME_BUTTON);
@@ -109,6 +110,8 @@ public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
     this.add(saveButton);
     this.add(loadButton);
     this.add(deleteBlock);
+
+    brickingBad.initializeMapBuild();
     (new Thread(this)).start();
   }
 
@@ -166,7 +169,7 @@ public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.MENU_LABEL);
     }
     if (e.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
-      gamePanel = new GamePanel(brickingBad, cardLayout, contPanel);
+      gamePanel = new Game(brickingBad, cardLayout, contPanel);
       contPanel.add(gamePanel, Constants.GAME_LABEL);
       cardLayout.show(contPanel, Constants.GAME_LABEL);
     }
