@@ -86,16 +86,6 @@ public class Board {
     // TODO: ball and paddle are added to movables for now for sake of collision checking
     movables.add(ball);
     movables.add(paddle);
-/*
-    for (int i = 0; i < 10; i+=4) {
-      for (int j = 3; j < 6; j+=10) {
-        Position curpos = new Position(80 * i + 20, 40 * j + 10);
-        if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
-        else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
-      }
-    }
-
- */
   }
 
     /**
@@ -136,7 +126,7 @@ public class Board {
     }
 
     /**
-     * Checks the number of balls on in the board, respawns a ball if non left.
+     * Checks the number of balls on in the board, respawns a ball if none left.
      */
     private void checkNumBalls() {
         int numBalls = 0;
@@ -146,7 +136,7 @@ public class Board {
             }
         }
         if (numBalls == 0) {
-            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.RADIUS));
+            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2));
         }
     }
 
