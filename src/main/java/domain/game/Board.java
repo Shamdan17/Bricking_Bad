@@ -58,9 +58,9 @@ public class Board {
             throw new IllegalArgumentException();
         }
         movables = data.getMovables();
-        ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
-        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
+        ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
+        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         movables.add(ball);
         movables.add(paddle);
         bindMovables();
