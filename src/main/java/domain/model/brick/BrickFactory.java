@@ -34,7 +34,7 @@ public class BrickFactory {
 
         //res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
         //res.add(new GangOfBalls(powerupMovBeh.copy()));
-        res.add(new TallerPaddle(powerupMovBeh.copy()));
+        //res.add(new TallerPaddle(powerupMovBeh.copy()));
         res.add(new Magnet(powerupMovBeh.copy()));
         
         Collections.shuffle(res);

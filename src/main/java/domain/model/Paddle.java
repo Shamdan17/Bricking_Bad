@@ -63,11 +63,10 @@ public class Paddle extends Rectangle {
 
     public void moveLeft() {
         if (isMagnet) {
-            ball.setVelocity(new Velocity(0, 0));
             setPosition(
                     new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
-            ball.setPosition(
-                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY() - ball.getRadius()));
+            ball.setMovementBehavior(new NoMovement(
+                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
         } else {
             setPosition(
                     new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
@@ -76,11 +75,10 @@ public class Paddle extends Rectangle {
 
     public void moveRight() {
         if (isMagnet) {
-            ball.setVelocity(new Velocity(0, 0));
             setPosition(
                     new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
-            ball.setPosition(
-                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY() - ball.getRadius()));
+            ball.setMovementBehavior(new NoMovement(
+                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
         } else {
             setPosition(
                     new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
@@ -121,6 +119,7 @@ public class Paddle extends Rectangle {
     public void applyMagnetPowerup(Ball ball) {
         if (ball != null) {
             this.ball = ball;
+            ball.setMovementBehavior(new NoMovement(new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 + 1)));
             isMagnet = true;
         }
     }

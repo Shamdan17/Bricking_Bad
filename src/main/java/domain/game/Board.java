@@ -7,6 +7,7 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.brick.BrickFactory;
+import domain.model.movement.LinearMovement;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -80,7 +81,8 @@ public class Board {
         }
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
-        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        ball.setMovementBehavior(new LinearMovement(ball.getPosition(), new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY)));
+        //ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         paddle = new Paddle(new Position(300, 700));
 
         // TODO: ball and paddle are added to movables for now for sake of collision checking
@@ -311,7 +313,9 @@ public class Board {
     public void throwBall() {
         if (paddle.isMagnet()) {
             paddle.setMagnet(false);
-            ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+            ball = getBall();
+            ball.setMovementBehavior(new LinearMovement(ball.getPosition(), new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY)));
+            //ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         }
 
     }
@@ -321,7 +325,11 @@ public class Board {
     }
 
     public Ball getBall() {
-        return ball;
+        for (MovableShape movableShape : movables) {
+            if (movableShape.getType() == Type.Ball)
+                return (Ball) movableShape;
+        }
+        return null;
     }
 
     /**
