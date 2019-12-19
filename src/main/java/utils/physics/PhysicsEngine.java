@@ -8,6 +8,7 @@ import utils.Velocity;
 import utils.physics.math.Rotation;
 import utils.physics.math.Slope;
 import utils.physics.math.Vector;
+import utils.physics.math.util;
 
 
 // Overview: PhysicsEngine is responsible for handling the physics of collisions between objects.
@@ -316,10 +317,10 @@ public final class PhysicsEngine {
 
         // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
         boolean result =
-                getDistance(cnt, rect) <= radius //top left
-                        || getDistance(cnt, rect.incrementX(len)) <= radius //top right
-                        || getDistance(cnt, rect.incrementY(wid)) <= radius //bottom left
-                        || getDistance(cnt, rect.incrementX(len).incrementY(wid)) <= radius; //bottom right
+                util.getDistance(cnt, rect) <= radius //top left
+                        || util.getDistance(cnt, rect.incrementX(len)) <= radius //top right
+                        || util.getDistance(cnt, rect.incrementY(wid)) <= radius //bottom left
+                        || util.getDistance(cnt, rect.incrementX(len).incrementY(wid)) <= radius; //bottom right
 
         return result;
 
@@ -332,7 +333,7 @@ public final class PhysicsEngine {
         int radius1 = getRadius(obj1);
         int radius2 = getRadius(obj2);
 
-        return getDistance(cnt1, cnt2) < (radius1 + radius2);
+        return util.getDistance(cnt1, cnt2) < (radius1 + radius2);
     }
 
 
@@ -387,10 +388,6 @@ public final class PhysicsEngine {
         }
     }
 
-    // Helper functions
-    private double getDistance(Position pt1, Position pt2) {
-        return Math.sqrt(Math.pow(pt2.getX() - pt1.getX(), 2) + Math.pow(pt2.getY() - pt1.getY(), 2));
-    }
 
     // Since circles have their length and width as their diameters, this returns the radius
     private int getRadius(MovableShape obj) {

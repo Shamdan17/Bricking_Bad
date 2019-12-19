@@ -1,8 +1,8 @@
-package domain.model.powerup;
-
-public class ChemicalBall extends PowerUp {
-    @Override
-    public boolean activate() {
-        return false;
-    }
-}
+//package domain.model.powerup;
+//
+//public class ChemicalBall extends PowerUp {
+//    @Override
+//    public boolean activate() {
+//        return false;
+//    }
+//}

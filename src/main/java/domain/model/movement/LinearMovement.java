@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -73,4 +74,8 @@ public class LinearMovement implements MovementBehavior, Serializable {
         setVelocity(oldVelocity);
     }
 
+    @Override
+    public MovementBehavior copy() {
+        return SerializationUtils.clone(this);
+    }
 }

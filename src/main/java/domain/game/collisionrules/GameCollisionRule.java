@@ -29,4 +29,13 @@ public class GameCollisionRule implements CollisionRule {
     public void addCollisionRule(CollisionRule rule) {
         rules.add(rule);
     }
+
+    public boolean isCollided(MovableShape obj1, MovableShape obj2) {
+        for (CollisionRule rule : rules) {
+            if (rule.ruleApplies(obj1, obj2)) {
+                return rule.isCollided(obj1, obj2);
+            }
+        }
+        return defaultRule.isCollided(obj1, obj2);
+    }
 }
