@@ -7,7 +7,6 @@ import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
-import utils.Velocity;
 
 public class Ball extends Circle {
 
@@ -38,30 +37,11 @@ public class Ball extends Circle {
 
     @Override
     public void move() {
-        // Get parameters
-        // TODO probability of future null thingy here
-        Position oldPos = getPosition();
-
-        // Calculate new position
-        // Do we really need this (maybe we can provide oldPos.move(dx, dy)?
-        Position newPos = oldPos.incrementX(getVelocity().getX()).incrementY(getVelocity().getY());
-        ensureBallIsInBounds();
-        setPosition(newPos);
-    }
-
-    //TODO: Move this out of ball
-    public void ensureBallIsInBounds() {
-        Velocity oldVelocity = getVelocity();
-        if (getPosition().getX() + getLength() > Constants.maxX) {
-            oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
+        super.move();
+        // Self destruct if out of screen
+        if (getPosition().getY() > Constants.maxY) {
+            destroy();
         }
-        if (getPosition().getX() < 0) {
-            oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
-        }
-        if (getPosition().getY() < 0) {
-            oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
-        }
-        setVelocity(oldVelocity);
     }
 
     /**
@@ -90,6 +70,6 @@ public class Ball extends Circle {
 
     @Override
     public String toString() {
-        return "Ball with " + getPosition().toString();
+        return "Ball at " + getPosition().toString() + " with " + getVelocity() ;
     }
 }
