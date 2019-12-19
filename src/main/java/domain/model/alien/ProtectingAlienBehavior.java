@@ -1,35 +1,46 @@
 package domain.model.alien;
 
 import domain.model.SpecificType;
-import domain.model.Type;
-import domain.model.brick.Brick;
-import domain.model.brick.BrickFactory;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
-import domain.model.shape.Shape;
-import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
-public class ProtectingAlienBehavior extends Alien {
+import java.io.Serializable;
 
-    public ProtectingAlienBehavior(MovementBehavior movBeh, int length, int width) {
-        super(movBeh, length, width);
+import static utils.Constants.Protecting_Alien_Speed;
+
+public class ProtectingAlienBehavior implements AlienBehavior, Serializable {
+
+    private Alien self;
+    private MovementBehavior movBeh;
+
+    public ProtectingAlienBehavior(Position pos) {
+        movBeh = new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0));
+    }
+
+    public void setSelf(Alien self) {
+        this.self = self;
+        self.initializeMovementBehavior(movBeh);
     }
 
     @Override
-
     public void behave() {
-        //todo implementation
+        //Protecting alien doesn't really do anything
     }
 
 
     @Override
     public void collide(MovableShape obj) {
-        if (obj.getCenter().getY() < this.getCenter().getY()) {
-            this.destroy();
+        if (obj.getCenter().getY() < movBeh.getCurrentPosition().getY()) {
+            self.setDestroyed(true);
         }
+    }
+
+    @Override
+    public void setMovementBehavior(MovementBehavior movBeh) {
+        this.movBeh = movBeh;
     }
 
     @Override
@@ -37,9 +48,14 @@ public class ProtectingAlienBehavior extends Alien {
         return SpecificType.ProtectingAlien;
     }
 
+    @Override
+    public void move() {
+        movBeh.getNextPosition();
+    }
+
 
     @Override
     public String toString() {
-        return "Protecting Alien at " + super.getPosition() + " with velocity " + super.getVelocity();
+        return "Protecting Alien at " + movBeh.getCurrentPosition() + " with velocity " + movBeh.getCurrentVelocity();
     }
 }

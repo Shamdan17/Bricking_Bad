@@ -6,6 +6,7 @@ import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.AlienFactory;
 import domain.model.brick.BrickFactory;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
@@ -74,10 +75,12 @@ public class Board {
      * EFFECTS: creates new objects using hardcoded values
      */
     private void defaultMovables() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
+            if (i == 0) movables.add(AlienFactory.get(SpecificType.RepairingAlien, new Position(40, 50 * i)));
             if (i % 3 == 2)
-                movables.add(bf.get(SpecificType.WrapperBrick, new Position(100 * i - 100, 300)));
+                movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
         }
+
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
@@ -97,12 +100,12 @@ public class Board {
      */
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
-        if (Math.random() < 0.02) {
-            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
-        if (Math.random() < 0.0005) {
-            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
+//        if (Math.random() < 0.02) {
+//            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
+//        }
+//        if (Math.random() < 0.0005) {
+//            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
+//        }
 //    if(Math.random()<0.01){
 //      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
 //    }
@@ -146,6 +149,7 @@ public class Board {
      * EFFECT: takes objects from the queue, checks if adding them violates any game rule, and if not adds it to list of movables
      */
     private void handleQueue() {
+        System.out.println("Queue size: " + objectQueue.size());
         while (!objectQueue.isEmpty()) {
             MovableShape cur = objectQueue.remove();
             if (cur.getType() == Type.Powerup || cur.getType() == Type.Alien || cur.getType() == Type.Ball) {
@@ -153,10 +157,10 @@ public class Board {
             } else {
                 for (MovableShape ms : movables) {
                     if (collisionRule.isCollided(cur, ms)) {
-                        return;
+                        cur.setDestroyed(true);
                     }
                 }
-                movables.add(cur);
+                if (!cur.isDestroyed()) movables.add(cur);
             }
         }
     }
