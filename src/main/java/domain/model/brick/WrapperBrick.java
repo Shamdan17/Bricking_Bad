@@ -1,31 +1,27 @@
 package domain.model.brick;
 
 import domain.model.SpecificType;
+import domain.model.Type;
+import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
-import utils.Position;
-import utils.Velocity;
 
 public class WrapperBrick extends Brick {
-    // TODO: Implement
-    public WrapperBrick(Position position, int length, int width) {
-        super(new NoMovement(position), length, width);
+    MovableShape ms;
+
+    public WrapperBrick(MovementBehavior movBeh, int length, int width, MovableShape ms) {
+        super(new NoMovement(movBeh.getCurrentPosition()), length, width);
+        ms.setPosition(getCenter().incrementX(-ms.getLength() / 2));
+        this.ms = ms;
     }
 
 
     public void collide(MovableShape obj) {
-        //TODO: Implement
-    }
-
-    @Override
-    public void move() {
-        //TODO: Implement
-    }
-
-    @Override
-    public void setVelocity(Velocity ps) {
-        //TODO: Implement
+        if (obj.getType() == Type.Ball) {
+            super.addToQueue(ms);
+            super.destroy();
+        }
     }
 
     @Override
@@ -39,7 +35,7 @@ public class WrapperBrick extends Brick {
     }
 
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         Brick copyBrick = SerializationUtils.clone(this);
         return copyBrick;
     }

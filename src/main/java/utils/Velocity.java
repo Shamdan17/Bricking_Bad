@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.physics.math.util;
 
 import java.io.Serializable;
@@ -29,13 +30,13 @@ public class Velocity implements Serializable {
     public boolean equals(Velocity o) {
         if (this == o) return true;
         if (o == null) return false;
-        return util.equal(o.getX(),getX()) && util.equal(getY(),o.getY());
+        return util.equal(o.getX(), getX()) && util.equal(getY(), o.getY());
     }
 
     @Override
     public boolean equals(Object o) {
-        if(o == null) return false;
-        if(!(o instanceof Velocity)){
+        if (o == null) return false;
+        if (!(o instanceof Velocity)) {
             return false;
         }
         return equals((Velocity) o);
@@ -44,6 +45,10 @@ public class Velocity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(vx, vy);
+    }
+
+    public Velocity copy() {
+        return SerializationUtils.clone(this);
     }
 
     @Override

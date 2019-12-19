@@ -87,11 +87,11 @@ public abstract class MovableShape implements Serializable {
         this.movBehavior = movBeh;
     }
 
-    protected MovementBehavior getMovementBehavior(){
+    protected MovementBehavior getMovementBehavior() {
         return this.movBehavior;
     }
 
-    public Position stepBack(){
+    public Position stepBack() {
         return movBehavior.stepBack();
     }
 
@@ -153,4 +153,10 @@ public abstract class MovableShape implements Serializable {
 
     public abstract MovableShape copy();
 
+    public boolean repOK() {
+        return this.movBehavior != null &&
+                length >= 0 &&
+                width >= 0 &&
+                queue != null;
+    }
 }

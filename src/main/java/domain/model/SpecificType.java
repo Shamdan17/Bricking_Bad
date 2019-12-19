@@ -12,4 +12,7 @@ public enum SpecificType {
     RepairingAlien,
     DrunkAlien,
     Explosion,
+    Laser,
+    DestructiveLaserGun,
+    GangOfBallsPowerup,
 }

@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Position;
 import utils.Velocity;
 
@@ -9,9 +10,9 @@ public class NoMovement implements MovementBehavior, Serializable {
     Position curpos;
     Velocity curvel;
 
-    public NoMovement(Position initial){
+    public NoMovement(Position initial) {
         curpos = initial;
-        curvel = new Velocity(0,0);
+        curvel = new Velocity(0, 0);
     }
 
     @Override
@@ -47,5 +48,10 @@ public class NoMovement implements MovementBehavior, Serializable {
     @Override
     public void inverse() {
         // Do nothing
+    }
+
+    @Override
+    public MovementBehavior copy() {
+        return SerializationUtils.clone(this);
     }
 }

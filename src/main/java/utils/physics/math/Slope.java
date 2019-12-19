@@ -2,8 +2,6 @@ package utils.physics.math;
 
 import utils.Position;
 
-import java.util.Objects;
-
 public class Slope {
     private double m;
     // If the line is vertical then its slope is undefined, so we use this boolean instead

@@ -2,45 +2,89 @@ package domain.storage;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.Serializable;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestBinaryStorage {
+    String storageName = "test";
 
     @Test
-    void testStoragePut() {
-        human john = new human("john", 32);
+    void testStoragePutGet() {
+        String key = "key";
+        String value = "value";
 
-        BinaryStorage bs = new BinaryStorage("test");
-        bs.put("key", john);
-        assertEquals((human) bs.get("key"), john);
+        BinaryStorage bs = new BinaryStorage(storageName);
+        bs.put(key, value);
+        assertEquals(bs.get(key), value);
     }
+
+    @Test
+    void testDoesContainKey() {
+        String key = "key exists";
+        String value = "definitely";
+
+        BinaryStorage bs = new BinaryStorage(storageName);
+        assertDoesNotThrow(() -> bs.put(key, value));
+        assertTrue(bs.contains(key), "prevously inserted key must be found");
+    }
+
+    @Test
+    void testDoesNotContainKey() {
+        String key = "key does not exist";
+
+        BinaryStorage bs = new BinaryStorage(storageName);
+        assertFalse(bs.contains(key), "un-inserted key must not be found");
+    }
+
+
+    // Assert that methods are guarded against null inputs
+    @Test
+    void testInvalidArgumentPut() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinaryStorage bs = new BinaryStorage(storageName);
+            bs.put(null, null);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinaryStorage bs = new BinaryStorage(storageName);
+            bs.put("key", null);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinaryStorage bs = new BinaryStorage(storageName);
+            bs.put(null, "val");
+        });
+    }
+
+    @Test
+    void testInvalidArgumentGet() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinaryStorage bs = new BinaryStorage(storageName);
+            bs.get(null);
+        });
+    }
+
+    @Test
+    void testInvalidArgumentContains() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinaryStorage bs = new BinaryStorage(storageName);
+            bs.contains(null);
+        });
+    }
+
+    @Test
+    void testInvalidArgumentConstructer() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BinaryStorage(null);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new BinaryStorage(" ");
+        });
+
+        assertDoesNotThrow(() -> {
+            new BinaryStorage("valid-name");
+        });
+    }
+
 }
-
-class human implements Serializable {
-    protected String name;
-    protected int age;
-
-    protected human(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public boolean equals(Object o) {
-
-        // Check if o is an instance of Complex or not
-        // "null instanceof [type]" also returns false
-        if (!(o instanceof human)) {
-            return false;
-        }
-
-        // typecast o to Complex so that we can compare data members
-        human c = (human) o;
-
-        // Compare the data members and return accordingly
-        return name.equals(c.name)
-                && Integer.compare(age, c.age) == 0;
-    }
-}
-

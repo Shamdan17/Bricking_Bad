@@ -8,7 +8,12 @@ import utils.Velocity;
 import utils.physics.math.Rotation;
 import utils.physics.math.Slope;
 import utils.physics.math.Vector;
+import utils.physics.math.util;
 
+
+// Overview: PhysicsEngine is responsible for handling the physics of collisions between objects.
+// it has methods for calculating post collision velocities, slopes, and whether objects are collided
+// or not.
 public final class PhysicsEngine {
 
     final static Logger logger = Logger.getLogger(PhysicsEngine.class);
@@ -81,8 +86,8 @@ public final class PhysicsEngine {
 
         Velocity firstInitialVelocity = obj1.getVelocity();
         Velocity secondInitialVelocity = obj2.getVelocity();
-        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX()-secondInitialVelocity.getX(),
-                                                firstInitialVelocity.getY()-secondInitialVelocity.getY());
+        Velocity relativeVelocity = new Velocity(firstInitialVelocity.getX() - secondInitialVelocity.getX(),
+                firstInitialVelocity.getY() - secondInitialVelocity.getY());
 
         return calculatePostCollisionVelocity(relativeVelocity, collisionWallSlope);
     }
@@ -301,21 +306,21 @@ public final class PhysicsEngine {
         // if the circle center is between the X bounds of the rect
         // This means the circle is either above or below the rectangle
         if (cnt.getX() >= rect.getX() && cnt.getX() <= rect.getX() + len) {
-            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY()-radius);
+            return (rect.getY() <= cnt.getY() + radius) && (rect.getY() + wid >= cnt.getY() - radius);
         }
 
         // if the circle center is between the Y bounds of the rect
         // This means the circle is on either side of the rectangle
         if (cnt.getY() >= rect.getY() && cnt.getY() <= rect.getY() + wid) {
-            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX()-radius);
+            return (rect.getX() <= cnt.getX() + radius) && (rect.getX() + len >= cnt.getX() - radius);
         }
 
         // Otherwise, check if the distance between the circle and the corners of the rectangle is less than r
         boolean result =
-                getDistance(cnt, rect) <= radius //top left
-                        || getDistance(cnt, rect.incrementX(len)) <= radius //top right
-                        || getDistance(cnt, rect.incrementY(wid)) <= radius //bottom left
-                        || getDistance(cnt, rect.incrementX(len).incrementY(wid)) <= radius; //bottom right
+                util.getDistance(cnt, rect) <= radius //top left
+                        || util.getDistance(cnt, rect.incrementX(len)) <= radius //top right
+                        || util.getDistance(cnt, rect.incrementY(wid)) <= radius //bottom left
+                        || util.getDistance(cnt, rect.incrementX(len).incrementY(wid)) <= radius; //bottom right
 
         return result;
 
@@ -328,7 +333,7 @@ public final class PhysicsEngine {
         int radius1 = getRadius(obj1);
         int radius2 = getRadius(obj2);
 
-        return getDistance(cnt1, cnt2) < (radius1 + radius2);
+        return util.getDistance(cnt1, cnt2) < (radius1 + radius2);
     }
 
 
@@ -365,7 +370,7 @@ public final class PhysicsEngine {
     /**
      * Requires: valid non-null movable shapes
      * Effects: returns the relative X direction of obj1 with respect to obj2
-     * if function returns Left, then that means that obj1 is to the left of (x1<x2) of obj2
+     * if function returns Left, then that means that obj1 is to the left of (x1 is less than x2) of obj2
      * objects are compared relative to their centers
      *
      * @param obj1
@@ -383,10 +388,6 @@ public final class PhysicsEngine {
         }
     }
 
-    // Helper functions
-    private double getDistance(Position pt1, Position pt2) {
-        return Math.sqrt(Math.pow(pt2.getX() - pt1.getX(), 2) + Math.pow(pt2.getY() - pt1.getY(), 2));
-    }
 
     // Since circles have their length and width as their diameters, this returns the radius
     private int getRadius(MovableShape obj) {

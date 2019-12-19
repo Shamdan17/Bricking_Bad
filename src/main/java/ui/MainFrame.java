@@ -2,7 +2,6 @@ package ui;
 
 
 import domain.BrickingBad;
-import utils.Position;
 
 import javax.swing.*;
 import java.awt.*;
@@ -130,6 +129,10 @@ class MKeyListener extends KeyAdapter {
 
         if (event.getKeyCode() == KeyEvent.VK_D) {
             bb.rotatePaddleRight();
+        }
+
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            bb.shootLaser();
         }
     }
 }

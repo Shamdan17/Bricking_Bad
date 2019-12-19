@@ -2,9 +2,9 @@ package ui;
 
 import java.awt.*;
 
-public class DummyDrawable implements Drawable{
+public class DummyDrawable implements Drawable {
 
-    public DummyDrawable(){
+    public DummyDrawable() {
 
     }
 

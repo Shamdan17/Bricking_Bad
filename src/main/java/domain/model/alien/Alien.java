@@ -4,7 +4,7 @@ import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
-import utils.Position;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Velocity;
 
 //TODO: Implement
@@ -32,8 +32,7 @@ public abstract class Alien extends MovableShape {
 
     @Override
     public MovableShape copy(){
-        Alien copyAlien = AlienFactory.get(this.getSpecificType(),this.getPosition());
-        return copyAlien;
+        return SerializationUtils.clone(this);
     }
 
     @Override

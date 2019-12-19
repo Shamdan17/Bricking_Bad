@@ -7,7 +7,7 @@ import utils.Constants;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
 
-public class DefaultCollisionRule implements CollisionRule{
+public class DefaultCollisionRule implements CollisionRule {
 
     private static PhysicsEngine physics = PhysicsEngine.getInstance();
     private static final Logger logger = Logger.getLogger(DefaultCollisionRule.class);
@@ -32,9 +32,9 @@ public class DefaultCollisionRule implements CollisionRule{
             obj2.collide(obj1);
 
             int cnt = 0;
-            while(physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)){
-                if(obj2.getType() == Type.Paddle && obj1.getVelocity().getY()<0
-                        ||obj1.getType() == Type.Paddle && obj2.getVelocity().getY()<0) break;
+            while (physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)) {
+                if (obj2.getType() == Type.Paddle && obj1.getVelocity().getY() < 0
+                        || obj1.getType() == Type.Paddle && obj2.getVelocity().getY() < 0) break;
                 obj1.stepBack();
                 obj2.stepBack();
             }
@@ -43,5 +43,9 @@ public class DefaultCollisionRule implements CollisionRule{
             obj1.setVelocity(v1);
             obj2.setVelocity(v2);
         }
+    }
+
+    public boolean isCollided(MovableShape obj1, MovableShape obj2) {
+        return physics.isCollided(obj1, obj2);
     }
 }

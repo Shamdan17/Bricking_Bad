@@ -9,10 +9,14 @@ import utils.Constants;
 import utils.Position;
 import utils.physics.math.util;
 
+import static utils.Constants.explosion_radius_factor;
+
 // An explosion is a collidable object that results when a minebrick explodes
 public class Explosion extends MovableShape {
-    public Explosion(Position pos){
-        super(new NoMovement(pos), util.round(2* Constants.L),util.round(2* Constants.L));
+    public Explosion(Position center) {
+        super(new NoMovement(center.incrementX(-util.round((explosion_radius_factor / 2) * Constants.L)).incrementY(-util.round((explosion_radius_factor / 2) * Constants.L))),
+                util.round(explosion_radius_factor * Constants.L),
+                util.round(explosion_radius_factor * Constants.L));
         // Mark as destroyed in order for it to be removed next iteration
         super.destroy();
     }
@@ -39,7 +43,7 @@ public class Explosion extends MovableShape {
 
     @Override
     public String toString() {
-        return "Explosion at "+getPosition();
+        return "Explosion at " + getPosition();
     }
 
     @Override

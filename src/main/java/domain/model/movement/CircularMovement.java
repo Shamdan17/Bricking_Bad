@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -13,17 +14,17 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     private PolarPoint position;
     private double dTheta;
-    private Velocity defaultVelocityVector = new Velocity(0,0);
+    private Velocity defaultVelocityVector = new Velocity(0, 0);
 
 
-    public CircularMovement(Position pos, double radius){
+    public CircularMovement(Position pos, double radius) {
         position = new PolarPoint(pos, radius, 0);
         // Calculate dTheta
-        dTheta = Constants.Brick_Velocity ;//* 360;
+        dTheta = Constants.Brick_Velocity;//* 360;
         //defaultVelocityVector = new Velocity(0, Constants.Brick_Velocity/(2*Math.PI));
     }
 
-    public CircularMovement(Position pos, double radius, double initAngle){
+    public CircularMovement(Position pos, double radius, double initAngle) {
         position = new PolarPoint(pos, radius, initAngle);
         // Calculate dTheta
         dTheta = Constants.Brick_Velocity;//* 360;
@@ -47,7 +48,7 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     @Override
     public Position stepBack() {
-        position.rotate(dTheta/Math.PI);
+        position.rotate(dTheta / Math.PI);
         return position.getPosition();
     }
 
@@ -65,7 +66,13 @@ public class CircularMovement implements MovementBehavior, Serializable {
         this.position.setOrigin(newOrigin);
     }
 
-    public void inverse(){
-        this.dTheta*=-1;
+    public void inverse() {
+        this.dTheta *= -1;
+    }
+
+
+    @Override
+    public MovementBehavior copy() {
+        return SerializationUtils.clone(this);
     }
 }

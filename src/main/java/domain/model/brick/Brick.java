@@ -6,8 +6,6 @@ import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
 import utils.Velocity;
 
-import java.io.Serializable;
-
 public abstract class Brick extends MovableShape {
     public Shape getShape() {
         return Shape.Rectangle;
@@ -24,6 +22,7 @@ public abstract class Brick extends MovableShape {
     /**
      * Crucial information for copy:
      * - position
+     *
      * @return a copy of current brick
      */
 
@@ -44,7 +43,16 @@ public abstract class Brick extends MovableShape {
     }
 
     @Override
-    public void setVelocity(Velocity v){
+    public void setVelocity(Velocity v) {
         super.getMovementBehavior().inverse();
+    }
+
+    public boolean repOk() {
+        if (getType() != Type.Brick)
+            return false;
+        if (getLength() <= 0 || getWidth() <= 0 || getAngle() != 0)
+            return false;
+
+        return true;
     }
 }

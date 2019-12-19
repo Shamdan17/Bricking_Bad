@@ -2,7 +2,6 @@ package ui;
 
 import domain.BrickingBad;
 import domain.mapbuild.MapBuildData;
-import domain.model.Type;
 import domain.model.shape.MovableShape;
 import ui.bricks.HalfMetalBrick;
 import ui.bricks.MineBrick;
@@ -55,17 +54,18 @@ public class MapBuildPanel extends JPanel implements Runnable, ActionListener {
             d.draw(g);
         }
     }
+
     // TODO: this code fragment is repeated, define a brick factory to shortcut it.
     public Drawable getDrawable(MovableShape ms) {
-        switch(ms.getSpecificType()){
+        switch (ms.getSpecificType()) {
             case SimpleBrick:
-                return new SimpleBrick(ms,brickingBad);
+                return new SimpleBrick(ms, brickingBad);
             case MineBrick:
-                return new MineBrick(ms,brickingBad);
+                return new MineBrick(ms, brickingBad);
             case HalfMetalBrick:
-                return new HalfMetalBrick(ms,brickingBad);
+                return new HalfMetalBrick(ms, brickingBad);
             case WrapperBrick:
-                return new WrapperBrick(ms,brickingBad);
+                return new WrapperBrick(ms, brickingBad);
             default:
                 throw new IllegalArgumentException("provided type not supported");
         }

@@ -4,21 +4,15 @@ public class Account {
     private String username;
     private String password;
     /*
-    TODO: More fields here. For example: Saved maps of the user
+     * TODO: More fields here. For example: Saved maps of the user
      */
 
     /*
-    Constants
+     * Constants
      */
-    // Valid Password constants
-    // min password size
+
+    // minimum password size
     private static final int minSize = 8;
-    // does the password need to have at least 1 char
-    private static final boolean mustChar = true;
-    // does the password need to have at least 1 digit
-    private static final boolean mustNum = true;
-    // does the password need to have at least 1 special char
-    private static final boolean mustSpecialChar = false;
 
     public Account(String username, String password) {
         this.username = username;
@@ -34,29 +28,10 @@ public class Account {
     }
 
     private static boolean isValidPassword(String password) {
-        int specialChars = 0, chars = 0, digits = 0;
-        for (int i = 0; i < password.length(); i++) {
-            char cur = password.charAt(i);
-            if (Character.isDigit(cur)) {
-                digits++;
-            } else if (Character.isAlphabetic(cur)) {
-                chars++;
-            } else {
-                specialChars++;
-            }
-        }
-        // character count check
-        if (mustChar && !(chars > 0)) {
+        if (password.length() < minSize) {
             return false;
         }
-        // digit count check
-        if (mustNum && !(digits > 0)) {
-            return false;
-        }
-        // special character count check
-        if (mustSpecialChar && !(specialChars > 0)) {
-            return false;
-        }
+
         return true;
     }
 
@@ -79,6 +54,8 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean repOK() {
+        return username != null && password != null && isValid(username, password);
+    }
 }
-
-
