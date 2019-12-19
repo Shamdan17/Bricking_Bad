@@ -133,22 +133,18 @@ class MKeyListener extends KeyAdapter {
             bb.rotatePaddleRight();
         }
 
-        if (pressed.contains(KeyEvent.VK_D) && pressed.contains(KeyEvent.VK_RIGHT)) {
-            bb.movePaddleRight();
+        if (pressed.contains(KeyEvent.VK_RIGHT)) {
             bb.rotatePaddleRight();
         }
 
-        if (pressed.contains(KeyEvent.VK_A) && pressed.contains(KeyEvent.VK_RIGHT)) {
-            bb.movePaddleRight();
+        if (pressed.contains(KeyEvent.VK_RIGHT)) {
             bb.rotatePaddleLeft();
         }
-        if (pressed.contains(KeyEvent.VK_D) && pressed.contains(KeyEvent.VK_LEFT)) {
-            bb.movePaddleLeft();
+        if (pressed.contains(KeyEvent.VK_LEFT)) {
             bb.rotatePaddleRight();
         }
 
-        if (pressed.contains(KeyEvent.VK_A) && pressed.contains(KeyEvent.VK_LEFT)) {
-            bb.movePaddleLeft();
+        if (pressed.contains(KeyEvent.VK_LEFT)) {
             bb.rotatePaddleLeft();
         }
 
