@@ -20,6 +20,8 @@ public class DrawableFactory {
                 return new WrapperBrick(ms,brickingBad);
             case Ball:
                 return new Ball(ms);
+            case Laser:
+                return new Laser(ms);
             default:
                 throw new IllegalArgumentException("Not supported type provided");
         }

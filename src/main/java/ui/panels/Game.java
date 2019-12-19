@@ -77,11 +77,8 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
     Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
-    Ball ball = new Ball(gameData.getBall());
     List<MovableShape> drawables = gameData.getMovables();
     paddle.draw(g);
-    ball.draw(g);
-
     for (MovableShape ms : drawables) {
       Drawable d = getDrawable(ms);
       d.draw(g);
