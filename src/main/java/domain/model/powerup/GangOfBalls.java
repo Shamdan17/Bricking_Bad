@@ -7,6 +7,7 @@ import domain.model.Type;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
+import org.apache.log4j.Logger;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -19,6 +20,8 @@ import static utils.Constants.PowerupSize;
 import static utils.Constants.gangofballs_multiplier;
 
 public class GangOfBalls extends PowerUp {
+
+    final static Logger logger = Logger.getLogger(GangOfBalls.class);
 
     public GangOfBalls(MovementBehavior movBeh) {
         super(movBeh, PowerupSize, PowerupSize);
@@ -49,6 +52,7 @@ public class GangOfBalls extends PowerUp {
                 Ball newBall = new Ball(new LinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_DIAMETER / 2);
                 super.addToQueue(newBall);
             }
+            logger.debug("Gang of Balls power-up is activated with multiplier: " + gangofballs_multiplier);
             return true;
         }
         return false;
@@ -58,6 +62,7 @@ public class GangOfBalls extends PowerUp {
     public void collide(MovableShape obj) {
         if (obj.getType() == Type.Ball) {
             super.destroy();
+            logger.debug("Gang of Balls power-up is caught");
         }
     }
 
