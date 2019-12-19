@@ -14,13 +14,13 @@ public class NoCollisionRule implements CollisionRule {
     }
 
     private boolean ruleAppliesHelper(MovableShape obj1, MovableShape obj2) {
-        // Powerup can only collide with the paddle
-        if (obj1.getType() == Type.Powerup && obj2.getType() != Type.Paddle) {
+        // Balls do not collide with one another
+        if (obj1.getType() == Type.Ball && obj2.getType() == Type.Ball) {
             return true;
         }
 
-        // Balls do not collide with one another
-        if (obj1.getType() == Type.Ball && obj2.getType() == Type.Ball) {
+        // Powerup can only collide with the paddle
+        if (obj1.getType() == Type.Powerup && obj2.getType() != Type.Paddle) {
             return true;
         }
 
@@ -35,5 +35,9 @@ public class NoCollisionRule implements CollisionRule {
     @Override
     public void collide(MovableShape obj1, MovableShape obj2) {
         // do nothing
+    }
+
+    public boolean isCollided(MovableShape obj1, MovableShape obj2) {
+        return false;
     }
 }

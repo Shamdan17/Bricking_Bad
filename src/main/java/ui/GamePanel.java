@@ -68,10 +68,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
     Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
-    Ball ball = new Ball(gameData.getBall());
     List<MovableShape> drawables = gameData.getMovables();
-    paddle.draw(g);
-    ball.draw(g);
 
     for (MovableShape ms : drawables) {
       Drawable d = getDrawable(ms);
@@ -81,6 +78,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
   public Drawable getDrawable(MovableShape ms) {
     switch (ms.getSpecificType()) {
+        case Paddle:
+            return new Paddle(ms, brickingBad);
+        case Ball:
+            return new Ball(ms);
+      case Laser:
+        return new SimpleBrick(ms, brickingBad);
       case SimpleBrick:
         return new SimpleBrick(ms, brickingBad);
             case MineBrick:
@@ -90,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             case WrapperBrick:
               return new WrapperBrick(ms, brickingBad);
       default:
-        return new DummyDrawable();
+          return new SimpleBrick(ms, brickingBad);
     }
 
   }

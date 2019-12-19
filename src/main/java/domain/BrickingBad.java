@@ -127,6 +127,10 @@ public class BrickingBad {
         gameSession.rotatePaddleLeft();
     }
 
+    public void shootLaser() {
+        gameSession.shootLaser();
+    }
+
     /**
      * remove a brick from building mode
      *

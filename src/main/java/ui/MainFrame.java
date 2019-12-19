@@ -133,6 +133,9 @@ class MKeyListener extends KeyAdapter {
             bb.rotatePaddleRight();
         }
 
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            bb.shootLaser();
+        }
     }
 
     @Override
