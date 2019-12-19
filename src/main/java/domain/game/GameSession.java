@@ -74,6 +74,13 @@ public class GameSession {
     }
 
     /**
+     * shoots a laser from the paddle
+     */
+    public void shootLaser() {
+        board.shootLaser();
+    }
+
+    /**
      * saves current game
      */
     public void save() {

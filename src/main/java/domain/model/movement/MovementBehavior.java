@@ -27,4 +27,7 @@ public interface MovementBehavior {
 
     // reverse inverses the path of the object
     public void inverse();
+
+    // copy returns a copy of the movement behavior
+    public MovementBehavior copy();
 }

@@ -1,5 +1,6 @@
 package domain.model.movement;
 
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -67,5 +68,11 @@ public class CircularMovement implements MovementBehavior, Serializable {
 
     public void inverse() {
         this.dTheta *= -1;
+    }
+
+
+    @Override
+    public MovementBehavior copy() {
+        return SerializationUtils.clone(this);
     }
 }

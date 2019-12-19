@@ -51,7 +51,7 @@ public class MapTest {
     }
 
     @Test
-    void movableShapeShouldNotBeAddedIfThereIsNoCollision() {
+    void movableShapeShouldNotBeAddedIfThereIsCollision() {
         map.add(brickFactory.get(SimpleBrick, new Position(10, 10)), new Position(10, 10));
         assertEquals(1, map.getMovables().size());
         assertFalse(map.add(brickFactory.get(SimpleBrick, new Position(11, 11)), new Position(11, 11)));

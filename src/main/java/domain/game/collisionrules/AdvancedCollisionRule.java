@@ -48,5 +48,7 @@ public class AdvancedCollisionRule implements CollisionRule {
         }
     }
 
-
+    public boolean isCollided(MovableShape obj1, MovableShape obj2) {
+        return physics.isCollided(obj1, obj2);
+    }
 }
