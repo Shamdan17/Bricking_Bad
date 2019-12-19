@@ -2,7 +2,6 @@ package ui;
 
 import domain.BrickingBad;
 import domain.game.GameData;
-import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
 import ui.bricks.HalfMetalBrick;
 import ui.bricks.MineBrick;
@@ -70,11 +69,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     GameData gameData = brickingBad.getGameData();
     Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
     List<MovableShape> drawables = gameData.getMovables();
-    for (MovableShape m : drawables) {
-      if (m.getSpecificType() == SpecificType.Laser) {
-        System.out.println();
-      }
-    }
 
     for (MovableShape ms : drawables) {
       Drawable d = getDrawable(ms);

@@ -12,12 +12,22 @@ import utils.physics.math.util;
 public class Laser extends MovableShape {
 
     private Position initialSource;
+    // How many ticks until self destruction
+    private int ticksLeft;
 
     public Laser(Position source) {
         // Make the length of the laser extend from the top of the screen to the source
         super(new NoMovement(new Position(source.getX(), 0)), 5, util.round(source.getY()));
         initialSource = source;
-        super.destroy();
+        this.ticksLeft = 4;
+    }
+
+    @Override
+    public void move() {
+        this.ticksLeft--;
+        if (this.ticksLeft <= 0) {
+            super.destroy();
+        }
     }
 
     @Override
