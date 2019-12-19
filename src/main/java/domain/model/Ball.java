@@ -47,6 +47,10 @@ public class Ball extends Circle {
         Position newPos = oldPos.incrementX(getVelocity().getX()).incrementY(getVelocity().getY());
         ensureBallIsInBounds();
         setPosition(newPos);
+        //Ensure ball is in bounds
+        if (getPosition().getY() > Constants.maxY) {
+            destroy();
+        }
     }
 
     //TODO: Move this out of ball

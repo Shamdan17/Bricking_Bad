@@ -83,8 +83,12 @@ public class Paddle extends Rectangle {
     }
 
     public void shootLaser() {
-        Laser leftLaser = new Laser(getPosition());
-        Laser rightLaser = new Laser(getPosition().incrementX(getLength() - leftLaser.getLength()));
+        if (laser_count <= 0) return;
+        laser_count--;
+        Position lpos = getPosition().incrementY(5);
+        Laser leftLaser = new Laser(lpos);
+        Position rpos = Rotation.rotate(lpos, lpos.incrementX(getLength() - leftLaser.getLength()), -getAngle());
+        Laser rightLaser = new Laser(rpos);
         super.addToQueue(leftLaser);
         super.addToQueue(rightLaser);
     }

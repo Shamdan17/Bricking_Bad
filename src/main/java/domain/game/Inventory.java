@@ -25,8 +25,10 @@ public class Inventory {
 
     // Activates one powerup of the given specific type
     public void activatePowerup(SpecificType type) {
-        for (PowerUp p : powerUps) {
+        for (int i = 0; i < powerUps.size(); i++) {
+            PowerUp p = powerUps.get(i);
             if (p.activate(type, board)) {
+                powerUps.remove(i);
                 return;
             }
         }
