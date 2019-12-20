@@ -4,10 +4,7 @@ import domain.BrickingBad;
 import domain.game.GameData;
 import domain.model.shape.MovableShape;
 import ui.MKeyListener;
-import ui.drawables.Ball;
-import ui.drawables.Drawable;
-import ui.drawables.DummyDrawable;
-import ui.drawables.Paddle;
+import ui.drawables.*;
 import ui.drawables.bricks.HalfMetalBrick;
 import ui.drawables.bricks.MineBrick;
 import ui.drawables.bricks.SimpleBrick;
@@ -76,27 +73,10 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
-    Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
     List<MovableShape> drawables = gameData.getMovables();
-    paddle.draw(g);
     for (MovableShape ms : drawables) {
-      Drawable d = getDrawable(ms);
+      Drawable d = DrawableFactory.get(ms,brickingBad);
       d.draw(g);
-    }
-  }
-
-  public Drawable getDrawable(MovableShape ms) {
-    switch (ms.getSpecificType()) {
-      case SimpleBrick:
-        return new SimpleBrick(ms, brickingBad);
-      case MineBrick:
-        return new MineBrick(ms, brickingBad);
-      case HalfMetalBrick:
-        return new HalfMetalBrick(ms, brickingBad);
-      case WrapperBrick:
-        return new WrapperBrick(ms, brickingBad);
-      default:
-        return new DummyDrawable();
     }
   }
 

@@ -31,7 +31,6 @@ public class Board {
     private Paddle paddle;
     private Ball ball;
     private Queue<MovableShape> objectQueue = new LinkedList<>();
-    private BrickFactory bf = new BrickFactory(objectQueue);
     private PhysicsEngine ps = PhysicsEngine.getInstance();
     private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
     private Inventory inventory;
@@ -47,11 +46,13 @@ public class Board {
         if (data == null) {
             throw new IllegalArgumentException();
         }
-        paddle = data.getPaddle();
         movables = data.getMovables();
+        for(MovableShape ms : movables)
+            if(ms.getType() == Type.Paddle){
+                paddle = (Paddle)ms.copy();
+                break;
+            }
         inventory = new Inventory(this);
-        movables.add(ball);
-        movables.add(paddle);
         bindMovables();
     }
 
@@ -60,6 +61,7 @@ public class Board {
             throw new IllegalArgumentException();
         }
         movables = data.getMovables();
+        inventory = new Inventory(this);
         paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
         ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
@@ -78,36 +80,7 @@ public class Board {
     public Board() throws IllegalArgumentException {
         movables = new ArrayList<>();
         inventory = new Inventory(this);
-        defaultMovables();
         bindMovables();
-    }
-
-    /**
-     * OVERVIEW: Adds default data to board
-     * MODIFIES: ball, paddle, movables
-     * EFFECTS: creates new objects using hardcoded values
-     */
-    private void defaultMovables() {
-        for (int i = 0; i < 10; i++) {
-            if (i % 3 == 2)
-                movables.add(bf.get(SpecificType.WrapperBrick, new Position(100 * i - 100, 300)));
-        }
-        // TODO: remove constants from here
-        ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
-        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
-        paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
-
-        // TODO: ball and paddle are added to movables for now for sake of collision checking
-        movables.add(ball);
-        movables.add(paddle);
-
-        for (int i = 0; i < 10; i += 4) {
-            for (int j = 3; j < 6; j += 10) {
-                Position curpos = new Position(80 * i + 20, 40 * j + 10);
-                if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
-                else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
-            }
-        }
     }
 
     /**
@@ -118,16 +91,6 @@ public class Board {
      * result of previous steps
      */
     public void animate() {
-        // advance all movables one step and check collisions and remove collided ones
-        if (Math.random() < 0.02) {
-            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
-        if (Math.random() < 0.0005) {
-            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
-//    if(Math.random()<0.01){
-//      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
-//    }
         moveAllMovables();
         checkCollisions();
         removeDestroyedMovables();
@@ -158,7 +121,7 @@ public class Board {
             }
         }
         if (numBalls == 0) {
-            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.RADIUS));
+            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_RADIUS));
         }
     }
 
@@ -232,18 +195,13 @@ public class Board {
             MovableShape ms = movables.get(i);
             if (ms.isDestroyed()) {
                 if (ms.getType() == Type.Powerup) {
+                    ms.setQueue(objectQueue);
                     inventory.addPowerup((PowerUp) ms);
                 }
                 movables.remove(ms);
                 i--;
             }
         }
-//        movables.removeIf(
-//                movableShape -> {
-//                    if (movableShape.isDestroyed()) logger.debug(movableShape + " is destroyed.");
-//                    return movableShape.isDestroyed();
-//                });
-        // logger.debug("# of remaining movables: " + movables.size());
     }
 
     /**
@@ -299,12 +257,11 @@ public class Board {
      * @return a GameData instance containing copies of movables in this board
      */
     public GameData getData() {
-        Paddle p = (Paddle) paddle.copy();
         List<MovableShape> movableList = new ArrayList<>();
         for (MovableShape ms : movables) {
             movableList.add(ms.copy());
         }
-        return new GameData(p, movableList);
+        return new GameData(movableList);
     }
 
     public boolean repOK() {

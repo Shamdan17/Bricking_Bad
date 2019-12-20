@@ -52,8 +52,8 @@ public class BrickingBad {
         return mapBuildSession.getData();
     }
 
-    public boolean buildMap(int simple,int halfmetal,int mine,int wrapper){
-        return mapBuildSession.buildMap(simple,halfmetal,mine,wrapper);
+    public boolean buildMap(int simple,int halfMetal,int mine,int wrapper){
+        return mapBuildSession.buildMap(simple,halfMetal,mine,wrapper);
     }
 
     public void initializeMapBuild(){

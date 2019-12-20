@@ -18,7 +18,7 @@ public class Laser implements Drawable {
     int y = (int) Math.round(ms.getPosition().getY());
     int length = ms.getLength();
     int width = ms.getWidth();
-    g.setColor(Color.black);
+    g.setColor(Color.PINK);
     g.fillRect(x, y, length, width);
     g.drawRect(x, y, length, width);
   }

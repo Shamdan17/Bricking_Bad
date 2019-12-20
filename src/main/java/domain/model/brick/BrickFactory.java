@@ -14,6 +14,7 @@ import utils.Velocity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class BrickFactory {
@@ -25,6 +26,7 @@ public class BrickFactory {
 
     public BrickFactory() {
         WrapperBrickItems = defaultItems();
+        this.movQueue = new LinkedList<>();
     }
 
     private ArrayList<MovableShape> defaultItems() {
@@ -63,12 +65,9 @@ public class BrickFactory {
                 result = new HalfMetalBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case WrapperBrick:
-                result = new WrapperBrick(pos, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
-                break;
-            case WrapperBrick:
                 MovableShape containedObject = getNextWrapperBrickItem(pos);
                 containedObject.setQueue(movQueue);
-                result = new WrapperBrick(movBeh, Constants.LENGTH, Constants.WIDTH, containedObject);
+                result = new WrapperBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH, containedObject);
                 break;
             default:
                 throw new IllegalArgumentException("not brick type supplied");

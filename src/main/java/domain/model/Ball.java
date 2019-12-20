@@ -48,7 +48,7 @@ public class Ball extends Circle {
         ensureBallIsInBounds();
         setPosition(newPos);
         //Ensure ball is in bounds
-        if (getPosition().getY() > Constants.maxY) {
+        if (getPosition().getY() > Constants.FRAME_HEIGHT) {
             destroy();
         }
     }

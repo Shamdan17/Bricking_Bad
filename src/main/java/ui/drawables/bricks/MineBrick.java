@@ -20,6 +20,7 @@ public class MineBrick extends Brick {
     isDragged = false;
   }
 
+  @Override
   public void draw(Graphics g) {
     g.setColor(Color.BLUE);
     g.fillOval(

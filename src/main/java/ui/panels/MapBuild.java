@@ -4,8 +4,8 @@ import domain.BrickingBad;
 import domain.mapbuild.MapBuildData;
 import domain.model.shape.MovableShape;
 import ui.drawables.Drawable;
+import ui.drawables.DrawableFactory;
 import ui.drawables.bricks.Brick;
-import ui.drawables.bricks.BrickFactory;
 import ui.load.MapLoadPage;
 import ui.save.MapSavePage;
 import utils.Constants;
@@ -47,6 +47,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   private JLabel mineBrickLabel;
   private JLabel wrapperBrickLabel;
   private NumberFormat numberFormat;
+
 
   public MapBuild(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.drawables = new HashMap<>();
@@ -140,6 +141,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
     Map<UUID, MovableShape> IDMap = mapBuildData.getMovablesIDMap();
     List<MovableShape> movables = mapBuildData.getMovables();
     List<UUID> removables = new ArrayList<>();
+
     for (UUID ID : drawables.keySet()) {
       if (!IDMap.containsKey(ID)) removables.add(ID);
     }
@@ -155,7 +157,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
         this.addMouseMotionListener(d);
         d.draw(g);
       } else {
-        Drawable d = BrickFactory.getDrawable(ms, brickingBad);
+        Drawable d = DrawableFactory.get(ms, brickingBad);
         drawables.put(ms.getID(), d);
         d.draw(g);
         this.addMouseListener((Brick) d);
