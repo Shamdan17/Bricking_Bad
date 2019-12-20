@@ -6,14 +6,20 @@ import java.awt.*;
 
 public class Laser implements Drawable {
 
-    MovableShape ms;
+  MovableShape ms;
 
-    public Laser(MovableShape ms){
-        this.ms = ms;
-    }
+  public Laser(MovableShape ms) {
+    this.ms = ms;
+  }
 
-    @Override
-    public void draw(Graphics g) {
-
-    }
+  @Override
+  public void draw(Graphics g) {
+    int x = (int) Math.round(ms.getPosition().getX());
+    int y = (int) Math.round(ms.getPosition().getY());
+    int length = ms.getLength();
+    int width = ms.getWidth();
+    g.setColor(Color.black);
+    g.fillRect(x, y, length, width);
+    g.drawRect(x, y, length, width);
+  }
 }
