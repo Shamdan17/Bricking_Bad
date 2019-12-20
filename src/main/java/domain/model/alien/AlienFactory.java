@@ -1,6 +1,10 @@
 package domain.model.alien;
 
 import domain.model.SpecificType;
+import domain.model.alien.behavior.AlienBehavior;
+import domain.model.alien.behavior.CooperativeAlienBehavior;
+import domain.model.alien.behavior.ProtectingAlienBehavior;
+import domain.model.alien.behavior.RepairingAlienBehavior;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import utils.Constants;
@@ -25,7 +29,10 @@ public class AlienFactory {
                 beh = new RepairingAlienBehavior(pos);
                 res = new Alien(beh, Constants.LENGTH, Constants.LENGTH);
                 return res;
-                //return new RepairingAlienBehavior(movBeh, Constants.LENGTH, Constants.WIDTH);
+            case CooperativeAlien:
+                beh = new CooperativeAlienBehavior(pos);
+                res = new Alien(beh, Constants.LENGTH, Constants.LENGTH);
+                return res;
             default:
                 throw new IllegalArgumentException("not alien type supplied");
         }

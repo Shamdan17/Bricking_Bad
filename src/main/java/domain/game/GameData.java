@@ -1,6 +1,7 @@
 package domain.game;
 
 import domain.model.Paddle;
+import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
 
 import java.io.Serializable;
@@ -11,10 +12,8 @@ public class GameData implements Serializable {
 
     // This class wraps all information that can be saved or sent to UI
     private final List<MovableShape> movables;
-    private final Paddle paddle;
 
-    public GameData(Paddle p, List<MovableShape> ms) {
-        this.paddle = p;
+    public GameData(List<MovableShape> ms) {
         this.movables = ms;
     }
 
@@ -25,7 +24,12 @@ public class GameData implements Serializable {
     }
 
     public Paddle getPaddle() {
-        return (Paddle) paddle.copy();
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Paddle) {
+                return (Paddle) ms;
+            }
+        }
+        return null;
     }
 
     public boolean equals(GameData data) {
@@ -34,6 +38,6 @@ public class GameData implements Serializable {
         for (int i = 0; i < movables.size(); ++i)
             if (!movables.get(i).equals(data.getMovables().get(i)))
                 return false;
-        return paddle.equals(data.getPaddle());
+        return true;
     }
 }

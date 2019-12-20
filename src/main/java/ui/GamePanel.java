@@ -95,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         case RepairingAlien:
           return new SimpleBrick(ms, brickingBad);
           default:
-              return new DummyDrawable();
+              return new SimpleBrick(ms, brickingBad);
       }
 
   }

@@ -2,6 +2,7 @@ package domain.model.alien;
 
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.behavior.AlienBehavior;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
@@ -25,7 +26,7 @@ public class Alien extends MovableShape {
 
     @Override
     public void setVelocity(Velocity v){
-        super.getMovementBehavior().inverse();
+        getMovementBehavior().inverse();
     }
 
 

@@ -38,8 +38,8 @@ public class Paddle implements Drawable {
                 py - util.round(width * sina) - util.round(length * cosa),
                 py - util.round(length * cosa)
         };
-        g.fillPolygon(x, y, 4);
         g.setColor(Color.GRAY);
+        g.fillPolygon(x, y, 4);
         g.drawPolygon(x, y, 4);
     }
 

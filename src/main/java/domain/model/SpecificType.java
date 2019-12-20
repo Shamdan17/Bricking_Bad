@@ -15,4 +15,5 @@ public enum SpecificType {
     Laser,
     DestructiveLaserGun,
     GangOfBallsPowerup,
+    AlienBeam,
 }

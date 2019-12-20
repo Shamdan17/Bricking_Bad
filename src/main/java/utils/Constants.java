@@ -34,7 +34,7 @@ public final class Constants {
     public static final int STEP_BACK_THRESHOLD = 5;
 
     // Aliens
-    public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000);
+    public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000.0);
     public static final long Repairing_Alien_Brick_Period = 5000; // in milliseconds
 
 

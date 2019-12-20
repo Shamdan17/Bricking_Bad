@@ -1,4 +1,4 @@
-package domain.model.alien;
+package domain.model.alien.behavior;
 
 //public class DrunkAlienBehavior implements AlienBehavior{
 

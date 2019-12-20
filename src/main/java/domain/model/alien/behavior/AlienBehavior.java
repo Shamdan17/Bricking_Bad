@@ -1,6 +1,7 @@
-package domain.model.alien;
+package domain.model.alien.behavior;
 
 import domain.model.SpecificType;
+import domain.model.alien.Alien;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 
