@@ -12,6 +12,10 @@ import utils.Velocity;
 
 public class Ball extends Circle {
 
+    private SpecificType curType = SpecificType.Ball;
+
+    private boolean hitPaddle;
+
     public Ball(Position pos, int radius) {
         super(new LinearMovement(pos, Constants.defaultRespawnVelocity), radius);
     }
@@ -72,7 +76,7 @@ public class Ball extends Circle {
 
     @Override
     public SpecificType getSpecificType() {
-        return SpecificType.Ball;
+        return curType;
     }
 
     @Override
