@@ -133,8 +133,24 @@ class MKeyListener extends KeyAdapter {
             bb.rotatePaddleRight();
         }
 
-        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (pressed.contains(KeyEvent.VK_T)) {
+            bb.activateTallerPaddle();
+        }
+
+        if (pressed.contains(KeyEvent.VK_M)) {
+            bb.activateMagnet();
+        }
+
+        if (pressed.contains(KeyEvent.VK_W)) {
+            bb.throwBall();
+        }
+
+        if (pressed.contains(KeyEvent.VK_SPACE)) {
             bb.shootLaser();
+        }
+
+        if (pressed.contains(KeyEvent.VK_C)) {
+            bb.activateChemicalBall();
         }
     }
 
@@ -142,7 +158,6 @@ class MKeyListener extends KeyAdapter {
     public synchronized void keyReleased(KeyEvent e) {
         pressed.remove(e.getKeyCode());
     }
-
 
 }
 

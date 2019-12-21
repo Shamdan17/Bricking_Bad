@@ -20,11 +20,11 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
     @Override
     public void behave() {
         if (lastAddedBeam != null) {
-            if (lastAddedBeam.getNumDestroyedObjects() == 0) {
-                lastAddedBeam.setDestroyed(true);
-                lastAddedBeam = null;
-            } else {
+            if (lastAddedBeam.getNumDestroyedObjects() != 0) {
                 self.setDestroyed(true);
+            }
+            if (lastAddedBeam.isDestroyed()) {
+                lastAddedBeam = null;
             }
         }
         if (Math.random() < 0.015) {

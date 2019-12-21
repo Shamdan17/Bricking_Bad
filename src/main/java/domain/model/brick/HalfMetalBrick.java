@@ -13,10 +13,15 @@ public class HalfMetalBrick extends Brick {
         super(movBeh, length, width);
     }
 
+    private boolean cracked = false;
+
     @Override
     public void collide(MovableShape obj) {
-        if (obj.getType() == Type.Ball && obj.getCenter().getY() < this.getCenter().getY()) {
+        if ((obj.getType() == Type.Ball && (cracked || obj.getCenter().getY() < this.getCenter().getY())) || obj.getSpecificType() == SpecificType.ChemicalBall) {
             this.destroy();
+        }
+        if (obj.getSpecificType() == SpecificType.FireBall) {
+            cracked = true;
         }
     }
 
@@ -28,6 +33,10 @@ public class HalfMetalBrick extends Brick {
     @Override
     public String toString() {
         return "Half Metal Brick at " + super.getPosition().toString();
+    }
+
+    private boolean isCracked() {
+        return cracked;
     }
 
     @Override

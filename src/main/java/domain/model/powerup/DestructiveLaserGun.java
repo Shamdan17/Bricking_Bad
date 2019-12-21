@@ -5,10 +5,13 @@ import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
+import org.apache.log4j.Logger;
 
 import static utils.Constants.PowerupSize;
 
 public class DestructiveLaserGun extends PowerUp {
+
+    final static Logger logger = Logger.getLogger(DestructiveLaserGun.class);
 
     public DestructiveLaserGun(MovementBehavior movbeh) {
         super(movbeh, PowerupSize, PowerupSize);
@@ -18,6 +21,7 @@ public class DestructiveLaserGun extends PowerUp {
     public boolean activate(SpecificType type, Board board) {
         if (type == SpecificType.DestructiveLaserGun) {
             board.getPaddle().applyLaserPowerup();
+            logger.debug("Destructive Laser Gun power-up is activated.");
             return true;
         }
         return false;
@@ -28,6 +32,7 @@ public class DestructiveLaserGun extends PowerUp {
     public void collide(MovableShape obj) {
         if (obj.getType() == Type.Paddle) {
             this.destroy();
+            logger.debug("Destructive Laser Gun power-up is caught");
         }
     }
 
