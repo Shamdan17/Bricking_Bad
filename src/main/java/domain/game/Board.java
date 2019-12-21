@@ -8,9 +8,6 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.brick.BrickFactory;
-import domain.model.brick.MineBrick;
-import domain.model.brick.SimpleBrick;
-import domain.model.movement.NoMovement;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -50,11 +47,7 @@ public class Board {
             throw new IllegalArgumentException();
         }
         movables = data.getMovables();
-        for(MovableShape ms : movables)
-            if(ms.getType() == Type.Paddle){
-                paddle = (Paddle)ms.copy();
-                break;
-            }
+        paddle = getPaddle(movables);
         inventory = new Inventory(this);
         bindMovables();
     }
@@ -266,6 +259,15 @@ public class Board {
             movableList.add(ms.copy());
         }
         return new GameData(movableList);
+    }
+
+    private Paddle getPaddle(List<MovableShape> movables) {
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Paddle) {
+                return (Paddle) ms;
+            }
+        }
+        return null;
     }
 
     public boolean repOK() {

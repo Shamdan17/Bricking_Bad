@@ -66,12 +66,13 @@ public class BoardTest {
     Method destroyMovables = cls.getDeclaredMethod("removeDestroyedMovables");
     destroyMovables.setAccessible(true);
     destroyMovables.invoke(board);
-    assertEquals(1, board.getData().getMovables().size(), "not correct movables size");
+    assertEquals(2, board.getData().getMovables().size(), "not correct movables size");
   }
 
   @Test
   void testGetData() {
     List<MovableShape> movables = new ArrayList<>();
+    movables.add(paddle);
     for (int i = 0; i < 3; ++i) {
       Brick brick = brickFactory.get(SimpleBrick, new Position(1, 1));
       movables.add(brick);
@@ -117,6 +118,7 @@ public class BoardTest {
   void testPaddleMovement() {
     List<MovableShape> movables = new ArrayList<>();
     GameData data = new GameData(movables);
+    movables.add(paddle);
     Board board = new Board(data);
 
     board.movePaddleLeft();
