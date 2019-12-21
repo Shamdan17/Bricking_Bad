@@ -34,8 +34,8 @@ public class TallerPaddle extends PowerUp {
                 @Override
                 public void run() {
                     paddle.setLength(util.round(L));
-                     logger.debug("Taller paddle power-up is expired.");
-                   }
+                    logger.debug("Taller paddle power-up is expired.");
+                }
             }, POWERUP_TALLER_PADDLE_TIME * 1000);
             return true;
         }

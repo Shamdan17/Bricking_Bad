@@ -32,7 +32,7 @@ public class HalfMetalBrick extends Brick {
 
     @Override
     public String toString() {
-        return "Half Metal Brick at " + super.getPosition().toString(); //TODO add position.toString here;
+        return "Half Metal Brick at " + super.getPosition().toString();
     }
 
     private boolean isCracked() {

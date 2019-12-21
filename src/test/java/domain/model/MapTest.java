@@ -90,16 +90,17 @@ public class MapTest {
         assertFalse(map.move(new Position(10, 10), new Position(100, 100)));
         assertEquals(2, map.getMovables().size());
     }
+
     @Test
-    void testgetMovables(){
+    void testgetMovables() {
         List<MovableShape> list = new ArrayList<>();
-        for(int i=0 ; i<3 ; ++i){
-            Position pos = new Position(50 + 50 * i,50 + 50 * i);
-            map.add(brickFactory.get(SimpleBrick, pos),pos);
-            list.add(brickFactory.get(SimpleBrick,pos));
+        for (int i = 0; i < 3; ++i) {
+            Position pos = new Position(50 + 50 * i, 50 + 50 * i);
+            map.add(brickFactory.get(SimpleBrick, pos), pos);
+            list.add(brickFactory.get(SimpleBrick, pos));
         }
         List<MovableShape> testedList = map.getData().getMovables();
-        for(int i=0 ; i<3 ; ++i){
+        for (int i = 0; i < 3; ++i) {
             assertTrue(list.get(i).equals(testedList.get(i)));
         }
     }
@@ -110,7 +111,7 @@ public class MapTest {
         map.add(brickFactory.get(SimpleBrick, new Position(100, 100)), new Position(100, 100));
         List<MovableShape> movables = map.getMovables();
         List<MovableShape> testdata = map.getData().getMovables();
-        for(int i=0 ; i<movables.size() ; ++i){
+        for (int i = 0; i < movables.size(); ++i) {
             assertTrue(movables.get(i).equals(testdata.get(i)));
         }
     }

@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
   private JButton loadButton;
 
 
-  public GamePanel(BrickingBad bb) {
+    public GamePanel(BrickingBad bb) {
     backToMain = new JButton("Back to Main");
     brickingBad = bb;
     saveButton = new JButton("save");
@@ -52,49 +52,49 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     });
   }
 
-  public void run() {
-    while (true) {
-      try {
+    public void run() {
+        while (true) {
+            try {
         repaint();
         Thread.sleep(Constants.SLEEP_TIME);
-      } catch (Exception e) {
+            } catch (Exception e) {
         e.printStackTrace();
       }
     }
   }
 
-  public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
-    Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
+        Paddle paddle = new Paddle(gameData.getPaddle(), brickingBad);
     List<MovableShape> drawables = gameData.getMovables();
 
-    for (MovableShape ms : drawables) {
+        for (MovableShape ms : drawables) {
       Drawable d = getDrawable(ms);
       d.draw(g);
     }
   }
 
-  public Drawable getDrawable(MovableShape ms) {
-    switch (ms.getSpecificType()) {
-      case Paddle:
-        return new Paddle(ms, brickingBad);
-      case Ball:
-        return new Ball(ms);
-      case Laser:
-        return new SimpleBrick(ms, brickingBad);
-      case SimpleBrick:
-        return new SimpleBrick(ms, brickingBad);
-      case MineBrick:
-        return new MineBrick(ms, brickingBad);
-      case HalfMetalBrick:
-        return new HalfMetalBrick(ms, brickingBad);
-      case WrapperBrick:
-        return new WrapperBrick(ms, brickingBad);
-      default:
-          return new SimpleBrick(ms, brickingBad);
-    }
+    public Drawable getDrawable(MovableShape ms) {
+        switch (ms.getSpecificType()) {
+            case Paddle:
+                return new Paddle(ms, brickingBad);
+            case Ball:
+                return new Ball(ms);
+            case Laser:
+                return new SimpleBrick(ms, brickingBad);
+            case SimpleBrick:
+                return new SimpleBrick(ms, brickingBad);
+            case MineBrick:
+                return new MineBrick(ms, brickingBad);
+            case HalfMetalBrick:
+                return new HalfMetalBrick(ms, brickingBad);
+            case WrapperBrick:
+                return new WrapperBrick(ms, brickingBad);
+            default:
+                return new SimpleBrick(ms, brickingBad);
+        }
 
   }
 

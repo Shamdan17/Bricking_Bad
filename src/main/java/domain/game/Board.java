@@ -6,6 +6,7 @@ import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.AlienFactory;
 import domain.model.brick.BrickFactory;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
@@ -72,6 +73,9 @@ public class Board {
      */
     private void defaultMovables() {
         for (int i = 0; i < 10; i++) {
+            if (i == 0) movables.add(AlienFactory.get(SpecificType.CooperativeAlien, new Position(40, 50 * i)));
+            if (i % 3 == 2)
+                movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
             for (int j = 0; j < 5; j++) {
                 if (j == 4) {
                     movables.add(bf.get(SpecificType.WrapperBrick, new Position(70 * i - 100, 50 * j + 40)));
@@ -89,18 +93,10 @@ public class Board {
         //ball = new Ball(new NoMovement(new Position(paddle.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), paddle.getPosition().getY() - ball.getRadius() * 2 - 1)), Constants.BALL_DIAMETER / 2);
         //ball.setMovementBehavior(new NoMovement(new Position(paddle.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), paddle.getPosition().getY() - ball.getRadius() * 2 - 1)));
 
-        // TODO: ball and paddle are added to movables for now for sake of collision checking
-        movables.add(ball);
-        movables.add(paddle);
-
-        for (int i = 0; i < 10; i += 4) {
-            for (int j = 3; j < 6; j += 10) {
-                //Position curpos = new Position(80 * i + 20, 40 * j + 10);
-                //if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
-                //else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
-            }
-        }
-    }
+    // TODO: ball and paddle are added to movables for now for sake of collision checking
+    movables.add(ball);
+    movables.add(paddle);
+  }
 
     /**
      * OVERVIEW: moves the game 1 cycle
@@ -111,12 +107,12 @@ public class Board {
      */
     public void animate() {
         // advance all movables one step and check collisions and remove collided ones
-        /*if (Math.random() < 0.02) {
-            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }
-        if (Math.random() < 0.0005) {
-            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
-        }*/
+//        if (Math.random() < 0.02) {
+//            objectQueue.add(bf.get(SpecificType.SimpleBrick, new Position(Math.random() * 600, Math.random() * 600)));
+//        }
+//        if (Math.random() < 0.0005) {
+//            objectQueue.add(bf.get(SpecificType.WrapperBrick, new Position(Math.random() * 600, Math.random() * 600)));
+//        }
 //    if(Math.random()<0.01){
 //      objectQueue.add(bf.get(SpecificType.HalfMetalBrick, new Position(Math.random()*600, Math.random()*600)));
 //    }
@@ -140,7 +136,7 @@ public class Board {
     }
 
     /**
-     * Checks the number of balls on in the board, respawns a ball if non left.
+     * Checks the number of balls on in the board, respawns a ball if none left.
      */
     private void checkNumBalls() {
         int numBalls = 0;
@@ -150,7 +146,7 @@ public class Board {
             }
         }
         if (numBalls == 0) {
-            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.RADIUS));
+            movables.add(new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2));
         }
     }
 
@@ -167,10 +163,10 @@ public class Board {
             } else {
                 for (MovableShape ms : movables) {
                     if (collisionRule.isCollided(cur, ms)) {
-                        return;
+                        cur.setDestroyed(true);
                     }
                 }
-                movables.add(cur);
+                if (!cur.isDestroyed()) movables.add(cur);
             }
         }
     }
@@ -292,6 +288,7 @@ public class Board {
         inventory.activatePowerup(SpecificType.TallerPaddlePowerup);
 
     }
+
     /**
      * Activate Magnet Power-up
      *

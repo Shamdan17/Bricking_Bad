@@ -13,6 +13,7 @@ public enum SpecificType {
     CooperativeAlien,
     ProtectingAlien,
     RepairingAlien,
+    DrunkAlien,
     Explosion,
     Laser,
     DestructiveLaserGun,
@@ -21,4 +22,5 @@ public enum SpecificType {
     MagnetPowerup,
     FireBallPowerup,
     ChemicalBallPowerup,
+    AlienBeam,
 }

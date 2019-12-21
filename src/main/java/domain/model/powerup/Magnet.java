@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import static utils.Constants.PowerupSize;
 
-public class Magnet extends PowerUp  {
+public class Magnet extends PowerUp {
 
     final static Logger logger = Logger.getLogger(Magnet.class);
 
