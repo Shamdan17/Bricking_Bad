@@ -17,7 +17,7 @@ public final class Constants {
     public static final int PowerupSize = 10;
 
     public static final int explosion_radius_factor = 2;
-    public static final int fireball_explosion_radius_factor = 5;
+    public static final double fireball_explosion_radius_factor = 5;
 
     public static final int laser_ammo_count = 5;
     public static final int gangofballs_multiplier = 10;

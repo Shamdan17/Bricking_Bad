@@ -14,7 +14,7 @@ import static utils.Constants.fireball_explosion_radius_factor;
 
 public class FireBallExplosion extends MovableShape {
     public FireBallExplosion(Position center) {
-        super(new NoMovement(center.incrementX(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.L)).incrementY(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.L))),
+        super(new NoMovement(center.incrementX(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.BALL_DIAMETER)).incrementY(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.BALL_DIAMETER))),
                 util.round(fireball_explosion_radius_factor * Constants.BALL_DIAMETER),
                 util.round(fireball_explosion_radius_factor * Constants.BALL_DIAMETER));
         // Mark as destroyed in order for it to be removed next iteration

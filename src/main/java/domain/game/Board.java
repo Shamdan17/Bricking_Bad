@@ -73,10 +73,10 @@ public class Board {
     private void defaultMovables() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
-                if (i == 9 && j == 4) {
+                if (j == 4) {
                     movables.add(bf.get(SpecificType.WrapperBrick, new Position(70 * i - 100, 50 * j + 40)));
                 } else {
-                    //movables.add(bf.get(SpecificType.SimpleBrick, new Position(70 * i - 100, 50*j+40)));
+                    movables.add(bf.get(SpecificType.SimpleBrick, new Position(70 * i - 100, 50 * j + 40)));
                 }
             }
         }
@@ -270,6 +270,10 @@ public class Board {
         paddle.rotateLeft();
     }
 
+    public void activateChemicalBall() {
+        inventory.activatePowerup(SpecificType.ChemicalBallPowerup);
+    }
+
     /**
      * Shoot laser
      *
@@ -286,7 +290,6 @@ public class Board {
      */
     public void activateTallerPaddle() {
         inventory.activatePowerup(SpecificType.TallerPaddlePowerup);
-        inventory.removePowerup(SpecificType.TallerPaddlePowerup);
 
     }
     /**
@@ -296,7 +299,6 @@ public class Board {
      */
     public void activateMagnet() {
         inventory.activatePowerup(SpecificType.MagnetPowerup);
-        inventory.removePowerup(SpecificType.MagnetPowerup);
     }
 
     public void releaseBall() {

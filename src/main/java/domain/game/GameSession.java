@@ -80,6 +80,10 @@ public class GameSession {
         board.activateMagnet();
     }
 
+    public void activateChemicalBall() {
+        board.activateChemicalBall();
+    }
+
     public void throwBall() {
         board.releaseBall();
     }

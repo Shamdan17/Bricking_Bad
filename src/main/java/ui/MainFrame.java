@@ -148,6 +148,10 @@ class MKeyListener extends KeyAdapter {
         if (pressed.contains(KeyEvent.VK_SPACE)) {
             bb.shootLaser();
         }
+
+        if (pressed.contains(KeyEvent.VK_C)) {
+            bb.activateChemicalBall();
+        }
     }
 
     @Override

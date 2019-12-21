@@ -27,7 +27,7 @@ public class Fireball extends PowerUp {
             double closestDistance = 100000;
             Position myPos = getCenter();
             for (MovableShape ms : shapes) {
-                if (ms.getSpecificType() != SpecificType.Ball) continue;
+                if (!(ms instanceof Ball)) continue;
                 Position objPos = ms.getCenter();
                 if (util.getDistance(objPos, myPos) < closestDistance) {
                     closestDistance = util.getDistance(objPos, myPos);
