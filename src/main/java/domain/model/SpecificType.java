@@ -2,6 +2,9 @@ package domain.model;
 
 public enum SpecificType {
     Ball,
+    FireBall,
+    FireBallExplosion,
+    ChemicalBall,
     Paddle,
     SimpleBrick,
     MineBrick,
@@ -14,4 +17,8 @@ public enum SpecificType {
     Laser,
     DestructiveLaserGun,
     GangOfBallsPowerup,
+    TallerPaddlePowerup,
+    MagnetPowerup,
+    FireBallPowerup,
+    ChemicalBallPowerup,
 }

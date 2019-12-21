@@ -72,6 +72,22 @@ public class GameSession {
         board.shootLaser();
     }
 
+    public void activateTallerPaddle() {
+        board.activateTallerPaddle();
+    }
+
+    public void activateMagnet() {
+        board.activateMagnet();
+    }
+
+    public void activateChemicalBall() {
+        board.activateChemicalBall();
+    }
+
+    public void throwBall() {
+        board.releaseBall();
+    }
+
     /**
      * saves current game
      */

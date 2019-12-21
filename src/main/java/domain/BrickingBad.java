@@ -127,8 +127,24 @@ public class BrickingBad {
         gameSession.rotatePaddleLeft();
     }
 
+    public void activateChemicalBall() {
+        gameSession.activateChemicalBall();
+    }
+
     public void shootLaser() {
         gameSession.shootLaser();
+    }
+
+    public void activateTallerPaddle() {
+        gameSession.activateTallerPaddle();
+    }
+
+    public void activateMagnet() {
+        gameSession.activateMagnet();
+    }
+
+    public void throwBall() {
+        gameSession.throwBall();
     }
 
     /**

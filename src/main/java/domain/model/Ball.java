@@ -1,5 +1,6 @@
 package domain.model;
 
+import domain.model.misc.FireBallExplosion;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.Circle;
@@ -11,61 +12,34 @@ import utils.Velocity;
 
 public class Ball extends Circle {
 
+    private SpecificType curType = SpecificType.Ball;
+
+    private boolean hitPaddle;
+
     public Ball(Position pos, int radius) {
         super(new LinearMovement(pos, Constants.defaultRespawnVelocity), radius);
-
-        // TODO we need to remove constants, also we need to check every place
-        // where we initialize variable, we don't want null thingies
-        // (for example by design any setter should not accept null, contractors
-        // should not accept null, etc..)
     }
 
     public Ball(MovementBehavior movBeh, int radius) {
         super(movBeh, radius);
-
-        // TODO we need to remove constants, also we need to check every place
-        // where we initialize variable, we don't want null thingies
-        // (for example by design any setter should not accept null, contractors
-        // should not accept null, etc..)
     }
 
     public void collide(MovableShape obj) {
-        // TODO Implement this
-        // if (obj.getType() == bottomWall) {
-        //     destroy();
-        // }
+        if (obj.getType() == Type.Paddle) {
+            hitPaddle = true;
+        } else {
+            if (curType == SpecificType.FireBall)
+                super.addToQueue(new FireBallExplosion(getCenter()));
+        }
     }
 
     @Override
     public void move() {
-        // Get parameters
-        // TODO probability of future null thingy here
-        Position oldPos = getPosition();
-
-        // Calculate new position
-        // Do we really need this (maybe we can provide oldPos.move(dx, dy)?
-        Position newPos = oldPos.incrementX(getVelocity().getX()).incrementY(getVelocity().getY());
-        ensureBallIsInBounds();
-        setPosition(newPos);
-        //Ensure ball is in bounds
+        super.move();
+        // Self destruct if out of screen
         if (getPosition().getY() > Constants.maxY) {
             destroy();
         }
-    }
-
-    //TODO: Move this out of ball
-    public void ensureBallIsInBounds() {
-        Velocity oldVelocity = getVelocity();
-        if (getPosition().getX() + getLength() > Constants.maxX) {
-            oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
-        }
-        if (getPosition().getX() < 0) {
-            oldVelocity = new Velocity(Math.abs(oldVelocity.getX()), oldVelocity.getY());
-        }
-        if (getPosition().getY() < 0) {
-            oldVelocity = new Velocity(oldVelocity.getX(), Math.abs(oldVelocity.getY()));
-        }
-        setVelocity(oldVelocity);
     }
 
     /**
@@ -83,17 +57,30 @@ public class Ball extends Circle {
     }
 
     @Override
+    // if chemcial ball only change velocity if we hit a paddle
+    public void setVelocity(Velocity v) {
+        if (curType != SpecificType.ChemicalBall || hitPaddle) {
+            hitPaddle = false;
+            super.setVelocity(v);
+        }
+    }
+
+    public void setSpecificType(SpecificType st) {
+        this.curType = st;
+    }
+
+    @Override
     public final Type getType() {
         return Type.Ball;
     }
 
     @Override
     public SpecificType getSpecificType() {
-        return SpecificType.Ball;
+        return curType;
     }
 
     @Override
     public String toString() {
-        return "Ball with " + getPosition().toString();
+        return "Ball at " + getPosition().toString() + " with " + getVelocity() ;
     }
 }

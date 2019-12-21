@@ -17,6 +17,7 @@ public final class Constants {
     public static final int PowerupSize = 10;
 
     public static final int explosion_radius_factor = 2;
+    public static final double fireball_explosion_radius_factor = 5;
 
     public static final int laser_ammo_count = 5;
     public static final int gangofballs_multiplier = 10;
@@ -29,6 +30,9 @@ public final class Constants {
     public static final double PADDLE_TURNING_SPEED = 2;
     public static final double PADDLE_MOVING_SPEED = 10;
     public static final double PADDLE_RESTORING_SPEED = 0.2;
+
+    public static final int POWERUP_TALLER_PADDLE_TIME = 30;
+    public static final int POWERUP_CHEMICAL_BALL_TIME = 60;
 
 
     public static final int STEP_BACK_THRESHOLD = 5;
