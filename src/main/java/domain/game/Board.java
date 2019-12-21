@@ -178,20 +178,6 @@ public class Board {
         }
     }
 
-
-    /**
-     * OVERVIEW: This function is responsible for ball movements, and it checks extra logic related to ball like
-     * respawning etc..
-     * MODIFIES: ball,
-     * EFFECT: calls move function for ball and handles respawning in case ball falls down
-     */
-    private void moveBall(MovableShape ball) {
-        ball.move();
-        if (ball.getPosition().getY() > Constants.maxY) {
-            ball.setDestroyed(true);
-        }
-    }
-
     /**
      * OVERVIEW: This function iterates over movables and calls move() function on each
      * MODIFIES: movables
@@ -200,8 +186,7 @@ public class Board {
     private void moveAllMovables() {
         // move all objects once
         for (MovableShape movableShape : movables) {
-            if (movableShape.getSpecificType() == SpecificType.Ball) moveBall(movableShape);
-            else movableShape.move();
+            movableShape.move();
         }
     }
 
