@@ -28,7 +28,6 @@ public class Board {
     static final Logger logger = Logger.getLogger(Board.class);
     private List<MovableShape> movables;
     private Paddle paddle;
-    private Ball ball;
     private Queue<MovableShape> objectQueue = new LinkedList<>();
     private BrickFactory bf = new BrickFactory(objectQueue);
     private PhysicsEngine ps = PhysicsEngine.getInstance();
@@ -46,10 +45,9 @@ public class Board {
         if (data == null) {
             throw new IllegalArgumentException();
         }
-        paddle = data.getPaddle();
         movables = data.getMovables();
+        paddle = getPaddle(movables);
         inventory = new Inventory(this);
-        movables.add(paddle);
         bindMovables();
     }
 
@@ -83,8 +81,7 @@ public class Board {
             }
         }
         // TODO: remove constants from here
-        ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
-        //ball.setMovementBehavior(new LinearMovement(ball.getPosition(), new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY)));
+        Ball ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         paddle = new Paddle(new Position(300, 700));
         paddle.setMagnet(true);
@@ -337,12 +334,20 @@ public class Board {
      * @return a GameData instance containing copies of movables in this board
      */
     public GameData getData() {
-        Paddle p = (Paddle) paddle.copy();
         List<MovableShape> movableList = new ArrayList<>();
         for (MovableShape ms : movables) {
             movableList.add(ms.copy());
         }
-        return new GameData(p, movableList);
+        return new GameData(movableList);
+    }
+
+    private Paddle getPaddle(List<MovableShape> movables) {
+        for (MovableShape ms : movables) {
+            if (ms.getSpecificType() == SpecificType.Paddle) {
+                return (Paddle) ms;
+            }
+        }
+        return null;
     }
 
     public boolean repOK() {
