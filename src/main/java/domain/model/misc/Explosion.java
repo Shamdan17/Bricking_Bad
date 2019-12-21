@@ -5,11 +5,12 @@ import domain.model.Type;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Shape;
+import org.apache.commons.lang3.SerializationUtils;
 import utils.Constants;
 import utils.Position;
 import utils.physics.math.util;
 
-import static utils.Constants.explosion_radius_factor;
+import static utils.Constants.EXPLOSION_RADIUS_FACTOR;
 
 // An explosion is a collidable object that results when a minebrick explodes
 public class Explosion extends MovableShape {
@@ -17,12 +18,12 @@ public class Explosion extends MovableShape {
     super(
         new NoMovement(
             center
-                .incrementX(-util.round((explosion_radius_factor / 2) * Constants.L))
-                .incrementY(-util.round((explosion_radius_factor / 2) * Constants.L))),
-        util.round(explosion_radius_factor * Constants.L),
-        util.round(explosion_radius_factor * Constants.L));
+                .incrementX(-util.round((EXPLOSION_RADIUS_FACTOR / 2) * Constants.L))
+                .incrementY(-util.round((EXPLOSION_RADIUS_FACTOR / 2) * Constants.L))),
+        util.round(EXPLOSION_RADIUS_FACTOR * Constants.L),
+        util.round(EXPLOSION_RADIUS_FACTOR * Constants.L));
     // Mark as destroyed in order for it to be removed next iteration
-    super.destroy();
+     super.destroy();
   }
 
   @Override
@@ -50,6 +51,7 @@ public class Explosion extends MovableShape {
 
   @Override
   public MovableShape copy() {
-    return new Explosion(getPosition());
+      Explosion copyExplosion = SerializationUtils.clone(this);
+    return copyExplosion;
   }
 }

@@ -8,6 +8,9 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.brick.BrickFactory;
+import domain.model.brick.MineBrick;
+import domain.model.brick.SimpleBrick;
+import domain.model.movement.NoMovement;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -64,7 +67,8 @@ public class Board {
         inventory = new Inventory(this);
         paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
         ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
-        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, -Constants.BALL_INITIAL_VY));
+
         movables.add(ball);
         movables.add(paddle);
         bindMovables();

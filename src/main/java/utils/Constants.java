@@ -3,14 +3,13 @@ package utils;
 public final class Constants {
 
   public static final int PADDLE_WIDTH = 20;
-  public static final long SLEEP_TIME = 10;
   public static final int BALL_RADIUS = 10;
   public static final int PowerupSize = 10;
-  public static final int explosion_radius_factor = 2;
+  public static final int EXPLOSION_RADIUS_FACTOR = 2;
   public static final int laser_ammo_count = 5;
   public static final int gangofballs_multiplier = 10;
   public static final int BALL_INITIAL_VX = 0;
-  public static final int BALL_INITIAL_VY = 2;
+  public static final int BALL_INITIAL_VY = 4;
   public static final int BALL_DIAMETER = 17;
   public static final double PADDLE_TURNING_SPEED = 2;
   public static final double PADDLE_MOVING_SPEED = 10;
@@ -22,12 +21,10 @@ public final class Constants {
   public static final String MineBrick = "MineBrick";
   public static final int FRAME_HEIGHT = 1000;
   public static final int FRAME_WIDTH = 1500;
-  public static final double L = FRAME_WIDTH / 6;
-  public static final double Brick_Velocity = L / (4 * (1000 / SLEEP_TIME));
-  // todo width should be %10 of the screen width and not a constant
-  // TODO: reorganize this file
+  public static final double L = FRAME_WIDTH / 10;
   public static final int BRICK_LENGTH = 60;
   public static final int BRICK_WIDTH = 20;
+  public static final int MINE_BRICK_DIAMETER = 20;
   public static final int ALIEN_LENGTH = 60;
   public static final int ALIEN_WIDTH = 20;
   public static final int MIN_SIMPLE_BRICK = 75;
@@ -40,6 +37,8 @@ public final class Constants {
   public static final int BRICK_UPPER_BOUND = 100;
   public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
   public static final int HALF_METAL_BRICK_YLIMIT = 4 * FRAME_HEIGHT / 10;
+  public static final long SLEEP_TIME = 5;
+  public static final double Brick_Velocity = L / (4 * (1000 / SLEEP_TIME));
 
   /** Constants for UI */
   public static final String MENU_LABEL = "main";

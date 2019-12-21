@@ -5,22 +5,27 @@ import utils.physics.math.util;
 
 import java.awt.*;
 
-public class Explosion implements Drawable{
+public class Explosion implements Drawable {
 
-    private MovableShape ms;
+  private MovableShape ms;
 
-    public Explosion(MovableShape ms){
-        this.ms = ms;
-    }
+  public Explosion(MovableShape ms) {
+    this.ms = ms;
+  }
 
-    @Override
-     public void draw(Graphics g) {
-        g.setColor(Color.ORANGE);
-        g.fillOval(util.round(ms.getCenter().getX()), util.round(ms.getCenter().getY()), ms.getLength(), ms.getWidth());
-        g.drawOval(util.round(ms.getCenter().getX()), util.round(ms.getCenter().getY()), ms.getLength(), ms.getWidth());
-        // Add dot in center
-        g.setColor(Color.black);
-        g.fillOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
-        g.drawOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
-    }
+  @Override
+  public void draw(Graphics g) {
+      System.out.println("Adding at: " + ms.getPosition());
+    g.setColor(Color.ORANGE);
+    g.fillOval(
+        util.round(ms.getPosition().getX()),
+        util.round(ms.getPosition().getY()),
+        ms.getLength(),
+        ms.getWidth());
+    g.drawOval(
+        util.round(ms.getPosition().getX()),
+        util.round(ms.getPosition().getY()),
+        ms.getLength(),
+        ms.getWidth());
+  }
 }

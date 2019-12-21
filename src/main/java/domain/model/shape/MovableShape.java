@@ -143,6 +143,7 @@ public abstract class MovableShape implements Serializable {
         this.angle = angle;
     }
 
+
     // Makes the object of radius newRadius and the same center
     protected void setRadius(double newRadius) {
         Position cnt = this.getCenter();

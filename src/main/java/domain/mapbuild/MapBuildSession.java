@@ -19,6 +19,8 @@ public class MapBuildSession {
   private long unixTimestamp;
   private BrickFactory bf = new BrickFactory();
 
+  private boolean testMode = false;
+
   /**
    * OVERVIEW: constructor for MapBuildSession MODIFIES: map, storageManager EFFECT: create a new
    * instance of MapBuildSession
@@ -31,10 +33,10 @@ public class MapBuildSession {
 
   public boolean buildMap(int simple, int halfMetal, int mine, int wrapper) {
 
-    if (simple < Constants.MIN_SIMPLE_BRICK) return false;
-    if (halfMetal < Constants.MIN_HALF_METAL_BRICK) return false;
-    if (mine < Constants.MIN_MINE_BRICK) return false;
-    if (wrapper < Constants.MIN_WRAPPER_BRICK) return false;
+    if (simple < Constants.MIN_SIMPLE_BRICK && !testMode) return false;
+    if (halfMetal < Constants.MIN_HALF_METAL_BRICK && !testMode) return false;
+    if (mine < Constants.MIN_MINE_BRICK && !testMode) return false;
+    if (wrapper < Constants.MIN_WRAPPER_BRICK && !testMode) return false;
     map = new Map();
     for (int i = 0; i < simple; ++i) {
         Random rand = new Random();

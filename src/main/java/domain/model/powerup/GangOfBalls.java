@@ -46,7 +46,7 @@ public class GangOfBalls extends PowerUp {
             Velocity originalVel = closestBall.getVelocity().copy();
             for (int i = 1; i < gangofballs_multiplier; i++) {
                 originalVel = Rotation.rotate(originalVel, 360 / gangofballs_multiplier);
-                Ball newBall = new Ball(new LinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_DIAMETER / 2);
+                Ball newBall = new Ball(new LinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_RADIUS);
                 super.addToQueue(newBall);
             }
             return true;
