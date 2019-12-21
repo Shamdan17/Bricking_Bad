@@ -50,7 +50,7 @@ public class Position implements Serializable {
 
 
     public boolean repOK() {
-        if(this.x < 0 || this.y < 0) {
+        if (this.x < 0 || this.y < 0) {
             return false;
         }
 

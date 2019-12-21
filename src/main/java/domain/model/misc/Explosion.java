@@ -49,9 +49,8 @@ public class Explosion extends MovableShape {
     return "Explosion at " + getPosition();
   }
 
-  @Override
-  public MovableShape copy() {
-      Explosion copyExplosion = SerializationUtils.clone(this);
-    return copyExplosion;
-  }
+    @Override
+    public MovableShape copy() {
+        return new Explosion(getPosition());
+    }
 }

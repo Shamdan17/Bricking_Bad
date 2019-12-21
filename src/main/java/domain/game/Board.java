@@ -7,6 +7,7 @@ import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.AlienFactory;
 import domain.model.brick.BrickFactory;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
@@ -29,7 +30,6 @@ public class Board {
     static final Logger logger = Logger.getLogger(Board.class);
     private List<MovableShape> movables;
     private Paddle paddle;
-    private Ball ball;
     private Queue<MovableShape> objectQueue = new LinkedList<>();
     private PhysicsEngine ps = PhysicsEngine.getInstance();
     private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
@@ -59,7 +59,7 @@ public class Board {
         movables = data.getMovables();
         inventory = new Inventory(this);
         paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
-        ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
+        Ball ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
         ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, -Constants.BALL_INITIAL_VY));
 
         movables.add(ball);
@@ -79,6 +79,38 @@ public class Board {
         inventory = new Inventory(this);
         bindMovables();
     }
+
+    /**
+     * OVERVIEW: Adds default data to board
+     * MODIFIES: ball, paddle, movables
+     * EFFECTS: creates new objects using hardcoded values
+     */
+    private void defaultMovables() {
+        for (int i = 0; i < 10; i++) {
+            if (i == 0) movables.add(AlienFactory.get(SpecificType.CooperativeAlien, new Position(40, 50 * i)));
+            if (i % 3 == 2)
+                movables.add(bf.get(SpecificType.MineBrick, new Position(100 * i - 100, 300)));
+            for (int j = 0; j < 5; j++) {
+                if (j == 4) {
+                    movables.add(bf.get(SpecificType.WrapperBrick, new Position(70 * i - 100, 50 * j + 40)));
+                } else {
+                    movables.add(bf.get(SpecificType.SimpleBrick, new Position(70 * i - 100, 50 * j + 40)));
+                }
+            }
+        }
+        // TODO: remove constants from here
+        Ball ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
+        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        paddle = new Paddle(new Position(300, 700));
+        paddle.setMagnet(true);
+        paddle.applyMagnetPowerup(ball);
+        //ball = new Ball(new NoMovement(new Position(paddle.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), paddle.getPosition().getY() - ball.getRadius() * 2 - 1)), Constants.BALL_DIAMETER / 2);
+        //ball.setMovementBehavior(new NoMovement(new Position(paddle.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), paddle.getPosition().getY() - ball.getRadius() * 2 - 1)));
+
+    // TODO: ball and paddle are added to movables for now for sake of collision checking
+    movables.add(ball);
+    movables.add(paddle);
+  }
 
     /**
      * OVERVIEW: moves the game 1 cycle
@@ -108,12 +140,13 @@ public class Board {
     }
 
     /**
-     * Checks the number of balls on in the board, respawns a ball if non left.
+     * Checks the number of balls on in the board, respawns a ball if none left.
      */
     private void checkNumBalls() {
         int numBalls = 0;
         for (MovableShape ms : movables) {
-            if (ms.getSpecificType() == SpecificType.Ball) {
+            // TODO: get back to this
+            if (ms instanceof Ball) {
                 numBalls++;
             }
         }
@@ -135,10 +168,10 @@ public class Board {
             } else {
                 for (MovableShape ms : movables) {
                     if (collisionRule.isCollided(cur, ms)) {
-                        return;
+                        cur.setDestroyed(true);
                     }
                 }
-                movables.add(cur);
+                if (!cur.isDestroyed()) movables.add(cur);
             }
         }
     }
@@ -233,6 +266,10 @@ public class Board {
         paddle.rotateLeft();
     }
 
+    public void activateChemicalBall() {
+        inventory.activatePowerup(SpecificType.ChemicalBallPowerup);
+    }
+
     /**
      * Shoot laser
      *
@@ -242,8 +279,50 @@ public class Board {
         paddle.shootLaser();
     }
 
+    /**
+     * Activate Taller Paddle Power-up
+     *
+     * @return
+     */
+    public void activateTallerPaddle() {
+        inventory.activatePowerup(SpecificType.TallerPaddlePowerup);
+
+    }
+
+    /**
+     * Activate Magnet Power-up
+     *
+     * @return
+     */
+    public void activateMagnet() {
+        inventory.activatePowerup(SpecificType.MagnetPowerup);
+    }
+
+    public void releaseBall() {
+        paddle.releaseBall();
+    }
+
     public Paddle getPaddle() {
         return paddle;
+    }
+
+    public Ball getBall() {
+        for (MovableShape movableShape : movables) {
+            if (movableShape.getType() == Type.Ball)
+                return (Ball) movableShape;
+        }
+        return null;
+    }
+
+    //TODO: Replace with a better function like getData but with references instead of copies
+
+    /**
+     * OVERVIEW: This function returns a reference to the movables
+     *
+     * @return a list containing all the movables
+     */
+    public List<MovableShape> getMovables() {
+        return movables;
     }
 
     /**

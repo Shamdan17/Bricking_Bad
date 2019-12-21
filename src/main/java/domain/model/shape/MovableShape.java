@@ -52,7 +52,8 @@ public abstract class MovableShape implements Serializable {
         this.queue = queue;
     }
 
-    protected void addToQueue(MovableShape shape) {
+    protected void addToQueue(MovableShape shape){
+        shape.setQueue(queue);
         queue.add(shape);
     }
 

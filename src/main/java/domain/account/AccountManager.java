@@ -12,18 +12,17 @@ public class AccountManager {
      */
     private StorageManager accounts;
 
-	/**
-	 *
-	 * OVERVIEW: Creates an AccountManager with the specified name. MODIFIES:
-	 * accounts EFFECT: constructs a new AccountManager with new Accounts Storage
-	 * and adds default admin user
-	 *
-	 * @param accounts is the storage to use for the AccountManager
-	 */
-	public AccountManager(StorageManager accounts) throws IllegalArgumentException {
-		if (accounts == null) {
-			throw new IllegalArgumentException("accounts storage cannot be null");
-		}
+    /**
+     * OVERVIEW: Creates an AccountManager with the specified name. MODIFIES:
+     * accounts EFFECT: constructs a new AccountManager with new Accounts Storage
+     * and adds default admin user
+     *
+     * @param accounts is the storage to use for the AccountManager
+     */
+    public AccountManager(StorageManager accounts) throws IllegalArgumentException {
+        if (accounts == null) {
+            throw new IllegalArgumentException("accounts storage cannot be null");
+        }
 
         this.accounts = accounts;
         accounts.put("admin", "admin");
