@@ -1,7 +1,6 @@
 package domain.model.powerup;
 
 import domain.game.Board;
-import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
@@ -19,9 +18,7 @@ public class Magnet extends PowerUp  {
     public boolean activate(SpecificType type, Board board) {
         if (type == SpecificType.MagnetPowerup) {
             Paddle paddle = board.getPaddle();
-            Ball ball = board.getBall();
             paddle.setMagnet(true);
-            paddle.applyMagnetPowerup(ball);
             return true;
         }
         return false;

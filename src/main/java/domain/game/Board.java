@@ -7,8 +7,6 @@ import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.brick.BrickFactory;
-import domain.model.movement.LinearMovement;
-import domain.model.movement.NoMovement;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -16,14 +14,11 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 import utils.physics.PhysicsEngine;
-import utils.physics.math.util;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import static utils.Constants.L;
 
 // TODO move all movable objects - ones has hasNextPosition() == true
 
@@ -54,7 +49,6 @@ public class Board {
         paddle = data.getPaddle();
         movables = data.getMovables();
         inventory = new Inventory(this);
-        movables.add(ball);
         movables.add(paddle);
         bindMovables();
     }
@@ -91,7 +85,7 @@ public class Board {
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
         //ball.setMovementBehavior(new LinearMovement(ball.getPosition(), new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY)));
-        //ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
+        ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
         paddle = new Paddle(new Position(300, 700));
         paddle.setMagnet(true);
         paddle.applyMagnetPowerup(ball);
@@ -323,14 +317,8 @@ public class Board {
         inventory.removePowerup(SpecificType.MagnetPowerup);
     }
 
-    public void throwBall() {
-        if (paddle.isMagnet()) {
-            paddle.setMagnet(false);
-            ball = getBall();
-            ball.setMovementBehavior(new LinearMovement(ball.getPosition(), new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY)));
-            //ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, Constants.BALL_INITIAL_VY));
-        }
-
+    public void releaseBall() {
+        paddle.releaseBall();
     }
 
     public Paddle getPaddle() {

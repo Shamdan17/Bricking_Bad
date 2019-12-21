@@ -78,20 +78,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
   public Drawable getDrawable(MovableShape ms) {
     switch (ms.getSpecificType()) {
-        case Paddle:
-            return new Paddle(ms, brickingBad);
-        case Ball:
-            return new Ball(ms);
+      case Paddle:
+        return new Paddle(ms, brickingBad);
+      case Ball:
+        return new Ball(ms);
       case Laser:
         return new SimpleBrick(ms, brickingBad);
       case SimpleBrick:
         return new SimpleBrick(ms, brickingBad);
-            case MineBrick:
-              return new MineBrick(ms, brickingBad);
-            case HalfMetalBrick:
-              return new HalfMetalBrick(ms, brickingBad);
-            case WrapperBrick:
-              return new WrapperBrick(ms, brickingBad);
+      case MineBrick:
+        return new MineBrick(ms, brickingBad);
+      case HalfMetalBrick:
+        return new HalfMetalBrick(ms, brickingBad);
+      case WrapperBrick:
+        return new WrapperBrick(ms, brickingBad);
       default:
           return new SimpleBrick(ms, brickingBad);
     }

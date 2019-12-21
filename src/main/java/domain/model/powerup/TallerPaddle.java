@@ -6,12 +6,12 @@ import domain.model.SpecificType;
 import domain.model.Type;
 import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
+import utils.physics.math.util;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static utils.Constants.POWERUP_TALLER_PADDLE_TIME;
-import static utils.Constants.PowerupSize;
+import static utils.Constants.*;
 
 public class TallerPaddle extends PowerUp {
 
@@ -23,21 +23,15 @@ public class TallerPaddle extends PowerUp {
     public boolean activate(SpecificType type, Board board) {
         if (type == SpecificType.TallerPaddlePowerup) {
             Paddle paddle = board.getPaddle();
-
-            if (!paddle.isTallerPaddle()) {
-                paddle.applyTallerPaddlePowerup();
-
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        paddle.returnPaddleToDefault();
-                    }
-                }, POWERUP_TALLER_PADDLE_TIME * 1000);
-
-                return true;
-            }
-
+            paddle.setLength(util.round(2 * L));
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    paddle.setLength(util.round(L));
+                }
+            }, POWERUP_TALLER_PADDLE_TIME * 1000);
+            return true;
         }
         return false;
     }

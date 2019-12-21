@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.model.misc.Laser;
+import domain.model.movement.LinearMovement;
 import domain.model.movement.NoMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
@@ -14,11 +15,12 @@ import static utils.Constants.*;
 
 public class Paddle extends Rectangle {
 
-    private boolean isTallerPaddle = false;
     private boolean tiltLeft = false;
     private boolean tiltRight = false;
+    private boolean moveRight = false;
+    private boolean moveLeft = false;
     private int laser_count;
-    private Ball ball;
+    private Ball boundBall;
     private boolean isMagnet = false;
 
 
@@ -36,7 +38,9 @@ public class Paddle extends Rectangle {
 
     @Override
     public void collide(MovableShape obj) {
-        return;
+        if (isMagnet && obj instanceof Ball) {
+            applyMagnetPowerup((Ball) obj);
+        }
     }
 
     public Type getType() {
@@ -57,32 +61,26 @@ public class Paddle extends Rectangle {
         } else {
             normalizeAngle(PADDLE_RESTORING_SPEED);
         }
+        if (moveLeft) {
+            setPosition(super.getPosition().incrementX(-PADDLE_MOVING_SPEED));
+        } else if (moveRight) {
+            setPosition(super.getPosition().incrementX(PADDLE_MOVING_SPEED));
+        }
+        if (boundBall != null) {
+            boundBall.setPosition(calculateBallPosition());
+        }
+        moveLeft = false;
+        moveRight = false;
         tiltRight = false;
         tiltLeft = false;
     }
 
     public void moveLeft() {
-        if (isMagnet) {
-            setPosition(
-                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
-            ball.setMovementBehavior(new NoMovement(
-                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
-        } else {
-            setPosition(
-                    new Position(super.getPosition().getX() - PADDLE_MOVING_SPEED, super.getPosition().getY()));
-        }
+        moveLeft = true;
     }
 
     public void moveRight() {
-        if (isMagnet) {
-            setPosition(
-                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
-            ball.setMovementBehavior(new NoMovement(
-                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
-        } else {
-            setPosition(
-                    new Position(super.getPosition().getX() + PADDLE_MOVING_SPEED, super.getPosition().getY()));
-        }
+        moveRight = true;
     }
 
     public void rotateRight() {
@@ -99,16 +97,6 @@ public class Paddle extends Rectangle {
         laser_count += 5;
     }
 
-    public void applyTallerPaddlePowerup() {
-        this.setTallerPaddle(true);
-        this.setLength(util.round(2 * L));
-    }
-
-    public void returnPaddleToDefault() {
-        this.setTallerPaddle(false);
-        this.setLength(util.round(L));
-    }
-
     public void shootLaser() {
         Laser leftLaser = new Laser(getPosition());
         Laser rightLaser = new Laser(getPosition().incrementX(getLength() - leftLaser.getLength()));
@@ -118,10 +106,9 @@ public class Paddle extends Rectangle {
 
     public void applyMagnetPowerup(Ball ball) {
         if (ball != null) {
-            this.ball = ball;
-            ball.setMovementBehavior(new NoMovement(
-                    new Position(super.getPosition().getX() + util.round(L / 2 - ball.getRadius() / 2), super.getPosition().getY() - ball.getRadius() * 2 - 1)));
-            isMagnet = true;
+            this.boundBall = ball;
+            ball.setMovementBehavior(new NoMovement(super.getCenter().incrementX(-ball.getRadius()).incrementY(-ball.getWidth() - 0.5 * getWidth() - 1)));
+            isMagnet = false;
         }
     }
 
@@ -133,6 +120,15 @@ public class Paddle extends Rectangle {
         isMagnet = magnet;
     }
 
+    public void releaseBall() {
+        if (boundBall != null) {
+            Velocity vel = new Velocity(BALL_INITIAL_VX, BALL_INITIAL_VY);
+            vel = Rotation.rotate(vel, -getAngle());
+            boundBall.setMovementBehavior(new LinearMovement(boundBall.getPosition(), vel));
+            boundBall = null;
+        }
+    }
+
     // Since paddles don't move on collision the method is not used
     public void setVelocity(Velocity ps) {
     }
@@ -141,7 +137,6 @@ public class Paddle extends Rectangle {
     public void setAngle(double angle) {
         super.setAngle(getValidAngle(angle));
     }
-
     // normalizeAngle is used to return the paddle to its original length
     // it decreases the current angle by the parameter angle until it reaches 0.
     public void normalizeAngle(double angle) {
@@ -183,12 +178,12 @@ public class Paddle extends Rectangle {
         }
     }
 
-    public boolean isTallerPaddle() {
-        return isTallerPaddle;
-    }
-
-    public void setTallerPaddle(boolean tallerPaddle) {
-        isTallerPaddle = tallerPaddle;
+    // Returns the position that a bound ball should be in
+    private Position calculateBallPosition() {
+        Position ballPos = getPosition().incrementX((getLength()) / 2).incrementY(-BALL_DIAMETER / 2 - 1);
+        ballPos = Rotation.rotate(getPosition(), ballPos, -getAngle());
+        ballPos = ballPos.incrementX(-BALL_DIAMETER / 2).incrementY(-BALL_DIAMETER / 2);
+        return ballPos;
     }
 
     /**
@@ -204,8 +199,7 @@ public class Paddle extends Rectangle {
      */
     @Override
     public MovableShape copy() {
-        Paddle copyPaddle = SerializationUtils.clone(this);
-        return copyPaddle;
+        return SerializationUtils.clone(this);
     }
 
     @Override

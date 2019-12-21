@@ -81,7 +81,7 @@ public class GameSession {
     }
 
     public void throwBall() {
-        board.throwBall();
+        board.releaseBall();
     }
 
     /**
