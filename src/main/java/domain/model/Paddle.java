@@ -135,7 +135,6 @@ public class Paddle extends Rectangle {
 
     // Since paddles don't move on collision the method is not used
     public void setVelocity(Velocity ps) {
-        return;
     }
 
     @Override
