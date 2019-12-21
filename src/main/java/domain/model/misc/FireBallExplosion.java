@@ -10,21 +10,19 @@ import utils.Constants;
 import utils.Position;
 import utils.physics.math.util;
 
-import static utils.Constants.explosion_radius_factor;
+import static utils.Constants.fireball_explosion_radius_factor;
 
-// An explosion is a collidable object that results when a minebrick explodes
-public class Explosion extends MovableShape {
-    public Explosion(Position center) {
-        super(new NoMovement(center.incrementX(-util.round((explosion_radius_factor / 2.0) * Constants.L)).incrementY(-util.round((explosion_radius_factor / 2.0) * Constants.L))),
-                util.round(explosion_radius_factor * Constants.L),
-                util.round(explosion_radius_factor * Constants.L));
+public class FireBallExplosion extends MovableShape {
+    public FireBallExplosion(Position center) {
+        super(new NoMovement(center.incrementX(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.L)).incrementY(-util.round((fireball_explosion_radius_factor / 2.0) * Constants.L))),
+                util.round(fireball_explosion_radius_factor * Constants.BALL_DIAMETER),
+                util.round(fireball_explosion_radius_factor * Constants.BALL_DIAMETER));
         // Mark as destroyed in order for it to be removed next iteration
         super.destroy();
     }
 
     @Override
     public void collide(MovableShape obj) {
-
     }
 
     @Override
@@ -39,12 +37,12 @@ public class Explosion extends MovableShape {
 
     @Override
     public SpecificType getSpecificType() {
-        return SpecificType.Explosion;
+        return SpecificType.FireBallExplosion;
     }
 
     @Override
     public String toString() {
-        return "Explosion at " + getPosition();
+        return "Fireball explosion at" + getPosition();
     }
 
     @Override

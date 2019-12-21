@@ -5,7 +5,7 @@ import domain.model.movement.CircularMovement;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
-import domain.model.powerup.TallerPaddle;
+import domain.model.powerup.ChemicalBall;
 import domain.model.shape.MovableShape;
 import utils.Constants;
 import utils.Position;
@@ -31,8 +31,9 @@ public class BrickFactory {
 
 //        res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
 //        res.add(new GangOfBalls(powerupMovBeh.copy()));
-        res.add(new TallerPaddle(powerupMovBeh.copy()));
+//        res.add(new TallerPaddle(powerupMovBeh.copy()));
 //        res.add(new Magnet(powerupMovBeh.copy()));
+        res.add(new ChemicalBall(powerupMovBeh.copy()));
         
         Collections.shuffle(res);
         return res;

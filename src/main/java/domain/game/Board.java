@@ -80,8 +80,13 @@ public class Board {
      */
     private void defaultMovables() {
         for (int i = 0; i < 10; i++) {
-            if (i % 3 == 2)
-                movables.add(bf.get(SpecificType.WrapperBrick, new Position(100 * i - 100, 300)));
+            for (int j = 0; j < 5; j++) {
+                if (i == 9 && j == 4) {
+                    movables.add(bf.get(SpecificType.WrapperBrick, new Position(70 * i - 100, 50 * j + 40)));
+                } else {
+                    //movables.add(bf.get(SpecificType.SimpleBrick, new Position(70 * i - 100, 50*j+40)));
+                }
+            }
         }
         // TODO: remove constants from here
         ball = new Ball(new Position(310, 300), Constants.BALL_DIAMETER / 2);
@@ -99,9 +104,9 @@ public class Board {
 
         for (int i = 0; i < 10; i += 4) {
             for (int j = 3; j < 6; j += 10) {
-                Position curpos = new Position(80 * i + 20, 40 * j + 10);
-                if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
-                else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
+                //Position curpos = new Position(80 * i + 20, 40 * j + 10);
+                //if (i % 2 == 1) movables.add(bf.get(SpecificType.SimpleBrick, curpos));
+                //else movables.add(bf.get(SpecificType.HalfMetalBrick, curpos));
             }
         }
     }
@@ -149,7 +154,7 @@ public class Board {
     private void checkNumBalls() {
         int numBalls = 0;
         for (MovableShape ms : movables) {
-            if (ms.getSpecificType() == SpecificType.Ball) {
+            if (ms instanceof Ball) {
                 numBalls++;
             }
         }
@@ -338,6 +343,17 @@ public class Board {
                 return (Ball) movableShape;
         }
         return null;
+    }
+
+    //TODO: Replace with a better function like getData but with references instead of copies
+
+    /**
+     * OVERVIEW: This function returns a reference to the movables
+     *
+     * @return a list containing all the movables
+     */
+    public List<MovableShape> getMovables() {
+        return movables;
     }
 
     /**
