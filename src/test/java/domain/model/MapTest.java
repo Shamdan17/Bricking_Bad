@@ -70,9 +70,10 @@ public class MapTest {
     @Test
     void nonExistingMovableShapeShouldNotChangeMovablesContainer() {
         Brick brick = brickFactory.get(SimpleBrick, new Position(10, 10));
+        Brick brick2 = brickFactory.get(SimpleBrick, new Position(10, 10));
         map.add(brick, new Position(10, 10));
         assertEquals(1, map.getMovables().size());
-        assertFalse(map.remove(brick.getID()));
+        assertFalse(map.remove(brick2.getID()));
         assertEquals(1, map.getMovables().size());
     }
 
