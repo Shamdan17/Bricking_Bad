@@ -1,6 +1,5 @@
 package domain.model;
 
-import domain.mapbuild.MapBuildData;
 import domain.mapbuild.MapBuildSession;
 import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
@@ -73,7 +72,7 @@ public class MapEditorTest {
         List<MovableShape> list = mapEditor.getData().getMovables();
         Brick brick1 = (Brick)list.get(0);
         Brick brick2 = (Brick)list.get(1);
-        assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(60, 50)));
+        assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(60, 0)));
     }
 
     @Test

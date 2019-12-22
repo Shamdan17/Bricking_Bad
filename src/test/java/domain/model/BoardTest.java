@@ -99,7 +99,7 @@ public class BoardTest {
       movables.add(brick.copy());
       list.add(brick);
     }
-      GameData data = new GameData(movables,true);
+    GameData data = new GameData(movables, true);
     Board board = new Board(data);
 
     Class cls = board.getClass();
@@ -123,25 +123,37 @@ public class BoardTest {
     Board board = new Board(data);
 
     board.movePaddleLeft();
+    board.animate();
     paddle.moveLeft();
+    paddle.move();
+
     assertTrue(paddle.equals(board.getPaddle()));
 
     board.movePaddleRight();
+    board.animate();
     paddle.moveRight();
+    paddle.move();
     assertTrue(paddle.equals(board.getPaddle()));
 
     board.rotatePaddleLeft();
+    board.animate();
     paddle.rotateLeft();
+    paddle.move();
     assertTrue(paddle.equals(board.getPaddle()));
 
     board.rotatePaddleRight();
+    board.animate();
     paddle.rotateRight();
+    paddle.move();
     assertTrue(paddle.equals(board.getPaddle()));
 
 
     board.movePaddleRight();
+    board.animate();
     board.movePaddleRight();
+    board.animate();
     paddle.moveRight();
+    paddle.move();
 
     assertFalse(paddle.equals(board.getPaddle()));
 

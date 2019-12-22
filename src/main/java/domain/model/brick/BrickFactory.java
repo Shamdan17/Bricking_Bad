@@ -1,6 +1,7 @@
 package domain.model.brick;
 
 import domain.model.SpecificType;
+import domain.model.alien.AlienFactory;
 import domain.model.movement.CircularMovement;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
@@ -32,11 +33,14 @@ public class BrickFactory {
         ArrayList<MovableShape> res = new ArrayList<>();
 
         res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
-        res.add(new GangOfBalls(powerupMovBeh.copy()));
+        //res.add(new GangOfBalls(powerupMovBeh.copy()));
         res.add(new TallerPaddle(powerupMovBeh.copy()));
         res.add(new Magnet(powerupMovBeh.copy()));
         res.add(new ChemicalBall(powerupMovBeh.copy()));
         res.add(new Fireball(powerupMovBeh.copy()));
+        res.add(AlienFactory.get(SpecificType.CooperativeAlien, null));
+        res.add(AlienFactory.get(SpecificType.ProtectingAlien, null));
+        res.add(AlienFactory.get(SpecificType.RepairingAlien, null));
         
         Collections.shuffle(res);
         return res;
@@ -84,6 +88,7 @@ public class BrickFactory {
     private MovableShape getNextWrapperBrickItem(Position pos) {
         MovableShape curItem = WrapperBrickItems.get(numWrapperBricksCreated % WrapperBrickItems.size());
         numWrapperBricksCreated++;
+        curItem.setPosition(pos);
         return curItem.copy();
     }
 

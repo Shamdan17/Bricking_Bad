@@ -38,7 +38,7 @@ public class Paddle extends Rectangle {
 
     @Override
     public void collide(MovableShape obj) {
-        if (isMagnet && obj instanceof Ball) {
+        if (isMagnet && obj instanceof Ball && boundBall == null) {
             applyMagnetPowerup((Ball) obj);
         }
     }

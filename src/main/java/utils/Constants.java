@@ -33,11 +33,11 @@ public final class Constants {
   public static final int MIN_WRAPPER_BRICK = 10;
 
   /** Bounds */
-  public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 4);
+  public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 3);
   public static final int BRICK_LOWER_BOUND = FRAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
   public static final int BRICK_UPPER_BOUND = 100;
   public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
-  public static final int HALF_METAL_BRICK_YLIMIT = 4 * FRAME_HEIGHT / 10;
+  public static final int HALF_METAL_BRICK_YLIMIT = 5 * FRAME_HEIGHT / 10;
   public static final long SLEEP_TIME = 10;
   public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
 
@@ -46,7 +46,7 @@ public final class Constants {
   public static final int BALL_INITIAL_VY = 4;
   public static final int BALL_DIAMETER = 17;
   public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
-  public static final int BALL_RADIUS = 10;
+  public static final int BALL_RADIUS = BALL_DIAMETER / 2;
   public static final int BALL_SPAWNING_HEIGHT = 170;
 
 

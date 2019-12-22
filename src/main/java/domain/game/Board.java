@@ -7,7 +7,6 @@ import domain.model.Ball;
 import domain.model.Paddle;
 import domain.model.SpecificType;
 import domain.model.Type;
-import domain.model.alien.AlienFactory;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -46,6 +45,9 @@ public class Board {
     }
     movables = data.getMovables();
     paddle = getPaddle(movables);
+    if (paddle != null) {
+      paddle.applyMagnetPowerup(getBall());
+    }
     inventory = new Inventory(this);
     bindMovables();
   }
@@ -59,7 +61,7 @@ public class Board {
     paddle = new Paddle(new Position((Constants.FRAME_WIDTH / 2) - (Constants.L / 2), 900));
     Ball ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
     ball.setVelocity(new Velocity(Constants.BALL_INITIAL_VX, -Constants.BALL_INITIAL_VY));
-
+    paddle.applyMagnetPowerup(ball);
     movables.add(ball);
     movables.add(paddle);
     bindMovables();
@@ -112,6 +114,7 @@ public class Board {
     }
     if (numBalls == 0) {
       movables.add(new Ball(paddle.getCenter().incrementY(-Constants.BALL_SPAWNING_HEIGHT), Constants.BALL_RADIUS));
+      paddle.applyMagnetPowerup(getBall());
     }
   }
 
@@ -253,7 +256,7 @@ public class Board {
 
   public Ball getBall() {
     for (MovableShape movableShape : movables) {
-      if (movableShape.getType() == Type.Ball) return (Ball) movableShape;
+      if (movableShape instanceof Ball) return (Ball) movableShape;
     }
     return null;
   }
