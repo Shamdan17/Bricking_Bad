@@ -1,6 +1,5 @@
 package domain.game;
 
-import domain.model.Paddle;
 import domain.model.shape.MovableShape;
 
 import java.io.Serializable;
@@ -12,16 +11,47 @@ public class GameData implements Serializable {
     // This class wraps all information that can be saved or sent to UI
     private final List<MovableShape> movables;
     boolean isCopy;
+    private double score;
+    private int remainingLives;
+    private long gameTime;
+    private long maxGameTime;
+
+
     public GameData(List<MovableShape> ms, boolean isCopy) {
         this.movables = ms;
         this.isCopy = isCopy;
- }
+    }
+
+    public GameData(List<MovableShape> ms, boolean isCopy, double score, int remainingLives, long gameTime, long maxGameTime) {
+        this.movables = ms;
+        this.isCopy = isCopy;
+        this.score = score;
+        this.remainingLives = remainingLives;
+        this.gameTime = gameTime;
+        this.maxGameTime = maxGameTime;
+    }
 
     public List<MovableShape> getMovables() {
-        if(!isCopy) return movables;
+        if (!isCopy) return movables;
         List<MovableShape> list = new ArrayList<>();
         for (MovableShape ms : movables) list.add(ms.copy());
         return list;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public int getRemainingLives() {
+        return remainingLives;
+    }
+
+    public long getGameTime() {
+        return gameTime;
+    }
+
+    public long getMaxGameTime() {
+        return maxGameTime;
     }
 
 
