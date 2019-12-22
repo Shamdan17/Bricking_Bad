@@ -342,7 +342,7 @@ public class Board {
         for (MovableShape ms : movables) {
             movableList.add(ms.copy());
         }
-        return new GameData(movableList, Constants.COPY_MODE);
+        return new GameData(movableList, Constants.COPY_MODE, score, remainingLives, gameTime, maxGameTime);
     }
 
     public GameData getData() {
@@ -350,7 +350,7 @@ public class Board {
         for (MovableShape ms : movables) {
             movableList.add(ms);
         }
-        return new GameData(movableList, Constants.REFERENCE_MODE);
+        return new GameData(movableList, Constants.REFERENCE_MODE, score, remainingLives, gameTime, maxGameTime);
     }
 
     private Paddle getPaddle(List<MovableShape> movables) {
