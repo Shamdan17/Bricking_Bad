@@ -1,1 +1,0 @@
-[![coverage report](https://git.ku.edu.tr/shamdan17/302_2019_shawarma/badges/master/coverage.svg)](https://git.ku.edu.tr/shamdan17/302_2019_shawarma/commits/master)
