@@ -7,13 +7,14 @@ import domain.storage.StorageManager;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.ArrayList;
 
 public class GameSession {
 
     private String username;
     private StorageManager sm;
     private Board board;
-    private long unixTimestamp;
+    private String unixTimestamp;
 
     public GameSession(String username) {
         if (username == null) {
@@ -100,9 +101,17 @@ public class GameSession {
      * saves current game
      */
     public void save() {
-        GameData data = board.getDataCopy();
-        unixTimestamp = Instant.now().getEpochSecond();
+        GameData data = board.getData();
+        unixTimestamp = String.valueOf(Instant.now().getEpochSecond());
         sm.put(unixTimestamp, data);
+    }
+
+    /**
+     * saves current game with name
+     */
+    public void save(String name) {
+        GameData data = board.getDataCopy();
+        sm.put(name, data);
     }
 
     /**
@@ -115,5 +124,24 @@ public class GameSession {
 
         GameData data = (GameData) sm.get(unixTimestamp);
         board = new Board(data);
+    }
+
+    /**
+     * loads previously saved game with name
+     */
+    public void load(String name) {
+        if (sm.get(name) == null) {
+            return;
+        }
+
+        GameData data = (GameData) sm.get(name);
+        board = new Board(data);
+    }
+
+    /**
+     * loads previously saved game with name
+     */
+    public List<String> getGamesList() {
+        return new ArrayList<>(sm.keySet());
     }
 }

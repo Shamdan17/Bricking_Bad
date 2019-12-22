@@ -66,6 +66,27 @@ public class BrickingBad {
     }
 
     /**
+     * saves named game
+     */
+    public void saveGame(String name) {
+        gameSession.save(name);
+    }
+
+    /**
+     * loads named game
+     */
+    public void loadGame(String name) {
+        gameSession.load(name);
+    }
+
+    /**
+     * getSavedGames
+     */
+    public List<String> getGamesList() {
+        return gameSession.getGamesList();
+    }
+
+    /**
      * saves the game
      */
     public void saveGame() {
