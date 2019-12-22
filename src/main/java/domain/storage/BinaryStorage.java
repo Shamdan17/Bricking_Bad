@@ -4,11 +4,12 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Set;
 
 // BinaryStorage is a storage manager that works as a generic persistent key value store.
 
 public class BinaryStorage implements StorageManager {
-    private HashMap<Serializable, Serializable> DataLinks;
+    private HashMap<String, Serializable> DataLinks;
     private String storageName;
 
     /**
@@ -25,6 +26,9 @@ public class BinaryStorage implements StorageManager {
 
         this.DataLinks = new HashMap<>();
         this.storageName = storageName;
+
+        // If a previous version of the same storage name exists load it
+        load();
     }
 
     /**
@@ -34,7 +38,7 @@ public class BinaryStorage implements StorageManager {
      * @param key   the identifier of saved data
      * @param value the actual data to be saved
      */
-    public void put(Serializable key, Serializable value) throws IllegalArgumentException {
+    public void put(String key, Serializable value) throws IllegalArgumentException {
         if (key == null || value == null) {
             throw new IllegalArgumentException("storage name may not be null");
         }
@@ -47,7 +51,7 @@ public class BinaryStorage implements StorageManager {
      *
      * @param key the identifier of saved data
      */
-    public Object get(Serializable key) throws IllegalArgumentException {
+    public Object get(String key) throws IllegalArgumentException {
         if (key == null) {
             throw new IllegalArgumentException("storage name may not be null");
         }
@@ -56,17 +60,28 @@ public class BinaryStorage implements StorageManager {
     }
 
     /**
-     * OVERVIEW: checks if the given key is used or not MODIFIES: Nothing EFFECT:
-     * verifies if the given key have been used before to store data
+     * OVERVIEW: checks if the given key is used or not
+     * MODIFIES: Nothing
+     * EFFECT: verifies if the given key have been used before to store data
      *
      * @param key the identifier of saved data
      */
-    public boolean contains(Serializable key) {
+    public boolean contains(String key) {
         if (key == null) {
             throw new IllegalArgumentException("null key cannot be exist in storage");
         }
 
         return this.DataLinks.containsKey(key);
+    }
+
+    /**
+     * OVERVIEW: provides the caller of a list of all saved entires inside the
+     * storage
+     * MODIFIES: Nothing
+     *
+     */
+    public Set<String> keySet() {
+        return this.DataLinks.keySet();
     }
 
     /**
@@ -90,12 +105,17 @@ public class BinaryStorage implements StorageManager {
      * content of a storage file into memory
      */
     private void load() {
-        Path filepath = Paths.get(System.getProperty("user.dir"), storageName);
+        File dataFile = new File(System.getProperty("user.dir"), storageName);
+
+        if(!dataFile.exists()) {
+            return;
+        }
+
 
         try {
-            FileInputStream fis = new FileInputStream(filepath.toString());
+            FileInputStream fis = new FileInputStream(dataFile);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            DataLinks = (HashMap<Serializable, Serializable>) ois.readObject();
+            DataLinks = (HashMap<String, Serializable>) ois.readObject();
             ois.close();
         } catch (Exception e) {
             e.printStackTrace();
