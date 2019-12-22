@@ -28,7 +28,7 @@ public class BinaryStorage implements StorageManager {
         this.storageName = storageName;
 
         // If a previous version of the same storage name exists load it
-        load();
+        // load();
     }
 
     /**

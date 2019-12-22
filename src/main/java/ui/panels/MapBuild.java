@@ -176,13 +176,13 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.GAME_LABEL);
     }
     if (e.getActionCommand().equals(Constants.SAVE_BUTTON)) {
-      brickingBad.saveMap();
+      brickingBad.saveMap("");
     }
     if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
       Brick.setRemoveFlag(deleteBlock.isSelected());
     }
     if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      brickingBad.loadMap();
+      brickingBad.loadMap("");
     }
     if (e.getActionCommand().equals(Constants.ADD_BRICKS_BUTTON)) {
 

@@ -94,26 +94,21 @@ public class BrickingBad {
     }
 
     /**
-     * loads the game
-     */
-    public void loadGame() {
-        gameSession.load();
-    }
-
-    /**
      * saves map
      */
-    public void saveMap() {
+    public void saveMap(String name) {
         mapBuildSession.save();
     }
-
-    // TODO: Add save name support
 
     /**
      * loads map
      */
-    public void loadMap() {
+    public void loadMap(String name) {
         mapBuildSession.load();
+    }
+
+    public List<String> getMapList(){
+        return null;
     }
 
     /**

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Menu extends JPanel implements ActionListener {
+public class MainMenu extends JPanel implements ActionListener {
 
   private BrickingBad brickingBad;
   private CardLayout cardLayout;
@@ -26,7 +26,7 @@ public class Menu extends JPanel implements ActionListener {
   private JButton exitButton;
   // this class represents the main menu
 
-  public Menu(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
+  public MainMenu(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.brickingBad = brickingBad;
     this.cardLayout = cardLayout;
     this.contPanel = contPanel;
@@ -46,18 +46,23 @@ public class Menu extends JPanel implements ActionListener {
   }
 
   // here add buttons to main menu
-  void addButtons() {
+  private void addButtons() {
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.gridx = 0;
+    Dimension size = new Dimension(Constants.MAIN_MENU_BUTTON_WIDTH,Constants.MAIN_MENU_BUTTON_LENGTH);
+    startGameButton.setPreferredSize(size);
+    loadGameButton.setPreferredSize(size);
+    helpButton.setPreferredSize(size);
+    exitButton.setPreferredSize(size);
     gbc.gridy = 0;
-    add(startGameButton);
+    gbc.gridx = 0;
+    add(startGameButton,gbc);
     gbc.gridy = 1;
-    add(loadGameButton);
+    add(loadGameButton,gbc);
     gbc.gridy = 2;
-    add(helpButton);
+    add(helpButton,gbc);
     gbc.gridy = 3;
-    add(exitButton);
+    add(exitButton,gbc);
   }
 
   @Override
@@ -71,7 +76,7 @@ public class Menu extends JPanel implements ActionListener {
     if (actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)) {
       loadPage = new GameLoadPage(brickingBad, cardLayout, contPanel);
       // TODO: modify this after having proper load save mechanisms
-      brickingBad.loadGame();
+      // TODO: up
     }
     if (actionEvent.getActionCommand().equals(Constants.HELP_BUTTON)) {
       help = new Help(cardLayout, contPanel);

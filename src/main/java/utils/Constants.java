@@ -92,17 +92,25 @@ public final class Constants {
 
     public static final String MAP_BUILD_LABEL = "mapbuild";
     public static final String GAME_LABEL = "game";
-    public static final String LOAD_LABEL = "load";
-    public static final String SAVE_LABEL = "save";
+    public static final String GAME_BUTTON = "Return to Game";
+    public static final String GAME_LOAD_LABEL = "game load";
+    public static final String GAME_SAVE_LABEL = "game save";
+    public static final String MAP_LOAD_LABEL = "map load";
+    public static final String MAP_SAVE_LABEL = "map save";
     public static final String HELP_LABEL = "help";
+    public static final String PAUSE_BUTTON = "Pause";
+    public static final String PAUSE_LABEL = "pause";
+    public static final String CANCEL_BUTTON = "Cancel";
 
-    public static final String SAVE_BUTTON = "Save Button";
-    public static final String LOAD_BUTTON = "Load Button";
-    public static final String MENU_BUTTON = "Menu Button";
-    public static final String START_GAME_BUTTON = "Start Game Button";
-    public static final String ADD_BRICKS_BUTTON = "Add Bricks Button";
-    public static final String HELP_BUTTON = "Help Button";
-    public static final String EXIT_BUTTON = "Exit Button";
+    public static final String ENTER_SAVE_NAME = "Enter Save Name";
+
+    public static final String SAVE_BUTTON = "Save";
+    public static final String LOAD_BUTTON = "Load";
+    public static final String MENU_BUTTON = "Menu";
+    public static final String START_GAME_BUTTON = "Start Game";
+    public static final String ADD_BRICKS_BUTTON = "Add Bricks";
+    public static final String HELP_BUTTON = "Help";
+    public static final String EXIT_BUTTON = "Exit";
     public static final String DELETE_BY_CLICK_LABEL = "Delete By Click";
 
     public static final String SIMPLE_BRICK_LABEL = "Simple Brick Count";
@@ -116,10 +124,18 @@ public final class Constants {
     public static final String EMPTY_MINE_BRICK_FIELD_WARNING = "Mine Brick field is empty";
     public static final String EMPTY_WRAPPER_BRICK_FIELD_WARNING = "Wrapper Brick field is empty";
     public static final String BRICK_NUMBER_WARNING = "Number of Bricks does not satisfy constraints";
-
+    public static final String NO_PREVIOUS_SAVE_WARNING = "NO Previous Saves Available";
     public static final String PASSWORD_LABEL = "Password Label";
     public static final String USERNAME_LABEL = "Username Label";
-    public static final String LOGIN_BUTTON = "Login Button";
+    public static final String LOGIN_BUTTON = "Login";
+
+    public static final int MAIN_MENU_BUTTON_LENGTH = 60;
+    public static final int MAIN_MENU_BUTTON_WIDTH = 600;
+    public static final int TEXT_INPUT_LENGTH = 50;
+    public static final int TEXT_INPUT_WIDTH = 200;
+    public static final int BUTTON_LENGTH = 50;
+    public static final int BUTTON_WIDTH = 200;
+
     // TODO: reorganize this file
     public static final int LENGTH = 60;
     public static final int WIDTH = 20;
