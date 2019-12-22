@@ -19,14 +19,14 @@ public class DefaultCollisionRule implements CollisionRule {
 
     @Override
     public void collide(MovableShape obj1, MovableShape obj2) {
-        if (physics.isCollided(obj1, obj2)) {
             logger.debug("Collision detected between " + obj1 + " and " + obj2);
+
             // Calculate the new velocities
-            //obj1.setVelocity(new Velocity(5,-200));
             Velocity v1 = physics.calculateNewVelocity(obj1, obj2);
             Velocity v2 = physics.calculateNewVelocity(obj2, obj1);
             logger.debug("obj1 new velocity: " + v1);
             logger.debug("obj2 new velocity: " + v2);
+
             // Set the new velocities
             obj1.collide(obj2);
             obj2.collide(obj1);
@@ -38,11 +38,9 @@ public class DefaultCollisionRule implements CollisionRule {
                 obj1.stepBack();
                 obj2.stepBack();
             }
-//            if(obj2.getType()!= MovableShape.Type.Paddle || obj1.getVelocity().getY()>0)obj1.stepBack();
-//            if(obj1.getType()!= MovableShape.Type.Paddle || obj2.getVelocity().getY()>0)obj2.stepBack();
+
             obj1.setVelocity(v1);
             obj2.setVelocity(v2);
-        }
     }
 
     public boolean isCollided(MovableShape obj1, MovableShape obj2) {
