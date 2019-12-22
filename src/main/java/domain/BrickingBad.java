@@ -10,6 +10,9 @@ import domain.model.SpecificType;
 import domain.storage.BinaryStorage;
 import utils.Position;
 
+import java.util.List;
+import java.util.UUID;
+
 // BrickingBad is the main controller
 public class BrickingBad {
 
@@ -49,6 +52,19 @@ public class BrickingBad {
         return mapBuildSession.getData();
     }
 
+    public boolean buildMap(int simple,int halfMetal,int mine,int wrapper){
+        return mapBuildSession.buildMap(simple,halfMetal,mine,wrapper);
+    }
+
+    public void initializeMapBuild(){
+        mapBuildSession = new MapBuildSession();
+    }
+
+    public void startGame(){
+        MapBuildData data = mapBuildSession.getData();
+        gameSession = new GameSession(data);
+    }
+
     /**
      * saves the game
      */
@@ -70,12 +86,13 @@ public class BrickingBad {
         mapBuildSession.save();
     }
 
-    // TODO: implement
+    // TODO: Add save name support
 
     /**
      * loads map
      */
     public void loadMap() {
+        mapBuildSession.load();
     }
 
     /**
@@ -150,20 +167,24 @@ public class BrickingBad {
     /**
      * remove a brick from building mode
      *
-     * @param pos position of brick to be removed
+     * @param ID ID of brick to be removed
      */
-    public void removeBrick(Position pos) {
-        boolean isRemoved = mapBuildSession.removeBrick(pos);
+    public void removeBrick(UUID ID) {
+        boolean isRemoved = mapBuildSession.removeBrick(ID);
     }
 
     /**
      * changes the location of a brick in build mode
      *
-     * @param from original location of brick
+     * @param ID ID of brick to be moved
      * @param to   destination of brick
      */
-    public void moveBrick(Position from, Position to) {
-        mapBuildSession.moveBrick(from, to);
+    public boolean moveBrick(UUID ID, Position to) {
+        return mapBuildSession.moveBrick(ID, to);
+    }
+
+    public void dragBrick(UUID ID, Position to){
+        mapBuildSession.dragBrick(ID,to);
     }
 
     /**

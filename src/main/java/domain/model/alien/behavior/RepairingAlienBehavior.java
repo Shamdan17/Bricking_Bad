@@ -49,8 +49,8 @@ public class RepairingAlienBehavior extends AbstractBehavior {
     }
 
     private Position getRandomBrickPosition() {
-        double y = Math.random() * 0.7 * Constants.maxY;
-        double x = Math.random() * Constants.maxX;
+        double y = Math.random() * 0.7 * Constants.FRAME_HEIGHT;
+        double x = Math.random() * Constants.FRAME_WIDTH;
         return new Position(x, y);
     }
 

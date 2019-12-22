@@ -19,7 +19,7 @@ public class TallerPaddle extends PowerUp {
     final static Logger logger = Logger.getLogger(TallerPaddle.class);
 
     public TallerPaddle(MovementBehavior mb) {
-        super(mb, PowerupSize, PowerupSize);
+        super(mb, POWERUP_SIZE, POWERUP_SIZE);
     }
 
     @Override

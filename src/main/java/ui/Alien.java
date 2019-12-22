@@ -2,6 +2,7 @@ package ui;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
+import ui.drawables.Drawable;
 
 import java.awt.*;
 

@@ -13,6 +13,7 @@ import utils.Velocity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class BrickFactory {
@@ -24,6 +25,7 @@ public class BrickFactory {
 
     public BrickFactory() {
         WrapperBrickItems = defaultItems();
+        this.movQueue = new LinkedList<>();
     }
 
     private ArrayList<MovableShape> defaultItems() {
@@ -46,14 +48,14 @@ public class BrickFactory {
     }
 
     public Brick get(SpecificType type, Position pos) {
-        boolean moving = Math.random() < Constants.movingProbability;
+        boolean moving = Math.random() < Constants.MOVING_PROBABILITY;
         MovementBehavior movBeh = new NoMovement(pos);
         Brick result;
         switch (type) {
             case SimpleBrick:
                 if (moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
-                result = new SimpleBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.BRICK_VELOCITY, 0));
+                result = new SimpleBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case MineBrick:
                 if (moving)
@@ -62,13 +64,13 @@ public class BrickFactory {
                 break;
             case HalfMetalBrick:
                 if (moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
-                result = new HalfMetalBrick(movBeh, Constants.LENGTH, Constants.WIDTH);
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.BRICK_VELOCITY, 0));
+                result = new HalfMetalBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case WrapperBrick:
                 MovableShape containedObject = getNextWrapperBrickItem(pos);
                 containedObject.setQueue(movQueue);
-                result = new WrapperBrick(movBeh, Constants.LENGTH, Constants.WIDTH, containedObject);
+                result = new WrapperBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH, containedObject);
                 break;
             default:
                 throw new IllegalArgumentException("not brick type supplied");

@@ -1,9 +1,12 @@
 package domain.game;
 
+import domain.mapbuild.MapBuildData;
+import domain.model.shape.MovableShape;
 import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
 
 import java.time.Instant;
+import java.util.List;
 
 public class GameSession {
 
@@ -19,6 +22,11 @@ public class GameSession {
         this.username = username;
         this.sm = new BinaryStorage(username);
         this.board = new Board();
+    }
+
+    public GameSession(MapBuildData data){
+        this.board = new Board(data);
+        this.sm = new BinaryStorage("hi");
     }
 
     /**
@@ -92,7 +100,7 @@ public class GameSession {
      * saves current game
      */
     public void save() {
-        GameData data = board.getData();
+        GameData data = board.getDataCopy();
         unixTimestamp = Instant.now().getEpochSecond();
         sm.put(unixTimestamp, data);
     }

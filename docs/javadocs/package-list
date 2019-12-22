@@ -13,7 +13,7 @@ domain.model.powerup
 domain.model.shape
 domain.storage
 ui
-ui.bricks
+ui.drawables.bricks
 utils
 utils.physics
 utils.physics.math

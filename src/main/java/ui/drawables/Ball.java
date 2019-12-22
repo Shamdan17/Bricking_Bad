@@ -1,4 +1,4 @@
-package ui;
+package ui.drawables;
 
 import domain.model.shape.MovableShape;
 import utils.physics.math.util;

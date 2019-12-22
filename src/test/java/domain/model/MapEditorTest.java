@@ -1,6 +1,8 @@
 package domain.model;
 
+import domain.mapbuild.MapBuildData;
 import domain.mapbuild.MapBuildSession;
+import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
 import domain.model.shape.MovableShape;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +11,7 @@ import utils.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static domain.model.SpecificType.SimpleBrick;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -42,19 +45,24 @@ public class MapEditorTest {
     @Test
     void removeExistingBrickFromMapShouldShouldReturnTrue() {
         mapEditor.addBrick(SimpleBrick, new Position(10, 10));
-        assertTrue(mapEditor.removeBrick(new Position(10, 10)));
+        Brick brick = (Brick)mapEditor.getData().getMovables().get(0);
+        assertTrue(mapEditor.removeBrick(brick.getID()));
     }
 
     @Test
     void removeNonExistingBrickFromMapShouldReturnFalse() {
-        assertFalse(mapEditor.removeBrick(new Position(100, 100)));
+        UUID id = UUID.randomUUID();
+        assertFalse(mapEditor.removeBrick(id));
     }
 
     @Test
     void moveBrickCausingCollisionShouldReturnFalse() {
         mapEditor.addBrick(SimpleBrick, new Position(10, 10));
         mapEditor.addBrick(SimpleBrick, new Position(50, 50));
-        assertFalse(mapEditor.moveBrick(new Position(50, 50), new Position(10, 10)));
+        List<MovableShape> list = mapEditor.getData().getMovables();
+        Brick brick1 = (Brick)list.get(0);
+        Brick brick2 = (Brick)list.get(1);
+        assertFalse(mapEditor.moveBrick(brick1.getID(), brick2.getPosition()));
 
     }
 
@@ -62,7 +70,10 @@ public class MapEditorTest {
     void moveBrickToEmptyPositionShouldReturnTrue() {
         mapEditor.addBrick(SimpleBrick, new Position(10, 10));
         mapEditor.addBrick(SimpleBrick, new Position(50, 50));
-        assertTrue(mapEditor.moveBrick(new Position(50, 50), new Position(60, 50)));
+        List<MovableShape> list = mapEditor.getData().getMovables();
+        Brick brick1 = (Brick)list.get(0);
+        Brick brick2 = (Brick)list.get(1);
+        assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(60, 50)));
     }
 
     @Test

@@ -32,12 +32,12 @@ public class BoardTest {
     assertThrows(
         NullPointerException.class,
         () -> {
-            board = new Board(new GameData(null));
+            board = new Board(new GameData(null, Constants.COPY_MODE));
         });
     assertThrows(
         IllegalArgumentException.class,
         () -> {
-          board = new Board(null);
+          board = new Board((GameData)null);
         });
   }
 
@@ -61,7 +61,7 @@ public class BoardTest {
       if (i % 2 == 0) brick.setDestroyed(true);
       movables.add(brick);
     }
-      GameData data = new GameData(movables);
+      GameData data = new GameData(movables,true);
     Board board = new Board(data);
     Class cls = board.getClass();
     Method destroyMovables = cls.getDeclaredMethod("removeDestroyedMovables");
@@ -78,7 +78,7 @@ public class BoardTest {
       Brick brick = brickFactory.get(SimpleBrick, new Position(1, 1));
       movables.add(brick);
     }
-      GameData data = new GameData(movables);
+      GameData data = new GameData(movables,true);
     Board board = new Board(data);
 
     GameData testedData = board.getData();
@@ -99,7 +99,7 @@ public class BoardTest {
       movables.add(brick.copy());
       list.add(brick);
     }
-      GameData data = new GameData(movables);
+      GameData data = new GameData(movables,true);
     Board board = new Board(data);
 
     Class cls = board.getClass();
@@ -119,31 +119,31 @@ public class BoardTest {
   void testPaddleMovement() {
     List<MovableShape> movables = new ArrayList<>();
       movables.add(paddle);
-      GameData data = new GameData(movables);
+      GameData data = new GameData(movables,true);
     Board board = new Board(data);
 
     board.movePaddleLeft();
     paddle.moveLeft();
-    assertTrue(paddle.equals(board.getData().getPaddle()));
+    assertTrue(paddle.equals(board.getPaddle()));
 
     board.movePaddleRight();
     paddle.moveRight();
-    assertTrue(paddle.equals(board.getData().getPaddle()));
+    assertTrue(paddle.equals(board.getPaddle()));
 
     board.rotatePaddleLeft();
     paddle.rotateLeft();
-    assertTrue(paddle.equals(board.getData().getPaddle()));
+    assertTrue(paddle.equals(board.getPaddle()));
 
     board.rotatePaddleRight();
     paddle.rotateRight();
-    assertTrue(paddle.equals(board.getData().getPaddle()));
+    assertTrue(paddle.equals(board.getPaddle()));
 
 
     board.movePaddleRight();
     board.movePaddleRight();
     paddle.moveRight();
 
-    assertFalse(paddle.equals(board.getData().getPaddle()));
+    assertFalse(paddle.equals(board.getPaddle()));
 
   }
 }
