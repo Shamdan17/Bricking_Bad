@@ -16,15 +16,15 @@ import utils.physics.math.util;
 
 import java.util.List;
 
-import static utils.Constants.PowerupSize;
-import static utils.Constants.gangofballs_multiplier;
+import static utils.Constants.POWERUP_SIZE;
+import static utils.Constants.GANG_OF_BALLS_MULTIPLIER;
 
 public class GangOfBalls extends PowerUp {
 
     final static Logger logger = Logger.getLogger(GangOfBalls.class);
 
     public GangOfBalls(MovementBehavior movBeh) {
-        super(movBeh, PowerupSize, PowerupSize);
+        super(movBeh, POWERUP_SIZE, POWERUP_SIZE);
         super.destroy();
     }
 
@@ -47,12 +47,12 @@ public class GangOfBalls extends PowerUp {
 
             // Create 9 mirrors
             Velocity originalVel = closestBall.getVelocity().copy();
-            for (int i = 1; i < gangofballs_multiplier; i++) {
-                originalVel = Rotation.rotate(originalVel, 360 / gangofballs_multiplier);
+            for (int i = 1; i < GANG_OF_BALLS_MULTIPLIER; i++) {
+                originalVel = Rotation.rotate(originalVel, 360 / GANG_OF_BALLS_MULTIPLIER);
                 Ball newBall = new Ball(new LinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_RADIUS);
                 super.addToQueue(newBall);
             }
-            logger.debug("Gang of Balls power-up is activated with multiplier: " + gangofballs_multiplier);
+            logger.debug("Gang of Balls power-up is activated with multiplier: " + GANG_OF_BALLS_MULTIPLIER);
             return true;
         }
         return false;

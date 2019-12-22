@@ -48,13 +48,13 @@ public class BrickFactory {
     }
 
     public Brick get(SpecificType type, Position pos) {
-        boolean moving = Math.random() < Constants.movingProbability;
+        boolean moving = Math.random() < Constants.MOVING_PROBABILITY;
         MovementBehavior movBeh = new NoMovement(pos);
         Brick result;
         switch (type) {
             case SimpleBrick:
                 if (moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.BRICK_VELOCITY, 0));
                 result = new SimpleBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case MineBrick:
@@ -64,7 +64,7 @@ public class BrickFactory {
                 break;
             case HalfMetalBrick:
                 if (moving)
-                    movBeh = new LinearMovement(pos, new Velocity(Constants.Brick_Velocity, 0));
+                    movBeh = new LinearMovement(pos, new Velocity(Constants.BRICK_VELOCITY, 0));
                 result = new HalfMetalBrick(movBeh, Constants.BRICK_LENGTH, Constants.BRICK_WIDTH);
                 break;
             case WrapperBrick:

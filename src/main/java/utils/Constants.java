@@ -2,43 +2,65 @@ package utils;
 
 public final class Constants {
 
-  public static final int PADDLE_WIDTH = 20;
-  public static final int BALL_RADIUS = 10;
-  public static final int PowerupSize = 10;
-  public static final int EXPLOSION_RADIUS_FACTOR = 2;
-  public static final int laser_ammo_count = 5;
-  public static final int gangofballs_multiplier = 10;
-  public static final int BALL_INITIAL_VX = 0;
-  public static final int BALL_INITIAL_VY = 4;
-  public static final int BALL_DIAMETER = 17;
-  public static final double PADDLE_TURNING_SPEED = 2;
-  public static final double PADDLE_MOVING_SPEED = 10;
-  public static final double PADDLE_RESTORING_SPEED = 0.2;
-  public static final int STEP_BACK_THRESHOLD = 5;
-  public static final Velocity defaultRespawnVelocity = new Velocity(0, BALL_INITIAL_VY);
-  public static final double movingProbability = 0.9;
-  public static final String SimpleBrick = "SimpleBrick";
-  public static final String MineBrick = "MineBrick";
+
+
+  /** General */
   public static final int FRAME_HEIGHT = 1000;
   public static final int FRAME_WIDTH = 1500;
+  public static final int STEP_BACK_THRESHOLD = 5;
+  public static final double MOVING_PROBABILITY = 0.9;
+  public static boolean COPY_MODE = true;
+  public static boolean REFERENCE_MODE = false;
+
+  /** Paddle */
+  public static final double PADDLE_MOVING_SPEED = 10;
+  public static final double PADDLE_RESTORING_SPEED = 0.2;
+  public static final double PADDLE_TURNING_SPEED = 2;
+  public static final int PADDLE_WIDTH = 20;
+  public static final double PADDLE_LENGTH = FRAME_WIDTH / 10;
   public static final double L = FRAME_WIDTH / 10;
+
+  /** Bricks */
+  public static final String SIMPLE_BRICK = "SimpleBrick";
+  public static final String MINE_BRICK = "MineBrick";
   public static final int BRICK_LENGTH = 60;
   public static final int BRICK_WIDTH = 20;
   public static final int MINE_BRICK_DIAMETER = 20;
   public static final int ALIEN_LENGTH = 60;
-  public static final int ALIEN_WIDTH = 20;
   public static final int MIN_SIMPLE_BRICK = 75;
   public static final int MIN_HALF_METAL_BRICK = 10;
   public static final int MIN_MINE_BRICK = 10;
   public static final int MIN_WRAPPER_BRICK = 10;
 
+  /** Bounds */
   public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 4);
   public static final int BRICK_LOWER_BOUND = FRAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
   public static final int BRICK_UPPER_BOUND = 100;
   public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
   public static final int HALF_METAL_BRICK_YLIMIT = 4 * FRAME_HEIGHT / 10;
-  public static final long SLEEP_TIME = 5;
-  public static final double Brick_Velocity = L / (4 * (1000 / SLEEP_TIME));
+  public static final long SLEEP_TIME = 10;
+  public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
+
+  /** Ball */
+  public static final int BALL_INITIAL_VX = 0;
+  public static final int BALL_INITIAL_VY = 4;
+  public static final int BALL_DIAMETER = 17;
+  public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
+  public static final int BALL_RADIUS = 10;
+  public static final int BALL_SPAWNING_HEIGHT = 170;
+
+
+  /** Powerups */
+  public static final int EXPLOSION_RADIUS_FACTOR = 2;
+  public static final int POWERUP_SIZE = 10;
+  public static final double FIREBALL_EXPLOSION_RADIUS_FACTOR = 5;
+  public static final int LASER_AMMO_COUNT = 5;
+  public static final int GANG_OF_BALLS_MULTIPLIER = 10;
+
+
+  /** Aliens */
+  public static final int ALIEN_WIDTH = 20;
+
 
   /** Constants for UI */
   public static final String MENU_LABEL = "main";
@@ -78,28 +100,11 @@ public final class Constants {
     public static final int WIDTH = 20;
     public static final int RADIUS = 10;
 
-    public static final int PowerupSize = 10;
-
-    public static final int explosion_radius_factor = 2;
-    public static final double fireball_explosion_radius_factor = 5;
-
-    public static final int laser_ammo_count = 5;
-    public static final int gangofballs_multiplier = 10;
-
-
-    public static final int BALL_INITIAL_VX = 0;
-    public static final int BALL_INITIAL_VY = 2;
-    public static final int BALL_DIAMETER = 17;
-
-    public static final double PADDLE_TURNING_SPEED = 2;
-    public static final double PADDLE_MOVING_SPEED = 10;
-    public static final double PADDLE_RESTORING_SPEED = 0.2;
 
     public static final int POWERUP_TALLER_PADDLE_TIME = 30;
     public static final int POWERUP_CHEMICAL_BALL_TIME = 60;
 
 
-    public static final int STEP_BACK_THRESHOLD = 5;
 
     // Aliens
     public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000.0);
@@ -110,11 +115,5 @@ public final class Constants {
     public static final Velocity defaultVelocity = new Velocity(0, 0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0, BALL_INITIAL_VY);
 
-    public static final double Brick_Velocity = L / (4 * (1000 / SLEEP_TIME));
-
-    public static final double movingProbability = 0.9;
-
-    public static final String SimpleBrick = "SimpleBrick";
-    public static final String MineBrick = "MineBrick";
     //public static final defaultBoard
 }

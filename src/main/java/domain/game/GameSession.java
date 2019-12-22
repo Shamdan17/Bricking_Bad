@@ -100,7 +100,7 @@ public class GameSession {
      * saves current game
      */
     public void save() {
-        GameData data = board.getData();
+        GameData data = board.getDataCopy();
         unixTimestamp = Instant.now().getEpochSecond();
         sm.put(unixTimestamp, data);
     }

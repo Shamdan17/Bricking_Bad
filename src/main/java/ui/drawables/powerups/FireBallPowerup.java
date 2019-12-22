@@ -1,36 +1,27 @@
-package ui;
+package ui.drawables.powerups;
 
-import domain.BrickingBad;
 import domain.model.shape.MovableShape;
 import ui.drawables.Drawable;
 
 import java.awt.*;
 
-public class Alien implements Drawable {
-
+public class FireBallPowerup implements Drawable {
 
     private MovableShape ms;
-    private BrickingBad brickingBad;
-    private static boolean removeFlag = false;
 
-    public Alien(MovableShape ms, BrickingBad bb) {
+    public FireBallPowerup(MovableShape ms){
         this.ms = ms;
-        brickingBad = bb;
     }
 
+    @Override
     public void draw(Graphics g) {
         int x = (int) Math.round(ms.getPosition().getX());
         int y = (int) Math.round(ms.getPosition().getY());
         int length = ms.getLength();
         int width = ms.getWidth();
-        g.setColor(Color.red);
+        g.setColor(Color.pink);
         g.fillRect(x, y, length, width);
         g.drawRect(x, y, length, width);
     }
-
-    public static void setRemoveFlag(boolean state) {
-        removeFlag = state;
-    }
-
 
 }

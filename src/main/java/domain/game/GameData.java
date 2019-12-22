@@ -11,12 +11,14 @@ public class GameData implements Serializable {
 
     // This class wraps all information that can be saved or sent to UI
     private final List<MovableShape> movables;
-
-    public GameData(List<MovableShape> ms) {
+    boolean isCopy;
+    public GameData(List<MovableShape> ms, boolean isCopy) {
         this.movables = ms;
-    }
+        this.isCopy = isCopy;
+ }
 
     public List<MovableShape> getMovables() {
+        if(!isCopy) return movables;
         List<MovableShape> list = new ArrayList<>();
         for (MovableShape ms : movables) list.add(ms.copy());
         return list;

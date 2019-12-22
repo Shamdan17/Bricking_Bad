@@ -14,11 +14,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static utils.Constants.POWERUP_CHEMICAL_BALL_TIME;
-import static utils.Constants.PowerupSize;
+import static utils.Constants.POWERUP_SIZE;
 
 public class ChemicalBall extends PowerUp {
     public ChemicalBall(MovementBehavior mb) {
-        super(mb, PowerupSize, PowerupSize);
+        super(mb, POWERUP_SIZE, POWERUP_SIZE);
     }
 
     @Override

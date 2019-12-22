@@ -51,6 +51,6 @@ public class Explosion extends MovableShape {
 
     @Override
     public MovableShape copy() {
-        return new Explosion(getPosition());
+        return SerializationUtils.clone(this);
     }
 }

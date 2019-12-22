@@ -6,8 +6,7 @@ import ui.drawables.bricks.HalfMetalBrick;
 import ui.drawables.bricks.MineBrick;
 import ui.drawables.bricks.SimpleBrick;
 import ui.drawables.bricks.WrapperBrick;
-import ui.drawables.powerups.DestructiveLaserGun;
-import ui.drawables.powerups.GangOfBalls;
+import ui.drawables.powerups.*;
 
 public class DrawableFactory {
 
@@ -33,6 +32,20 @@ public class DrawableFactory {
                 return new DestructiveLaserGun(ms);
             case GangOfBallsPowerup:
                 return new GangOfBalls(ms);
+            case TallerPaddlePowerup:
+                return new TallerPaddle(ms);
+            case FireBall:
+                return new FireBall(ms);
+            case ChemicalBallPowerup:
+                return new ChemicalBallPowerup(ms);
+            case ChemicalBall:
+                return new ChemicalBall(ms);
+            case MagnetPowerup:
+                return new MagnetPowerUp(ms);
+            case FireBallPowerup:
+                return new FireBallPowerup(ms);
+            case FireBallExplosion:
+                return new Explosion(ms);
             default:
                 throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
         }

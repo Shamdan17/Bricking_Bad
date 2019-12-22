@@ -10,11 +10,11 @@ import utils.physics.math.util;
 
 import java.util.List;
 
-import static utils.Constants.PowerupSize;
+import static utils.Constants.POWERUP_SIZE;
 
 public class Fireball extends PowerUp {
     public Fireball(MovementBehavior mb) {
-        super(mb, PowerupSize, PowerupSize);
+        super(mb, POWERUP_SIZE, POWERUP_SIZE);
         super.destroy();
     }
 

@@ -8,14 +8,14 @@ import domain.model.movement.MovementBehavior;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 
-import static utils.Constants.PowerupSize;
+import static utils.Constants.POWERUP_SIZE;
 
 public class Magnet extends PowerUp {
 
     final static Logger logger = Logger.getLogger(Magnet.class);
 
     public Magnet(MovementBehavior mb) {
-        super(mb, PowerupSize, PowerupSize);
+        super(mb, POWERUP_SIZE, POWERUP_SIZE);
     }
 
     @Override

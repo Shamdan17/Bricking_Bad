@@ -37,7 +37,7 @@ public class Ball extends Circle {
     public void move() {
         super.move();
         // Self destruct if out of screen
-        if (getPosition().getY() > Constants.maxY) {
+        if (getPosition().getY() > Constants.FRAME_HEIGHT) {
             destroy();
         }
     }
