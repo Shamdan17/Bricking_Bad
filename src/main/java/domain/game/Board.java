@@ -238,7 +238,7 @@ public class Board {
                 }
                 // score logic is handled while removing bricks
                 if (ms.getType() == Type.Brick) {
-                    score += 300 / ((System.currentTimeMillis() - gameStartTime) / 1000);
+                    score += 300 / ((System.currentTimeMillis() - gameStartTime) / 1000 + 1);
                 }
                 movables.remove(ms);
                 i--;
