@@ -163,6 +163,27 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
         this.addMouseMotionListener((Brick) d);
       }
     }
+    drawLines(g);
+  }
+
+  private void drawLines(Graphics g) {
+      g.setColor(Color.RED);
+    g.drawLine(
+        0,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH);
+    g.drawLine(
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_UPPER_BOUND,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH);
+
+    g.drawLine(
+        0,
+        Constants.BRICK_UPPER_BOUND,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_UPPER_BOUND );
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -180,9 +201,9 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.MAP_SAVE_LABEL);
     }
     if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-        MapLoadPage loadPage = new MapLoadPage(brickingBad,cardLayout,contPanel);
-        contPanel.add(loadPage,Constants.MAP_LOAD_LABEL);
-        cardLayout.show(contPanel,Constants.MAP_LOAD_LABEL);
+      MapLoadPage loadPage = new MapLoadPage(brickingBad, cardLayout, contPanel);
+      contPanel.add(loadPage, Constants.MAP_LOAD_LABEL);
+      cardLayout.show(contPanel, Constants.MAP_LOAD_LABEL);
     }
 
     if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {

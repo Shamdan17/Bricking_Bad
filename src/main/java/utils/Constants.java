@@ -78,7 +78,7 @@ public final class Constants {
      */
     public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
     public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
-    public static final int BRICK_UPPER_BOUND = 100;
+    public static final int BRICK_UPPER_BOUND = 50;
     public static final int BRICK_RIGHT_BOUND = GAME_WIDTH - BRICK_LENGTH;
     public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = 10;

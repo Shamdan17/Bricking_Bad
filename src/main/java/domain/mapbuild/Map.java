@@ -1,6 +1,7 @@
 package domain.mapbuild;
 
 import domain.model.shape.MovableShape;
+import utils.Constants;
 import utils.Position;
 import utils.physics.PhysicsEngine;
 
@@ -74,6 +75,8 @@ public class Map {
    */
   public boolean move(UUID ID, Position to) {
 
+    if(to.getX() < Constants.BRICK_UPPER_BOUND || to.getX() > Constants.BRICK_RIGHT_BOUND) return false;
+    if(to.getY() < Constants.BRICK_UPPER_BOUND || to.getY() > Constants.BRICK_LOWER_BOUND) return false;
     MovableShape msh = null;
     Position originalPos = new Position(0, 0);
     // check if object exists in movables
