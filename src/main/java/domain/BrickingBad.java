@@ -100,6 +100,10 @@ public class BrickingBad {
         mapBuildSession.load(name);
     }
 
+    public boolean validMap(){
+        return mapBuildSession.validMap();
+    }
+
     public List<String> getMapList(){
         return mapBuildSession.getMapList();
     }

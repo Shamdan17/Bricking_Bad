@@ -38,7 +38,7 @@ public class Board {
   private long maxGameTime;
   private long gameStartTime;
   private boolean isGameOver = false;
-  private boolean testMode = true;
+  private boolean testMode = false;
 
   /**
    * OVERVIEW: constructor for Board MODIFIES: paddle, ball, movables EFFECT: creates new instance
@@ -113,8 +113,8 @@ public class Board {
       removeDestroyedMovables();
       handleQueue();
       checkNumBalls();
-      logger.debug("gameTime: " + gameTime);
-      logger.debug("Score: " + score);
+      //logger.debug("gameTime: " + gameTime);
+      //logger.debug("Score: " + score);
     } else {
       // TODO send a message to controller so it wont call animate and shows a message to player
       // maybe we can add another button to restart
@@ -127,13 +127,13 @@ public class Board {
       isGameOver = true;
       // TODO do sth if game is over !!
       // show a message in the ui
-      logger.info("You don't have any more Live. Game Over!");
+      //logger.info("You don't have any more Live. Game Over!");
     }
     if (gameTime >= maxGameTime) {
       isGameOver = true;
       // TODO do sth if game is over !!
       // show a message in the ui
-      logger.info("You don't have seconds left. Game Over!");
+      // logger.info("You don't have seconds left. Game Over!");
     }
   }
 
@@ -349,7 +349,8 @@ public class Board {
         remainingLives,
         gameTime,
         maxGameTime,
-        paddle.getLaserCount());
+        paddle.getLaserCount(),
+            (isGameOver && !testMode));
   }
 
   public GameData getData() {
@@ -365,7 +366,8 @@ public class Board {
         remainingLives,
         gameTime,
         maxGameTime,
-        paddle.getLaserCount());
+        paddle.getLaserCount(),
+            (isGameOver && !testMode));
   }
 
   private Paddle getPaddle(List<MovableShape> movables) {

@@ -121,7 +121,7 @@ public class BoardTest {
         List<MovableShape> movables = new ArrayList<>();
         movables.add(paddle);
         movables.add(ball);
-        GameData data = new GameData(movables,null, true, 0, 1, 0, 1,0);
+        GameData data = new GameData(movables,null, true, 0, 1, 0, 1,0,false);
         Board board = new Board(data);
 
         board.movePaddleLeft();

@@ -191,6 +191,10 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.MENU_LABEL);
     }
     if (e.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
+      if(!brickingBad.validMap()){
+          JOptionPane.showMessageDialog(null,Constants.NOT_VALID_MAP_WARNING);
+          return;
+      }
       gamePanel = new Game(brickingBad, cardLayout, contPanel);
       contPanel.add(gamePanel, Constants.GAME_LABEL);
       cardLayout.show(contPanel, Constants.GAME_LABEL);

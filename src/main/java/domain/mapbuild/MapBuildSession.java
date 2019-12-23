@@ -3,6 +3,7 @@ package domain.mapbuild;
 import domain.model.SpecificType;
 import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
+import domain.model.shape.MovableShape;
 import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
 import utils.Constants;
@@ -81,6 +82,28 @@ public class MapBuildSession {
             }
         }
 
+        return true;
+    }
+
+    public boolean validMap(){
+        int simple = 0;
+        int halfMetal = 0;
+        int mine = 0;
+        int wrapper = 0;
+        for(MovableShape ms : map.getMovables()){
+            if(ms.getSpecificType() == SpecificType.SimpleBrick)
+                simple++;
+            if(ms.getSpecificType() == SpecificType.HalfMetalBrick)
+                halfMetal++;
+            if(ms.getSpecificType() == SpecificType.MineBrick)
+                mine++;
+            if(ms.getSpecificType() == SpecificType.WrapperBrick)
+                wrapper++;
+        }
+        if (simple < Constants.MIN_SIMPLE_BRICK && !testMode) return false;
+        if (halfMetal < Constants.MIN_HALF_METAL_BRICK && !testMode) return false;
+        if (mine < Constants.MIN_MINE_BRICK && !testMode) return false;
+        if (wrapper < Constants.MIN_WRAPPER_BRICK && !testMode) return false;
         return true;
     }
 

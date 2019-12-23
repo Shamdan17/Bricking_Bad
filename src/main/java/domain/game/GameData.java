@@ -17,7 +17,8 @@ public class GameData implements Serializable {
   private long gameTime;
   private long maxGameTime;
   private List<PowerUp> powerupList;
-  private int laserCount ;
+  private int laserCount;
+  private boolean gameOver;
 
   public GameData(List<MovableShape> ms, boolean isCopy) {
     this.movables = ms;
@@ -32,7 +33,8 @@ public class GameData implements Serializable {
       int remainingLives,
       long gameTime,
       long maxGameTime,
-      int laserCount) {
+      int laserCount,
+      boolean gameOver) {
 
     this.movables = ms;
     this.powerupList = powerupList;
@@ -42,6 +44,7 @@ public class GameData implements Serializable {
     this.gameTime = gameTime;
     this.maxGameTime = maxGameTime;
     this.laserCount = laserCount;
+    this.gameOver = gameOver;
   }
 
   public List<MovableShape> getMovables() {
@@ -73,6 +76,10 @@ public class GameData implements Serializable {
 
   public int getLaserCount(){
       return laserCount;
+  }
+
+  public boolean isGameOver(){
+      return gameOver;
   }
 
   public boolean equals(GameData data) {

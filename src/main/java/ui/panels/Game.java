@@ -18,6 +18,7 @@ import java.util.List;
 
 public class Game extends JPanel implements Runnable, KeyListener, ActionListener {
 
+  boolean exit = false;
   private BrickingBad brickingBad;
   private JPanel contPanel;
   private CardLayout cardLayout;
@@ -55,9 +56,10 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
         Constants.SIDE_BAR_X, 0, Constants.SIDE_BAR_WIDTH, Constants.SIDE_BAR_LENGTH);
     pauseButton.addActionListener(this);
 
-    livesLeft.setBounds(Constants.LIVES_LEFT_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
-    score.setBounds(Constants.SCORE_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
-    time.setBounds(Constants.TIME_LEFT_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
+    livesLeft.setBounds(
+        Constants.LIVES_LEFT_X, 0, Constants.DEFAULT_WIDTH, Constants.DEFAULT_LENGTH);
+    score.setBounds(Constants.SCORE_X, 0, Constants.DEFAULT_WIDTH, Constants.DEFAULT_LENGTH);
+    time.setBounds(Constants.TIME_LEFT_X, 0, Constants.DEFAULT_WIDTH, Constants.DEFAULT_LENGTH);
 
     livesLeft.setFont(Constants.DEFAULT_FONT);
     score.setFont(Constants.DEFAULT_FONT);
@@ -71,7 +73,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   }
 
   public void run() {
-    while (true) {
+    while (!exit) {
       try {
         repaint();
         Thread.sleep(Constants.SLEEP_TIME);
@@ -86,6 +88,12 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
+    if(gameData.isGameOver()){
+        terminateGame();
+        goToMenu();
+        exit = true;
+        return;
+    }
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     updateLives(gameData.getRemainingLives());
     updateScore(gameData.getScore());
@@ -95,18 +103,39 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
       Drawable d = DrawableFactory.get(ms, brickingBad);
       d.draw(g);
     }
+
   }
 
-  private void updateScore(double newScore){
-      score.setText("Score: " + newScore);
+  private void terminateGame() {
+    EventQueue.invokeLater(
+        new Runnable() {
+          @Override
+          public void run() {
+            JOptionPane.showMessageDialog(null, "Game Over! you shall return to main menu now!");
+          }
+        });
   }
 
-  private void updateTime(long newTime){
-      time.setText("Time Elapsed: " + newTime);
+  private void goToMenu() {
+    EventQueue.invokeLater(
+        new Runnable() {
+          @Override
+          public void run() {
+            cardLayout.show(contPanel, Constants.MENU_LABEL);
+          }
+        });
   }
 
-  private void updateLives(int lives){
-      livesLeft.setText(lives + " Lives Left");
+  private void updateScore(double newScore) {
+    score.setText("Score: " + newScore);
+  }
+
+  private void updateTime(long newTime) {
+    time.setText("Time Elapsed: " + newTime);
+  }
+
+  private void updateLives(int lives) {
+    livesLeft.setText(lives + " Lives Left");
   }
 
   @Override
