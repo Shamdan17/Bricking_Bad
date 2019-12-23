@@ -74,7 +74,7 @@ public class MainMenu extends JPanel implements ActionListener {
       cardLayout.show(contPanel, Constants.MAP_BUILD_LABEL);
     }
     if (actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      GameLoadPage loadPage = new GameLoadPage(brickingBad, cardLayout, contPanel);
+      GameLoadPage loadPage = new GameLoadPage(brickingBad, cardLayout, contPanel,Constants.MENU_LABEL);
       contPanel.add(loadPage,Constants.GAME_LOAD_LABEL);
       cardLayout.show(contPanel,Constants.GAME_LOAD_LABEL);
     }

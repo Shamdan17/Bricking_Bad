@@ -26,12 +26,13 @@ public class GameLoadPage extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
 
     private List<String> savedList;
+    private String prevLabel;
 
-    public GameLoadPage(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel){
+    public GameLoadPage(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel, String prevLabel){
         this.brickingBad = brickingBad;
         this.cardLayout = cardLayout;
         this.contPanel = contPanel;
-
+        this.prevLabel = prevLabel;
         this.loadButton = new JButton(Constants.LOAD_BUTTON);
         this.cancelButton = new JButton(Constants.CANCEL_BUTTON);
 
@@ -72,7 +73,7 @@ public class GameLoadPage extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getActionCommand().equals(Constants.CANCEL_BUTTON)){
-            cardLayout.show(contPanel,Constants.PAUSE_LABEL);
+            cardLayout.show(contPanel,prevLabel);
         }
         if(actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)){
             int index = saveJList.getSelectedIndex();
