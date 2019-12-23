@@ -23,11 +23,18 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private CardLayout cardLayout;
   private JButton pauseButton;
   private Inventory inventory;
+  private JLabel livesLeft;
+  private JLabel score;
+  private JLabel time;
 
   public Game(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
+
+    this.livesLeft = new JLabel();
+    this.score = new JLabel();
+    this.time = new JLabel();
 
     this.pauseButton = new JButton(Constants.PAUSE_BUTTON);
     this.inventory = new Inventory(brickingBad, cardLayout, contPanel);
@@ -47,7 +54,19 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     inventory.setBounds(
         Constants.SIDE_BAR_X, 0, Constants.SIDE_BAR_WIDTH, Constants.SIDE_BAR_LENGTH);
     pauseButton.addActionListener(this);
+
+    livesLeft.setBounds(Constants.LIVES_LEFT_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
+    score.setBounds(Constants.SCORE_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
+    time.setBounds(Constants.TIME_LEFT_X,0,Constants.DEFAULT_WIDTH,Constants.DEFAULT_LENGTH);
+
+    livesLeft.setFont(Constants.DEFAULT_FONT);
+    score.setFont(Constants.DEFAULT_FONT);
+    time.setFont(Constants.DEFAULT_FONT);
+
     add(pauseButton);
+    add(time);
+    add(score);
+    add(livesLeft);
     add(inventory, BorderLayout.EAST);
   }
 
@@ -68,11 +87,26 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
+    updateLives(gameData.getRemainingLives());
+    updateScore(gameData.getScore());
+    updateTime(gameData.getGameTime());
     List<MovableShape> drawables = gameData.getMovables();
     for (MovableShape ms : drawables) {
       Drawable d = DrawableFactory.get(ms, brickingBad);
       d.draw(g);
     }
+  }
+
+  private void updateScore(double newScore){
+      score.setText("Score: " + newScore);
+  }
+
+  private void updateTime(long newTime){
+      time.setText("Time Elapsed: " + newTime);
+  }
+
+  private void updateLives(int lives){
+      livesLeft.setText(lives + " Lives Left");
   }
 
   @Override

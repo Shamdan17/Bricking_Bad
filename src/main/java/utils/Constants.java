@@ -179,7 +179,12 @@ public final class Constants {
     public static final Font POWERUP_FONT = new Font("consolas",Font.BOLD, 30);
     public static final String POWERUP_LEFT_DEFAULT = "0 Left";
 
-
+    public static final int SCORE_X = 100;
+    public static final int TIME_LEFT_X = 700;
+    public static final int LIVES_LEFT_X = 1300;
+    public static final int DEFAULT_WIDTH = 300 ;
+    public static final int DEFAULT_LENGTH = 40;
+    public static final Font DEFAULT_FONT = new Font("monospaced",Font.PLAIN,20);
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;
