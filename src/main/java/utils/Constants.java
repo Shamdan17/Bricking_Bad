@@ -79,7 +79,7 @@ public final class Constants {
     public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
     public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
     public static final int BRICK_UPPER_BOUND = 50;
-    public static final int BRICK_RIGHT_BOUND = GAME_WIDTH - BRICK_LENGTH;
+    public static final int BRICK_RIGHT_BOUND = GAME_WIDTH ;
     public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = 10;
     public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
@@ -186,6 +186,12 @@ public final class Constants {
     public static final int DEFAULT_WIDTH = 300 ;
     public static final int DEFAULT_LENGTH = 40;
     public static final Font DEFAULT_FONT = new Font("monospaced",Font.PLAIN,20);
+    public static final Font VERY_BIG_FONT = new Font("monospaced",Font.PLAIN,120);
+
+    public static final int VERDICT_X = 400;
+    public static final int VERDICT_Y = 50;
+    public static final int VERDICT_WIDTH = 800;
+    public static final int VERDICT_LENGTH = 800;
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;

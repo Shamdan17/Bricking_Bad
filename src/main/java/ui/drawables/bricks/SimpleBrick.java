@@ -12,8 +12,9 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
 
   private boolean isDragged;
   private Position oldPos;
-  private double dx ;
-  private double dy ;
+  private double dx;
+  private double dy;
+
   public SimpleBrick(MovableShape ms, BrickingBad bb) {
     super(ms, bb);
     isDragged = false;
@@ -22,6 +23,7 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
   public void draw(Graphics g) {
     int x = (int) Math.round(ms.getPosition().getX());
     int y = (int) Math.round(ms.getPosition().getY());
+
     int length = ms.getLength();
     int width = ms.getWidth();
     g.setColor(Color.black);
@@ -51,10 +53,10 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
   public void mousePressed(MouseEvent mouseEvent) {
     if (!isInside(mouseEvent.getX(), mouseEvent.getY())) return;
     if (!isDragged) {
-        double x = ms.getPosition().getX();
-        double y = ms.getPosition().getY();
-        dx = mouseEvent.getX() - x;
-        dy = mouseEvent.getY() - y;
+      double x = ms.getPosition().getX();
+      double y = ms.getPosition().getY();
+      dx = mouseEvent.getX() - x;
+      dy = mouseEvent.getY() - y;
       oldPos = new Position(ms.getPosition().getX(), ms.getPosition().getY());
       isDragged = true;
     }
@@ -66,7 +68,7 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
       Position newPos = new Position(mouseEvent.getX() - dx, mouseEvent.getY() - dy);
       boolean isMoved = brickingBad.moveBrick(ms.getID(), newPos);
       if (!isMoved) {
-        brickingBad.moveBrick(ms.getID(),oldPos);
+        brickingBad.moveBrick(ms.getID(), oldPos);
       }
       isDragged = false;
     }
@@ -80,15 +82,11 @@ public class SimpleBrick extends Brick implements MouseMotionListener {
 
   @Override
   public void mouseDragged(MouseEvent mouseEvent) {
-      if(!isDragged)
-          return ;
-      int x = mouseEvent.getX(), y = mouseEvent.getY();
-      brickingBad.dragBrick(ms.getID(),new Position(x - dx,y - dy));
-
+    if (!isDragged) return;
+    int x = mouseEvent.getX(), y = mouseEvent.getY();
+    brickingBad.dragBrick(ms.getID(), new Position(x - dx, y - dy));
   }
 
   @Override
-  public void mouseMoved(MouseEvent mouseEvent) {
-
-  }
+  public void mouseMoved(MouseEvent mouseEvent) {}
 }

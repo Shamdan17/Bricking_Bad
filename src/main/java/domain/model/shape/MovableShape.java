@@ -16,6 +16,7 @@ import java.util.UUID;
 // Shapes represent objects such as circles and rectangles
 // All shapes have two dimensions for now, length and width. For circles, both of these parameters are the diameter
 public abstract class MovableShape implements Serializable {
+    private static final long serialVersionUID = -2312364032183254633L;
     // Object dimensions
     private int length, width;
     private double angle;

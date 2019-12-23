@@ -110,7 +110,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
     this.add(saveButton);
     this.add(loadButton);
     this.add(deleteBlock);
-
+    setSize(Constants.MAX_X,Constants.MAX_Y);
     brickingBad.initializeMapBuild();
     (new Thread(this)).start();
   }

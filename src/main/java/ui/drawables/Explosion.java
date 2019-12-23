@@ -28,4 +28,7 @@ public class Explosion implements Drawable {
         ms.getLength(),
         ms.getWidth());
   }
+  public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
 }

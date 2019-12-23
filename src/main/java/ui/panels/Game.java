@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
 import java.util.List;
 
 public class Game extends JPanel implements Runnable, KeyListener, ActionListener {
@@ -27,15 +28,22 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private JLabel livesLeft;
   private JLabel score;
   private JLabel time;
+  private Map<UUID,Drawable> drawables;
+
+  private JLabel gameOverLabel;
+  private JLabel youWonLabel;
 
   public Game(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
+    this.drawables = new HashMap<>();
 
     this.livesLeft = new JLabel();
     this.score = new JLabel();
     this.time = new JLabel();
+    this.gameOverLabel = new JLabel("GAME OVER!");
+    this.youWonLabel = new JLabel("You Won !");
 
     this.pauseButton = new JButton(Constants.PAUSE_BUTTON);
     this.inventory = new Inventory(brickingBad, cardLayout, contPanel);
@@ -65,6 +73,15 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     score.setFont(Constants.DEFAULT_FONT);
     time.setFont(Constants.DEFAULT_FONT);
 
+    gameOverLabel.setFont(Constants.VERY_BIG_FONT);
+    youWonLabel.setFont(Constants.VERY_BIG_FONT);
+
+    gameOverLabel.setBounds(Constants.VERDICT_X,Constants.VERDICT_Y,Constants.VERDICT_WIDTH,Constants.VERDICT_LENGTH);
+    gameOverLabel.setForeground(Color.RED);
+
+    youWonLabel.setBounds(Constants.VERDICT_X,Constants.VERDICT_Y,Constants.VERDICT_WIDTH,Constants.VERDICT_LENGTH);
+    youWonLabel.setForeground(Color.GREEN);
+
     add(pauseButton);
     add(time);
     add(score);
@@ -88,42 +105,41 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
-    if(gameData.isGameOver()){
-        terminateGame();
-        goToMenu();
-        exit = true;
-        return;
+     if(gameData.isGameOver()){
+        add(gameOverLabel);
     }
+    if(gameData.isWin()){
+        add(youWonLabel);
+    }
+
+
+    Map<UUID, MovableShape> IDMap = gameData.getMovablesIDMap();
+    List<MovableShape> movables = gameData.getMovables();
+    List<UUID> removables = new ArrayList<>();
+    for (UUID ID : drawables.keySet()) {
+      if (!IDMap.containsKey(ID)) removables.add(ID);
+    }
+    for (UUID ID : removables) {
+      drawables.remove(ID);
+    }
+    for (MovableShape ms :movables) {
+      if (drawables.containsKey(ms.getID())) {
+        Drawable d = drawables.get(ms.getID());
+        d.setMovable(ms);
+        d.draw(g);
+      } else {
+        Drawable d = DrawableFactory.get(ms, brickingBad);
+        drawables.put(ms.getID(), d);
+        d.draw(g);
+      }
+    }
+
+
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     updateLives(gameData.getRemainingLives());
     updateScore(gameData.getScore());
     updateTime(gameData.getGameTime());
-    List<MovableShape> drawables = gameData.getMovables();
-    for (MovableShape ms : drawables) {
-      Drawable d = DrawableFactory.get(ms, brickingBad);
-      d.draw(g);
-    }
 
-  }
-
-  private void terminateGame() {
-    EventQueue.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            JOptionPane.showMessageDialog(null, "Game Over! you shall return to main menu now!");
-          }
-        });
-  }
-
-  private void goToMenu() {
-    EventQueue.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            cardLayout.show(contPanel, Constants.MENU_LABEL);
-          }
-        });
   }
 
   private void updateScore(double newScore) {

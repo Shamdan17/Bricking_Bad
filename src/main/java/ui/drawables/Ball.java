@@ -22,4 +22,8 @@ public class Ball implements Drawable {
         g.fillOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
         g.drawOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
     }
+
+    public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
 }
