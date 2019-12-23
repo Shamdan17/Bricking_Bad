@@ -38,7 +38,7 @@ public class AccountManager {
      *                 password hash, to avoid storing actual passwords in the
      *                 storage layer
      */
-    public boolean Register(String username, String password) {
+    public boolean register(String username, String password) {
         if (username == null || password == null) {
             throw new IllegalArgumentException("cannot register sername or password with null");
         }

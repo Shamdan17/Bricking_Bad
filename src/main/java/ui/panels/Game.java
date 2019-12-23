@@ -112,8 +112,8 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
         add(youWonLabel);
     }
 
-
     Map<UUID, MovableShape> IDMap = gameData.getMovablesIDMap();
+
     List<MovableShape> movables = gameData.getMovables();
     List<UUID> removables = new ArrayList<>();
     for (UUID ID : drawables.keySet()) {

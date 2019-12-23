@@ -21,16 +21,17 @@ public class MapBuildSession {
     private StorageManager storageManager;
     private String unixTimestamp;
     private BrickFactory bf = new BrickFactory();
-
+    private String username;
     /**
      * OVERVIEW: constructor for MapBuildSession
      * MODIFIES: map, storageManager
      * EFFECT: create a new instance of MapBuildSession
      */
-    public MapBuildSession() {
-        map = new Map();
+    public MapBuildSession(String username) {
+        this.map = new Map();
+        this.username = username;
         // TODO: replace this string with a variable value
-        storageManager = new BinaryStorage("MapBuild");
+        storageManager = new BinaryStorage(username);
     }
 
     private boolean testMode = false;

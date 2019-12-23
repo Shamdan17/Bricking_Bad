@@ -154,9 +154,6 @@ public final class Constants {
     public static final String BRICK_NUMBER_WARNING = "Number of Bricks does not satisfy constraints";
     public static final String NO_PREVIOUS_SAVE_WARNING = "NO Previous Saves Available";
     public static final String NOT_VALID_MAP_WARNING = "Cannot start Game without valid number of bricks";
-    public static final String PASSWORD_LABEL = "Password Label";
-    public static final String USERNAME_LABEL = "Username Label";
-    public static final String LOGIN_BUTTON = "Login";
 
     public static final int MAIN_MENU_BUTTON_LENGTH = 60;
     public static final int MAIN_MENU_BUTTON_WIDTH = 600;
@@ -192,6 +189,17 @@ public final class Constants {
     public static final int VERDICT_Y = 50;
     public static final int VERDICT_WIDTH = 800;
     public static final int VERDICT_LENGTH = 800;
+
+
+    public static final String PASSWORD_LABEL = "Password:";
+    public static final String USERNAME_LABEL = "Username:";
+    public static final String LOGIN_BUTTON = "Login";
+    public static final String CREATE_ACCOUNT_LABEL = "create account";
+    public static final String LOGIN_LABEL = "login";
+    public static final String CREATE_ACCOUNT_BUTTON = "create account";
+    public static final String LOGOUT_BUTTON = "Log Out";
+    public static final int LOGIN_INPUT_LENGTH = 30;
+    public static final int LOGIN_INPUT_WIDTH = 200;
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;
