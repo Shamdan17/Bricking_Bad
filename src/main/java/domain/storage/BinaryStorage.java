@@ -111,7 +111,6 @@ public class BinaryStorage implements StorageManager {
             return;
         }
 
-
         try {
             FileInputStream fis = new FileInputStream(dataFile);
             ObjectInputStream ois = new ObjectInputStream(fis);

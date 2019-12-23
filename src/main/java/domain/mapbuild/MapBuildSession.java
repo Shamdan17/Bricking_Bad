@@ -9,6 +9,8 @@ import utils.Constants;
 import utils.Position;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -163,6 +165,10 @@ public class MapBuildSession {
     public void load(String name) {
         MapBuildData data = (MapBuildData) storageManager.get(name);
         map = new Map(data);
+    }
+
+    public List<String> getMapList(){
+        return new ArrayList<>(storageManager.keySet());
     }
 
     /**

@@ -48,7 +48,6 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   private JLabel wrapperBrickLabel;
   private NumberFormat numberFormat;
 
-
   public MapBuild(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.drawables = new HashMap<>();
     this.menuButton = new JButton(Constants.MENU_BUTTON);
@@ -176,13 +175,18 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.GAME_LABEL);
     }
     if (e.getActionCommand().equals(Constants.SAVE_BUTTON)) {
-      brickingBad.saveMap("");
-    }
-    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
-      Brick.setRemoveFlag(deleteBlock.isSelected());
+      MapSavePage savePage = new MapSavePage(brickingBad, cardLayout, contPanel);
+      contPanel.add(savePage, Constants.MAP_SAVE_LABEL);
+      cardLayout.show(contPanel, Constants.MAP_SAVE_LABEL);
     }
     if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      brickingBad.loadMap("");
+        MapLoadPage loadPage = new MapLoadPage(brickingBad,cardLayout,contPanel);
+        contPanel.add(loadPage,Constants.MAP_LOAD_LABEL);
+        cardLayout.show(contPanel,Constants.MAP_LOAD_LABEL);
+    }
+
+    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
+      Brick.setRemoveFlag(deleteBlock.isSelected());
     }
     if (e.getActionCommand().equals(Constants.ADD_BRICKS_BUTTON)) {
 

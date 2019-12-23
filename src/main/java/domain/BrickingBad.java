@@ -62,7 +62,7 @@ public class BrickingBad {
 
     public void startGame(){
         MapBuildData data = mapBuildSession.getData();
-        gameSession = new GameSession(data);
+        gameSession.loadMap(data);
     }
 
     /**
@@ -87,28 +87,21 @@ public class BrickingBad {
     }
 
     /**
-     * saves the game
-     */
-    public void saveGame() {
-        gameSession.save();
-    }
-
-    /**
      * saves map
      */
     public void saveMap(String name) {
-        mapBuildSession.save();
+        mapBuildSession.save(name);
     }
 
     /**
      * loads map
      */
     public void loadMap(String name) {
-        mapBuildSession.load();
+        mapBuildSession.load(name);
     }
 
     public List<String> getMapList(){
-        return null;
+        return mapBuildSession.getMapList();
     }
 
     /**

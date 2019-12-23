@@ -4,13 +4,19 @@ import domain.model.SpecificType;
 import domain.model.powerup.PowerUp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
     private Board board;
-    private ArrayList<PowerUp> powerUps;
+    private List<PowerUp> powerUps;
 
     public Inventory(Board b) {
         powerUps = new ArrayList<>();
+        this.board = b;
+    }
+
+    public Inventory(Board b, List<PowerUp> pList){
+        this.powerUps = pList;
         this.board = b;
     }
 
@@ -40,6 +46,10 @@ public class Inventory {
                 return true;
             return false;
         });
+    }
+
+    public List<PowerUp> getPowerupList(){
+        return powerUps;
     }
 
 

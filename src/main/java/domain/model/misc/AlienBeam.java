@@ -18,7 +18,7 @@ public class AlienBeam extends MovableShape {
 
     public AlienBeam(Position source) {
         // Make the length of the bream extend from the left of the screen to the right
-        super(new NoMovement(new Position(0, source.getY())), Constants.FRAME_HEIGHT, 5);
+        super(new NoMovement(new Position(0, source.getY())), Constants.GAME_HEIGHT, 5);
         initialSource = source;
         this.ticksLeft = 2;
     }

@@ -3,6 +3,7 @@ package ui.panels;
 import domain.BrickingBad;
 import ui.MKeyListener;
 import ui.load.GameLoadPage;
+import ui.load.MapLoadPage;
 import utils.Constants;
 
 import javax.swing.*;
@@ -18,7 +19,6 @@ public class MainMenu extends JPanel implements ActionListener {
 
   private MapBuild mapBuildPanel;
   private Help help;
-  private GameLoadPage loadPage;
 
   private JButton startGameButton;
   private JButton loadGameButton;
@@ -74,9 +74,9 @@ public class MainMenu extends JPanel implements ActionListener {
       cardLayout.show(contPanel, Constants.MAP_BUILD_LABEL);
     }
     if (actionEvent.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      loadPage = new GameLoadPage(brickingBad, cardLayout, contPanel);
-      // TODO: modify this after having proper load save mechanisms
-      // TODO: up
+      GameLoadPage loadPage = new GameLoadPage(brickingBad, cardLayout, contPanel);
+      contPanel.add(loadPage,Constants.GAME_LOAD_LABEL);
+      cardLayout.show(contPanel,Constants.GAME_LOAD_LABEL);
     }
     if (actionEvent.getActionCommand().equals(Constants.HELP_BUTTON)) {
       help = new Help(cardLayout, contPanel);

@@ -19,9 +19,9 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
             pos,
             new Velocity(0, Constants.Protecting_Alien_Speed),
             0,
-            Constants.FRAME_WIDTH,
+            Constants.GAME_WIDTH,
             0,
-            Constants.FRAME_HEIGHT * 0.5));
+            Constants.GAME_HEIGHT * 0.5));
   }
 
   @Override

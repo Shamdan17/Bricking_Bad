@@ -1,18 +1,46 @@
 package utils;
 
+import java.awt.*;
+
 public final class Constants {
 
 
     /**
      * General
      */
-    public static final int FRAME_HEIGHT = 1000;
-    public static final int FRAME_WIDTH = 1500;
-    public static final int STEP_BACK_THRESHOLD = 5;
-    public static final double MOVING_PROBABILITY = 0.9;
-    public static boolean COPY_MODE = true;
+
+    public static final int GAME_HEIGHT = 1000;
+    public static final int GAME_WIDTH = 1500 - 60;
+    public static final int MAX_X = GAME_WIDTH + 260;
+    public static final int MAX_Y = GAME_HEIGHT;
+    public static final int SIDE_BAR_WIDTH = 200;
+    public static final int SIDE_BAR_X = GAME_WIDTH + 60;
+    public static final int SIDE_BAR_LENGTH = GAME_HEIGHT;
     public static boolean REFERENCE_MODE = false;
 
+    public static final int POWERUP_LABEL_LENGTH = 30;
+    public static final int POWERUP_LABEL_WIDTH = 60;
+    public static final int POWERUP_LENGTH = 80;
+    public static final int POWERUP_WIDTH = 180;
+    public static final int POWERUP_X =  10;
+    public static final int POWERUP_LEFT_X = POWERUP_X + 20;
+
+    public static final int MAGNET_POWERUP_Y = 200;
+    public static final int MAGNET_LEFT_Y = 270;
+
+    public static final int TALLER_POWERUP_Y = 400;
+    public static final int TALLER_LEFT_Y = 470;
+
+    public static final int CHEMICAL_POWERUP_Y = 600;
+    public static final int CHEMICAL_LEFT_Y = 670;
+
+    public static final int LASER_POWERUP_Y = 800;
+    public static final int LASER_LEFT_Y = 870;
+
+
+    public static boolean COPY_MODE = true;
+    public static final double MOVING_PROBABILITY = 0.9;
+    public static final int STEP_BACK_THRESHOLD = 5;
     /**
      * Gameplay
      */
@@ -28,8 +56,8 @@ public final class Constants {
     public static final double PADDLE_RESTORING_SPEED = 0.2;
     public static final double PADDLE_TURNING_SPEED = 2;
     public static final int PADDLE_WIDTH = 20;
-    public static final double PADDLE_LENGTH = FRAME_WIDTH / 10;
-    public static final double L = FRAME_WIDTH / 10;
+    public static final double PADDLE_LENGTH = GAME_WIDTH / 10;
+    public static final double L = GAME_WIDTH / 10;
 
     /**
      * Bricks
@@ -48,11 +76,11 @@ public final class Constants {
     /**
      * Bounds
      */
-    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 3);
-    public static final int BRICK_LOWER_BOUND = FRAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
+    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
+    public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
     public static final int BRICK_UPPER_BOUND = 100;
-    public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
-    public static final int HALF_METAL_BRICK_YLIMIT = 5 * FRAME_HEIGHT / 10;
+    public static final int BRICK_RIGHT_BOUND = GAME_WIDTH - BRICK_LENGTH;
+    public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = 10;
     public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
 
@@ -135,6 +163,23 @@ public final class Constants {
     public static final int TEXT_INPUT_WIDTH = 200;
     public static final int BUTTON_LENGTH = 50;
     public static final int BUTTON_WIDTH = 200;
+    public static final int PAUSE_BUTTON_WIDTH = 80;
+    public static final int PAUSE_BUTTON_LENGTH = 40;
+
+    public static final int LOAD_MENU_WIDTH = 500;
+    public static final int LOAD_MENU_LENGTH = 500;
+    public static final int LOAD_MENU_FONT_SIZE = 30;
+    public static final String LOAD_MENU_FONT = "consolas";
+
+
+    public static final String TALLER_POWERUP_BUTTON = "Taller Paddle";
+    public static final String MAGNET_POWERUP_BUTTON = "Magnetic Paddle";
+    public static final String CHEMICAL_POWERUP_BUTTON = "Chemical Ball";
+    public static final String LASER_POWERUP_BUTTON = "Laser";
+    public static final Font POWERUP_FONT = new Font("consolas",Font.BOLD, 30);
+    public static final String POWERUP_LEFT_DEFAULT = "0 Left";
+
+
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;

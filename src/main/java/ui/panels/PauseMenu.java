@@ -1,4 +1,4 @@
-package ui;
+package ui.panels;
 
 import domain.BrickingBad;
 import ui.load.GameLoadPage;
@@ -41,15 +41,20 @@ public class PauseMenu extends JPanel implements ActionListener {
   void addButtons() {
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.gridx = 0;
+    Dimension size = new Dimension(Constants.MAIN_MENU_BUTTON_WIDTH,Constants.MAIN_MENU_BUTTON_LENGTH);
+    menuButton.setPreferredSize(size);
+    saveButton.setPreferredSize(size);
+    loadButton.setPreferredSize(size);
+    gameButton.setPreferredSize(size);
     gbc.gridy = 0;
-    add(gameButton);
-    gbc.gridx = 1;
-    this.add(saveButton);
-    gbc.gridx = 2;
-    this.add(loadButton);
-    gbc.gridx = 3;
-    this.add(menuButton);
+    gbc.gridx = 0;
+    add(gameButton,gbc);
+    gbc.gridy = 1;
+    add(saveButton,gbc);
+    gbc.gridy = 2;
+    add(loadButton,gbc);
+    gbc.gridy = 3;
+    add(menuButton,gbc);
   }
 
   @Override

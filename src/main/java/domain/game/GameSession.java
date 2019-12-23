@@ -25,16 +25,15 @@ public class GameSession {
         this.board = new Board();
     }
 
-    public GameSession(MapBuildData data){
-        this.board = new Board(data);
-        this.sm = new BinaryStorage("hi");
-    }
-
     /**
      * This function launches the next step of movement for objects in the board
      */
     public void nextStep() {
         board.animate();
+    }
+
+    public void loadMap(MapBuildData data){
+        board = new Board(data);
     }
 
     /**

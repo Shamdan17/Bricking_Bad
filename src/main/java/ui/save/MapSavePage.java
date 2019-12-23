@@ -55,7 +55,7 @@ public class MapSavePage extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent actionEvent) {
       if(actionEvent.getActionCommand().equals(Constants.CANCEL_BUTTON)){
-          cardLayout.show(contPanel,Constants.PAUSE_LABEL);
+          cardLayout.show(contPanel,Constants.MAP_BUILD_LABEL);
       }
       if(actionEvent.getActionCommand().equals(Constants.SAVE_BUTTON)){
           String name = textInput.getText();
@@ -64,7 +64,7 @@ public class MapSavePage extends JPanel implements ActionListener {
               return;
           }
           brickingBad.saveMap(name);
-          cardLayout.show(contPanel, Constants.PAUSE_LABEL);
+          cardLayout.show(contPanel, Constants.MAP_BUILD_LABEL);
       }
   }
 }

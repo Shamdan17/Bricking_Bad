@@ -4,14 +4,8 @@ import domain.BrickingBad;
 import domain.game.GameData;
 import domain.model.shape.MovableShape;
 import ui.MKeyListener;
-import ui.PauseMenu;
-import ui.drawables.*;
-import ui.drawables.bricks.HalfMetalBrick;
-import ui.drawables.bricks.MineBrick;
-import ui.drawables.bricks.SimpleBrick;
-import ui.drawables.bricks.WrapperBrick;
-import ui.load.GameLoadPage;
-import ui.save.GameSavePage;
+import ui.drawables.Drawable;
+import ui.drawables.DrawableFactory;
 import utils.Constants;
 
 import javax.swing.*;
@@ -28,26 +22,33 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private JPanel contPanel;
   private CardLayout cardLayout;
   private JButton pauseButton;
+  private Inventory inventory;
 
   public Game(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
 
-
     this.pauseButton = new JButton(Constants.PAUSE_BUTTON);
-
-    pauseButton.addActionListener(this);
-
-    this.add(pauseButton);
-    this.addKeyListener(new MKeyListener(brickingBad));
-
+    this.inventory = new Inventory(brickingBad, cardLayout, contPanel);
+    setLayout(null);
     setBackground(new Color(204, 229, 255));
-    setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
+    setSize(Constants.MAX_X, Constants.MAX_Y);
 
+    setup();
+    setFocusable(true);
     brickingBad.startGame();
-
     (new Thread(this)).start();
+  }
+
+  void setup() {
+    addKeyListener(new MKeyListener(brickingBad));
+    pauseButton.setBounds(0, 0, Constants.PAUSE_BUTTON_WIDTH, Constants.PAUSE_BUTTON_LENGTH);
+    inventory.setBounds(
+        Constants.SIDE_BAR_X, 0, Constants.SIDE_BAR_WIDTH, Constants.SIDE_BAR_LENGTH);
+    pauseButton.addActionListener(this);
+    add(pauseButton);
+    add(inventory, BorderLayout.EAST);
   }
 
   public void run() {
@@ -62,12 +63,14 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   }
 
   public void paintComponent(Graphics g) {
+    this.requestFocus();
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
+    inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     List<MovableShape> drawables = gameData.getMovables();
     for (MovableShape ms : drawables) {
-      Drawable d = DrawableFactory.get(ms,brickingBad);
+      Drawable d = DrawableFactory.get(ms, brickingBad);
       d.draw(g);
     }
   }
@@ -75,9 +78,9 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   @Override
   public void actionPerformed(ActionEvent actionEvent) {
     if (actionEvent.getActionCommand().equals(Constants.PAUSE_BUTTON)) {
-        PauseMenu pauseMenu = new PauseMenu(brickingBad,cardLayout,contPanel);
-        contPanel.add(pauseMenu,Constants.PAUSE_LABEL);
-        cardLayout.show(contPanel,Constants.PAUSE_LABEL);
+      PauseMenu pauseMenu = new PauseMenu(brickingBad, cardLayout, contPanel);
+      contPanel.add(pauseMenu, Constants.PAUSE_LABEL);
+      cardLayout.show(contPanel, Constants.PAUSE_LABEL);
     }
   }
 

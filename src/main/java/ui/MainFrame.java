@@ -31,12 +31,10 @@ public class MainFrame extends JFrame {
         add(contPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
-        setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
+        setSize(Constants.MAX_X,Constants.MAX_Y);
         setVisible(true);
         setFocusable(true);
     }
-
-
 
 }
 
