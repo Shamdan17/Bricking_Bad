@@ -22,7 +22,7 @@ public class MapEditorTest {
     private BrickFactory brickFactory;
     @BeforeEach
     void setUp() {
-        mapEditor = new MapBuildSession();
+        mapEditor = new MapBuildSession("");
         brickFactory = new BrickFactory();
     }
 

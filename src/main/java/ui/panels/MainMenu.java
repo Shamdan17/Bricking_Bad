@@ -24,6 +24,7 @@ public class MainMenu extends JPanel implements ActionListener {
   private JButton loadGameButton;
   private JButton helpButton;
   private JButton exitButton;
+  private JButton logoutButton;
   // this class represents the main menu
 
   public MainMenu(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
@@ -31,6 +32,7 @@ public class MainMenu extends JPanel implements ActionListener {
     this.cardLayout = cardLayout;
     this.contPanel = contPanel;
 
+    this.logoutButton = new JButton(Constants.LOGOUT_BUTTON);
     this.startGameButton = new JButton(Constants.START_GAME_BUTTON);
     this.loadGameButton = new JButton(Constants.LOAD_BUTTON);
     this.helpButton = new JButton(Constants.HELP_BUTTON);
@@ -43,6 +45,7 @@ public class MainMenu extends JPanel implements ActionListener {
     loadGameButton.addActionListener(this);
     helpButton.addActionListener(this);
     exitButton.addActionListener(this);
+    logoutButton.addActionListener(this);
   }
 
   // here add buttons to main menu
@@ -54,6 +57,7 @@ public class MainMenu extends JPanel implements ActionListener {
     loadGameButton.setPreferredSize(size);
     helpButton.setPreferredSize(size);
     exitButton.setPreferredSize(size);
+    logoutButton.setPreferredSize(size);
     gbc.gridy = 0;
     gbc.gridx = 0;
     add(startGameButton,gbc);
@@ -63,6 +67,8 @@ public class MainMenu extends JPanel implements ActionListener {
     add(helpButton,gbc);
     gbc.gridy = 3;
     add(exitButton,gbc);
+    gbc.gridy = 4;
+    add(logoutButton,gbc);
   }
 
   @Override
@@ -82,6 +88,9 @@ public class MainMenu extends JPanel implements ActionListener {
       help = new Help(cardLayout, contPanel);
       contPanel.add(help, Constants.HELP_LABEL);
       cardLayout.show(contPanel, Constants.HELP_LABEL);
+    }
+    if(actionEvent.getActionCommand().equals(Constants.LOGOUT_BUTTON)){
+        cardLayout.show(contPanel,Constants.LOGIN_LABEL);
     }
     if (actionEvent.getActionCommand().equals(Constants.EXIT_BUTTON)) {
       System.exit(0);
