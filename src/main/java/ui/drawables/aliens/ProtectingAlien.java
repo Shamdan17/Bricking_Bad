@@ -11,7 +11,7 @@ import java.io.File;
 public class ProtectingAlien implements Drawable {
 
   private MovableShape ms;
-  private String iconURL = "/home/nazirnayal/Desktop/302_2019_shawarma/icons/ProtectingAlien.jpeg";
+  private String iconURL = System.getProperty("user.dir") + "/assets/ProtectingAlien.png";
   private BufferedImage bufferedImage;
   private Image image;
 

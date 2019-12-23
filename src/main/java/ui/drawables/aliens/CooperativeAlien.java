@@ -11,7 +11,7 @@ import java.io.File;
 public class CooperativeAlien implements Drawable {
 
   private MovableShape ms;
-  private String iconURL = "/home/nazirnayal/Desktop/302_2019_shawarma/icons/CooperativeAlien.jpeg";
+  private String iconURL = System.getProperty("user.dir") + "/assets/CooperativeAlien.png";
   private BufferedImage bufferedImage;
   private Image image;
 
@@ -30,11 +30,6 @@ public class CooperativeAlien implements Drawable {
     int x = (int) Math.round(ms.getPosition().getX());
     int y = (int) Math.round(ms.getPosition().getY());
     g.drawImage(image, x, y, null);
-    //        int length = ms.getLength();
-    //        int width = ms.getWidth();
-    //        g.setColor(Color.orange);
-    //        g.fillRect(x, y, length, width);
-    //        g.drawRect(x, y, length, width);
   }
 
   public void setMovable(MovableShape ms) {

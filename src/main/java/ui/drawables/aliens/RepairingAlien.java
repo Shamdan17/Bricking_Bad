@@ -12,7 +12,7 @@ public class RepairingAlien implements Drawable {
 
   private MovableShape ms;
 
-  private String iconURL = "/home/nazirnayal/Desktop/302_2019_shawarma/icons/RepairingAlien.jpeg";
+  private String iconURL = System.getProperty("user.dir") + "/assets/RepairingAlien.png";
   private BufferedImage bufferedImage;
   private Image image;
 
@@ -31,11 +31,6 @@ public class RepairingAlien implements Drawable {
     int x = (int) Math.round(ms.getPosition().getX());
     int y = (int) Math.round(ms.getPosition().getY());
     g.drawImage(image,x,y,null);
-//    int length = ms.getLength();
-//    int width = ms.getWidth();
-//    g.setColor(Color.green);
-//    g.fillRect(x, y, length, width);
-//    g.drawRect(x, y, length, width);
   }
 
   public void setMovable(MovableShape ms) {
