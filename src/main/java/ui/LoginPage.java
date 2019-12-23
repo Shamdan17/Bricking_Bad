@@ -25,6 +25,7 @@ public class LoginPage extends JPanel implements ActionListener {
 
   private JButton loginButton;
   private JButton createAccountButton;
+  private JButton exitButton;
 
   public LoginPage(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.brickingBad = brickingBad;
@@ -35,7 +36,7 @@ public class LoginPage extends JPanel implements ActionListener {
     this.passwordField = new JTextField();
     this.usernameLabel = new JLabel(Constants.USERNAME_LABEL);
     this.passwordLabel = new JLabel(Constants.PASSWORD_LABEL);
-
+    this.exitButton = new JButton(Constants.EXIT_BUTTON);
     this.loginButton = new JButton(Constants.LOGIN_BUTTON);
     this.createAccountButton = new JButton(Constants.CREATE_ACCOUNT_BUTTON);
 
@@ -52,6 +53,7 @@ public class LoginPage extends JPanel implements ActionListener {
       passwordLabel.setFont(Constants.DEFAULT_FONT);
       loginButton.addActionListener(this);
       createAccountButton.addActionListener(this);
+      exitButton.addActionListener(this);
       gbc.gridx = 0;
       gbc.gridy = 0;
       add(usernameLabel,gbc);
@@ -65,8 +67,10 @@ public class LoginPage extends JPanel implements ActionListener {
       gbc.gridx = 0;
       gbc.gridy = 2;
       add(loginButton,gbc);
-      gbc.gridx = 2;
+      gbc.gridx = 1;
       add(createAccountButton,gbc);
+      gbc.gridx = 2;
+      add(exitButton,gbc);
   }
 
   @Override
@@ -92,7 +96,9 @@ public class LoginPage extends JPanel implements ActionListener {
               return;
           }
           JOptionPane.showMessageDialog(null,"AccountCreationSuccessful");
-
+      }
+      if(actionEvent.getActionCommand().equals(Constants.EXIT_BUTTON)){
+          System.exit(0);
       }
   }
 }
