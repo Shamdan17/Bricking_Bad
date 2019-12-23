@@ -28,6 +28,9 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private JLabel score;
   private JLabel time;
 
+  private JLabel gameOverLabel;
+  private JLabel youWonLabel;
+
   public Game(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
@@ -36,6 +39,8 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     this.livesLeft = new JLabel();
     this.score = new JLabel();
     this.time = new JLabel();
+    this.gameOverLabel = new JLabel("GAME OVER!");
+    this.youWonLabel = new JLabel("You Won !");
 
     this.pauseButton = new JButton(Constants.PAUSE_BUTTON);
     this.inventory = new Inventory(brickingBad, cardLayout, contPanel);
@@ -65,6 +70,15 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     score.setFont(Constants.DEFAULT_FONT);
     time.setFont(Constants.DEFAULT_FONT);
 
+    gameOverLabel.setFont(Constants.VERY_BIG_FONT);
+    youWonLabel.setFont(Constants.VERY_BIG_FONT);
+
+    gameOverLabel.setBounds(Constants.VERDICT_X,Constants.VERDICT_Y,Constants.VERDICT_WIDTH,Constants.VERDICT_LENGTH);
+    gameOverLabel.setForeground(Color.RED);
+
+    youWonLabel.setBounds(Constants.VERDICT_X,Constants.VERDICT_Y,Constants.VERDICT_WIDTH,Constants.VERDICT_LENGTH);
+    youWonLabel.setForeground(Color.GREEN);
+
     add(pauseButton);
     add(time);
     add(score);
@@ -89,10 +103,10 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
     if(gameData.isGameOver()){
-        terminateGame();
-        goToMenu();
-        exit = true;
-        return;
+        add(gameOverLabel);
+    }
+    if(gameData.isWin()){
+        add(youWonLabel);
     }
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     updateLives(gameData.getRemainingLives());
@@ -104,26 +118,6 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
       d.draw(g);
     }
 
-  }
-
-  private void terminateGame() {
-    EventQueue.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            JOptionPane.showMessageDialog(null, "Game Over! you shall return to main menu now!");
-          }
-        });
-  }
-
-  private void goToMenu() {
-    EventQueue.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            cardLayout.show(contPanel, Constants.MENU_LABEL);
-          }
-        });
   }
 
   private void updateScore(double newScore) {

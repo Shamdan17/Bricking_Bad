@@ -38,6 +38,7 @@ public class Board {
   private long maxGameTime;
   private long gameStartTime;
   private boolean isGameOver = false;
+  private boolean isWin = false;
   private boolean testMode = false;
 
   /**
@@ -106,34 +107,32 @@ public class Board {
    * collisions between objects and then removes destroyed objects as a result of previous steps
    */
   public void animate() {
-    checkGameOver();
     if (!isGameOver || testMode) {
       moveAllMovables();
       checkCollisions();
       removeDestroyedMovables();
       handleQueue();
       checkNumBalls();
-      //logger.debug("gameTime: " + gameTime);
-      //logger.debug("Score: " + score);
-    } else {
-      // TODO send a message to controller so it wont call animate and shows a message to player
-      // maybe we can add another button to restart
+      checkWin();
+      checkGameOver();
     }
+  }
+
+  private void checkWin(){
+      for(MovableShape ms : movables){
+          if(ms.getType() == Type.Brick)
+              return ;
+      }
+      isWin = true;
   }
 
   private void checkGameOver() {
     gameTime = (System.currentTimeMillis() - gameStartTime) / 1000;
     if (remainingLives <= 0) {
       isGameOver = true;
-      // TODO do sth if game is over !!
-      // show a message in the ui
-      //logger.info("You don't have any more Live. Game Over!");
     }
     if (gameTime >= maxGameTime) {
       isGameOver = true;
-      // TODO do sth if game is over !!
-      // show a message in the ui
-      // logger.info("You don't have seconds left. Game Over!");
     }
   }
 
@@ -156,7 +155,7 @@ public class Board {
         numBalls++;
       }
     }
-    if (numBalls == 0 && (remainingLives > 0 || testMode) ) {
+    if (numBalls == 0 && (remainingLives > 0 || testMode)) {
       remainingLives--;
       if (remainingLives != 0 || testMode) {
         movables.add(
@@ -350,7 +349,8 @@ public class Board {
         gameTime,
         maxGameTime,
         paddle.getLaserCount(),
-            (isGameOver && !testMode));
+        (isGameOver && !testMode),
+            (isWin && !testMode));
   }
 
   public GameData getData() {
@@ -367,7 +367,8 @@ public class Board {
         gameTime,
         maxGameTime,
         paddle.getLaserCount(),
-            (isGameOver && !testMode));
+        (isGameOver && !testMode),
+            (isWin && !testMode));
   }
 
   private Paddle getPaddle(List<MovableShape> movables) {

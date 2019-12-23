@@ -9,6 +9,7 @@ import java.util.List;
 
 public class GameData implements Serializable {
 
+  private static final long serialVersionUID = 1L;
   // This class wraps all information that can be saved or sent to UI
   private final List<MovableShape> movables;
   boolean isCopy;
@@ -19,7 +20,7 @@ public class GameData implements Serializable {
   private List<PowerUp> powerupList;
   private int laserCount;
   private boolean gameOver;
-
+  private boolean win;
   public GameData(List<MovableShape> ms, boolean isCopy) {
     this.movables = ms;
     this.isCopy = isCopy;
@@ -34,7 +35,8 @@ public class GameData implements Serializable {
       long gameTime,
       long maxGameTime,
       int laserCount,
-      boolean gameOver) {
+      boolean gameOver,
+      boolean win) {
 
     this.movables = ms;
     this.powerupList = powerupList;
@@ -45,6 +47,7 @@ public class GameData implements Serializable {
     this.maxGameTime = maxGameTime;
     this.laserCount = laserCount;
     this.gameOver = gameOver;
+    this.win = win;
   }
 
   public List<MovableShape> getMovables() {
@@ -70,18 +73,21 @@ public class GameData implements Serializable {
     return maxGameTime;
   }
 
-  public List<PowerUp> getPowerupList(){
-      return powerupList;
+  public List<PowerUp> getPowerupList() {
+    return powerupList;
   }
 
-  public int getLaserCount(){
-      return laserCount;
+  public int getLaserCount() {
+    return laserCount;
   }
 
-  public boolean isGameOver(){
-      return gameOver;
+  public boolean isGameOver() {
+    return gameOver;
   }
 
+  public boolean isWin(){
+      return win;
+  }
   public boolean equals(GameData data) {
     if (movables.size() != data.getMovables().size()) return false;
     for (int i = 0; i < movables.size(); ++i)

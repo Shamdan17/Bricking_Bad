@@ -186,6 +186,12 @@ public final class Constants {
     public static final int DEFAULT_WIDTH = 300 ;
     public static final int DEFAULT_LENGTH = 40;
     public static final Font DEFAULT_FONT = new Font("monospaced",Font.PLAIN,20);
+    public static final Font VERY_BIG_FONT = new Font("monospaced",Font.PLAIN,120);
+
+    public static final int VERDICT_X = 400;
+    public static final int VERDICT_Y = 50;
+    public static final int VERDICT_WIDTH = 800;
+    public static final int VERDICT_LENGTH = 800;
 
     // TODO: reorganize this file
     public static final int LENGTH = 60;
