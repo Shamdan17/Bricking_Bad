@@ -9,6 +9,7 @@ import domain.mapbuild.MapBuildSession;
 import domain.model.SpecificType;
 import domain.storage.BinaryStorage;
 import utils.Position;
+import utils.PropertyManager;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,11 +20,13 @@ public class BrickingBad {
     private AccountManager accountManager;
     private MapBuildSession mapBuildSession;
     private GameSession gameSession;
+    private PropertyManager propertyManager;
 
     public BrickingBad() {
         this.mapBuildSession = new MapBuildSession();
         this.gameSession = new GameSession("demo");
         this.accountManager = new AccountManager(new BinaryStorage("account-manager-data"));
+        this.propertyManager = PropertyManager.getInstance();
     }
 
     /**

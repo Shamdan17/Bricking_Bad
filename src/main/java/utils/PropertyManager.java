@@ -2,11 +2,12 @@ package utils;
 
 import org.apache.log4j.Logger;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class PropertyManager {
+public final class PropertyManager {
 
     private static PropertyManager instance;
     private Properties properties;
@@ -14,7 +15,7 @@ public class PropertyManager {
 
 
     private PropertyManager() {
-
+        loadProperties();
     }
 
     public static PropertyManager getInstance() {
@@ -26,27 +27,11 @@ public class PropertyManager {
         return instance;
     }
 
-    public void saveProperties() {
+    public void saveProperties() throws IOException {
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String newGamePropertiesFile = rootPath + "game.properties";
+        properties.store(new FileWriter(newGamePropertiesFile), "store to properties file");
 
-        /*OutputStream outputStream = new FileOutputStream()
-
-        try (OutputStream output = new FileOutputStream("path/to/config.properties")) {
-
-            Properties prop = new Properties();
-
-            // set the properties value
-            prop.setProperty("db.url", "localhost");
-            prop.setProperty("db.user", "mkyong");
-            prop.setProperty("db.password", "password");
-
-            // save properties to project root folder
-            prop.store(output, null);
-
-            System.out.println(prop);
-
-        } catch (IOException io) {
-            io.printStackTrace();
-        }*/
     }
 
     public void updateProperty(String key, String value) {
@@ -69,6 +54,10 @@ public class PropertyManager {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public String getProperty(String key, String def) {
+        return properties.getProperty(key, def);
     }
 
     public void printProperties() {
