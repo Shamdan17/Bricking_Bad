@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
 import java.util.List;
 
 public class Game extends JPanel implements Runnable, KeyListener, ActionListener {
@@ -27,6 +28,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private JLabel livesLeft;
   private JLabel score;
   private JLabel time;
+  private Map<UUID,Drawable> drawables;
 
   private JLabel gameOverLabel;
   private JLabel youWonLabel;
@@ -35,6 +37,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     this.contPanel = contPanel;
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
+    this.drawables = new HashMap<>();
 
     this.livesLeft = new JLabel();
     this.score = new JLabel();
@@ -102,21 +105,40 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
-    if(gameData.isGameOver()){
+     if(gameData.isGameOver()){
         add(gameOverLabel);
     }
     if(gameData.isWin()){
         add(youWonLabel);
     }
+
+
+    Map<UUID, MovableShape> IDMap = gameData.getMovablesIDMap();
+    List<MovableShape> movables = gameData.getMovables();
+    List<UUID> removables = new ArrayList<>();
+    for (UUID ID : drawables.keySet()) {
+      if (!IDMap.containsKey(ID)) removables.add(ID);
+    }
+    for (UUID ID : removables) {
+      drawables.remove(ID);
+    }
+    for (MovableShape ms :movables) {
+      if (drawables.containsKey(ms.getID())) {
+        Drawable d = drawables.get(ms.getID());
+        d.setMovable(ms);
+        d.draw(g);
+      } else {
+        Drawable d = DrawableFactory.get(ms, brickingBad);
+        drawables.put(ms.getID(), d);
+        d.draw(g);
+      }
+    }
+
+
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     updateLives(gameData.getRemainingLives());
     updateScore(gameData.getScore());
     updateTime(gameData.getGameTime());
-    List<MovableShape> drawables = gameData.getMovables();
-    for (MovableShape ms : drawables) {
-      Drawable d = DrawableFactory.get(ms, brickingBad);
-      d.draw(g);
-    }
 
   }
 

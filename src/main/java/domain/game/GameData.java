@@ -4,8 +4,7 @@ import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GameData implements Serializable {
 
@@ -21,6 +20,7 @@ public class GameData implements Serializable {
   private int laserCount;
   private boolean gameOver;
   private boolean win;
+  private Map<UUID,MovableShape> IDMap;
   public GameData(List<MovableShape> ms, boolean isCopy) {
     this.movables = ms;
     this.isCopy = isCopy;
@@ -48,6 +48,10 @@ public class GameData implements Serializable {
     this.laserCount = laserCount;
     this.gameOver = gameOver;
     this.win = win;
+    this.IDMap = new HashMap<>();
+
+    for(MovableShape mo : movables)
+        IDMap.put(mo.getID(),mo);
   }
 
   public List<MovableShape> getMovables() {
@@ -83,6 +87,10 @@ public class GameData implements Serializable {
 
   public boolean isGameOver() {
     return gameOver;
+  }
+
+  public Map<UUID,MovableShape> getMovablesIDMap(){
+      return IDMap;
   }
 
   public boolean isWin(){

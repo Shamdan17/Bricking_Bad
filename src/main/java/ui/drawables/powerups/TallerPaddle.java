@@ -24,4 +24,8 @@ public class TallerPaddle implements Drawable {
         g.drawRect(x, y, length, width);
     }
 
+    public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
+
 }

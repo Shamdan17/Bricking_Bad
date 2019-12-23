@@ -33,7 +33,7 @@ public class BrickFactory {
         ArrayList<MovableShape> res = new ArrayList<>();
 
         res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
-        //res.add(new GangOfBalls(powerupMovBeh.copy()));
+        res.add(new GangOfBalls(powerupMovBeh.copy()));
         res.add(new TallerPaddle(powerupMovBeh.copy()));
         res.add(new Magnet(powerupMovBeh.copy()));
         res.add(new ChemicalBall(powerupMovBeh.copy()));

@@ -44,5 +44,8 @@ public class Paddle implements Drawable {
         g.drawPolygon(x, y, 4);
     }
 
+    public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
 
 }

@@ -28,4 +28,8 @@ public class DrunkAlien implements Drawable {
         g.fillRect(x, y + (width / 2), length, width / 2);
         g.drawRect(x, y + (width / 2), length, width / 2);
     }
+
+    public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
 }
