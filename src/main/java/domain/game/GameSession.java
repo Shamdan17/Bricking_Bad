@@ -1,13 +1,12 @@
 package domain.game;
 
 import domain.mapbuild.MapBuildData;
-import domain.model.shape.MovableShape;
 import domain.storage.StorageManager;
 import domain.storage.StorageManagerFactory;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameSession {
 

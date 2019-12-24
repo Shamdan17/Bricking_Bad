@@ -4,8 +4,8 @@ import domain.game.Board;
 import domain.model.Ball;
 import domain.model.SpecificType;
 import domain.model.Type;
-import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
+import domain.model.movement.NormalizingLinearMovement;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
 import utils.Constants;
@@ -16,8 +16,8 @@ import utils.physics.math.util;
 
 import java.util.List;
 
-import static utils.Constants.POWERUP_SIZE;
 import static utils.Constants.GANG_OF_BALLS_MULTIPLIER;
+import static utils.Constants.POWERUP_SIZE;
 
 public class GangOfBalls extends PowerUp {
 
@@ -49,7 +49,7 @@ public class GangOfBalls extends PowerUp {
             Velocity originalVel = closestBall.getVelocity().copy();
             for (int i = 1; i < GANG_OF_BALLS_MULTIPLIER; i++) {
                 originalVel = Rotation.rotate(originalVel, 360 / GANG_OF_BALLS_MULTIPLIER);
-                Ball newBall = new Ball(new LinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_RADIUS);
+                Ball newBall = new Ball(new NormalizingLinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_RADIUS);
                 super.addToQueue(newBall);
             }
             logger.debug("Gang of Balls power-up is activated with multiplier: " + GANG_OF_BALLS_MULTIPLIER);

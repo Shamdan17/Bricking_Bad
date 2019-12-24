@@ -78,22 +78,24 @@ public final class Constants {
     /**
      * Bounds
      */
-    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
+    private static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
     public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
     public static final int BRICK_UPPER_BOUND = Integer.parseInt(getProperty("BRICK_UPPER_BOUND", "50"));
     public static final int BRICK_RIGHT_BOUND = GAME_WIDTH;
     public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = Integer.parseInt(getProperty("SLEEP_TIME", "10"));
-    public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
+    public static final double BRICK_VELOCITY = L / (4 * (1000.0 / SLEEP_TIME));
 
     /**
      * Ball
      */
     public static final int BALL_INITIAL_VX = Integer.parseInt(getProperty("BALL_INITIAL_VX", "0"));
-    public static final int BALL_INITIAL_VY = Integer.parseInt(getProperty("BALL_INITIAL_VY", "4"));
+    public static final int BALL_INITIAL_VY = Integer.parseInt(getProperty("BALL_INITIAL_VY", "-2"));
     public static final int BALL_DIAMETER = Integer.parseInt(getProperty("BALL_DIAMETER", "17"));
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
-    public static final int BALL_SPAWNING_HEIGHT = Integer.parseInt(getProperty("BALL_SPAWNING_HEIGHT", "170"));
+    public static final int BALL_SPAWNING_HEIGHT = 170;
+    public static final double DAMPING_FACTOR = Double.parseDouble(getProperty("DAMPING_FACTOR", "0.1"));
+
     public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
 
     /**
@@ -101,6 +103,7 @@ public final class Constants {
      */
     public static final int EXPLOSION_RADIUS_FACTOR = Integer.parseInt(getProperty("EXPLOSION_RADIUS_FACTOR", "2"));
     public static final int POWERUP_SIZE = Integer.parseInt(getProperty("POWERUP_SIZE", "40"));
+    public static final double POWERUP_MOVEMENT_SPEED = Double.parseDouble(getProperty("POWERUP_MOVEMENT_SPEED", "1.5"));
     public static final int FIREBALL_EXPLOSION_RADIUS_FACTOR = Integer.parseInt(getProperty("FIREBALL_EXPLOSION_RADIUS_FACTOR", "5"));
     public static final int LASER_AMMO_COUNT = Integer.parseInt(getProperty("LASER_AMMO_COUNT", "5"));
     public static final int GANG_OF_BALLS_MULTIPLIER = Integer.parseInt(getProperty("GANG_OF_BALLS_MULTIPLIER", "10"));
@@ -213,7 +216,8 @@ public final class Constants {
     // Aliens
     public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000.0);
     public static final long Repairing_Alien_Brick_Period = Integer.parseInt(getProperty("Repairing_Alien_Brick_Period", "5000")); // in milliseconds
-
+    public static final long CONFUSED_ALIEN_DISAPPEAR_TIME = Long.parseLong(getProperty("CONFUSED_ALIEN_DISAPPEAR_TIME", "5000"));
+    public static final int DUAL_ALIEN_BRICK_THRESHOLD = Integer.parseInt(getProperty("DUAL_ALIEN_BRICK_THRESHOLD", "3"));
 
     public static final Position defaultPosition = new Position(0, 0);
     public static final Velocity defaultVelocity = new Velocity(0, 0);

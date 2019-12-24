@@ -3,12 +3,12 @@ package domain.storage;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
+
 import java.io.*;
-import java.util.Set;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Map;
-import java.lang.Class;
-import java.nio.file.Paths;
+import java.util.Set;
 
 
 // MapDBStorage is a storage manager that works as a generic persistent key value store.
@@ -50,7 +50,7 @@ public class MapDBStorage implements StorageManager {
 
         try {
             map.put(key, serialize(value));
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("could not serialize value with key " + key);
         }
 
@@ -74,7 +74,7 @@ public class MapDBStorage implements StorageManager {
 
         try {
             value = deserialize(map.get(key));
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("IO error occured when getting value with key " + key);
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -110,15 +110,14 @@ public class MapDBStorage implements StorageManager {
      * OVERVIEW: provides the caller of a list of all saved entires inside the
      * storage
      * MODIFIES: Nothing
-     *
      */
     public Set<String> keySet() {
         load();
         Set<String> keys = map.keySet();
 
         Set<String> finalKeys = new HashSet<>();
-        for(String key : keys) {
-             finalKeys.add(key);
+        for (String key : keys) {
+            finalKeys.add(key);
         }
 
         close();

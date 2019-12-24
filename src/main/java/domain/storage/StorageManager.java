@@ -34,8 +34,8 @@ public interface StorageManager {
      */
     public Set<String> keySet();
 
-	/**
-	 *  syncs the storage with disk and closes io
-	 */
-    public void   close();
+    /**
+     * syncs the storage with disk and closes io
+     */
+    public void close();
 }

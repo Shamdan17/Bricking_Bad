@@ -32,7 +32,7 @@ public class DrawableFactory {
                 return new CooperativeAlien(ms);
             case RepairingAlien:
                 return new RepairingAlien(ms);
-            case DrunkAlien:
+            case ConfusedDrunkAlien:
                 return new DrunkAlien(ms);
             case Ball:
                 return new Ball(ms);
