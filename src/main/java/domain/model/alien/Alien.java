@@ -13,11 +13,15 @@ public class Alien extends MovableShape {
 
     // An alien has alienBehavior
     private AlienBehavior alienBehavior;
+    // How long is an alien invincible after spawning
+    private int invincibilityCounter;
+
 
     public Alien(AlienBehavior beh, int length, int width) {
         super(null, length, width);
         this.alienBehavior = beh;
         beh.setSelf(this);
+        this.invincibilityCounter = 50;
     }
 
     public void behave() {
@@ -29,6 +33,9 @@ public class Alien extends MovableShape {
         getMovementBehavior().inverse();
     }
 
+    public int getInvincibilityCounter() {
+        return invincibilityCounter == 0 ? invincibilityCounter : invincibilityCounter--;
+    }
 
     @Override
     // move and behave
@@ -60,6 +67,7 @@ public class Alien extends MovableShape {
     @Override
     public void collide(MovableShape obj) {
         alienBehavior.collide(obj);
+        invincibilityCounter += 10;
     }
 
     @Override

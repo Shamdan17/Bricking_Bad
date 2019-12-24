@@ -39,7 +39,7 @@ public final class Constants {
 
 
     public static boolean COPY_MODE = true;
-    public static final double MOVING_PROBABILITY = 0.9;
+    public static final double MOVING_PROBABILITY = 0.001;
     public static final int STEP_BACK_THRESHOLD = 5;
     /**
      * Gameplay

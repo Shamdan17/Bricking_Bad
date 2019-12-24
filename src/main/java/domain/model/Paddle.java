@@ -1,8 +1,8 @@
 package domain.model;
 
 import domain.model.misc.Laser;
-import domain.model.movement.LinearMovement;
 import domain.model.movement.NoMovement;
+import domain.model.movement.NormalizingLinearMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import org.apache.commons.lang3.SerializationUtils;
@@ -132,7 +132,7 @@ public class Paddle extends Rectangle {
         if (boundBall != null) {
             Velocity vel = new Velocity(BALL_INITIAL_VX, BALL_INITIAL_VY);
             vel = Rotation.rotate(vel, -getAngle());
-            boundBall.setMovementBehavior(new LinearMovement(boundBall.getPosition(), vel));
+            boundBall.setMovementBehavior(new NormalizingLinearMovement(boundBall.getPosition(), vel));
             boundBall = null;
         }
     }
