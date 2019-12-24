@@ -4,6 +4,7 @@ import domain.game.collisionrules.CollisionRule;
 import domain.game.collisionrules.CollisionRuleFactory;
 import domain.mapbuild.MapBuildData;
 import domain.model.*;
+import domain.model.alien.Alien;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -37,7 +38,7 @@ public class Board {
   private long gameStartTime;
   private boolean isGameOver = false;
   private boolean isWin = false;
-  private boolean testMode = false;
+  private boolean testMode = true;
   private int totalBricksCount;
 
   /**
@@ -218,9 +219,10 @@ public class Board {
       if(ms.getType() == Type.Brick)
         curBricksCount++;
     }
-    double percentage = (double)(curBricksCount / totalBricksCount) * 100.0;
+    double percentage = (1.0 * curBricksCount / totalBricksCount) ;
 
     for (BrickPercentageListener listener : listeners) {
+      System.out.println(((Alien)listener).getSpecificType());
       listener.updateBrickPercentage(percentage);
     }
   }

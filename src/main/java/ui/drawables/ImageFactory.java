@@ -20,6 +20,7 @@ public class ImageFactory {
   private static Image ball;
   private static Image chemicalBall;
   private static Image fireBall;
+  private static Image confusedAlien;
   private static BufferedImage bufferedImage;
 
   private static Image chemicalButton;
@@ -37,6 +38,7 @@ public class ImageFactory {
   private static String ballPath = "NormalBall.png";
   private static String chemicalBallPath = "ChemicalBall.png";
   private static String fireBallPath = "FireBall.png";
+  private static String confusedAlienPath = "Confused1.png";
 
 
   private static String path = System.getProperty("user.dir") + "/assets/";
@@ -84,6 +86,10 @@ public class ImageFactory {
           if(ball != null) return ball;
           ball = getImage(ballPath,width,length);
           return ball;
+        case ConfusedDrunkAlien:
+          if(confusedAlien != null) return confusedAlien;
+          confusedAlien = getImage(confusedAlienPath,width,length);
+          return confusedAlien;
         default:
           throw new IllegalArgumentException("Unsupported type provided: " + type);
       }
