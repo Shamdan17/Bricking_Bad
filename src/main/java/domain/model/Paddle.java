@@ -73,7 +73,7 @@ public class Paddle extends Rectangle {
             movementOffset *= 0.87;
             if (Math.abs(movementOffset) < 1) movementOffset = 0;
         }
-        setPosition(super.getPosition().incrementX(movementOffset));
+        setPosition(getValidPosition(super.getPosition().incrementX(movementOffset)));
         if (boundBall != null) {
             boundBall.setPosition(calculateBallPosition());
         }
@@ -81,6 +81,13 @@ public class Paddle extends Rectangle {
         moveRight = false;
         tiltRight = false;
         tiltLeft = false;
+    }
+
+    private Position getValidPosition(Position pos){
+        double x = pos.getX();
+        x = Math.max(x,0);
+        x = Math.min(GAME_WIDTH-L/2, x);
+        return new Position(x, pos.getY());
     }
 
     public void moveLeft() {
