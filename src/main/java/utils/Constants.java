@@ -90,7 +90,7 @@ public final class Constants {
      * Ball
      */
     public static final int BALL_INITIAL_VX = Integer.parseInt(getProperty("BALL_INITIAL_VX", "0"));
-    public static final int BALL_INITIAL_VY = Integer.parseInt(getProperty("BALL_INITIAL_VY", "4"));
+    public static final int BALL_INITIAL_VY = Integer.parseInt(getProperty("BALL_INITIAL_VY", "-2"));
     public static final int BALL_DIAMETER = Integer.parseInt(getProperty("BALL_DIAMETER", "17"));
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
     public static final int BALL_SPAWNING_HEIGHT = 170;

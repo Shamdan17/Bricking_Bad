@@ -13,6 +13,7 @@ public enum SpecificType {
     CooperativeAlien,
     ProtectingAlien,
     RepairingAlien,
+    ConfusedDrunkAlien,
     DrunkAlien,
     Explosion,
     Laser,

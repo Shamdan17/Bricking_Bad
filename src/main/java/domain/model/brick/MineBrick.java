@@ -31,7 +31,7 @@ public class MineBrick extends Brick {
 
   @Override
   public void collide(MovableShape obj) {
-    if (obj.getType() == Type.Ball && !isDestroyed()) {
+    if (obj.getType() == Type.Ball  && !isDestroyed()) {
       super.addToQueue(new Explosion(getCenter()));
       super.destroy();
     }

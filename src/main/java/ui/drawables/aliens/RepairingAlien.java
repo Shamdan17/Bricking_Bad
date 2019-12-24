@@ -1,7 +1,7 @@
 package ui.drawables.aliens;
 
 import domain.model.shape.MovableShape;
-import ui.ImageFactory;
+import ui.drawables.ImageFactory;
 import ui.drawables.Drawable;
 
 import java.awt.*;
@@ -19,8 +19,7 @@ public class RepairingAlien implements Drawable {
   public void draw(Graphics g) {
     int x = (int) Math.round(ms.getPosition().getX());
     int y = (int) Math.round(ms.getPosition().getY());
-    if (image == null)
-      image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
+    image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
     g.drawImage(image, x, y, null);
   }
 

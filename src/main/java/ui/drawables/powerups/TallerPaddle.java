@@ -1,7 +1,7 @@
 package ui.drawables.powerups;
 
 import domain.model.shape.MovableShape;
-import ui.ImageFactory;
+import ui.drawables.ImageFactory;
 import ui.drawables.Drawable;
 
 import java.awt.*;

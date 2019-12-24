@@ -27,24 +27,21 @@ public class LazyCollisionRule implements CollisionRule {
 
     @Override
     public void collide(MovableShape obj1, MovableShape obj2) {
-        if (physics.isCollided(obj1, obj2)) {
-            logger.debug("Collision detected between " + obj1 + " and " + obj2);
-            // Don't Calculate the new velocities
-            Velocity v1 = new Velocity(0, 0);
-            // Set the new velocities
-            obj1.collide(obj2);
-            obj2.collide(obj1);
+        // Don't Calculate the new velocities
+        Velocity v1 = new Velocity(0, 0);
+        // Set the new velocities
+        obj1.collide(obj2);
+        obj2.collide(obj1);
 
-            int cnt = 0;
-            while (physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)) {
-                if (obj2.getType() == Type.Paddle && obj1.getVelocity().getY() < 0
-                        || obj1.getType() == Type.Paddle && obj2.getVelocity().getY() < 0) break;
-                obj1.stepBack();
-                obj2.stepBack();
-            }
-            obj1.setVelocity(v1);
-            obj2.setVelocity(v1);
+        int cnt = 0;
+        while (physics.isCollided(obj1, obj2) && (++cnt < Constants.STEP_BACK_THRESHOLD)) {
+            if (obj2.getType() == Type.Paddle && obj1.getVelocity().getY() < 0
+                    || obj1.getType() == Type.Paddle && obj2.getVelocity().getY() < 0) break;
+            obj1.stepBack();
+            obj2.stepBack();
         }
+        obj1.setVelocity(v1);
+        obj2.setVelocity(v1);
     }
 
     public boolean isCollided(MovableShape obj1, MovableShape obj2) {

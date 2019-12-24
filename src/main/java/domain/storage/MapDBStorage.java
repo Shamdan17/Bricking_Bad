@@ -3,12 +3,14 @@ package domain.storage;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
+
 import java.io.*;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map;
 import java.lang.Class;
 import java.nio.file.Paths;
+import utils.Constants;
 
 
 // MapDBStorage is a storage manager that works as a generic persistent key value store.
@@ -31,7 +33,8 @@ public class MapDBStorage implements StorageManager {
             throw new IllegalArgumentException("storage name may not be null or empty");
         }
 
-        this.storageName = Paths.get(System.getProperty("user.dir"), storageName).toString() + ".mapdb";
+        createSavesFolder();
+        this.storageName = Paths.get(getSavesFolder(), storageName).toString() + ".mapdb";
     }
 
     /**
@@ -164,5 +167,14 @@ public class MapDBStorage implements StorageManager {
 
     public void close() {
         db.close();
+    }
+
+    private void createSavesFolder() {
+        File saveDir = new File(Paths.get(System.getProperty("user.dir"), Constants.STORAGE_FOLDER).toString());
+        saveDir.mkdir();
+    }
+
+    private String getSavesFolder() {
+        return Paths.get(System.getProperty("user.dir"), Constants.STORAGE_FOLDER).toString();
     }
 }

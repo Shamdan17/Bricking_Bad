@@ -24,7 +24,7 @@ public class BrickingBad {
     private PropertyManager propertyManager;
 
     public BrickingBad() {
-        this.accountManager = new AccountManager(StorageManagerFactory.get("account-manager-data"));
+        this.accountManager = new AccountManager(StorageManagerFactory.get("account-manager-fata"));
         this.propertyManager = PropertyManager.getInstance();
     }
 

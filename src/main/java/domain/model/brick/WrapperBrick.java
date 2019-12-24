@@ -18,7 +18,7 @@ public class WrapperBrick extends Brick {
 
 
     public void collide(MovableShape obj) {
-        if (obj.getType() == Type.Ball) {
+        if (obj.getType() == Type.Ball && !isDestroyed()) {
             super.addToQueue(ms);
             super.destroy();
         }
