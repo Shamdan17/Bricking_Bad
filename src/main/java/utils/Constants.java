@@ -120,6 +120,7 @@ public final class Constants {
      * Storage provider
      */
     public static final String STORAGE_PROVIDER = getProperty("STORAGE_PROVIDER", "DEFAULT");
+    public static final String STORAGE_FOLDER = getProperty("STORAGE_FOLDER", "saves");
 
 
     /**
