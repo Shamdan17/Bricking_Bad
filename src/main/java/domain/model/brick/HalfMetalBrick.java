@@ -14,14 +14,16 @@ public class HalfMetalBrick extends Brick {
     }
 
     private boolean cracked = false;
+    private int invincibleTicks = 0;
 
     @Override
     public void collide(MovableShape obj) {
-        if ((obj.getType() == Type.Ball && (cracked || obj.getCenter().getY() < this.getCenter().getY())) || obj.getSpecificType() == SpecificType.ChemicalBall) {
+        if ((obj.getType() == Type.Ball && ((cracked && (invincibleTicks--<=0)) || obj.getCenter().getY() < this.getCenter().getY())) || obj.getSpecificType() == SpecificType.ChemicalBall) {
             this.destroy();
         }
         if (obj.getSpecificType() == SpecificType.FireBall) {
             cracked = true;
+            invincibleTicks = 10;
         }
     }
 
