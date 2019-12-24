@@ -9,7 +9,7 @@ import java.util.Set;
 // BinaryStorage is a storage manager that works as a generic persistent key value store.
 
 public class BinaryStorage implements StorageManager {
-    
+
     private HashMap<String, Serializable> DataLinks;
     private String storageName;
 
@@ -26,7 +26,7 @@ public class BinaryStorage implements StorageManager {
         }
 
         this.DataLinks = new HashMap<>();
-        this.storageName = storageName;
+        this.storageName = Paths.get(System.getProperty("user.dir"), storageName).toString() + ".bin";
 
         // If a previous version of the same storage name exists load it
          load();
@@ -100,9 +100,8 @@ public class BinaryStorage implements StorageManager {
      * EFFECT: dumps the current storage to a file (overwrites)
      */
     private void save() {
-        Path filepath = Paths.get(System.getProperty("user.dir"), storageName);
         try {
-            FileOutputStream fileOut = new FileOutputStream(filepath.toString());
+            FileOutputStream fileOut = new FileOutputStream(storageName);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(this.DataLinks);
             objectOut.close();
@@ -117,7 +116,7 @@ public class BinaryStorage implements StorageManager {
      * EFFECT: loads the content of a storage file into memory
      */
     private void load() {
-        File dataFile = new File(System.getProperty("user.dir"), storageName);
+        File dataFile = new File(storageName);
 
         if(!dataFile.exists()) {
             return;

@@ -31,9 +31,7 @@ public class MapDBStorage implements StorageManager {
             throw new IllegalArgumentException("storage name may not be null or empty");
         }
 
-        this.storageName = storageName;
-        // this.db = DBMaker.fileDB(Paths.get(System.getProperty("user.dir"), storageName).toString()).make();
-        // map = db.hashMap(storageName, Serializer.STRING, Serializer.BYTE_ARRAY).createOrOpen();
+        this.storageName = Paths.get(System.getProperty("user.dir"), storageName).toString() + ".mapdb";
     }
 
     /**
@@ -160,7 +158,7 @@ public class MapDBStorage implements StorageManager {
     }
 
     private void load() {
-        this.db = DBMaker.fileDB(Paths.get(System.getProperty("user.dir"), storageName).toString()).make();
+        this.db = DBMaker.fileDB(storageName).make();
         this.map = db.hashMap(storageName, Serializer.STRING, Serializer.BYTE_ARRAY).createOrOpen();
     }
 
