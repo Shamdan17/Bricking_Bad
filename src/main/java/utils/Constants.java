@@ -84,7 +84,7 @@ public final class Constants {
     public static final int BRICK_RIGHT_BOUND = GAME_WIDTH;
     public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = Integer.parseInt(getProperty("SLEEP_TIME", "10"));
-    public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
+    public static final double BRICK_VELOCITY = L / (4 * (1000.0 / SLEEP_TIME));
 
     /**
      * Ball
@@ -93,7 +93,8 @@ public final class Constants {
     public static final int BALL_INITIAL_VY = Integer.parseInt(getProperty("BALL_INITIAL_VY", "4"));
     public static final int BALL_DIAMETER = Integer.parseInt(getProperty("BALL_DIAMETER", "17"));
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
-    public static final int BALL_SPAWNING_HEIGHT = Integer.parseInt(getProperty("BALL_SPAWNING_HEIGHT", "170"));
+    public static final int BALL_SPAWNING_HEIGHT = 170;
+    public static final double DAMPING_FACTOR = Double.parseDouble(getProperty("DAMPING_FACTOR", "0.1"));
     public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
 
     /**
@@ -101,6 +102,7 @@ public final class Constants {
      */
     public static final int EXPLOSION_RADIUS_FACTOR = Integer.parseInt(getProperty("EXPLOSION_RADIUS_FACTOR", "2"));
     public static final int POWERUP_SIZE = Integer.parseInt(getProperty("POWERUP_SIZE", "40"));
+    public static final double POWERUP_MOVEMENT_SPEED = Double.parseDouble(getProperty("POWERUP_MOVEMENT_SPEED", "1.5"));
     public static final int FIREBALL_EXPLOSION_RADIUS_FACTOR = Integer.parseInt(getProperty("FIREBALL_EXPLOSION_RADIUS_FACTOR", "5"));
     public static final int LASER_AMMO_COUNT = Integer.parseInt(getProperty("LASER_AMMO_COUNT", "5"));
     public static final int GANG_OF_BALLS_MULTIPLIER = Integer.parseInt(getProperty("GANG_OF_BALLS_MULTIPLIER", "10"));
@@ -117,6 +119,7 @@ public final class Constants {
      * Storage provider
      */
     public static final String STORAGE_PROVIDER = getProperty("STORAGE_PROVIDER", "DEFAULT");
+    public static final String STORAGE_FOLDER = getProperty("STORAGE_FOLDER", "saves");
 
 
     /**
@@ -213,11 +216,20 @@ public final class Constants {
     // Aliens
     public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000.0);
     public static final long Repairing_Alien_Brick_Period = Integer.parseInt(getProperty("Repairing_Alien_Brick_Period", "5000")); // in milliseconds
-
+    public static final long CONFUSED_ALIEN_DISAPPEAR_TIME = Long.parseLong(getProperty("CONFUSED_ALIEN_DISAPPEAR_TIME", "5000"));
+    public static final int DUAL_ALIEN_BRICK_THRESHOLD = Integer.parseInt(getProperty("DUAL_ALIEN_BRICK_THRESHOLD", "3"));
 
     public static final Position defaultPosition = new Position(0, 0);
     public static final Velocity defaultVelocity = new Velocity(0, 0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0, BALL_INITIAL_VY);
 
-    //public static final defaultBoard
+    // Key binds
+
+    public static final int KEY_ROTATE_PADDLE_LEFT = (int) getProperty("KEY_ROTATE_PADDLE_LEFT", "A").charAt(0);
+    public static final int KEY_ROTATE_PADDLE_RIGHT = (int) getProperty("KEY_ROTATE_PADDLE_RIGHT", "D").charAt(0);
+    public static final int KEY_ACTIVATE_TALLER_PADDLE = (int) getProperty("ACTIVATE_TALLER_PADDLE", "T").charAt(0);
+    public static final int KEY_ACTIVATE_MAGNET = (int) getProperty("ACTIVATE_MAGNET", "M").charAt(0);
+    public static final int KEY_ACTIVATE_CHEMICAL_BALL = (int) getProperty("ACTIVATE_CHEMICAL_BALL", "C").charAt(0);
+    public static final int KEY_THROW_BALL = (int) getProperty("THROW_BALL", "W").charAt(0);
+
 }

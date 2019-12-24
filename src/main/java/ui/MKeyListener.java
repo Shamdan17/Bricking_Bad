@@ -1,6 +1,7 @@
 package ui;
 
 import domain.BrickingBad;
+import utils.Constants;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -28,23 +29,23 @@ public class MKeyListener extends KeyAdapter {
       bb.movePaddleLeft();
     }
 
-    if (pressed.contains(KeyEvent.VK_A)) {
+    if (pressed.contains(Constants.KEY_ROTATE_PADDLE_LEFT)) {
       bb.rotatePaddleLeft();
     }
 
-    if (pressed.contains(KeyEvent.VK_D)) {
+    if (pressed.contains(Constants.KEY_ROTATE_PADDLE_RIGHT)) {
       bb.rotatePaddleRight();
     }
 
-    if (pressed.contains(KeyEvent.VK_T)) {
+    if (pressed.contains(Constants.KEY_ACTIVATE_TALLER_PADDLE)) {
       bb.activateTallerPaddle();
     }
 
-    if (pressed.contains(KeyEvent.VK_M)) {
+    if (pressed.contains(Constants.KEY_ACTIVATE_MAGNET)) {
       bb.activateMagnet();
     }
 
-    if (pressed.contains(KeyEvent.VK_W)) {
+    if (pressed.contains(Constants.KEY_THROW_BALL)) {
       bb.throwBall();
     }
 
@@ -52,7 +53,7 @@ public class MKeyListener extends KeyAdapter {
       bb.shootLaser();
     }
 
-    if (pressed.contains(KeyEvent.VK_C)) {
+    if (pressed.contains(Constants.KEY_ACTIVATE_CHEMICAL_BALL)) {
       bb.activateChemicalBall();
     }
   }
