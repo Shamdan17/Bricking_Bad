@@ -38,7 +38,7 @@ public class Board {
   private long gameStartTime;
   private boolean isGameOver = false;
   private boolean isWin = false;
-  private boolean testMode = true;
+    private boolean testMode = false;
   private int totalBricksCount;
 
   /**
