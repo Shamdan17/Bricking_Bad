@@ -108,7 +108,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     brickingBad.nextStep();
     super.paintComponent(g);
     GameData gameData = brickingBad.getGameData();
-     if(gameData.isGameOver()){
+     if(gameData.isGameOver() && !gameData.isWin()){
         add(gameOverLabel);
     }
     if(gameData.isWin()){
