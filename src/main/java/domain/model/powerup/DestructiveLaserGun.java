@@ -11,43 +11,43 @@ import static utils.Constants.POWERUP_SIZE;
 
 public class DestructiveLaserGun extends PowerUp {
 
-  static final Logger logger = Logger.getLogger(DestructiveLaserGun.class);
+    static final Logger logger = Logger.getLogger(DestructiveLaserGun.class);
 
-  public DestructiveLaserGun(MovementBehavior movbeh) {
-    super(movbeh, POWERUP_SIZE, POWERUP_SIZE);
-  }
-
-  @Override
-  public boolean activate(SpecificType type, Board board) {
-    if (type == SpecificType.DestructiveLaserGun) {
-      board.getPaddle().applyLaserPowerup();
-      logger.debug("Destructive Laser Gun power-up is activated.");
-      return true;
+    public DestructiveLaserGun(MovementBehavior movbeh) {
+        super(movbeh, POWERUP_SIZE, POWERUP_SIZE);
     }
-    return false;
-  }
 
-  @Override
-  // when powerups are destroyed they are added to the inventory
-  public void collide(MovableShape obj) {
-    if (obj.getType() == Type.Paddle) {
-      this.destroy();
-      logger.debug("Destructive Laser Gun power-up is caught");
+    @Override
+    public boolean activate(SpecificType type, Board board) {
+        if (type == SpecificType.DestructiveLaserGun) {
+            board.getPaddle().applyLaserPowerup();
+            logger.debug("Destructive Laser Gun power-up is activated.");
+            return true;
+        }
+        return false;
     }
-  }
 
-  @Override
-  public boolean isInstant() {
-    return true;
-  }
+    @Override
+    // when powerups are destroyed they are added to the inventory
+    public void collide(MovableShape obj) {
+        if (obj.getType() == Type.Paddle) {
+            this.destroy();
+            logger.debug("Destructive Laser Gun power-up is caught");
+        }
+    }
 
-  @Override
-  public SpecificType getSpecificType() {
-    return SpecificType.DestructiveLaserGun;
-  }
+    @Override
+    public boolean isInstant() {
+        return true;
+    }
 
-  @Override
-  public String toString() {
-    return "Destructive laser gun powerup";
-  }
+    @Override
+    public SpecificType getSpecificType() {
+        return SpecificType.DestructiveLaserGun;
+    }
+
+    @Override
+    public String toString() {
+        return "Destructive laser gun powerup";
+    }
 }

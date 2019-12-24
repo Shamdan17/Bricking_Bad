@@ -31,7 +31,7 @@ public class GameSession {
         board.animate();
     }
 
-    public void loadMap(MapBuildData data){
+    public void loadMap(MapBuildData data) {
         board = new Board(data);
     }
 

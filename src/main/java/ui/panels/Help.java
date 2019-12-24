@@ -1,6 +1,5 @@
 package ui.panels;
 
-import ui.drawables.ImageFactory;
 import utils.Constants;
 
 import javax.swing.*;
@@ -15,7 +14,8 @@ public class Help extends JPanel implements ActionListener {
     private JButton backToMenu;
 
     private JTextArea helpInfo;
-    public Help(CardLayout cardLayout , JPanel contPanel){
+
+    public Help(CardLayout cardLayout, JPanel contPanel) {
         this.cardLayout = cardLayout;
         this.contPanel = contPanel;
         this.backToMenu = new JButton(Constants.MENU_BUTTON);
@@ -64,7 +64,7 @@ public class Help extends JPanel implements ActionListener {
         helpInfo.setFont(Constants.DEFAULT_FONT);
         helpInfo.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(helpInfo);
-        scrollPane.setPreferredSize(new Dimension(Constants.GAME_WIDTH,Constants.GAME_HEIGHT));
+        scrollPane.setPreferredSize(new Dimension(Constants.GAME_WIDTH, Constants.GAME_HEIGHT));
         backToMenu.addActionListener(this);
         add(scrollPane);
         add(backToMenu);
@@ -72,8 +72,8 @@ public class Help extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if(actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)){
-            cardLayout.show(contPanel,Constants.MENU_LABEL);
+        if (actionEvent.getActionCommand().equals(Constants.MENU_BUTTON)) {
+            cardLayout.show(contPanel, Constants.MENU_LABEL);
         }
     }
 }

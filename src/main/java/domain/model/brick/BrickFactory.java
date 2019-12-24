@@ -42,7 +42,7 @@ public class BrickFactory {
         res.add(AlienFactory.get(SpecificType.ProtectingAlien, null));
         res.add(AlienFactory.get(SpecificType.RepairingAlien, null));
         res.add(AlienFactory.get(SpecificType.DrunkAlien, null));
-        
+
         Collections.shuffle(res);
         return res;
     }
@@ -82,7 +82,6 @@ public class BrickFactory {
         result.setQueue(movQueue);
         return result;
     }
-
 
 
     private int numWrapperBricksCreated = 0;

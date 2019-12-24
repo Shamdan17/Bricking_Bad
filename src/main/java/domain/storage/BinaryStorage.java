@@ -1,11 +1,11 @@
 package domain.storage;
 
+import utils.Constants;
+
 import java.io.*;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Set;
-import utils.Constants;
 
 // BinaryStorage is a storage manager that works as a generic persistent key value store.
 
@@ -82,7 +82,6 @@ public class BinaryStorage implements StorageManager {
      * OVERVIEW: provides the caller of a list of all saved entires inside the
      * storage
      * MODIFIES: Nothing
-     *
      */
     public Set<String> keySet() {
         return this.DataLinks.keySet();
@@ -120,7 +119,7 @@ public class BinaryStorage implements StorageManager {
     private void load() {
         File dataFile = new File(storageName);
 
-        if(!dataFile.exists()) {
+        if (!dataFile.exists()) {
             return;
         }
         try {

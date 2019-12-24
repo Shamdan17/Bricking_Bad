@@ -54,15 +54,15 @@ public class BrickingBad {
         return mapBuildSession.getData();
     }
 
-    public boolean buildMap(int simple,int halfMetal,int mine,int wrapper){
-        return mapBuildSession.buildMap(simple,halfMetal,mine,wrapper);
+    public boolean buildMap(int simple, int halfMetal, int mine, int wrapper) {
+        return mapBuildSession.buildMap(simple, halfMetal, mine, wrapper);
     }
 
-    public void initializeMapBuild(){
+    public void initializeMapBuild() {
         mapBuildSession = new MapBuildSession(acc.getUsername());
     }
 
-    public void startGame(){
+    public void startGame() {
         MapBuildData data = mapBuildSession.getData();
         gameSession.loadMap(data);
     }
@@ -102,11 +102,11 @@ public class BrickingBad {
         mapBuildSession.load(name);
     }
 
-    public boolean validMap(){
+    public boolean validMap() {
         return mapBuildSession.validMap();
     }
 
-    public List<String> getMapList(){
+    public List<String> getMapList() {
         return mapBuildSession.getMapList();
     }
 
@@ -133,7 +133,7 @@ public class BrickingBad {
         return true;
     }
 
-    public boolean creatAccount(String username, String password){
+    public boolean creatAccount(String username, String password) {
         return accountManager.register(username, password);
     }
 
@@ -198,14 +198,14 @@ public class BrickingBad {
      * changes the location of a brick in build mode
      *
      * @param ID ID of brick to be moved
-     * @param to   destination of brick
+     * @param to destination of brick
      */
     public boolean moveBrick(UUID ID, Position to) {
         return mapBuildSession.moveBrick(ID, to);
     }
 
-    public void dragBrick(UUID ID, Position to){
-        mapBuildSession.dragBrick(ID,to);
+    public void dragBrick(UUID ID, Position to) {
+        mapBuildSession.dragBrick(ID, to);
     }
 
     /**

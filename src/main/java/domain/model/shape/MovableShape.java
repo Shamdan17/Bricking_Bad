@@ -53,7 +53,7 @@ public abstract class MovableShape implements Serializable {
         this.queue = queue;
     }
 
-    protected void addToQueue(MovableShape shape){
+    protected void addToQueue(MovableShape shape) {
         shape.setQueue(queue);
         queue.add(shape);
     }
@@ -63,7 +63,7 @@ public abstract class MovableShape implements Serializable {
             this.destroyed = true;
     }
 
-    public UUID getID(){
+    public UUID getID() {
         return ID;
     }
 

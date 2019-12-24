@@ -36,7 +36,7 @@ public class GameCollisionRule implements CollisionRule {
         cache.put(new Pair<>(obj1.getID(), obj2.getID()), cache.getOrDefault(new Pair<>(obj1.getID(), obj2.getID()), 1) - 1);
 
         // if those two objects are not colliding then ignore
-        if(!ps.isCollided(obj1, obj2)) {
+        if (!ps.isCollided(obj1, obj2)) {
             return;
         }
 

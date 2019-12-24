@@ -10,7 +10,8 @@ public class DrunkAlien implements Drawable {
 
     private MovableShape ms;
     Image image;
-    public DrunkAlien(MovableShape ms){
+
+    public DrunkAlien(MovableShape ms) {
         this.ms = ms;
     }
 
@@ -18,11 +19,11 @@ public class DrunkAlien implements Drawable {
     public void draw(Graphics g) {
         int x = (int) Math.round(ms.getPosition().getX());
         int y = (int) Math.round(ms.getPosition().getY());
-        image = ImageFactory.get(ms.getSpecificType(),ms.getWidth(),ms.getLength());
-        g.drawImage(image,x,y,null);
+        image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
+        g.drawImage(image, x, y, null);
     }
 
-    public void setMovable(MovableShape ms){
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 }

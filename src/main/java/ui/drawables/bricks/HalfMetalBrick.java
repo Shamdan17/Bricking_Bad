@@ -15,7 +15,7 @@ public class HalfMetalBrick extends Brick {
     private double dy;
 
     public HalfMetalBrick(MovableShape ms, BrickingBad bb) {
-        super(ms,bb);
+        super(ms, bb);
         isDragged = false;
     }
 
@@ -30,18 +30,19 @@ public class HalfMetalBrick extends Brick {
         int width = ms.getWidth();
 
         domain.model.brick.HalfMetalBrick brick = (domain.model.brick.HalfMetalBrick) ms;
-        if(!brick.isCracked())
-          g.setColor(Color.YELLOW);
+        if (!brick.isCracked())
+            g.setColor(Color.YELLOW);
         else
-          g.setColor(Color.DARK_GRAY);
+            g.setColor(Color.DARK_GRAY);
         g.fillRect(x, y, length, width / 2);
         g.drawRect(x, y, length, width / 2);
         g.setColor(Color.DARK_GRAY);
         g.fillRect(x, y + (width / 2), length, width / 2);
         g.drawRect(x, y + (width / 2), length, width / 2);
     }
+
     @Override
-    public boolean isInside(double x,double y){
+    public boolean isInside(double x, double y) {
         double myX = ms.getPosition().getX();
         double myY = ms.getPosition().getY();
         double len = ms.getLength();
@@ -64,45 +65,47 @@ public class HalfMetalBrick extends Brick {
         }
     }
 
-   @Override
-  public void mousePressed(MouseEvent mouseEvent) {
-    if (!isInside(mouseEvent.getX(), mouseEvent.getY())) return;
-    if (!isDragged) {
-        double x = ms.getPosition().getX();
-        double y = ms.getPosition().getY();
-        dx = mouseEvent.getX() - x;
-        dy = mouseEvent.getY() - y;
-      oldPos = new Position(ms.getPosition().getX(), ms.getPosition().getY());
-      isDragged = true;
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+        if (!isInside(mouseEvent.getX(), mouseEvent.getY())) return;
+        if (!isDragged) {
+            double x = ms.getPosition().getX();
+            double y = ms.getPosition().getY();
+            dx = mouseEvent.getX() - x;
+            dy = mouseEvent.getY() - y;
+            oldPos = new Position(ms.getPosition().getX(), ms.getPosition().getY());
+            isDragged = true;
+        }
     }
-  }
 
-  @Override
-  public void mouseReleased(MouseEvent mouseEvent) {
-    if (isDragged) {
-      Position newPos = new Position(mouseEvent.getX() - dx, mouseEvent.getY() - dy);
-      boolean isMoved = brickingBad.moveBrick(ms.getID(), newPos);
-      if (!isMoved) {
-        brickingBad.moveBrick(ms.getID(),oldPos);
-      }
-      isDragged = false;
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+        if (isDragged) {
+            Position newPos = new Position(mouseEvent.getX() - dx, mouseEvent.getY() - dy);
+            boolean isMoved = brickingBad.moveBrick(ms.getID(), newPos);
+            if (!isMoved) {
+                brickingBad.moveBrick(ms.getID(), oldPos);
+            }
+            isDragged = false;
+        }
     }
-  }
 
-  @Override
-  public void mouseEntered(MouseEvent mouseEvent) {}
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+    }
 
-  @Override
-  public void mouseExited(MouseEvent mouseEvent) {}
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+    }
 
-  @Override
-  public void mouseDragged(MouseEvent mouseEvent) {
-      if(!isDragged)
-          return ;
-      int x = mouseEvent.getX(), y = mouseEvent.getY();
-      brickingBad.dragBrick(ms.getID(),new Position(x - dx,y - dy));
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        if (!isDragged)
+            return;
+        int x = mouseEvent.getX(), y = mouseEvent.getY();
+        brickingBad.dragBrick(ms.getID(), new Position(x - dx, y - dy));
 
-  }
+    }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {

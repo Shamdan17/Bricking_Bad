@@ -7,22 +7,22 @@ import java.awt.*;
 
 public class Ball implements Drawable {
 
-  private MovableShape ms;
-  private Image image;
+    private MovableShape ms;
+    private Image image;
 
-  public Ball(MovableShape ms) {
-    this.ms = ms;
-  }
+    public Ball(MovableShape ms) {
+        this.ms = ms;
+    }
 
-  @Override
-  public void draw(Graphics g) {
-    int x = util.round(ms.getPosition().getX());
-    int y = util.round(ms.getPosition().getY());
-    image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
-    g.drawImage(image,x,y,null);
-  }
+    @Override
+    public void draw(Graphics g) {
+        int x = util.round(ms.getPosition().getX());
+        int y = util.round(ms.getPosition().getY());
+        image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
+        g.drawImage(image, x, y, null);
+    }
 
-  public void setMovable(MovableShape ms) {
-    this.ms = ms;
-  }
+    public void setMovable(MovableShape ms) {
+        this.ms = ms;
+    }
 }

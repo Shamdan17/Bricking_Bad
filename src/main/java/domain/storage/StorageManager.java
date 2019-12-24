@@ -9,12 +9,11 @@ import java.util.Set;
  */
 public interface StorageManager {
 
-	/**
-	 *
-	 * @param key the identifier of saved data
-	 * @param value the actual data to be saved
-	 */
-    public void   put(String key, Serializable value);
+    /**
+     * @param key   the identifier of saved data
+     * @param value the actual data to be saved
+     */
+    public void put(String key, Serializable value);
 
     /**
      * @param key the identifier of saved data
@@ -29,7 +28,6 @@ public interface StorageManager {
     public boolean contains(String key);
 
     /**
-     *
      * @return a set of saved entry keys
      */
     public Set<String> keySet();
