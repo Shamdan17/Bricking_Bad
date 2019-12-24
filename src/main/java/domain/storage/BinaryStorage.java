@@ -87,8 +87,17 @@ public class BinaryStorage implements StorageManager {
     }
 
     /**
-     * OVERVIEW: saves the storage to a file MODIFIES: File on Disk EFFECT: dumps
-     * the current storage to a file (overwrites)
+     * OVERVIEW: makes sure the storage cache is in sync with disk
+     * EFFECT: updates the file containing the storage
+     */
+    public void close() {
+        save();
+    }
+
+    /**
+     * OVERVIEW: saves the storage to a file
+     * MODIFIES: File on Disk
+     * EFFECT: dumps the current storage to a file (overwrites)
      */
     private void save() {
         Path filepath = Paths.get(System.getProperty("user.dir"), storageName);
@@ -103,8 +112,9 @@ public class BinaryStorage implements StorageManager {
     }
 
     /**
-     * OVERVIEW: loads the storage from a file MODIFIES: DataLinks EFFECT: loads the
-     * content of a storage file into memory
+     * OVERVIEW: loads the storage from a file
+     * MODIFIES: DataLinks
+     * EFFECT: loads the content of a storage file into memory
      */
     private void load() {
         File dataFile = new File(System.getProperty("user.dir"), storageName);
@@ -123,9 +133,9 @@ public class BinaryStorage implements StorageManager {
     }
 
     /**
-     * OVERVIEW: saves data to file before destroying the object MODIFIES: File on
-     * disk EFFECT: dumps the current storage to a file (overwrites) upon object
-     * destruction
+     * OVERVIEW: saves data to file before destroying the object
+     * MODIFIES: File on disk
+     * EFFECT: dumps the current storage to a file (overwrites) upon object destruction
      */
     @Override
     protected void finalize() throws Throwable {
