@@ -20,22 +20,22 @@ public final class Constants {
 
     public static final int POWERUP_LABEL_LENGTH = 30;
     public static final int POWERUP_LABEL_WIDTH = 60;
-    public static final int POWERUP_LENGTH = 80;
+    public static final int POWERUP_LENGTH = 150;
     public static final int POWERUP_WIDTH = 180;
     public static final int POWERUP_X =  10;
     public static final int POWERUP_LEFT_X = POWERUP_X + 20;
 
-    public static final int MAGNET_POWERUP_Y = 200;
-    public static final int MAGNET_LEFT_Y = 270;
+    public static final int MAGNET_POWERUP_Y = 0;
+    public static final int MAGNET_LEFT_Y = 100;
 
-    public static final int TALLER_POWERUP_Y = 400;
-    public static final int TALLER_LEFT_Y = 470;
+    public static final int TALLER_POWERUP_Y = 200;
+    public static final int TALLER_LEFT_Y = 300;
 
-    public static final int CHEMICAL_POWERUP_Y = 600;
-    public static final int CHEMICAL_LEFT_Y = 670;
+    public static final int CHEMICAL_POWERUP_Y = 400;
+    public static final int CHEMICAL_LEFT_Y = 500;
 
-    public static final int LASER_POWERUP_Y = 800;
-    public static final int LASER_LEFT_Y = 870;
+    public static final int LASER_POWERUP_Y = 600;
+    public static final int LASER_LEFT_Y = 700;
 
 
     public static boolean COPY_MODE = true;
@@ -99,7 +99,7 @@ public final class Constants {
      * Powerups
      */
     public static final int EXPLOSION_RADIUS_FACTOR = 2;
-    public static final int POWERUP_SIZE = 10;
+    public static final int POWERUP_SIZE = 40;
     public static final double FIREBALL_EXPLOSION_RADIUS_FACTOR = 5;
     public static final int LASER_AMMO_COUNT = 5;
     public static final int GANG_OF_BALLS_MULTIPLIER = 10;

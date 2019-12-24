@@ -3,10 +3,11 @@ package ui.panels;
 import domain.BrickingBad;
 import domain.model.SpecificType;
 import domain.model.powerup.PowerUp;
-import ui.drawables.powerups.MagnetPowerUp;
+import ui.ImageFactory;
 import utils.Constants;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +29,6 @@ public class Inventory extends JPanel implements ActionListener {
   JLabel chemicalLeftLabel;
   JLabel laserLeftLabel;
 
-
   public Inventory(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.brickingBad = brickingBad;
     this.cardLayout = cardLayout;
@@ -43,7 +43,6 @@ public class Inventory extends JPanel implements ActionListener {
     this.tallerLeftLabel = new JLabel(Constants.POWERUP_LEFT_DEFAULT);
     this.chemicalLeftLabel = new JLabel(Constants.POWERUP_LEFT_DEFAULT);
     this.laserLeftLabel = new JLabel(Constants.POWERUP_LEFT_DEFAULT);
-
 
     setLayout(null);
     setBackground(new Color(100, 100, 200));
@@ -106,6 +105,49 @@ public class Inventory extends JPanel implements ActionListener {
     chemicalBallButton.addActionListener(this);
     laserButton.addActionListener(this);
 
+    magnetPaddleButton.setIcon(
+        new ImageIcon(
+            ImageFactory.getImageButton(
+                SpecificType.MagnetPowerup,
+                Constants.POWERUP_WIDTH,
+                Constants.POWERUP_LENGTH)));
+    magnetPaddleButton.setBorderPainted(false);
+    magnetPaddleButton.setFocusPainted(false);
+    magnetPaddleButton.setContentAreaFilled(false);
+
+
+    tallerPaddleButton.setIcon(
+        new ImageIcon(
+            ImageFactory.getImageButton(
+                SpecificType.TallerPaddlePowerup,
+                Constants.POWERUP_WIDTH,
+                Constants.POWERUP_LENGTH)));
+    tallerPaddleButton.setBorderPainted(false);
+    tallerPaddleButton.setFocusPainted(false);
+    tallerPaddleButton.setContentAreaFilled(false);
+
+
+    chemicalBallButton.setIcon(
+        new ImageIcon(
+            ImageFactory.getImageButton(
+                SpecificType.ChemicalBallPowerup,
+                Constants.POWERUP_WIDTH,
+                Constants.POWERUP_LENGTH)));
+    chemicalBallButton.setBorderPainted(false);
+    chemicalBallButton.setFocusPainted(false);
+    chemicalBallButton.setContentAreaFilled(false);
+
+    laserButton.setIcon(
+        new ImageIcon(
+            ImageFactory.getImageButton(
+                SpecificType.DestructiveLaserGun,
+                Constants.POWERUP_WIDTH,
+                Constants.POWERUP_LENGTH)));
+    laserButton.setBorderPainted(false);
+    laserButton.setFocusPainted(false);
+    laserButton.setContentAreaFilled(false);
+
+
     magnetLeftLabel.setFont(Constants.POWERUP_FONT);
     tallerLeftLabel.setFont(Constants.POWERUP_FONT);
     chemicalLeftLabel.setFont(Constants.POWERUP_FONT);
@@ -121,37 +163,34 @@ public class Inventory extends JPanel implements ActionListener {
     add(laserLeftLabel);
   }
 
-  public void updatePowerups(List<PowerUp> pList,int laserCount){
-      int magentCount = 0;
-      int tallerCount = 0;
-      int chemicalCount = 0;
-      for(PowerUp p : pList){
-          if(p.getSpecificType() == SpecificType.MagnetPowerup)
-              magentCount++;
-          if(p.getSpecificType() == SpecificType.TallerPaddlePowerup)
-              tallerCount++;
-          if(p.getSpecificType() == SpecificType.ChemicalBallPowerup)
-              chemicalCount++;
-      }
-      magnetLeftLabel.setText(magentCount + " Left");
-      tallerLeftLabel.setText(tallerCount + " Left");
-      chemicalLeftLabel.setText(chemicalCount + " Left");
-      laserLeftLabel.setText(laserCount + " Left");
+  public void updatePowerups(List<PowerUp> pList, int laserCount) {
+    int magentCount = 0;
+    int tallerCount = 0;
+    int chemicalCount = 0;
+    for (PowerUp p : pList) {
+      if (p.getSpecificType() == SpecificType.MagnetPowerup) magentCount++;
+      if (p.getSpecificType() == SpecificType.TallerPaddlePowerup) tallerCount++;
+      if (p.getSpecificType() == SpecificType.ChemicalBallPowerup) chemicalCount++;
+    }
+    magnetLeftLabel.setText(magentCount + " Left");
+    tallerLeftLabel.setText(tallerCount + " Left");
+    chemicalLeftLabel.setText(chemicalCount + " Left");
+    laserLeftLabel.setText(laserCount + " Left");
   }
 
   @Override
   public void actionPerformed(ActionEvent actionEvent) {
-      if(actionEvent.getActionCommand().equals(Constants.MAGNET_POWERUP_BUTTON)){
-          brickingBad.activateMagnet();
-      }
-      if(actionEvent.getActionCommand().equals(Constants.TALLER_POWERUP_BUTTON)){
-          brickingBad.activateTallerPaddle();
-      }
-      if(actionEvent.getActionCommand().equals(Constants.CHEMICAL_POWERUP_BUTTON)){
-          brickingBad.activateChemicalBall();
-      }
-      if(actionEvent.getActionCommand().equals(Constants.LASER_POWERUP_BUTTON)){
-          brickingBad.shootLaser();
-      }
+    if (actionEvent.getActionCommand().equals(Constants.MAGNET_POWERUP_BUTTON)) {
+      brickingBad.activateMagnet();
+    }
+    if (actionEvent.getActionCommand().equals(Constants.TALLER_POWERUP_BUTTON)) {
+      brickingBad.activateTallerPaddle();
+    }
+    if (actionEvent.getActionCommand().equals(Constants.CHEMICAL_POWERUP_BUTTON)) {
+      brickingBad.activateChemicalBall();
+    }
+    if (actionEvent.getActionCommand().equals(Constants.LASER_POWERUP_BUTTON)) {
+      brickingBad.shootLaser();
+    }
   }
 }
