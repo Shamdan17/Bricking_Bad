@@ -223,6 +223,4 @@ public final class Constants {
     public static final Position defaultPosition = new Position(0, 0);
     public static final Velocity defaultVelocity = new Velocity(0, 0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0, BALL_INITIAL_VY);
-
-    public static final double DAMPING_FACTOR = 0.1;
 }
