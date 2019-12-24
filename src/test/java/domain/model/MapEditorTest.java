@@ -22,7 +22,7 @@ public class MapEditorTest {
     private BrickFactory brickFactory;
     @BeforeEach
     void setUp() {
-        mapEditor = new MapBuildSession("");
+        mapEditor = new MapBuildSession("ssd");
         brickFactory = new BrickFactory();
     }
 
@@ -67,12 +67,12 @@ public class MapEditorTest {
 
     @Test
     void moveBrickToEmptyPositionShouldReturnTrue() {
-        mapEditor.addBrick(SimpleBrick, new Position(10, 10));
-        mapEditor.addBrick(SimpleBrick, new Position(50, 50));
+        mapEditor.addBrick(SimpleBrick, new Position(500, 500));
+        mapEditor.addBrick(SimpleBrick, new Position(600, 600));
         List<MovableShape> list = mapEditor.getData().getMovables();
         Brick brick1 = (Brick)list.get(0);
         Brick brick2 = (Brick)list.get(1);
-        assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(60, 0)));
+        assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(200, 200)));
     }
 
     @Test
