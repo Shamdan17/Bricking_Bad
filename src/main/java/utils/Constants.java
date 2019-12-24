@@ -216,7 +216,8 @@ public final class Constants {
     // Aliens
     public static final double Protecting_Alien_Speed = 3 * L * (SLEEP_TIME / 1000.0);
     public static final long Repairing_Alien_Brick_Period = Integer.parseInt(getProperty("Repairing_Alien_Brick_Period", "5000")); // in milliseconds
-
+    public static final long CONFUSED_ALIEN_DISAPPEAR_TIME = Long.parseLong(getProperty("CONFUSED_ALIEN_DISAPPEAR_TIME", "5000"));
+    public static final int DUAL_ALIEN_BRICK_THRESHOLD = Integer.parseInt(getProperty("DUAL_ALIEN_BRICK_THRESHOLD", "3"));
 
     public static final Position defaultPosition = new Position(0, 0);
     public static final Velocity defaultVelocity = new Velocity(0, 0);

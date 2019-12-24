@@ -73,7 +73,6 @@ public class Paddle extends Rectangle {
             movementOffset *= 0.87;
             if (Math.abs(movementOffset) < 1) movementOffset = 0;
         }
-        System.out.println(movementOffset);
         setPosition(super.getPosition().incrementX(movementOffset));
         if (boundBall != null) {
             boundBall.setPosition(calculateBallPosition());

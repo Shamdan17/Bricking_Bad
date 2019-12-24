@@ -54,6 +54,18 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
   }
 
   @Override
+  public void setPosition(Position pos) {
+    movBeh = new BoundedLinearBehavior(
+            pos,
+            new Velocity(0, Constants.Protecting_Alien_Speed),
+            0,
+            Constants.GAME_WIDTH,
+            0,
+            Constants.GAME_HEIGHT * 0.5);
+    self.initializeMovementBehavior(movBeh);
+  }
+
+  @Override
   public String toString() {
     return "Cooperative Alien at "
         + movBeh.getCurrentPosition()

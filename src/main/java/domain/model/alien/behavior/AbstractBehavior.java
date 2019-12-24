@@ -22,7 +22,7 @@ public abstract class AbstractBehavior implements AlienBehavior, Serializable {
     public abstract void collide(MovableShape movableShape);
 
     @Override
-    public final void setMovementBehavior(MovementBehavior movBeh) {
+    public void setMovementBehavior(MovementBehavior movBeh) {
         this.movBeh = movBeh;
     }
 
@@ -30,11 +30,11 @@ public abstract class AbstractBehavior implements AlienBehavior, Serializable {
 
     @Override
     public void move() {
-        movBeh.getNextPosition();
+        self.getMovBeh().getNextPosition();
     }
 
     @Override
-    public final void setSelf(Alien self) {
+    public void setSelf(Alien self) {
         this.self = self;
         self.initializeMovementBehavior(movBeh);
     }
