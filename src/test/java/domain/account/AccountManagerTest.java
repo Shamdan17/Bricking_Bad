@@ -1,9 +1,9 @@
 package domain.account;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import domain.storage.BinaryStorage;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class AccountManagerTest {
 
@@ -22,7 +22,7 @@ class AccountManagerTest {
 
         // During Registration
         assertTrue(account.repOK(), "Account Manager structure damaged before register");
-        boolean registryState = account.Register(username, password);
+        boolean registryState = account.register(username, password);
         assertTrue(account.repOK(), "Account Manager structure damaged after register");
 
         // After Registration

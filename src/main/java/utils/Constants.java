@@ -76,24 +76,24 @@ public final class Constants {
     /**
      * Bounds
      */
-    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
+    private static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
     public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
     public static final int BRICK_UPPER_BOUND = 50;
     public static final int BRICK_RIGHT_BOUND = GAME_WIDTH ;
     public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
-    public static final long SLEEP_TIME = 10;
-    public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
+    public static final long SLEEP_TIME = 5;
+    public static final double BRICK_VELOCITY = L / (4 * (1000.0 / SLEEP_TIME));
 
     /**
      * Ball
      */
     public static final int BALL_INITIAL_VX = 0;
-    public static final int BALL_INITIAL_VY = 4;
+    public static final int BALL_INITIAL_VY = 2;
     public static final int BALL_DIAMETER = 17;
     public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
     public static final int BALL_SPAWNING_HEIGHT = 170;
-    public static final double DAMPING_FACTOR = 0.05;
+    public static final double DAMPING_FACTOR = 0.1;
 
 
     /**
