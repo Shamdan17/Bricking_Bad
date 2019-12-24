@@ -4,6 +4,7 @@ import domain.game.collisionrules.CollisionRule;
 import domain.game.collisionrules.CollisionRuleFactory;
 import domain.mapbuild.MapBuildData;
 import domain.model.*;
+import domain.model.alien.Alien;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -26,7 +27,7 @@ public class Board {
   private List<MovableShape> movables;
   private Paddle paddle;
   private Queue<MovableShape> objectQueue = new LinkedList<>();
-    private List<BrickPercentageListener> listeners = new ArrayList<>();
+  private List<BrickPercentageListener> listeners = new ArrayList<>();
   private PhysicsEngine ps = PhysicsEngine.getInstance();
   private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
   private Inventory inventory;
@@ -37,7 +38,8 @@ public class Board {
   private long gameStartTime;
   private boolean isGameOver = false;
   private boolean isWin = false;
-  private boolean testMode = false;
+  private boolean testMode = true;
+  private int totalBricksCount;
 
   /**
    * OVERVIEW: constructor for Board MODIFIES: paddle, ball, movables EFFECT: creates new instance
@@ -60,6 +62,7 @@ public class Board {
     remainingLives = data.getRemainingLives();
     gameStartTime = System.currentTimeMillis() - data.getGameTime() * 1000;
     maxGameTime = data.getMaxGameTime();
+    totalBricksCount = data.getTotalBricksCount();
     isGameOver = false;
   }
 
@@ -68,6 +71,10 @@ public class Board {
       throw new IllegalArgumentException();
     }
     movables = data.getMovables();
+    totalBricksCount = 0;
+    for (MovableShape ms : movables) {
+      if (ms.getType() == Type.Brick) totalBricksCount++;
+    }
     inventory = new Inventory(this);
     paddle = new Paddle(new Position((Constants.GAME_WIDTH / 2) - (Constants.L / 2), 900));
     Ball ball = new Ball(paddle.getCenter().incrementY(-200), Constants.BALL_DIAMETER / 2);
@@ -113,16 +120,15 @@ public class Board {
       checkNumBalls();
       checkWin();
       checkGameOver();
-        updateScoreListeners();
+      updateBrickPercentageListeners();
     }
   }
 
-  private void checkWin(){
-      for(MovableShape ms : movables){
-          if(ms.getType() == Type.Brick)
-              return ;
-      }
-      isWin = true;
+  private void checkWin() {
+    for (MovableShape ms : movables) {
+      if (ms.getType() == Type.Brick) return;
+    }
+    isWin = true;
   }
 
   private void checkGameOver() {
@@ -174,7 +180,7 @@ public class Board {
   private void handleQueue() {
     while (!objectQueue.isEmpty()) {
       MovableShape cur = objectQueue.remove();
-        if (cur instanceof BrickPercentageListener) listeners.add((BrickPercentageListener) cur);
+      if (cur instanceof BrickPercentageListener) listeners.add((BrickPercentageListener) cur);
       if (cur.getType() == Type.Powerup
           || cur.getType() == Type.Alien
           || cur.getType() == Type.Ball) {
@@ -201,17 +207,25 @@ public class Board {
     }
   }
 
-    /**
-     * OVERVIEW: This function iterates over brick percentage listeners and calls updateScore() function on each
-     * MODIFIES: movables
-     * EFFECT: calls move function for each movable inside movables
-     */
-    private void updateScoreListeners() {
-        // move all objects once
-        for (BrickPercentageListener listener : listeners) {
-            listener.updateBrickPercentage(6);
-        }
+  /**
+   * OVERVIEW: This function iterates over brick percentage listeners and calls updateScore()
+   * function on each MODIFIES: movables EFFECT: calls move function for each movable inside
+   * movables
+   */
+  private void updateBrickPercentageListeners() {
+    // move all objects once
+    int curBricksCount = 0;
+    for(MovableShape ms : movables){
+      if(ms.getType() == Type.Brick)
+        curBricksCount++;
     }
+    double percentage = (1.0 * curBricksCount / totalBricksCount) ;
+
+    for (BrickPercentageListener listener : listeners) {
+      System.out.println(((Alien)listener).getSpecificType());
+      listener.updateBrickPercentage(percentage);
+    }
+  }
 
   /**
    * OVERVIEW: This function checks pairwise collisions between movable objects inside movables list
@@ -362,7 +376,8 @@ public class Board {
         maxGameTime,
         paddle.getLaserCount(),
         (isGameOver && !testMode),
-            (isWin && !testMode));
+        (isWin && !testMode),
+        totalBricksCount);
   }
 
   public GameData getData() {
@@ -380,7 +395,8 @@ public class Board {
         maxGameTime,
         paddle.getLaserCount(),
         (isGameOver && !testMode),
-            (isWin && !testMode));
+        (isWin && !testMode),
+        totalBricksCount);
   }
 
   private Paddle getPaddle(List<MovableShape> movables) {

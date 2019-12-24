@@ -29,10 +29,13 @@ public class HalfMetalBrick extends Brick {
         int length = ms.getLength();
         int width = ms.getWidth();
 
-        g.setColor(Color.YELLOW);
+        domain.model.brick.HalfMetalBrick brick = (domain.model.brick.HalfMetalBrick) ms;
+        if(!brick.isCracked())
+          g.setColor(Color.YELLOW);
+        else
+          g.setColor(Color.DARK_GRAY);
         g.fillRect(x, y, length, width / 2);
         g.drawRect(x, y, length, width / 2);
-
         g.setColor(Color.DARK_GRAY);
         g.fillRect(x, y + (width / 2), length, width / 2);
         g.drawRect(x, y + (width / 2), length, width / 2);

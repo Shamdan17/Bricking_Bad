@@ -10,6 +10,10 @@ import ui.drawables.bricks.HalfMetalBrick;
 import ui.drawables.bricks.MineBrick;
 import ui.drawables.bricks.SimpleBrick;
 import ui.drawables.bricks.WrapperBrick;
+import ui.drawables.effects.ChemicalBall;
+import ui.drawables.effects.Explosion;
+import ui.drawables.effects.FireBall;
+import ui.drawables.effects.Laser;
 import ui.drawables.powerups.*;
 
 public class DrawableFactory {
@@ -59,9 +63,7 @@ public class DrawableFactory {
             case FireBallExplosion:
                 return new Explosion(ms);
             default:
-                //TODO: Handle all drawables
-                return new SimpleBrick(ms, brickingBad);
-            //throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
+            throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
         }
     }
 

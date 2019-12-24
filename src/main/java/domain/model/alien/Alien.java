@@ -48,7 +48,8 @@ public class Alien extends MovableShape implements BrickPercentageListener {
     }
 
     public void updateBrickPercentage(double brickPercentage) {
-        this.brickPercentage = brickPercentage;
+      System.out.println("Brick Percentage: " + brickPercentage);
+      this.brickPercentage = brickPercentage;
     }
 
     public double getCurrentPercentage() {

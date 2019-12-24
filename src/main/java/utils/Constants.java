@@ -78,7 +78,7 @@ public final class Constants {
     /**
      * Bounds
      */
-    private static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
+    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
     public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
     public static final int BRICK_UPPER_BOUND = Integer.parseInt(getProperty("BRICK_UPPER_BOUND", "50"));
     public static final int BRICK_RIGHT_BOUND = GAME_WIDTH;
@@ -223,6 +223,4 @@ public final class Constants {
     public static final Position defaultPosition = new Position(0, 0);
     public static final Velocity defaultVelocity = new Velocity(0, 0);
     public static final Velocity defaultRespawnVelocity = new Velocity(0, BALL_INITIAL_VY);
-
-    //public static final defaultBoard
 }

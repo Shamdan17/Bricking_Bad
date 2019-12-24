@@ -6,4 +6,5 @@ public enum Type {
     Brick,
     Powerup,
     Alien,
+    Misc,
 }

@@ -35,7 +35,7 @@ public class HalfMetalBrick extends Brick {
         return "Half Metal Brick at " + super.getPosition().toString();
     }
 
-    private boolean isCracked() {
+    public boolean isCracked() {
         return cracked;
     }
 

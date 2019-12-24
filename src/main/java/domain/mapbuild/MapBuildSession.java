@@ -31,7 +31,7 @@ public class MapBuildSession {
         this.map = new Map();
         this.username = username;
         // TODO: replace this string with a variable value
-        storageManager = StorageManagerFactory.get(username);
+        storageManager = StorageManagerFactory.get(username + "builds");
     }
 
     private boolean testMode = true;

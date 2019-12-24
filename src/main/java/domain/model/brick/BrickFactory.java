@@ -32,15 +32,7 @@ public class BrickFactory {
     private ArrayList<MovableShape> defaultItems() {
         ArrayList<MovableShape> res = new ArrayList<>();
 
-//        res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
-//        res.add(new GangOfBalls(powerupMovBeh.copy()));
-//        res.add(new TallerPaddle(powerupMovBeh.copy()));
-//        res.add(new Magnet(powerupMovBeh.copy()));
-//        res.add(new ChemicalBall(powerupMovBeh.copy()));
-//        res.add(new Fireball(powerupMovBeh.copy()));
-//        res.add(AlienFactory.get(SpecificType.CooperativeAlien, null));
-//        res.add(AlienFactory.get(SpecificType.ProtectingAlien, null));
-//        res.add(AlienFactory.get(SpecificType.RepairingAlien, null));
+
         res.add(AlienFactory.get(SpecificType.DrunkAlien, null));
         
         Collections.shuffle(res);

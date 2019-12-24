@@ -21,6 +21,7 @@ public class GameData implements Serializable {
   private boolean gameOver;
   private boolean win;
   private Map<UUID,MovableShape> IDMap;
+  private int totalBricksCount;
   public GameData(List<MovableShape> ms, boolean isCopy) {
     this.movables = ms;
     this.isCopy = isCopy;
@@ -36,7 +37,8 @@ public class GameData implements Serializable {
       long maxGameTime,
       int laserCount,
       boolean gameOver,
-      boolean win) {
+      boolean win,
+      int totalBricksCount) {
 
     this.movables = ms;
     this.powerupList = powerupList;
@@ -48,10 +50,11 @@ public class GameData implements Serializable {
     this.laserCount = laserCount;
     this.gameOver = gameOver;
     this.win = win;
+    this.totalBricksCount = totalBricksCount;
     this.IDMap = new HashMap<>();
-
     for(MovableShape mo : movables)
         IDMap.put(mo.getID(),mo);
+
   }
 
   public List<MovableShape> getMovables() {
@@ -87,6 +90,10 @@ public class GameData implements Serializable {
 
   public boolean isGameOver() {
     return gameOver;
+  }
+
+  public int getTotalBricksCount(){
+    return totalBricksCount;
   }
 
   public Map<UUID,MovableShape> getMovablesIDMap(){

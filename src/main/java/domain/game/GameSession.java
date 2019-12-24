@@ -20,7 +20,7 @@ public class GameSession {
             throw new IllegalArgumentException();
         }
         this.username = username;
-        this.sm = StorageManagerFactory.get(username);
+        this.sm = StorageManagerFactory.get(username + "games");
         this.board = new Board();
     }
 

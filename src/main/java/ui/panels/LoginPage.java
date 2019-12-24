@@ -1,10 +1,11 @@
-package ui;
+package ui.panels;
 
 import domain.BrickingBad;
 import ui.panels.MainMenu;
 import utils.Constants;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +40,6 @@ public class LoginPage extends JPanel implements ActionListener {
     this.exitButton = new JButton(Constants.EXIT_BUTTON);
     this.loginButton = new JButton(Constants.LOGIN_BUTTON);
     this.createAccountButton = new JButton(Constants.CREATE_ACCOUNT_BUTTON);
-
     setup();
   }
 
@@ -54,23 +54,39 @@ public class LoginPage extends JPanel implements ActionListener {
       loginButton.addActionListener(this);
       createAccountButton.addActionListener(this);
       exitButton.addActionListener(this);
-      gbc.gridx = 0;
+
+      loginButton.setPreferredSize(fieldSize);
+      createAccountButton.setPreferredSize(fieldSize);
+      exitButton.setPreferredSize(fieldSize);
+      JLabel intro = new JLabel("BrickingBad");
+      intro.setFont(Constants.VERY_BIG_FONT);
+      intro.setBounds(0,0,300,300);
+
+//      gbc.gridheight = 4;
+//      gbc.gridwidth = 2;
+
+      gbc.gridx = 1;
       gbc.gridy = 0;
+      add(intro, gbc);
+
+      gbc.gridx = 0;
+      gbc.gridy = 1;
       add(usernameLabel,gbc);
       gbc.gridx = 1;
       add(usernameField,gbc);
       gbc.gridx = 0;
-      gbc.gridy = 1;
+      gbc.gridy = 2;
       add(passwordLabel,gbc);
       gbc.gridx = 1;
       add(passwordField,gbc);
-      gbc.gridx = 0;
-      gbc.gridy = 2;
-      add(loginButton,gbc);
       gbc.gridx = 1;
+      gbc.gridy = 3;
+      add(loginButton,gbc);
+      gbc.gridy = 4;
       add(createAccountButton,gbc);
-      gbc.gridx = 2;
+      gbc.gridy = 5;
       add(exitButton,gbc);
+
   }
 
   @Override
