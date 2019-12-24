@@ -22,15 +22,14 @@ import static utils.Constants.POWERUP_MOVEMENT_SPEED;
 public class BrickFactory {
 
     private Queue<MovableShape> movQueue;
-    private ArrayList<MovableShape> WrapperBrickItems;
     private static final MovementBehavior powerupMovBeh = new LinearMovement(new Position(0, 0), new Velocity(0, POWERUP_MOVEMENT_SPEED));
+    private static ArrayList<MovableShape> WrapperBrickItems = defaultItems();
 
     public BrickFactory() {
-        WrapperBrickItems = defaultItems();
         this.movQueue = new LinkedList<>();
     }
 
-    private ArrayList<MovableShape> defaultItems() {
+    private static ArrayList<MovableShape> defaultItems() {
         ArrayList<MovableShape> res = new ArrayList<>();
 
         res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
@@ -49,7 +48,6 @@ public class BrickFactory {
     }
 
     public BrickFactory(Queue<MovableShape> movQueue) {
-        WrapperBrickItems = defaultItems();
         this.movQueue = movQueue;
     }
 
@@ -84,6 +82,8 @@ public class BrickFactory {
         result.setQueue(movQueue);
         return result;
     }
+
+
 
     private int numWrapperBricksCreated = 0;
 
