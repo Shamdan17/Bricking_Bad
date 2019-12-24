@@ -31,7 +31,7 @@ public class WrapperBrick extends Brick {
 
     @Override
     public String toString() {
-        return "Wrapper brick with a hidden: "+this.ms; //TODO add position info
+        return "Wrapper brick with a hidden: " + this.ms; //TODO add position info
     }
 
     @Override

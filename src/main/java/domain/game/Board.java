@@ -112,7 +112,7 @@ public class Board {
      * collisions between objects and then removes destroyed objects as a result of previous steps
      */
     public void animate() {
-        if ((!isGameOver && !isWin) || testMode) {
+        if (!isGameOver || testMode) {
             moveAllMovables();
             checkCollisions();
             removeDestroyedMovables();

@@ -1,8 +1,8 @@
 package ui.drawables.powerups;
 
 import domain.model.shape.MovableShape;
-import ui.drawables.ImageFactory;
 import ui.drawables.Drawable;
+import ui.drawables.ImageFactory;
 
 import java.awt.*;
 
@@ -10,7 +10,8 @@ public class DestructiveLaserGun implements Drawable {
 
     private MovableShape ms;
     private Image image;
-    public DestructiveLaserGun(MovableShape ms){
+
+    public DestructiveLaserGun(MovableShape ms) {
         this.ms = ms;
     }
 
@@ -19,11 +20,12 @@ public class DestructiveLaserGun implements Drawable {
     public void draw(Graphics g) {
         int x = (int) Math.round(ms.getPosition().getX());
         int y = (int) Math.round(ms.getPosition().getY());
-        if(image == null)
-            image = ImageFactory.get(ms.getSpecificType(),ms.getWidth(),ms.getLength());
-        g.drawImage(image,x,y,null);
+        if (image == null)
+            image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
+        g.drawImage(image, x, y, null);
     }
-    public void setMovable(MovableShape ms){
+
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 }

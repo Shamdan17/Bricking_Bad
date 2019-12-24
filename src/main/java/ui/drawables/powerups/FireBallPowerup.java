@@ -9,7 +9,7 @@ public class FireBallPowerup implements Drawable {
 
     private MovableShape ms;
 
-    public FireBallPowerup(MovableShape ms){
+    public FireBallPowerup(MovableShape ms) {
         this.ms = ms;
     }
 
@@ -24,7 +24,7 @@ public class FireBallPowerup implements Drawable {
         g.drawRect(x, y, length, width);
     }
 
-    public void setMovable(MovableShape ms){
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 }

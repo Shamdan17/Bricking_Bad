@@ -1,7 +1,5 @@
 import domain.BrickingBad;
-import org.apache.log4j.Logger;
 import ui.MainFrame;
-import utils.Position;
 
 public class Main {
 

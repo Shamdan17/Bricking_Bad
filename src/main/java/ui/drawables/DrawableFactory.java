@@ -18,18 +18,18 @@ import ui.drawables.powerups.*;
 
 public class DrawableFactory {
 
-    public static Drawable get(MovableShape ms, BrickingBad brickingBad){
-        switch(ms.getSpecificType()){
+    public static Drawable get(MovableShape ms, BrickingBad brickingBad) {
+        switch (ms.getSpecificType()) {
             case Paddle:
-                return new Paddle(ms,brickingBad);
+                return new Paddle(ms, brickingBad);
             case SimpleBrick:
-                return new SimpleBrick(ms,brickingBad);
+                return new SimpleBrick(ms, brickingBad);
             case HalfMetalBrick:
-                return new HalfMetalBrick(ms,brickingBad);
+                return new HalfMetalBrick(ms, brickingBad);
             case MineBrick:
-                return new MineBrick(ms,brickingBad);
+                return new MineBrick(ms, brickingBad);
             case WrapperBrick:
-                return new WrapperBrick(ms,brickingBad);
+                return new WrapperBrick(ms, brickingBad);
             case ProtectingAlien:
                 return new ProtectingAlien(ms);
             case CooperativeAlien:
@@ -63,7 +63,7 @@ public class DrawableFactory {
             case FireBallExplosion:
                 return new Explosion(ms);
             default:
-            throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
+                throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
         }
     }
 

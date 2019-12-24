@@ -83,10 +83,10 @@ public class Paddle extends Rectangle {
         tiltLeft = false;
     }
 
-    private Position getValidPosition(Position pos){
+    private Position getValidPosition(Position pos) {
         double x = pos.getX();
-        x = Math.max(x,0);
-        x = Math.min(GAME_WIDTH-L/2, x);
+        x = Math.max(x, 0);
+        x = Math.min(GAME_WIDTH - L / 2, x);
         return new Position(x, pos.getY());
     }
 
@@ -131,7 +131,7 @@ public class Paddle extends Rectangle {
         }
     }
 
-    public int getLaserCount(){
+    public int getLaserCount() {
         return laser_count;
     }
 
@@ -160,6 +160,7 @@ public class Paddle extends Rectangle {
     public void setAngle(double angle) {
         super.setAngle(getValidAngle(angle));
     }
+
     // normalizeAngle is used to return the paddle to its original length
     // it decreases the current angle by the parameter angle until it reaches 0.
     public void normalizeAngle(double angle) {

@@ -17,16 +17,16 @@ public abstract class Brick implements Drawable, MouseListener, MouseMotionListe
     protected BrickingBad brickingBad;
     public static boolean removeFlag = false;
 
-    public Brick(MovableShape ms, BrickingBad bb){
+    public Brick(MovableShape ms, BrickingBad bb) {
         this.ms = ms;
         this.brickingBad = bb;
     }
 
-    public UUID getID(){
+    public UUID getID() {
         return ms.getID();
     }
 
-    public void setMovable(MovableShape ms){
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 

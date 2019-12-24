@@ -11,11 +11,11 @@ import utils.Velocity;
 
 public class AlienFactory {
 
-    public static Alien get(SpecificType type, Position pos){
+    public static Alien get(SpecificType type, Position pos) {
         MovementBehavior movBeh = new LinearMovement(pos, new Velocity(3 * Constants.L / 150, 0));
         AlienBehavior beh;
         Alien res;
-        switch(type){
+        switch (type) {
             case DrunkAlien:
                 beh = new DrunkAlienBehavior(new NoMovement(pos));
                 initializeDrunkAlienBehaviors(pos, beh);

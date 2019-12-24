@@ -10,19 +10,20 @@ import java.awt.*;
 
 public class ChemicalBall implements Drawable {
 
-  private MovableShape ms;
-  private Image image;
-  public ChemicalBall(MovableShape ms) {
-    this.ms = ms;
-  }
+    private MovableShape ms;
+    private Image image;
 
-  @Override
-  public void draw(Graphics g) {
-    int x = util.round(ms.getPosition().getX());
-    int y = util.round(ms.getPosition().getY());
-    if (image == null)
-      image = ImageFactory.get(SpecificType.ChemicalBall, ms.getWidth(), ms.getLength());
-    g.drawImage(image,x,y,null);
+    public ChemicalBall(MovableShape ms) {
+        this.ms = ms;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        int x = util.round(ms.getPosition().getX());
+        int y = util.round(ms.getPosition().getY());
+        if (image == null)
+            image = ImageFactory.get(SpecificType.ChemicalBall, ms.getWidth(), ms.getLength());
+        g.drawImage(image, x, y, null);
 
 //    g.setColor(Color.pink);
 //    g.fillOval(
@@ -39,9 +40,9 @@ public class ChemicalBall implements Drawable {
 //    g.setColor(Color.black);
 //    g.fillOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
 //    g.drawOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
-  }
+    }
 
-  public void setMovable(MovableShape ms){
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 }

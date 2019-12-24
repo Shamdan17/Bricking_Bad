@@ -2,7 +2,6 @@ package ui.drawables;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
-import ui.drawables.Drawable;
 import utils.physics.math.util;
 
 import java.awt.*;
@@ -44,7 +43,7 @@ public class Paddle implements Drawable {
         g.drawPolygon(x, y, 4);
     }
 
-    public void setMovable(MovableShape ms){
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 

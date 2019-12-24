@@ -20,6 +20,7 @@ public class MapEditorTest {
 
     private MapBuildSession mapEditor;
     private BrickFactory brickFactory;
+
     @BeforeEach
     void setUp() {
         mapEditor = new MapBuildSession("ssd");
@@ -28,7 +29,7 @@ public class MapEditorTest {
 
     @Test
     void addNotSupportedBrickTypeShouldReturnFalse() {
-        assertFalse(mapEditor.addBrick(null, new Position(100,100)));
+        assertFalse(mapEditor.addBrick(null, new Position(100, 100)));
     }
 
     @Test
@@ -44,7 +45,7 @@ public class MapEditorTest {
     @Test
     void removeExistingBrickFromMapShouldShouldReturnTrue() {
         mapEditor.addBrick(SimpleBrick, new Position(10, 10));
-        Brick brick = (Brick)mapEditor.getData().getMovables().get(0);
+        Brick brick = (Brick) mapEditor.getData().getMovables().get(0);
         assertTrue(mapEditor.removeBrick(brick.getID()));
     }
 
@@ -59,8 +60,8 @@ public class MapEditorTest {
         mapEditor.addBrick(SimpleBrick, new Position(10, 10));
         mapEditor.addBrick(SimpleBrick, new Position(50, 50));
         List<MovableShape> list = mapEditor.getData().getMovables();
-        Brick brick1 = (Brick)list.get(0);
-        Brick brick2 = (Brick)list.get(1);
+        Brick brick1 = (Brick) list.get(0);
+        Brick brick2 = (Brick) list.get(1);
         assertFalse(mapEditor.moveBrick(brick1.getID(), brick2.getPosition()));
 
     }
@@ -70,21 +71,21 @@ public class MapEditorTest {
         mapEditor.addBrick(SimpleBrick, new Position(500, 500));
         mapEditor.addBrick(SimpleBrick, new Position(600, 600));
         List<MovableShape> list = mapEditor.getData().getMovables();
-        Brick brick1 = (Brick)list.get(0);
-        Brick brick2 = (Brick)list.get(1);
+        Brick brick1 = (Brick) list.get(0);
+        Brick brick2 = (Brick) list.get(1);
         assertTrue(mapEditor.moveBrick(brick1.getID(), new Position(200, 200)));
     }
 
     @Test
-    void testGetData(){
+    void testGetData() {
         List<MovableShape> list = new ArrayList<>();
-        for(int i=0 ; i<3 ; ++i){
-            Position pos = new Position(50 + 50 * i,50 + 50 * i);
+        for (int i = 0; i < 3; ++i) {
+            Position pos = new Position(50 + 50 * i, 50 + 50 * i);
             mapEditor.addBrick(SimpleBrick, pos);
-            list.add(brickFactory.get(SimpleBrick,pos));
+            list.add(brickFactory.get(SimpleBrick, pos));
         }
         List<MovableShape> testedList = mapEditor.getData().getMovables();
-        for(int i=0 ; i<3 ; ++i){
+        for (int i = 0; i < 3; ++i) {
             assertTrue(list.get(i).equals(testedList.get(i)));
         }
 

@@ -22,6 +22,7 @@ public class MapBuildSession {
     private String unixTimestamp;
     private BrickFactory bf = new BrickFactory();
     private String username;
+
     /**
      * OVERVIEW: constructor for MapBuildSession
      * MODIFIES: map, storageManager
@@ -47,7 +48,7 @@ public class MapBuildSession {
             Random rand = new Random();
             int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
             int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
-            while(!addBrick(SpecificType.SimpleBrick, new Position(x, y))){
+            while (!addBrick(SpecificType.SimpleBrick, new Position(x, y))) {
                 x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
                 y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
             }
@@ -56,10 +57,10 @@ public class MapBuildSession {
         for (int i = 0; i < halfMetal; ++i) {
             Random rand = new Random();
             int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-            int y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.HALF_METAL_BRICK_YLIMIT)  + Constants.HALF_METAL_BRICK_YLIMIT;
-            while(!addBrick(SpecificType.HalfMetalBrick, new Position(x, y))){
+            int y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.HALF_METAL_BRICK_YLIMIT) + Constants.HALF_METAL_BRICK_YLIMIT;
+            while (!addBrick(SpecificType.HalfMetalBrick, new Position(x, y))) {
                 x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
-                y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.HALF_METAL_BRICK_YLIMIT)  + Constants.HALF_METAL_BRICK_YLIMIT;
+                y = rand.nextInt(Constants.BRICK_LOWER_BOUND - Constants.HALF_METAL_BRICK_YLIMIT) + Constants.HALF_METAL_BRICK_YLIMIT;
             }
         }
 
@@ -67,7 +68,7 @@ public class MapBuildSession {
             Random rand = new Random();
             int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
             int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
-            while(!addBrick(SpecificType.MineBrick, new Position(x, y))){
+            while (!addBrick(SpecificType.MineBrick, new Position(x, y))) {
                 x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
                 y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
             }
@@ -77,7 +78,7 @@ public class MapBuildSession {
             Random rand = new Random();
             int x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
             int y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
-            while(!addBrick(SpecificType.WrapperBrick, new Position(x, y))){
+            while (!addBrick(SpecificType.WrapperBrick, new Position(x, y))) {
                 x = rand.nextInt(Constants.BRICK_RIGHT_BOUND);
                 y = rand.nextInt(Constants.HALF_METAL_BRICK_YLIMIT - Constants.BRICK_UPPER_BOUND) + Constants.BRICK_UPPER_BOUND;
             }
@@ -86,19 +87,19 @@ public class MapBuildSession {
         return true;
     }
 
-    public boolean validMap(){
+    public boolean validMap() {
         int simple = 0;
         int halfMetal = 0;
         int mine = 0;
         int wrapper = 0;
-        for(MovableShape ms : map.getMovables()){
-            if(ms.getSpecificType() == SpecificType.SimpleBrick)
+        for (MovableShape ms : map.getMovables()) {
+            if (ms.getSpecificType() == SpecificType.SimpleBrick)
                 simple++;
-            if(ms.getSpecificType() == SpecificType.HalfMetalBrick)
+            if (ms.getSpecificType() == SpecificType.HalfMetalBrick)
                 halfMetal++;
-            if(ms.getSpecificType() == SpecificType.MineBrick)
+            if (ms.getSpecificType() == SpecificType.MineBrick)
                 mine++;
-            if(ms.getSpecificType() == SpecificType.WrapperBrick)
+            if (ms.getSpecificType() == SpecificType.WrapperBrick)
                 wrapper++;
         }
         if (simple < Constants.MIN_SIMPLE_BRICK && !testMode) return false;
@@ -114,7 +115,7 @@ public class MapBuildSession {
      * supplied EFFECT: adds a new brick of 'type' type to the map if type is not null
      *
      * @param type type of brick to be added
-     * @param pos position to which brick will be added
+     * @param pos  position to which brick will be added
      * @return true if addition was successful, or false otherwise
      */
     public boolean addBrick(SpecificType type, Position pos) {
@@ -153,8 +154,8 @@ public class MapBuildSession {
         return isMoved;
     }
 
-    public void dragBrick(UUID ID,Position to){
-        map.drag(ID,to);
+    public void dragBrick(UUID ID, Position to) {
+        map.drag(ID, to);
     }
 
     /**
@@ -191,7 +192,7 @@ public class MapBuildSession {
         map = new Map(data);
     }
 
-    public List<String> getMapList(){
+    public List<String> getMapList() {
         return new ArrayList<>(storageManager.keySet());
     }
 

@@ -81,6 +81,6 @@ public class Ball extends Circle {
 
     @Override
     public String toString() {
-        return "Ball at " + getPosition().toString() + " with " + getVelocity() ;
+        return "Ball at " + getPosition().toString() + " with " + getVelocity();
     }
 }

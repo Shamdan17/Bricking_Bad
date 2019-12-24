@@ -11,10 +11,11 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private JPanel contPanel;
-//    private MainMenu mainMenu;
+    //    private MainMenu mainMenu;
     private CardLayout cardLayout;
     private BrickingBad brickingBad;
     private LoginPage loginPage;
+
     public MainFrame(BrickingBad bb) {
 
         brickingBad = bb;
@@ -22,7 +23,7 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         contPanel.setLayout(cardLayout);
 
-        loginPage = new LoginPage(brickingBad,cardLayout,contPanel);
+        loginPage = new LoginPage(brickingBad, cardLayout, contPanel);
         contPanel.add(loginPage, Constants.LOGIN_LABEL);
         cardLayout.show(contPanel, Constants.LOGIN_LABEL);
 
@@ -32,8 +33,8 @@ public class MainFrame extends JFrame {
         add(contPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
-        setBackground(new Color(12,17,60));
-        setSize(Constants.MAX_X,Constants.MAX_Y);
+        setBackground(new Color(12, 17, 60));
+        setSize(Constants.MAX_X, Constants.MAX_Y);
         setVisible(true);
         setFocusable(true);
     }

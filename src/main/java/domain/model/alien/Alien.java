@@ -32,7 +32,7 @@ public class Alien extends MovableShape implements BrickPercentageListener {
     }
 
     @Override
-    public void setVelocity(Velocity v){
+    public void setVelocity(Velocity v) {
         getMovementBehavior().inverse();
     }
 
@@ -42,14 +42,14 @@ public class Alien extends MovableShape implements BrickPercentageListener {
 
     @Override
     // move and behave
-    public void move(){
+    public void move() {
         alienBehavior.move();
         behave();
     }
 
     public void updateBrickPercentage(double brickPercentage) {
-      System.out.println("Brick Percentage: " + brickPercentage);
-      this.brickPercentage = brickPercentage;
+        System.out.println("Brick Percentage: " + brickPercentage);
+        this.brickPercentage = brickPercentage;
     }
 
     public double getCurrentPercentage() {
@@ -73,7 +73,7 @@ public class Alien extends MovableShape implements BrickPercentageListener {
 
 
     @Override
-    public MovableShape copy(){
+    public MovableShape copy() {
         return SerializationUtils.clone(this);
     }
 

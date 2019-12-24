@@ -9,7 +9,7 @@ public class GangOfBalls implements Drawable {
 
     private MovableShape ms;
 
-    public GangOfBalls(MovableShape ms){
+    public GangOfBalls(MovableShape ms) {
         this.ms = ms;
     }
 
@@ -23,7 +23,8 @@ public class GangOfBalls implements Drawable {
         g.fillRect(x, y, length, width);
         g.drawRect(x, y, length, width);
     }
-    public void setMovable(MovableShape ms){
+
+    public void setMovable(MovableShape ms) {
         this.ms = ms;
     }
 }

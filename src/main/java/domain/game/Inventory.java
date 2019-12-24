@@ -15,7 +15,7 @@ public class Inventory {
         this.board = b;
     }
 
-    public Inventory(Board b, List<PowerUp> pList){
+    public Inventory(Board b, List<PowerUp> pList) {
         this.powerUps = pList;
         this.board = b;
     }
@@ -48,7 +48,7 @@ public class Inventory {
         });
     }
 
-    public List<PowerUp> getPowerupList(){
+    public List<PowerUp> getPowerupList() {
         return powerUps;
     }
 
