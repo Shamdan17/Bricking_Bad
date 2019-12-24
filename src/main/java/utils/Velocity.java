@@ -22,9 +22,8 @@ public class Velocity implements Serializable {
         return vy;
     }
 
-    public void updateSpeed(int vx, int vy) {
-        this.vx = vx;
-        this.vy = vy;
+    public double getSpeed() {
+        return Math.sqrt(vx * vx + vy * vy);
     }
 
     public boolean equals(Velocity o) {

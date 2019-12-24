@@ -93,6 +93,7 @@ public final class Constants {
     public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
     public static final int BALL_SPAWNING_HEIGHT = 170;
+    public static final double DAMPING_FACTOR = 0.05;
 
 
     /**
