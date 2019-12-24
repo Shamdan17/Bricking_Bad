@@ -6,6 +6,7 @@ import domain.model.movement.CircularMovement;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
 import domain.model.movement.NoMovement;
+import domain.model.powerup.*;
 import domain.model.shape.MovableShape;
 import utils.Constants;
 import utils.Position;
@@ -32,7 +33,15 @@ public class BrickFactory {
     private ArrayList<MovableShape> defaultItems() {
         ArrayList<MovableShape> res = new ArrayList<>();
 
-
+        res.add(new DestructiveLaserGun(powerupMovBeh.copy()));
+        res.add(new GangOfBalls(powerupMovBeh.copy()));
+        res.add(new TallerPaddle(powerupMovBeh.copy()));
+        res.add(new Magnet(powerupMovBeh.copy()));
+        res.add(new ChemicalBall(powerupMovBeh.copy()));
+        res.add(new Fireball(powerupMovBeh.copy()));
+        res.add(AlienFactory.get(SpecificType.CooperativeAlien, null));
+        res.add(AlienFactory.get(SpecificType.ProtectingAlien, null));
+        res.add(AlienFactory.get(SpecificType.RepairingAlien, null));
         res.add(AlienFactory.get(SpecificType.DrunkAlien, null));
         
         Collections.shuffle(res);
