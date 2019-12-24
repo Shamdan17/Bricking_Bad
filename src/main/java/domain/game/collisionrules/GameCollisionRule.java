@@ -12,7 +12,7 @@ import java.util.UUID;
 // GameCollisionRule contains all rules, uses composite pattern
 public class GameCollisionRule implements CollisionRule {
     private PhysicsEngine ps = PhysicsEngine.getInstance();
-    private HashMap<Pair<UUID>, Boolean> cache =  new HashMap<>();
+    private HashMap<Pair<UUID>, Boolean> cache =  new HashMap<>(2000);
 
     private ArrayList<CollisionRule> rules = new ArrayList<>();
     private CollisionRule defaultRule = new DefaultCollisionRule();
@@ -29,7 +29,7 @@ public class GameCollisionRule implements CollisionRule {
     public void collide(MovableShape obj1, MovableShape obj2) {
         // if those are objects that we do not need to calculate collisions for,
         // then return
-        if (noCollisionRule.ruleApplies(obj1, obj2) && noCollisionRule.isCollided(obj1, obj2)) {
+        if (noCollisionRule.ruleApplies(obj1, obj2)) {
             return;
         }
 

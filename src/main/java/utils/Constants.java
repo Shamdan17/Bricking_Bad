@@ -88,7 +88,7 @@ public final class Constants {
      * Ball
      */
     public static final int BALL_INITIAL_VX = 0;
-    public static final int BALL_INITIAL_VY = 2;
+    public static final int BALL_INITIAL_VY = -2;
     public static final int BALL_DIAMETER = 17;
     public static final Velocity DEFAULT_RESPAWN_VELOCITY = new Velocity(0, BALL_INITIAL_VY);
     public static final int BALL_RADIUS = BALL_DIAMETER / 2;
