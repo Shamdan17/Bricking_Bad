@@ -7,7 +7,7 @@ import domain.game.GameSession;
 import domain.mapbuild.MapBuildData;
 import domain.mapbuild.MapBuildSession;
 import domain.model.SpecificType;
-import domain.storage.BinaryStorage;
+import domain.storage.StorageManagerFactory;
 import utils.Position;
 import utils.PropertyManager;
 
@@ -24,7 +24,7 @@ public class BrickingBad {
     private PropertyManager propertyManager;
 
     public BrickingBad() {
-        this.accountManager = new AccountManager(new BinaryStorage("account-manager-data"));
+        this.accountManager = new AccountManager(StorageManagerFactory.get("account-manager-data"));
         this.propertyManager = PropertyManager.getInstance();
     }
 

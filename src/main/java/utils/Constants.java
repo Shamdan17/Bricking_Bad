@@ -113,6 +113,11 @@ public final class Constants {
     public static final int ALIEN_LENGTH = Integer.parseInt(getProperty("ALIEN_LENGTH", "60"));
     public static final int ALIEN_WIDTH = Integer.parseInt(getProperty("ALIEN_WIDTH", "20"));
 
+    /**
+     * Storage provider
+     */
+    public static final String STORAGE_PROVIDER = getProperty("STORAGE_PROVIDER", "DEFAULT");
+
 
     /**
      * Constants for UI
