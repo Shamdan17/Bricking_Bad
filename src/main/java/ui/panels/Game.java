@@ -2,7 +2,10 @@ package ui.panels;
 
 import domain.BrickingBad;
 import domain.game.GameData;
+import domain.model.SpecificType;
+import domain.model.Type;
 import domain.model.shape.MovableShape;
+import ui.CachedEffect;
 import ui.MKeyListener;
 import ui.drawables.Drawable;
 import ui.drawables.DrawableFactory;
@@ -29,6 +32,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
   private JLabel score;
   private JLabel time;
   private Map<UUID,Drawable> drawables;
+  private Map<UUID, CachedEffect> cachedEffects;
 
   private JLabel gameOverLabel;
   private JLabel youWonLabel;
@@ -38,7 +42,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
     this.cardLayout = cardLayout;
     this.brickingBad = brickingBad;
     this.drawables = new HashMap<>();
-
+    this.cachedEffects = new HashMap<>();
     this.livesLeft = new JLabel();
     this.score = new JLabel();
     this.time = new JLabel();
@@ -116,6 +120,7 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
 
     List<MovableShape> movables = gameData.getMovables();
     List<UUID> removables = new ArrayList<>();
+
     for (UUID ID : drawables.keySet()) {
       if (!IDMap.containsKey(ID)) removables.add(ID);
     }
@@ -123,22 +128,42 @@ public class Game extends JPanel implements Runnable, KeyListener, ActionListene
       drawables.remove(ID);
     }
     for (MovableShape ms :movables) {
+      Drawable d;
       if (drawables.containsKey(ms.getID())) {
-        Drawable d = drawables.get(ms.getID());
+        d = drawables.get(ms.getID());
         d.setMovable(ms);
-        d.draw(g);
       } else {
-        Drawable d = DrawableFactory.get(ms, brickingBad);
+        d = DrawableFactory.get(ms, brickingBad);
         drawables.put(ms.getID(), d);
-        d.draw(g);
+      }
+      d.draw(g);
+      if(isEffect(ms) && !cachedEffects.containsKey(ms.getID())){
+        cachedEffects.put(ms.getID(),new CachedEffect(d));
       }
     }
+    List<UUID> deadCaches = new ArrayList<>();
+    for(UUID ID : cachedEffects.keySet()){
+      CachedEffect ce = cachedEffects.get(ID);
+      ce.hit();
+      if(ce.isDead()) deadCaches.add(ID);
+      ce.getDrawable().draw(g);
+    }
 
+    for(UUID ID : deadCaches)
+      cachedEffects.remove(ID);
 
     inventory.updatePowerups(gameData.getPowerupList(), gameData.getLaserCount());
     updateLives(gameData.getRemainingLives());
     updateScore(gameData.getScore());
     updateTime(gameData.getGameTime());
+
+  }
+
+  public boolean isEffect(MovableShape ms){
+    return ms.getSpecificType() == SpecificType.Explosion ||
+            ms.getSpecificType() == SpecificType.FireBallExplosion ||
+            ms.getSpecificType() == SpecificType.Laser ||
+            ms.getSpecificType() == SpecificType.AlienBeam;
 
   }
 
