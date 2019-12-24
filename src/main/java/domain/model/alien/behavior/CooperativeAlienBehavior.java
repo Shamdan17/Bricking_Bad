@@ -34,7 +34,7 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
         lastAddedBeam = null;
       }
     }
-    if (Math.random() < 0.015) {
+    if (Math.random() < 0.0025) {
       AlienBeam bm = new AlienBeam(self.getCenter());
       lastAddedBeam = bm;
       self.addToQueue(bm);

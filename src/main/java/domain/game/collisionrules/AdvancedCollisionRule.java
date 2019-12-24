@@ -17,10 +17,11 @@ public class AdvancedCollisionRule implements CollisionRule {
 
     @Override
     public boolean ruleApplies(MovableShape obj1, MovableShape obj2) {
-        Type t1 = obj1.getType();
-        Type t2 = obj2.getType();
-        return (t1 == Type.Ball && t2 == Type.Alien ||
-                t2 == Type.Ball && t1 == Type.Alien);
+        return false;
+//        Type t1 = obj1.getType();
+//        Type t2 = obj2.getType();
+//        return (t1 == Type.Ball && t2 == Type.Alien ||
+//                t2 == Type.Ball && t1 == Type.Alien);
     }
 
     @Override
