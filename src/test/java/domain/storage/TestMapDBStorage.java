@@ -2,10 +2,11 @@ package domain.storage;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestMapDBStorage {
     String storageName = "test-mapDB";
@@ -92,7 +93,7 @@ class TestMapDBStorage {
 
     @Test
     void testPersistance() {
-        String key   = "key";
+        String key = "key";
         String value = "value";
 
         MapDBStorage map = new MapDBStorage(storageName);
@@ -105,7 +106,7 @@ class TestMapDBStorage {
 
     @Test
     void testGetKeys() {
-        ArrayList<String> keys   = new ArrayList<>();
+        ArrayList<String> keys = new ArrayList<>();
         keys.add("key");
         keys.add("keyss");
         keys.add("anotherkey");
@@ -114,7 +115,7 @@ class TestMapDBStorage {
         String value = "value";
 
         MapDBStorage map = new MapDBStorage(storageName);
-        for(String key : keys) {
+        for (String key : keys) {
             map.put(key, value);
         }
 

@@ -1,12 +1,10 @@
 package domain.model.alien;
 
 import domain.model.SpecificType;
-import domain.model.alien.behavior.AlienBehavior;
-import domain.model.alien.behavior.CooperativeAlienBehavior;
-import domain.model.alien.behavior.ProtectingAlienBehavior;
-import domain.model.alien.behavior.RepairingAlienBehavior;
+import domain.model.alien.behavior.*;
 import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
+import domain.model.movement.NoMovement;
 import utils.Constants;
 import utils.Position;
 import utils.Velocity;
@@ -18,9 +16,10 @@ public class AlienFactory {
         AlienBehavior beh;
         Alien res;
         switch(type){
-//            case CooperativeAlien:
-//                AlienBehavior beh = ne
-//                return new CooperativeAlienBehavior(movBeh, Constants.LENGTH,Constants.WIDTH);
+            case DrunkAlien:
+                beh = new DrunkAlienBehavior(new NoMovement(pos));
+                initializeDrunkAlienBehaviors(pos, beh);
+                return new Alien(beh, Constants.LENGTH, Constants.LENGTH);
             case ProtectingAlien:
                 beh = new ProtectingAlienBehavior(pos);
                 res = new Alien(beh, Constants.LENGTH, Constants.LENGTH);
@@ -36,5 +35,15 @@ public class AlienFactory {
             default:
                 throw new IllegalArgumentException("not alien type supplied");
         }
+    }
+
+    private static void initializeDrunkAlienBehaviors(Position pos, AlienBehavior beh) {
+        DrunkAlienBehavior dbeh = (DrunkAlienBehavior) beh;
+        dbeh.addBehavior(new DualAlienBehavior(pos), 0, 0.3);
+        dbeh.addBehavior(new ConfusedBehavior(pos), 0.3, 0.4);
+        dbeh.addBehavior(new ProtectingAlienBehavior(pos), 0.4, 0.5);
+        dbeh.addBehavior(new RepairingAlienBehavior(pos), 0.5, 0.6);
+        dbeh.addBehavior(new ConfusedBehavior(pos), 0.6, 0.7);
+        dbeh.addBehavior(new CooperativeAlienBehavior(pos), 0.7, 1);
     }
 }

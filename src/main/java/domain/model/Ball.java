@@ -1,8 +1,8 @@
 package domain.model;
 
 import domain.model.misc.FireBallExplosion;
-import domain.model.movement.LinearMovement;
 import domain.model.movement.MovementBehavior;
+import domain.model.movement.NormalizingLinearMovement;
 import domain.model.shape.Circle;
 import domain.model.shape.MovableShape;
 import org.apache.commons.lang3.SerializationUtils;
@@ -17,7 +17,7 @@ public class Ball extends Circle {
     private boolean hitPaddle;
 
     public Ball(Position pos, int radius) {
-        super(new LinearMovement(pos, Constants.defaultRespawnVelocity), radius);
+        super(new NormalizingLinearMovement(pos, Constants.defaultRespawnVelocity), radius);
     }
 
     public Ball(MovementBehavior movBeh, int radius) {

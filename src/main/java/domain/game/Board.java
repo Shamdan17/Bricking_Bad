@@ -3,10 +3,7 @@ package domain.game;
 import domain.game.collisionrules.CollisionRule;
 import domain.game.collisionrules.CollisionRuleFactory;
 import domain.mapbuild.MapBuildData;
-import domain.model.Ball;
-import domain.model.Paddle;
-import domain.model.SpecificType;
-import domain.model.Type;
+import domain.model.*;
 import domain.model.powerup.PowerUp;
 import domain.model.shape.MovableShape;
 import org.apache.log4j.Logger;
@@ -29,6 +26,7 @@ public class Board {
   private List<MovableShape> movables;
   private Paddle paddle;
   private Queue<MovableShape> objectQueue = new LinkedList<>();
+    private List<BrickPercentageListener> listeners = new ArrayList<>();
   private PhysicsEngine ps = PhysicsEngine.getInstance();
   private CollisionRule collisionRule = CollisionRuleFactory.getCollisionRule();
   private Inventory inventory;
@@ -115,6 +113,7 @@ public class Board {
       checkNumBalls();
       checkWin();
       checkGameOver();
+        updateScoreListeners();
     }
   }
 
@@ -175,6 +174,7 @@ public class Board {
   private void handleQueue() {
     while (!objectQueue.isEmpty()) {
       MovableShape cur = objectQueue.remove();
+        if (cur instanceof BrickPercentageListener) listeners.add((BrickPercentageListener) cur);
       if (cur.getType() == Type.Powerup
           || cur.getType() == Type.Alien
           || cur.getType() == Type.Ball) {
@@ -200,6 +200,18 @@ public class Board {
       movableShape.move();
     }
   }
+
+    /**
+     * OVERVIEW: This function iterates over brick percentage listeners and calls updateScore() function on each
+     * MODIFIES: movables
+     * EFFECT: calls move function for each movable inside movables
+     */
+    private void updateScoreListeners() {
+        // move all objects once
+        for (BrickPercentageListener listener : listeners) {
+            listener.updateBrickPercentage(6);
+        }
+    }
 
   /**
    * OVERVIEW: This function checks pairwise collisions between movable objects inside movables list
