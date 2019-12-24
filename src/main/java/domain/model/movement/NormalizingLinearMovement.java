@@ -30,7 +30,6 @@ public class NormalizingLinearMovement extends LinearMovement {
         }
         // handle semi 0 y's
         if (Math.abs(getCurrentVelocity().getY()) < 0.07 * Math.abs(BALL_INITIAL_VY)) {
-            logger.error(curCount);
             curCount++;
             if (curCount > threshold) {
                 curCount = 0;

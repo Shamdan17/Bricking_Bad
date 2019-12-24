@@ -102,7 +102,7 @@ public class Paddle extends Rectangle {
     }
 
     public void applyLaserPowerup() {
-        laser_count += 5;
+        laser_count += LASER_AMMO_COUNT;
     }
 
     public void shootLaser() {
