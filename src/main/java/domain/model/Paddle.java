@@ -23,6 +23,10 @@ public class Paddle extends Rectangle {
     private Ball boundBall;
     private boolean isMagnet = false;
 
+    private double movementOffset = 0;
+    private double maxLeftSpeed = -PADDLE_MOVING_SPEED;
+    private double maxRightSpeed = PADDLE_MOVING_SPEED;
+
 
     public Paddle(Position position) {
         super(new NoMovement(position), util.round(L), PADDLE_WIDTH);
@@ -62,10 +66,15 @@ public class Paddle extends Rectangle {
             normalizeAngle(PADDLE_RESTORING_SPEED);
         }
         if (moveLeft) {
-            setPosition(super.getPosition().incrementX(-PADDLE_MOVING_SPEED));
+            movementOffset = maxLeftSpeed;//Math.max(maxLeftSpeed, movementOffset-0.7*PADDLE_MOVING_SPEED);
         } else if (moveRight) {
-            setPosition(super.getPosition().incrementX(PADDLE_MOVING_SPEED));
+            movementOffset = maxRightSpeed;//Math.min(maxRightSpeed, movementOffset+0.7*PADDLE_MOVING_SPEED);
+        } else {
+            movementOffset *= 0.87;
+            if (Math.abs(movementOffset) < 1) movementOffset = 0;
         }
+        System.out.println(movementOffset);
+        setPosition(super.getPosition().incrementX(movementOffset));
         if (boundBall != null) {
             boundBall.setPosition(calculateBallPosition());
         }

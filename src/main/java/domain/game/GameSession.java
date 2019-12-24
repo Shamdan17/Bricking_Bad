@@ -1,13 +1,12 @@
 package domain.game;
 
 import domain.mapbuild.MapBuildData;
-import domain.model.shape.MovableShape;
-import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
+import domain.storage.StorageManagerFactory;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameSession {
 
@@ -21,7 +20,7 @@ public class GameSession {
             throw new IllegalArgumentException();
         }
         this.username = username;
-        this.sm = new BinaryStorage(username);
+        this.sm = StorageManagerFactory.get(username);
         this.board = new Board();
     }
 

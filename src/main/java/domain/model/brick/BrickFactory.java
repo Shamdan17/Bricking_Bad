@@ -17,12 +17,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static utils.Constants.POWERUP_MOVEMENT_SPEED;
+
 public class BrickFactory {
 
     private Queue<MovableShape> movQueue;
     private ArrayList<MovableShape> WrapperBrickItems;
-    private static final MovementBehavior defaultMovBeh = new LinearMovement(new Position(0, 0), new Velocity(0, 4));
-    private static final MovementBehavior powerupMovBeh = new LinearMovement(new Position(0, 0), new Velocity(0, 4));
+    private static final MovementBehavior powerupMovBeh = new LinearMovement(new Position(0, 0), new Velocity(0, POWERUP_MOVEMENT_SPEED));
 
     public BrickFactory() {
         WrapperBrickItems = defaultItems();

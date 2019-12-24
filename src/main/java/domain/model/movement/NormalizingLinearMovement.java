@@ -6,6 +6,7 @@ import utils.Velocity;
 import utils.physics.math.Rotation;
 import utils.physics.math.util;
 
+import static utils.Constants.BALL_INITIAL_VY;
 import static utils.Constants.DAMPING_FACTOR;
 
 public class NormalizingLinearMovement extends LinearMovement {
@@ -28,7 +29,7 @@ public class NormalizingLinearMovement extends LinearMovement {
             setVelocity(new Velocity((1 + factor) * vel.getX(), (1 + factor) * vel.getY()));
         }
         // handle semi 0 y's
-        if (Math.abs(getCurrentVelocity().getY()) < 0.1) {
+        if (Math.abs(getCurrentVelocity().getY()) < 0.07 * BALL_INITIAL_VY) {
             logger.error(curCount);
             curCount++;
             if (curCount > threshold) {

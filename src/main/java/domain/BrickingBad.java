@@ -7,8 +7,9 @@ import domain.game.GameSession;
 import domain.mapbuild.MapBuildData;
 import domain.mapbuild.MapBuildSession;
 import domain.model.SpecificType;
-import domain.storage.BinaryStorage;
+import domain.storage.StorageManagerFactory;
 import utils.Position;
+import utils.PropertyManager;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,9 +21,11 @@ public class BrickingBad {
     private MapBuildSession mapBuildSession;
     private GameSession gameSession;
     private Account acc;
+    private PropertyManager propertyManager;
 
     public BrickingBad() {
-        this.accountManager = new AccountManager(new BinaryStorage("account-manager-data"));
+        this.accountManager = new AccountManager(StorageManagerFactory.get("account-manager-data"));
+        this.propertyManager = PropertyManager.getInstance();
     }
 
     /**
@@ -211,4 +214,7 @@ public class BrickingBad {
      * @param pos position of brick to be added TODO: refactor this to take brick
      *            type
      */
+    public void addBrick(Position pos) {
+        boolean isAdded = mapBuildSession.addBrick(SpecificType.SimpleBrick, pos);
+    }
 }
