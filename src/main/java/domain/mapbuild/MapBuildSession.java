@@ -34,7 +34,7 @@ public class MapBuildSession {
         storageManager = StorageManagerFactory.get(username + "builds");
     }
 
-    private boolean testMode = true;
+    private boolean testMode = false;
 
     public boolean buildMap(int simple, int halfMetal, int mine, int wrapper) {
 
