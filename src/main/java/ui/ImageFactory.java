@@ -17,12 +17,27 @@ public class ImageFactory {
   private static Image protectingAlien;
   private static Image reparingAlien;
   private static Image tallerPaddlePowerup;
+  private static Image ball;
+  private static Image chemicalBall;
+  private static Image fireBall;
   private static BufferedImage bufferedImage;
 
   private static Image chemicalButton;
   private static Image tallerButton;
   private static Image laserButton;
   private static Image magneticButton;
+
+  private static String chemicalBallPowerupPath = "Chemical_ball_Powerup.png";
+  private static String cooperativeAlienPath = "CooperativeAlien.png";
+  private static String laserBeamPowerupPath = "Laser_Beam_Powerup.png";
+  private static String magneticPowerupPath = "Magnetic_Powerup.png";
+  private static String protectingAlienPath = "ProtectingAlien.png";
+  private static String reparingAlienPath = "RepairingAlien.png";
+  private static String tallerPaddlePowerupPath = "Taller_Paddle_Powerup.png";
+  private static String ballPath = "NormalBall.png";
+  private static String chemicalBallPath = "ChemicalBall.png";
+  private static String fireBallPath = "FireBall.png";
+
 
   private static String path = System.getProperty("user.dir") + "/assets/";
 
@@ -31,32 +46,44 @@ public class ImageFactory {
       switch (type) {
         case ChemicalBallPowerup:
           if (chemicalBallPowerup != null) return chemicalBallPowerup;
-          chemicalBallPowerup = getImage("Chemical_ball_Powerup.png", width, length);
+          chemicalBallPowerup = getImage(chemicalBallPowerupPath, width, length);
           return chemicalBallPowerup;
         case CooperativeAlien:
           if (cooperativeAlien != null) return cooperativeAlien;
-          cooperativeAlien = getImage("CooperativeAlien.png", width, length);
+          cooperativeAlien = getImage(cooperativeAlienPath, width, length);
           return cooperativeAlien;
         case DestructiveLaserGun:
           if (laserBeamPowerup != null) return laserBeamPowerup;
-          laserBeamPowerup = getImage("Laser_Beam_Powerup.png", width, length);
+          laserBeamPowerup = getImage(laserBeamPowerupPath, width, length);
           return laserBeamPowerup;
         case MagnetPowerup:
           if (magneticPowerup != null) return magneticPowerup;
-          magneticPowerup = getImage("Magnetic_Powerup.png", width, length);
+          magneticPowerup = getImage(magneticPowerupPath, width, length);
           return magneticPowerup;
         case ProtectingAlien:
           if (protectingAlien != null) return protectingAlien;
-          protectingAlien = getImage("ProtectingAlien.png", width, length);
+          protectingAlien = getImage(protectingAlienPath, width, length);
           return protectingAlien;
         case RepairingAlien:
           if (reparingAlien != null) return reparingAlien;
-          reparingAlien = getImage("RepairingAlien.png", width, length);
+          reparingAlien = getImage(reparingAlienPath, width, length);
           return reparingAlien;
         case TallerPaddlePowerup:
           if (tallerPaddlePowerup != null) return tallerPaddlePowerup;
-          tallerPaddlePowerup = getImage("Taller_Paddle_Powerup.png", width, length);
+          tallerPaddlePowerup = getImage(tallerPaddlePowerupPath, width, length);
           return tallerPaddlePowerup;
+        case FireBall:
+          if(fireBall != null) return fireBall;
+          fireBall = getImage(fireBallPath,width,length);
+          return fireBall;
+        case ChemicalBall:
+          if(chemicalBall != null) return chemicalBall;
+          chemicalBall = getImage(chemicalBallPath,width,length);
+          return chemicalBall;
+        case Ball:
+          if(ball != null) return ball;
+          ball = getImage(ballPath,width,length);
+          return ball;
         default:
           throw new IllegalArgumentException("Unsupported type provided: " + type);
       }
@@ -71,19 +98,19 @@ public class ImageFactory {
       switch (type) {
         case TallerPaddlePowerup:
           if (tallerButton != null) return tallerButton;
-          tallerButton = getImage("Taller_Paddle_Powerup.png", width, length);
+          tallerButton = getImage(tallerPaddlePowerupPath, width, length);
           return tallerButton;
         case MagnetPowerup:
           if (magneticButton != null) return magneticButton;
-          magneticButton = getImage("Magnetic_Powerup.png", width, length);
+          magneticButton = getImage(magneticPowerupPath, width, length);
           return magneticButton;
         case ChemicalBallPowerup:
           if (chemicalButton != null) return chemicalButton;
-          chemicalButton = getImage("Chemical_ball_Powerup.png", width, length);
+          chemicalButton = getImage(chemicalBallPowerupPath, width, length);
           return chemicalButton;
         case DestructiveLaserGun:
           if (laserButton != null) return laserButton;
-          laserButton = getImage("Laser_Beam_Powerup.png", width, length);
+          laserButton = getImage(laserBeamPowerupPath, width, length);
           return laserButton;
         default:
           throw new IllegalArgumentException("Unsupported type provided " + type);

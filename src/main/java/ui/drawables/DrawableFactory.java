@@ -59,9 +59,7 @@ public class DrawableFactory {
             case FireBallExplosion:
                 return new Explosion(ms);
             default:
-                //TODO: Handle all drawables
-                return new SimpleBrick(ms, brickingBad);
-            //throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
+            throw new IllegalArgumentException("Not supported type provided " + ms.getSpecificType());
         }
     }
 
