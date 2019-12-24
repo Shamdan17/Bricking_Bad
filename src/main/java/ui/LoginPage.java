@@ -19,7 +19,7 @@ public class LoginPage extends JPanel implements ActionListener {
   private JPanel contPanel;
 
   private JTextField usernameField;
-  private JTextField passwordField;
+  private JPasswordField passwordField;
   private JLabel usernameLabel;
   private JLabel passwordLabel;
 
@@ -33,7 +33,7 @@ public class LoginPage extends JPanel implements ActionListener {
     this.contPanel = contPanel;
 
     this.usernameField = new JTextField();
-    this.passwordField = new JTextField();
+    this.passwordField = new JPasswordField();
     this.usernameLabel = new JLabel(Constants.USERNAME_LABEL);
     this.passwordLabel = new JLabel(Constants.PASSWORD_LABEL);
     this.exitButton = new JButton(Constants.EXIT_BUTTON);
