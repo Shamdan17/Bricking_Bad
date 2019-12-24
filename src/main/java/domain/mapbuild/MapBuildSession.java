@@ -4,8 +4,8 @@ import domain.model.SpecificType;
 import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
 import domain.model.shape.MovableShape;
-import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
+import domain.storage.StorageManagerFactory;
 import utils.Constants;
 import utils.Position;
 
@@ -31,7 +31,7 @@ public class MapBuildSession {
         this.map = new Map();
         this.username = username;
         // TODO: replace this string with a variable value
-        storageManager = new BinaryStorage(username);
+        storageManager = StorageManagerFactory.get(username);
     }
 
     private boolean testMode = false;

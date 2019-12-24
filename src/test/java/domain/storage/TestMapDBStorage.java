@@ -3,6 +3,9 @@ package domain.storage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 class TestMapDBStorage {
     String storageName = "test-mapDB";
@@ -100,4 +103,24 @@ class TestMapDBStorage {
         assertEquals(value, valueAfterLoad, "saved and loaded values must be the same");
     }
 
+    @Test
+    void testGetKeys() {
+        ArrayList<String> keys   = new ArrayList<>();
+        keys.add("key");
+        keys.add("keyss");
+        keys.add("anotherkey");
+        keys.add("key exists");
+
+        String value = "value";
+
+        MapDBStorage map = new MapDBStorage(storageName);
+        for(String key : keys) {
+            map.put(key, value);
+        }
+
+        Set actualKeys = new HashSet(keys);
+        Set storedKeys = map.keySet();
+
+        assertEquals(actualKeys, storedKeys, "keys do not match");
+    }
 }

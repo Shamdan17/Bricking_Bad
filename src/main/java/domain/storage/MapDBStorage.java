@@ -5,6 +5,7 @@ import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 import java.io.*;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.lang.Class;
 import java.nio.file.Paths;
@@ -116,8 +117,14 @@ public class MapDBStorage implements StorageManager {
     public Set<String> keySet() {
         load();
         Set<String> keys = map.keySet();
+
+        Set<String> finalKeys = new HashSet<>();
+        for(String key : keys) {
+             finalKeys.add(key);
+        }
+
         close();
-        return keys;
+        return finalKeys;
     }
 
     /**
