@@ -1,18 +1,46 @@
 package utils;
 
+import java.awt.*;
+
 public final class Constants {
 
 
     /**
      * General
      */
-    public static final int FRAME_HEIGHT = 1000;
-    public static final int FRAME_WIDTH = 1500;
-    public static final int STEP_BACK_THRESHOLD = 5;
-    public static final double MOVING_PROBABILITY = 0.9;
-    public static boolean COPY_MODE = true;
+
+    public static final int GAME_HEIGHT = 1000;
+    public static final int GAME_WIDTH = 1500 - 60;
+    public static final int MAX_X = GAME_WIDTH + 260;
+    public static final int MAX_Y = GAME_HEIGHT;
+    public static final int SIDE_BAR_WIDTH = 200;
+    public static final int SIDE_BAR_X = GAME_WIDTH + 60;
+    public static final int SIDE_BAR_LENGTH = GAME_HEIGHT;
     public static boolean REFERENCE_MODE = false;
 
+    public static final int POWERUP_LABEL_LENGTH = 30;
+    public static final int POWERUP_LABEL_WIDTH = 60;
+    public static final int POWERUP_LENGTH = 150;
+    public static final int POWERUP_WIDTH = 180;
+    public static final int POWERUP_X =  10;
+    public static final int POWERUP_LEFT_X = POWERUP_X + 20;
+
+    public static final int MAGNET_POWERUP_Y = 0;
+    public static final int MAGNET_LEFT_Y = 100;
+
+    public static final int TALLER_POWERUP_Y = 200;
+    public static final int TALLER_LEFT_Y = 300;
+
+    public static final int CHEMICAL_POWERUP_Y = 400;
+    public static final int CHEMICAL_LEFT_Y = 500;
+
+    public static final int LASER_POWERUP_Y = 600;
+    public static final int LASER_LEFT_Y = 700;
+
+
+    public static boolean COPY_MODE = true;
+    public static final double MOVING_PROBABILITY = 0.9;
+    public static final int STEP_BACK_THRESHOLD = 5;
     /**
      * Gameplay
      */
@@ -28,8 +56,8 @@ public final class Constants {
     public static final double PADDLE_RESTORING_SPEED = 0.2;
     public static final double PADDLE_TURNING_SPEED = 2;
     public static final int PADDLE_WIDTH = 20;
-    public static final double PADDLE_LENGTH = FRAME_WIDTH / 10;
-    public static final double L = FRAME_WIDTH / 10;
+    public static final double PADDLE_LENGTH = GAME_WIDTH / 10;
+    public static final double L = GAME_WIDTH / 10;
 
     /**
      * Bricks
@@ -48,11 +76,11 @@ public final class Constants {
     /**
      * Bounds
      */
-    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (FRAME_HEIGHT / 3);
-    public static final int BRICK_LOWER_BOUND = FRAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
-    public static final int BRICK_UPPER_BOUND = 100;
-    public static final int BRICK_RIGHT_BOUND = FRAME_WIDTH - BRICK_LENGTH;
-    public static final int HALF_METAL_BRICK_YLIMIT = 5 * FRAME_HEIGHT / 10;
+    public static final int SPACE_BETWEEN_PADDLE_BRICKS = (GAME_HEIGHT / 3);
+    public static final int BRICK_LOWER_BOUND = GAME_HEIGHT - SPACE_BETWEEN_PADDLE_BRICKS;
+    public static final int BRICK_UPPER_BOUND = 50;
+    public static final int BRICK_RIGHT_BOUND = GAME_WIDTH ;
+    public static final int HALF_METAL_BRICK_YLIMIT = 5 * GAME_HEIGHT / 10;
     public static final long SLEEP_TIME = 10;
     public static final double BRICK_VELOCITY = L / (4 * (1000 / SLEEP_TIME));
 
@@ -71,7 +99,7 @@ public final class Constants {
      * Powerups
      */
     public static final int EXPLOSION_RADIUS_FACTOR = 2;
-    public static final int POWERUP_SIZE = 10;
+    public static final int POWERUP_SIZE = 40;
     public static final double FIREBALL_EXPLOSION_RADIUS_FACTOR = 5;
     public static final int LASER_AMMO_COUNT = 5;
     public static final int GANG_OF_BALLS_MULTIPLIER = 10;
@@ -92,17 +120,25 @@ public final class Constants {
 
     public static final String MAP_BUILD_LABEL = "mapbuild";
     public static final String GAME_LABEL = "game";
-    public static final String LOAD_LABEL = "load";
-    public static final String SAVE_LABEL = "save";
+    public static final String GAME_BUTTON = "Return to Game";
+    public static final String GAME_LOAD_LABEL = "game load";
+    public static final String GAME_SAVE_LABEL = "game save";
+    public static final String MAP_LOAD_LABEL = "map load";
+    public static final String MAP_SAVE_LABEL = "map save";
     public static final String HELP_LABEL = "help";
+    public static final String PAUSE_BUTTON = "Pause";
+    public static final String PAUSE_LABEL = "pause";
+    public static final String CANCEL_BUTTON = "Cancel";
 
-    public static final String SAVE_BUTTON = "Save Button";
-    public static final String LOAD_BUTTON = "Load Button";
-    public static final String MENU_BUTTON = "Menu Button";
-    public static final String START_GAME_BUTTON = "Start Game Button";
-    public static final String ADD_BRICKS_BUTTON = "Add Bricks Button";
-    public static final String HELP_BUTTON = "Help Button";
-    public static final String EXIT_BUTTON = "Exit Button";
+    public static final String ENTER_SAVE_NAME = "Enter Save Name";
+
+    public static final String SAVE_BUTTON = "Save";
+    public static final String LOAD_BUTTON = "Load";
+    public static final String MENU_BUTTON = "Menu";
+    public static final String START_GAME_BUTTON = "Start Game";
+    public static final String ADD_BRICKS_BUTTON = "Add Bricks";
+    public static final String HELP_BUTTON = "Help";
+    public static final String EXIT_BUTTON = "Exit";
     public static final String DELETE_BY_CLICK_LABEL = "Delete By Click";
 
     public static final String SIMPLE_BRICK_LABEL = "Simple Brick Count";
@@ -116,10 +152,55 @@ public final class Constants {
     public static final String EMPTY_MINE_BRICK_FIELD_WARNING = "Mine Brick field is empty";
     public static final String EMPTY_WRAPPER_BRICK_FIELD_WARNING = "Wrapper Brick field is empty";
     public static final String BRICK_NUMBER_WARNING = "Number of Bricks does not satisfy constraints";
+    public static final String NO_PREVIOUS_SAVE_WARNING = "NO Previous Saves Available";
+    public static final String NOT_VALID_MAP_WARNING = "Cannot start Game without valid number of bricks";
 
-    public static final String PASSWORD_LABEL = "Password Label";
-    public static final String USERNAME_LABEL = "Username Label";
-    public static final String LOGIN_BUTTON = "Login Button";
+    public static final int MAIN_MENU_BUTTON_LENGTH = 60;
+    public static final int MAIN_MENU_BUTTON_WIDTH = 600;
+    public static final int TEXT_INPUT_LENGTH = 50;
+    public static final int TEXT_INPUT_WIDTH = 200;
+    public static final int BUTTON_LENGTH = 50;
+    public static final int BUTTON_WIDTH = 200;
+    public static final int PAUSE_BUTTON_WIDTH = 80;
+    public static final int PAUSE_BUTTON_LENGTH = 40;
+
+    public static final int LOAD_MENU_WIDTH = 500;
+    public static final int LOAD_MENU_LENGTH = 500;
+    public static final int LOAD_MENU_FONT_SIZE = 30;
+    public static final String LOAD_MENU_FONT = "consolas";
+
+
+    public static final String TALLER_POWERUP_BUTTON = "Taller Paddle";
+    public static final String MAGNET_POWERUP_BUTTON = "Magnetic Paddle";
+    public static final String CHEMICAL_POWERUP_BUTTON = "Chemical Ball";
+    public static final String LASER_POWERUP_BUTTON = "Laser";
+    public static final Font POWERUP_FONT = new Font("consolas",Font.BOLD, 30);
+    public static final String POWERUP_LEFT_DEFAULT = "0 Left";
+
+    public static final int SCORE_X = 100;
+    public static final int TIME_LEFT_X = 700;
+    public static final int LIVES_LEFT_X = 1300;
+    public static final int DEFAULT_WIDTH = 300 ;
+    public static final int DEFAULT_LENGTH = 40;
+    public static final Font DEFAULT_FONT = new Font("monospaced",Font.PLAIN,20);
+    public static final Font VERY_BIG_FONT = new Font("monospaced",Font.PLAIN,120);
+
+    public static final int VERDICT_X = 400;
+    public static final int VERDICT_Y = 50;
+    public static final int VERDICT_WIDTH = 800;
+    public static final int VERDICT_LENGTH = 800;
+
+
+    public static final String PASSWORD_LABEL = "Password:";
+    public static final String USERNAME_LABEL = "Username:";
+    public static final String LOGIN_BUTTON = "Login";
+    public static final String CREATE_ACCOUNT_LABEL = "create account";
+    public static final String LOGIN_LABEL = "login";
+    public static final String CREATE_ACCOUNT_BUTTON = "create account";
+    public static final String LOGOUT_BUTTON = "Log Out";
+    public static final int LOGIN_INPUT_LENGTH = 30;
+    public static final int LOGIN_INPUT_WIDTH = 200;
+
     // TODO: reorganize this file
     public static final int LENGTH = 60;
     public static final int WIDTH = 20;

@@ -62,7 +62,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
 
     public void ensureObjectInBounds(Position position, Velocity velocity) {
         Velocity oldVelocity = velocity;
-        if (position.getX() > Constants.FRAME_WIDTH) {
+        if (position.getX() > Constants.GAME_WIDTH) {
             oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
         if (position.getX() < 0) {

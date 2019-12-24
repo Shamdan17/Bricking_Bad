@@ -116,6 +116,10 @@ public class Paddle extends Rectangle {
         }
     }
 
+    public int getLaserCount(){
+        return laser_count;
+    }
+
     public boolean isMagnet() {
         return isMagnet;
     }

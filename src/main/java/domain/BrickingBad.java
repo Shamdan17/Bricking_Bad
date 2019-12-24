@@ -19,10 +19,9 @@ public class BrickingBad {
     private AccountManager accountManager;
     private MapBuildSession mapBuildSession;
     private GameSession gameSession;
+    private Account acc;
 
     public BrickingBad() {
-        this.mapBuildSession = new MapBuildSession();
-        this.gameSession = new GameSession("demo");
         this.accountManager = new AccountManager(new BinaryStorage("account-manager-data"));
     }
 
@@ -57,12 +56,12 @@ public class BrickingBad {
     }
 
     public void initializeMapBuild(){
-        mapBuildSession = new MapBuildSession();
+        mapBuildSession = new MapBuildSession(acc.getUsername());
     }
 
     public void startGame(){
         MapBuildData data = mapBuildSession.getData();
-        gameSession = new GameSession(data);
+        gameSession.loadMap(data);
     }
 
     /**
@@ -87,33 +86,25 @@ public class BrickingBad {
     }
 
     /**
-     * saves the game
-     */
-    public void saveGame() {
-        gameSession.save();
-    }
-
-    /**
-     * loads the game
-     */
-    public void loadGame() {
-        gameSession.load();
-    }
-
-    /**
      * saves map
      */
-    public void saveMap() {
-        mapBuildSession.save();
+    public void saveMap(String name) {
+        mapBuildSession.save(name);
     }
-
-    // TODO: Add save name support
 
     /**
      * loads map
      */
-    public void loadMap() {
-        mapBuildSession.load();
+    public void loadMap(String name) {
+        mapBuildSession.load(name);
+    }
+
+    public boolean validMap(){
+        return mapBuildSession.validMap();
+    }
+
+    public List<String> getMapList(){
+        return mapBuildSession.getMapList();
     }
 
     /**
@@ -128,13 +119,19 @@ public class BrickingBad {
         if (username == null || password == null) {
             return false;
         }
-        Account acc = accountManager.Authenticate(username, password);
+        acc = accountManager.Authenticate(username, password);
         // if account does not exist fail
         if (acc == null) {
             return false;
         }
+        mapBuildSession = new MapBuildSession(acc.getUsername());
+        gameSession = new GameSession(acc.getUsername());
         // otherwise confirm authintication
         return true;
+    }
+
+    public boolean creatAccount(String username, String password){
+        return accountManager.register(username, password);
     }
 
     /**
@@ -214,7 +211,4 @@ public class BrickingBad {
      * @param pos position of brick to be added TODO: refactor this to take brick
      *            type
      */
-    public void addBrick(Position pos) {
-        boolean isAdded = mapBuildSession.addBrick(SpecificType.SimpleBrick, pos);
-    }
 }

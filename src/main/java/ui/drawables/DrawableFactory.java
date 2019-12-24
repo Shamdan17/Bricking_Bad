@@ -2,6 +2,10 @@ package ui.drawables;
 
 import domain.BrickingBad;
 import domain.model.shape.MovableShape;
+import ui.drawables.aliens.CooperativeAlien;
+import ui.drawables.aliens.DrunkAlien;
+import ui.drawables.aliens.ProtectingAlien;
+import ui.drawables.aliens.RepairingAlien;
 import ui.drawables.bricks.HalfMetalBrick;
 import ui.drawables.bricks.MineBrick;
 import ui.drawables.bricks.SimpleBrick;
@@ -22,6 +26,14 @@ public class DrawableFactory {
                 return new MineBrick(ms,brickingBad);
             case WrapperBrick:
                 return new WrapperBrick(ms,brickingBad);
+            case ProtectingAlien:
+                return new ProtectingAlien(ms);
+            case CooperativeAlien:
+                return new CooperativeAlien(ms);
+            case RepairingAlien:
+                return new RepairingAlien(ms);
+            case DrunkAlien:
+                return new DrunkAlien(ms);
             case Ball:
                 return new Ball(ms);
             case Laser:

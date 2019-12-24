@@ -22,4 +22,8 @@ public class Laser implements Drawable {
     g.fillRect(x, y, length, width);
     g.drawRect(x, y, length, width);
   }
+
+  public void setMovable(MovableShape ms){
+        this.ms = ms;
+    }
 }

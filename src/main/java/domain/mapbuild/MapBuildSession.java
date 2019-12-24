@@ -3,12 +3,15 @@ package domain.mapbuild;
 import domain.model.SpecificType;
 import domain.model.brick.Brick;
 import domain.model.brick.BrickFactory;
+import domain.model.shape.MovableShape;
 import domain.storage.BinaryStorage;
 import domain.storage.StorageManager;
 import utils.Constants;
 import utils.Position;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -18,16 +21,17 @@ public class MapBuildSession {
     private StorageManager storageManager;
     private String unixTimestamp;
     private BrickFactory bf = new BrickFactory();
-
+    private String username;
     /**
      * OVERVIEW: constructor for MapBuildSession
      * MODIFIES: map, storageManager
      * EFFECT: create a new instance of MapBuildSession
      */
-    public MapBuildSession() {
-        map = new Map();
+    public MapBuildSession(String username) {
+        this.map = new Map();
+        this.username = username;
         // TODO: replace this string with a variable value
-        storageManager = new BinaryStorage("MapBuild");
+        storageManager = new BinaryStorage(username);
     }
 
     private boolean testMode = false;
@@ -79,6 +83,28 @@ public class MapBuildSession {
             }
         }
 
+        return true;
+    }
+
+    public boolean validMap(){
+        int simple = 0;
+        int halfMetal = 0;
+        int mine = 0;
+        int wrapper = 0;
+        for(MovableShape ms : map.getMovables()){
+            if(ms.getSpecificType() == SpecificType.SimpleBrick)
+                simple++;
+            if(ms.getSpecificType() == SpecificType.HalfMetalBrick)
+                halfMetal++;
+            if(ms.getSpecificType() == SpecificType.MineBrick)
+                mine++;
+            if(ms.getSpecificType() == SpecificType.WrapperBrick)
+                wrapper++;
+        }
+        if (simple < Constants.MIN_SIMPLE_BRICK && !testMode) return false;
+        if (halfMetal < Constants.MIN_HALF_METAL_BRICK && !testMode) return false;
+        if (mine < Constants.MIN_MINE_BRICK && !testMode) return false;
+        if (wrapper < Constants.MIN_WRAPPER_BRICK && !testMode) return false;
         return true;
     }
 
@@ -163,6 +189,10 @@ public class MapBuildSession {
     public void load(String name) {
         MapBuildData data = (MapBuildData) storageManager.get(name);
         map = new Map(data);
+    }
+
+    public List<String> getMapList(){
+        return new ArrayList<>(storageManager.keySet());
     }
 
     /**

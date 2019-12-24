@@ -48,7 +48,6 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   private JLabel wrapperBrickLabel;
   private NumberFormat numberFormat;
 
-
   public MapBuild(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.drawables = new HashMap<>();
     this.menuButton = new JButton(Constants.MENU_BUTTON);
@@ -111,7 +110,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
     this.add(saveButton);
     this.add(loadButton);
     this.add(deleteBlock);
-
+    setSize(Constants.MAX_X,Constants.MAX_Y);
     brickingBad.initializeMapBuild();
     (new Thread(this)).start();
   }
@@ -164,6 +163,27 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
         this.addMouseMotionListener((Brick) d);
       }
     }
+    drawLines(g);
+  }
+
+  private void drawLines(Graphics g) {
+      g.setColor(Color.RED);
+    g.drawLine(
+        0,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH);
+    g.drawLine(
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_UPPER_BOUND,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH);
+
+    g.drawLine(
+        0,
+        Constants.BRICK_UPPER_BOUND,
+        Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
+        Constants.BRICK_UPPER_BOUND );
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -171,18 +191,27 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.MENU_LABEL);
     }
     if (e.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
+      if(!brickingBad.validMap()){
+          JOptionPane.showMessageDialog(null,Constants.NOT_VALID_MAP_WARNING);
+          return;
+      }
       gamePanel = new Game(brickingBad, cardLayout, contPanel);
       contPanel.add(gamePanel, Constants.GAME_LABEL);
       cardLayout.show(contPanel, Constants.GAME_LABEL);
     }
     if (e.getActionCommand().equals(Constants.SAVE_BUTTON)) {
-      brickingBad.saveMap();
-    }
-    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
-      Brick.setRemoveFlag(deleteBlock.isSelected());
+      MapSavePage savePage = new MapSavePage(brickingBad, cardLayout, contPanel);
+      contPanel.add(savePage, Constants.MAP_SAVE_LABEL);
+      cardLayout.show(contPanel, Constants.MAP_SAVE_LABEL);
     }
     if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      brickingBad.loadMap();
+      MapLoadPage loadPage = new MapLoadPage(brickingBad, cardLayout, contPanel);
+      contPanel.add(loadPage, Constants.MAP_LOAD_LABEL);
+      cardLayout.show(contPanel, Constants.MAP_LOAD_LABEL);
+    }
+
+    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
+      Brick.setRemoveFlag(deleteBlock.isSelected());
     }
     if (e.getActionCommand().equals(Constants.ADD_BRICKS_BUTTON)) {
 
