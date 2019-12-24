@@ -23,6 +23,7 @@ public class Paddle extends Rectangle {
     private Ball boundBall;
     private boolean isMagnet = false;
 
+    private double angleOffset = 0;
     private double movementOffset = 0;
     private double maxLeftSpeed = -PADDLE_MOVING_SPEED;
     private double maxRightSpeed = PADDLE_MOVING_SPEED;
@@ -59,11 +60,19 @@ public class Paddle extends Rectangle {
     @Override
     public void move() {
         if (tiltLeft) {
-            setAngle(getAngle() - PADDLE_TURNING_SPEED);
+            angleOffset=-PADDLE_TURNING_SPEED;
+            setAngle(getAngle()+angleOffset);
         } else if (tiltRight) {
-            setAngle(getAngle() + PADDLE_TURNING_SPEED);
+            angleOffset=PADDLE_TURNING_SPEED;
+            setAngle(getAngle()+angleOffset);
         } else {
-            normalizeAngle(PADDLE_RESTORING_SPEED);
+            angleOffset*=0.87;
+            if(Math.abs(angleOffset)<0.2*PADDLE_TURNING_SPEED){
+                angleOffset=0;
+                normalizeAngle(PADDLE_RESTORING_SPEED);
+            }else{
+                setAngle(getAngle()+angleOffset);
+            }
         }
         if (moveLeft) {
             movementOffset = maxLeftSpeed;//Math.max(maxLeftSpeed, movementOffset-0.7*PADDLE_MOVING_SPEED);
