@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Set;
+import utils.Constants;
 
 // BinaryStorage is a storage manager that works as a generic persistent key value store.
 
@@ -24,12 +25,13 @@ public class BinaryStorage implements StorageManager {
         if (storageName == null || storageName.trim().equals("")) {
             throw new IllegalArgumentException("storage name may not be null or empty");
         }
+        createSavesFolder();
 
         this.DataLinks = new HashMap<>();
-        this.storageName = Paths.get(System.getProperty("user.dir"), storageName).toString() + ".bin";
+        this.storageName = Paths.get(getSavesFolder(), storageName).toString() + ".bin";
 
         // If a previous version of the same storage name exists load it
-         load();
+        load();
     }
 
     /**
@@ -140,5 +142,14 @@ public class BinaryStorage implements StorageManager {
     protected void finalize() throws Throwable {
         save();
         super.finalize();
+    }
+
+    private void createSavesFolder() {
+        File saveDir = new File(Paths.get(System.getProperty("user.dir"), Constants.STORAGE_FOLDER).toString());
+        saveDir.mkdir();
+    }
+
+    private String getSavesFolder() {
+        return Paths.get(System.getProperty("user.dir"), Constants.STORAGE_FOLDER).toString();
     }
 }

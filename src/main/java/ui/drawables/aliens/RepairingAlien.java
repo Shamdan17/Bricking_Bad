@@ -19,7 +19,7 @@ public class RepairingAlien implements Drawable {
   public void draw(Graphics g) {
     int x = (int) Math.round(ms.getPosition().getX());
     int y = (int) Math.round(ms.getPosition().getY());
-    if (image == null)
+//    if (image == null)
       image = ImageFactory.get(ms.getSpecificType(), ms.getWidth(), ms.getLength());
     g.drawImage(image, x, y, null);
   }

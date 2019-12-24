@@ -27,7 +27,6 @@ public class LazyCollisionRule implements CollisionRule {
 
     @Override
     public void collide(MovableShape obj1, MovableShape obj2) {
-        logger.debug("Collision detected between " + obj1 + " and " + obj2);
         // Don't Calculate the new velocities
         Velocity v1 = new Velocity(0, 0);
         // Set the new velocities

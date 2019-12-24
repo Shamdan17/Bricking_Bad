@@ -34,7 +34,7 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
         lastAddedBeam = null;
       }
     }
-    if (Math.random() < 0.015) {
+    if (Math.random() < 0.0025) {
       AlienBeam bm = new AlienBeam(self.getCenter());
       lastAddedBeam = bm;
       self.addToQueue(bm);
@@ -51,6 +51,18 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
   @Override
   public SpecificType getSpecificType() {
     return SpecificType.CooperativeAlien;
+  }
+
+  @Override
+  public void setPosition(Position pos) {
+    movBeh = new BoundedLinearBehavior(
+            pos,
+            new Velocity(0, Constants.Protecting_Alien_Speed),
+            0,
+            Constants.GAME_WIDTH,
+            0,
+            Constants.GAME_HEIGHT * 0.5);
+    self.initializeMovementBehavior(movBeh);
   }
 
   @Override

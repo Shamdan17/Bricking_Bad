@@ -1,8 +1,8 @@
 package domain.model;
 
 import domain.model.misc.Laser;
-import domain.model.movement.LinearMovement;
 import domain.model.movement.NoMovement;
+import domain.model.movement.NormalizingLinearMovement;
 import domain.model.shape.MovableShape;
 import domain.model.shape.Rectangle;
 import org.apache.commons.lang3.SerializationUtils;
@@ -22,6 +22,10 @@ public class Paddle extends Rectangle {
     private int laser_count;
     private Ball boundBall;
     private boolean isMagnet = false;
+
+    private double movementOffset = 0;
+    private double maxLeftSpeed = -PADDLE_MOVING_SPEED;
+    private double maxRightSpeed = PADDLE_MOVING_SPEED;
 
 
     public Paddle(Position position) {
@@ -62,10 +66,14 @@ public class Paddle extends Rectangle {
             normalizeAngle(PADDLE_RESTORING_SPEED);
         }
         if (moveLeft) {
-            setPosition(super.getPosition().incrementX(-PADDLE_MOVING_SPEED));
+            movementOffset = maxLeftSpeed;//Math.max(maxLeftSpeed, movementOffset-0.7*PADDLE_MOVING_SPEED);
         } else if (moveRight) {
-            setPosition(super.getPosition().incrementX(PADDLE_MOVING_SPEED));
+            movementOffset = maxRightSpeed;//Math.min(maxRightSpeed, movementOffset+0.7*PADDLE_MOVING_SPEED);
+        } else {
+            movementOffset *= 0.87;
+            if (Math.abs(movementOffset) < 1) movementOffset = 0;
         }
+        setPosition(super.getPosition().incrementX(movementOffset));
         if (boundBall != null) {
             boundBall.setPosition(calculateBallPosition());
         }
@@ -132,7 +140,7 @@ public class Paddle extends Rectangle {
         if (boundBall != null) {
             Velocity vel = new Velocity(BALL_INITIAL_VX, BALL_INITIAL_VY);
             vel = Rotation.rotate(vel, -getAngle());
-            boundBall.setMovementBehavior(new LinearMovement(boundBall.getPosition(), vel));
+            boundBall.setMovementBehavior(new NormalizingLinearMovement(boundBall.getPosition(), vel));
             boundBall = null;
         }
     }

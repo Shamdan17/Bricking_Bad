@@ -31,6 +31,12 @@ public class ProtectingAlienBehavior extends AbstractBehavior {
         return SpecificType.ProtectingAlien;
     }
 
+    @Override
+    public void setPosition(Position pos) {
+        movBeh = new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0));
+        self.initializeMovementBehavior(movBeh);
+    }
+
 
     @Override
     public String toString() {

@@ -4,12 +4,12 @@ import java.util.Set;
 import java.util.HashSet;
 
  public class Pair<T> {
-     protected final Set<T> set;
+     T a;
+     T b;
 
      public Pair(T a, T b) {
-          set = new HashSet<T>();
-          set.add(a);
-          set.add(b);
+         this.a = a;
+         this.b = b;
      }
 
      public boolean equals(Object o) {
@@ -18,11 +18,12 @@ import java.util.HashSet;
 
            Pair<T> otherPair = (Pair<T>) o;
 
-           return set.equals(otherPair.set);
+           return otherPair.a.equals(a) && otherPair.b.equals(b)
+                   || otherPair.a.equals(b) && otherPair.b.equals(a);
 
      }
 
      public int hashCode() {
-         return set.hashCode();
+         return a.hashCode() + b.hashCode();
      }
 }

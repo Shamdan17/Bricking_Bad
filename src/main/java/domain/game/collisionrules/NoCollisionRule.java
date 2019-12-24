@@ -2,6 +2,7 @@ package domain.game.collisionrules;
 
 import domain.model.SpecificType;
 import domain.model.Type;
+import domain.model.alien.Alien;
 import domain.model.shape.MovableShape;
 
 // NoCollision does nothing to the objects as if they did not collide in the first place
@@ -27,6 +28,11 @@ public class NoCollisionRule implements CollisionRule {
 
         // Aliens only collide with the ball
         if (obj1.getType() == Type.Alien && (obj2.getType() != Type.Ball || obj2.getSpecificType() == SpecificType.Laser)) {
+            return true;
+        }
+
+        // Aliens that are invincible do not collide
+        if (obj1.getType() == Type.Alien && ((Alien) obj1).getInvincibilityCounter() > 0) {
             return true;
         }
 

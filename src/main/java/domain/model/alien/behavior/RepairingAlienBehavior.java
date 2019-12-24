@@ -10,6 +10,8 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
+import static utils.Constants.Protecting_Alien_Speed;
+
 public class RepairingAlienBehavior extends AbstractBehavior {
 
     // The time stamp of the last brick added in order to know when to add a brick
@@ -18,10 +20,12 @@ public class RepairingAlienBehavior extends AbstractBehavior {
     private Brick lastAddedBrick;
     // To track whether we added a brick in the last tick
     private boolean addedBrickLastTick = false;
+    // To track the number of added bricks
+    private long firstBrickTimeStamp = -1;
 
 
     public RepairingAlienBehavior(Position pos) {
-        super(new LinearMovement(pos, new Velocity(Constants.Protecting_Alien_Speed, 0)));
+        super(new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0)));
         lastBrickAddedStamp = 0;
     }
 
@@ -34,6 +38,9 @@ public class RepairingAlienBehavior extends AbstractBehavior {
             }
         }
         addedBrickLastTick = true;
+        if (firstBrickTimeStamp == -1) {
+            firstBrickTimeStamp = System.currentTimeMillis();
+        }
         lastBrickAddedStamp = System.currentTimeMillis();
         BrickFactory bf = new BrickFactory();
         Brick br = bf.get(SpecificType.SimpleBrick, getRandomBrickPosition());
@@ -46,6 +53,16 @@ public class RepairingAlienBehavior extends AbstractBehavior {
         if (obj.getType() == Type.Ball) {
             self.setDestroyed(true);
         }
+    }
+
+    public long getFirstBrickTimeStamp() {
+        return firstBrickTimeStamp;
+    }
+
+    @Override
+    public void setPosition(Position pos) {
+        movBeh = new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0));
+        self.initializeMovementBehavior(movBeh);
     }
 
     private Position getRandomBrickPosition() {
