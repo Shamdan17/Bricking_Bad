@@ -3,11 +3,10 @@ package ui.panels;
 import domain.BrickingBad;
 import domain.model.SpecificType;
 import domain.model.powerup.PowerUp;
-import ui.ImageFactory;
+import ui.drawables.ImageFactory;
 import utils.Constants;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

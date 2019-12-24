@@ -1,4 +1,4 @@
-package ui;
+package ui.drawables;
 
 import domain.model.SpecificType;
 

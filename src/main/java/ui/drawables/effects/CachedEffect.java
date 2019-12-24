@@ -1,4 +1,4 @@
-package ui;
+package ui.drawables.effects;
 
 import ui.drawables.Drawable;
 

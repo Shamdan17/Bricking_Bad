@@ -1,17 +1,18 @@
-package ui.drawables;
+package ui.drawables.effects;
 
 import domain.model.SpecificType;
 import domain.model.shape.MovableShape;
-import ui.ImageFactory;
+import ui.drawables.Drawable;
+import ui.drawables.ImageFactory;
 import utils.physics.math.util;
-
 import java.awt.*;
 
-public class ChemicalBall implements Drawable {
+public class FireBall implements Drawable {
 
   private MovableShape ms;
   private Image image;
-  public ChemicalBall(MovableShape ms) {
+
+  public FireBall(MovableShape ms) {
     this.ms = ms;
   }
 
@@ -20,7 +21,7 @@ public class ChemicalBall implements Drawable {
     int x = util.round(ms.getPosition().getX());
     int y = util.round(ms.getPosition().getY());
     if (image == null)
-      image = ImageFactory.get(SpecificType.ChemicalBall, ms.getWidth(), ms.getLength());
+      image = ImageFactory.get(SpecificType.FireBall, ms.getWidth(), ms.getLength());
     g.drawImage(image,x,y,null);
 
 //    g.setColor(Color.pink);
@@ -39,7 +40,6 @@ public class ChemicalBall implements Drawable {
 //    g.fillOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
 //    g.drawOval(util.round(ms.getCenter().getX()) - 2, util.round(ms.getCenter().getY()) - 2, 4, 4);
   }
-
   public void setMovable(MovableShape ms){
         this.ms = ms;
     }

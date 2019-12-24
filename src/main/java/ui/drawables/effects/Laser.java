@@ -1,6 +1,7 @@
-package ui.drawables;
+package ui.drawables.effects;
 
 import domain.model.shape.MovableShape;
+import ui.drawables.Drawable;
 
 import java.awt.*;
 

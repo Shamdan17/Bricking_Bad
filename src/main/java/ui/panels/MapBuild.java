@@ -75,7 +75,6 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   }
 
   public void paintComponent(Graphics g) {
-    this.requestFocus();
     super.paintComponent(g);
     MouseListener[] list = this.getMouseListeners();
     for (int i = 0; i < list.length; ++i) {

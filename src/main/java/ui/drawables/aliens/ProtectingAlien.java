@@ -1,14 +1,10 @@
 package ui.drawables.aliens;
 
 import domain.model.shape.MovableShape;
-import ui.ImageFactory;
+import ui.drawables.ImageFactory;
 import ui.drawables.Drawable;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class ProtectingAlien implements Drawable {
 

@@ -1,7 +1,6 @@
 package ui.drawables;
 
 import domain.model.shape.MovableShape;
-import ui.ImageFactory;
 import utils.physics.math.util;
 
 import java.awt.*;
