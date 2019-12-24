@@ -15,19 +15,19 @@ import java.util.List;
 
 public class Inventory extends JPanel implements ActionListener {
 
-  BrickingBad brickingBad;
-  CardLayout cardLayout;
-  JPanel contPanel;
+  private BrickingBad brickingBad;
+  private CardLayout cardLayout;
+  private JPanel contPanel;
 
-  JButton magnetPaddleButton;
-  JButton tallerPaddleButton;
-  JButton chemicalBallButton;
-  JButton laserButton;
+  private JButton magnetPaddleButton;
+  private JButton tallerPaddleButton;
+  private JButton chemicalBallButton;
+  private JButton laserButton;
 
-  JLabel magnetLeftLabel;
-  JLabel tallerLeftLabel;
-  JLabel chemicalLeftLabel;
-  JLabel laserLeftLabel;
+  private JLabel magnetLeftLabel;
+  private JLabel tallerLeftLabel;
+  private JLabel chemicalLeftLabel;
+  private JLabel laserLeftLabel;
 
   public Inventory(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.brickingBad = brickingBad;

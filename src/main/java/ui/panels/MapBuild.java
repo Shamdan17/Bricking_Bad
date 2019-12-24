@@ -6,8 +6,6 @@ import domain.model.shape.MovableShape;
 import ui.drawables.Drawable;
 import ui.drawables.DrawableFactory;
 import ui.drawables.bricks.Brick;
-import ui.load.MapLoadPage;
-import ui.save.MapSavePage;
 import utils.Constants;
 
 import javax.swing.*;
@@ -16,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
@@ -28,91 +25,42 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   private Game gamePanel;
   private CardLayout cardLayout;
   private JPanel contPanel;
-  private JPanel bottomPanel;
-  private JCheckBox deleteBlock;
-  private JButton saveButton;
-  private JButton loadButton;
-  private JButton addBricksButton;
   private Map<UUID, Drawable> drawables;
-
-  private MapSavePage savePage;
-  private MapLoadPage loadPage;
-
-  private JFormattedTextField simpleBrickField;
-  private JFormattedTextField halfMetalBrickField;
-  private JFormattedTextField mineBrickField;
-  private JFormattedTextField wrapperBrickField;
-  private JLabel simpleBrickLabel;
-  private JLabel halfMetalBrickLabel;
-  private JLabel mineBrickLabel;
-  private JLabel wrapperBrickLabel;
-  private NumberFormat numberFormat;
+  private MapSetup mapSetup;
 
   public MapBuild(BrickingBad brickingBad, CardLayout cardLayout, JPanel contPanel) {
     this.drawables = new HashMap<>();
-    this.menuButton = new JButton(Constants.MENU_BUTTON);
-    this.startGameButton = new JButton(Constants.START_GAME_BUTTON);
-    this.saveButton = new JButton(Constants.SAVE_BUTTON);
-    this.loadButton = new JButton(Constants.LOAD_BUTTON);
-    this.addBricksButton = new JButton(Constants.ADD_BRICKS_BUTTON);
-    this.deleteBlock = new JCheckBox(Constants.DELETE_BY_CLICK_LABEL);
     this.brickingBad = brickingBad;
+    this.menuButton = new JButton(Constants.MENU_BUTTON);
     this.cardLayout = cardLayout;
     this.contPanel = contPanel;
+    this.startGameButton = new JButton(Constants.START_GAME_BUTTON);
+    this.mapSetup = new MapSetup(brickingBad, cardLayout, contPanel);
 
-    menuButton.addActionListener(this);
-    loadButton.addActionListener(this);
-    saveButton.addActionListener(this);
-    deleteBlock.addActionListener(this);
-    addBricksButton.addActionListener(this);
-    startGameButton.addActionListener(this);
-
-    bottomPanel = new JPanel();
-    bottomPanel.setBounds(0, 750, 750, 1500);
-
-    numberFormat = NumberFormat.getIntegerInstance();
-
-    simpleBrickField = new JFormattedTextField(numberFormat);
-    simpleBrickField.setColumns(10);
-    simpleBrickField.setValue(Constants.MIN_SIMPLE_BRICK);
-    halfMetalBrickField = new JFormattedTextField(numberFormat);
-    halfMetalBrickField.setColumns(10);
-    halfMetalBrickField.setValue(Constants.MIN_HALF_METAL_BRICK);
-    mineBrickField = new JFormattedTextField(numberFormat);
-    mineBrickField.setColumns(10);
-    mineBrickField.setValue(Constants.MIN_MINE_BRICK);
-    wrapperBrickField = new JFormattedTextField(numberFormat);
-    wrapperBrickField.setColumns(10);
-    wrapperBrickField.setValue(Constants.MIN_WRAPPER_BRICK);
-
-    simpleBrickLabel = new JLabel(Constants.SIMPLE_BRICK_LABEL);
-    halfMetalBrickLabel = new JLabel(Constants.HALF_METAL_BRICK_LABEL);
-    mineBrickLabel = new JLabel(Constants.MINE_BRICK_LABEL);
-    wrapperBrickLabel = new JLabel(Constants.WRAPPER_BRICK_LABEL);
-
-    bottomPanel.add(simpleBrickLabel);
-    bottomPanel.add(simpleBrickField);
-
-    bottomPanel.add(halfMetalBrickLabel);
-    bottomPanel.add(halfMetalBrickField);
-
-    bottomPanel.add(mineBrickLabel);
-    bottomPanel.add(mineBrickField);
-
-    bottomPanel.add(wrapperBrickLabel);
-    bottomPanel.add(wrapperBrickField);
-
-    setLayout(new FlowLayout());
-    this.add(startGameButton);
-    this.add(addBricksButton);
-    this.add(bottomPanel);
-    this.add(menuButton);
-    this.add(saveButton);
-    this.add(loadButton);
-    this.add(deleteBlock);
-    setSize(Constants.MAX_X,Constants.MAX_Y);
+    setBackground(new Color(204, 229, 255));
+    setLayout(null);
+    setFocusable(true);
+    setup();
+    setSize(Constants.MAX_X, Constants.MAX_Y);
     brickingBad.initializeMapBuild();
     (new Thread(this)).start();
+  }
+
+  private void setup() {
+    mapSetup.setBounds(
+        Constants.SIDE_BAR_X, 0, Constants.SIDE_BAR_WIDTH, Constants.SIDE_BAR_LENGTH);
+    menuButton.setBounds(
+        0,
+        0,
+        200, Constants.BRICK_UPPER_BOUND);
+    startGameButton.setBounds(
+        200, 0, 1300, Constants.BRICK_UPPER_BOUND);
+    menuButton.addActionListener(this);
+    startGameButton.addActionListener(this);
+
+    add(mapSetup);
+    add(startGameButton);
+    add(menuButton);
   }
 
   public void run() {
@@ -127,6 +75,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   }
 
   public void paintComponent(Graphics g) {
+    this.requestFocus();
     super.paintComponent(g);
     MouseListener[] list = this.getMouseListeners();
     for (int i = 0; i < list.length; ++i) {
@@ -167,7 +116,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
   }
 
   private void drawLines(Graphics g) {
-      g.setColor(Color.RED);
+    g.setColor(Color.RED);
     g.drawLine(
         0,
         Constants.BRICK_LOWER_BOUND + Constants.BRICK_WIDTH,
@@ -183,7 +132,7 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
         0,
         Constants.BRICK_UPPER_BOUND,
         Constants.BRICK_RIGHT_BOUND + Constants.BRICK_LENGTH,
-        Constants.BRICK_UPPER_BOUND );
+        Constants.BRICK_UPPER_BOUND);
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -191,61 +140,13 @@ public class MapBuild extends JPanel implements Runnable, ActionListener {
       cardLayout.show(contPanel, Constants.MENU_LABEL);
     }
     if (e.getActionCommand().equals(Constants.START_GAME_BUTTON)) {
-      if(!brickingBad.validMap()){
-          JOptionPane.showMessageDialog(null,Constants.NOT_VALID_MAP_WARNING);
-          return;
+      if (!brickingBad.validMap()) {
+        JOptionPane.showMessageDialog(null, Constants.NOT_VALID_MAP_WARNING);
+        return;
       }
       gamePanel = new Game(brickingBad, cardLayout, contPanel);
       contPanel.add(gamePanel, Constants.GAME_LABEL);
       cardLayout.show(contPanel, Constants.GAME_LABEL);
-    }
-    if (e.getActionCommand().equals(Constants.SAVE_BUTTON)) {
-      MapSavePage savePage = new MapSavePage(brickingBad, cardLayout, contPanel);
-      contPanel.add(savePage, Constants.MAP_SAVE_LABEL);
-      cardLayout.show(contPanel, Constants.MAP_SAVE_LABEL);
-    }
-    if (e.getActionCommand().equals(Constants.LOAD_BUTTON)) {
-      MapLoadPage loadPage = new MapLoadPage(brickingBad, cardLayout, contPanel);
-      contPanel.add(loadPage, Constants.MAP_LOAD_LABEL);
-      cardLayout.show(contPanel, Constants.MAP_LOAD_LABEL);
-    }
-
-    if (e.getActionCommand().equals(Constants.DELETE_BY_CLICK_LABEL)) {
-      Brick.setRemoveFlag(deleteBlock.isSelected());
-    }
-    if (e.getActionCommand().equals(Constants.ADD_BRICKS_BUTTON)) {
-
-      Object simpleVal = simpleBrickField.getValue();
-      if (simpleVal == null) {
-        JOptionPane.showMessageDialog(null, Constants.EMPTY_SIMPLE_BRICK_FIELD_WARNING);
-      }
-
-      Object halfMetalVal = halfMetalBrickField.getValue();
-      if (halfMetalVal == null) {
-        JOptionPane.showMessageDialog(null, Constants.EMPTY_HALF_METAL_BRICK_FIELD_WARNING);
-        return;
-      }
-
-      Object mineVal = mineBrickField.getValue();
-      if (mineVal == null) {
-        JOptionPane.showMessageDialog(null, Constants.EMPTY_MINE_BRICK_FIELD_WARNING);
-        return;
-      }
-
-      Object wrapperVal = wrapperBrickField.getValue();
-      if (wrapperVal == null) {
-        JOptionPane.showMessageDialog(null, Constants.EMPTY_WRAPPER_BRICK_FIELD_WARNING);
-        return;
-      }
-
-      int simple = ((Number) simpleVal).intValue();
-      int halfMetal = ((Number) halfMetalVal).intValue();
-      int mineCount = ((Number) mineVal).intValue();
-      int wrapper = ((Number) wrapperVal).intValue();
-      boolean success = brickingBad.buildMap(simple, halfMetal, mineCount, wrapper);
-      if (!success) {
-        JOptionPane.showMessageDialog(null, Constants.BRICK_NUMBER_WARNING);
-      }
     }
   }
 }
