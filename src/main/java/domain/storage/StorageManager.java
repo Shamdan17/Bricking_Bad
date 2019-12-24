@@ -33,4 +33,9 @@ public interface StorageManager {
      * @return a set of saved entry keys
      */
     public Set<String> keySet();
+
+	/**
+	 *  syncs the storage with disk and closes io
+	 */
+    public void   close();
 }
