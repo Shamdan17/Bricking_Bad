@@ -11,7 +11,7 @@ import static utils.Constants.Protecting_Alien_Speed;
 public class ProtectingAlienBehavior extends AbstractBehavior {
 
     public ProtectingAlienBehavior(Position pos) {
-        super(new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0)));
+        super(new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0), 0));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ProtectingAlienBehavior extends AbstractBehavior {
 
     @Override
     public void setPosition(Position pos) {
-        movBeh = new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0));
+        movBeh = new LinearMovement(pos, new Velocity(Protecting_Alien_Speed, 0), 0);
         self.initializeMovementBehavior(movBeh);
     }
 

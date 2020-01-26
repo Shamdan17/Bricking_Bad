@@ -16,8 +16,8 @@ import utils.physics.math.util;
 
 import java.util.List;
 
-import static utils.Constants.GANG_OF_BALLS_MULTIPLIER;
-import static utils.Constants.POWERUP_SIZE;
+import static utils.Constants.*;
+import static utils.Constants.BALL_DIAMETER;
 
 public class GangOfBalls extends PowerUp {
 
@@ -49,7 +49,7 @@ public class GangOfBalls extends PowerUp {
             Velocity originalVel = closestBall.getVelocity().copy();
             for (int i = 1; i < GANG_OF_BALLS_MULTIPLIER; i++) {
                 originalVel = Rotation.rotate(originalVel, 360 / GANG_OF_BALLS_MULTIPLIER);
-                Ball newBall = new Ball(new NormalizingLinearMovement(closestBall.getPosition(), originalVel), Constants.BALL_RADIUS);
+                Ball newBall = new Ball(new NormalizingLinearMovement(closestBall.getPosition(), originalVel, GAME_WIDTH+BRICK_WIDTH+BALL_DIAMETER), Constants.BALL_RADIUS);
                 super.addToQueue(newBall);
             }
             logger.debug("Gang of Balls power-up is activated with multiplier: " + GANG_OF_BALLS_MULTIPLIER);

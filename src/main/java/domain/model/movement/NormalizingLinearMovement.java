@@ -20,6 +20,11 @@ public class NormalizingLinearMovement extends LinearMovement {
         initialVelocity = vel.copy();
     }
 
+    public NormalizingLinearMovement(Position initial, Velocity vel, int xLimit) {
+        super(initial, vel, xLimit);
+        initialVelocity = vel.copy();
+    }
+
     public Position getNextPosition() {
         Velocity vel = getCurrentVelocity();
         if (util.getDifference(vel, initialVelocity) > 0.2) {

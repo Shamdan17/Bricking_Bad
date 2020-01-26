@@ -11,8 +11,8 @@ public class BoundedLinearBehavior extends LinearMovement {
     private double miny;
     private double maxy;
 
-    public BoundedLinearBehavior(Position initial, Velocity velocity, double minx, double maxx, double miny, double maxy) {
-        super(initial, velocity);
+    public BoundedLinearBehavior(Position initial, Velocity velocity, int xLimit, double minx, double maxx, double miny, double maxy) {
+        super(initial, velocity, xLimit);
         this.minx = minx;
         this.maxx = maxx;
         this.miny = miny;

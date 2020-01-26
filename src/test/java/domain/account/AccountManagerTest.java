@@ -28,6 +28,9 @@ class AccountManagerTest {
         // After Registration
         assertTrue(registryState, "user with valid password should get registered");
         assertTrue(storage.contains(username), "storage should contain registered user");
+
+        // Clear storage
+        storage.clear();
     }
 
     @Test

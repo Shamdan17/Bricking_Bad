@@ -19,6 +19,7 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
                         pos,
                         new Velocity(0, Constants.Protecting_Alien_Speed),
                         0,
+                        0,
                         Constants.GAME_WIDTH,
                         0,
                         Constants.GAME_HEIGHT * 0.5));
@@ -58,6 +59,7 @@ public class CooperativeAlienBehavior extends AbstractBehavior {
         movBeh = new BoundedLinearBehavior(
                 pos,
                 new Velocity(0, Constants.Protecting_Alien_Speed),
+                0,
                 0,
                 Constants.GAME_WIDTH,
                 0,

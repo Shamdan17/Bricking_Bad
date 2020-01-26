@@ -156,7 +156,7 @@ public class Paddle extends Rectangle {
         if (boundBall != null) {
             Velocity vel = new Velocity(BALL_INITIAL_VX, BALL_INITIAL_VY);
             vel = Rotation.rotate(vel, -getAngle());
-            boundBall.setMovementBehavior(new NormalizingLinearMovement(boundBall.getPosition(), vel));
+            boundBall.setMovementBehavior(new NormalizingLinearMovement(boundBall.getPosition(), vel, GAME_WIDTH+BRICK_WIDTH+BALL_DIAMETER));
             boundBall = null;
         }
     }

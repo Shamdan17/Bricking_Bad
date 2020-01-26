@@ -132,6 +132,12 @@ public class BinaryStorage implements StorageManager {
         }
     }
 
+    // clear clears the binary storage
+    public void clear(){
+        DataLinks.clear();
+        save();
+    }
+
     /**
      * OVERVIEW: saves data to file before destroying the object
      * MODIFIES: File on disk

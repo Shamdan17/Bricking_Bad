@@ -11,10 +11,18 @@ public class LinearMovement implements MovementBehavior, Serializable {
 
     Position curpos;
     Velocity curvel;
+    int xLimit;
 
     public LinearMovement(Position initial, Velocity velocity) {
         curpos = initial;
         curvel = velocity;
+        this.xLimit = 0;
+    }
+
+    public LinearMovement(Position initial, Velocity velocity, int xLimit) {
+        curpos = initial;
+        curvel = velocity;
+        this.xLimit = xLimit;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class LinearMovement implements MovementBehavior, Serializable {
 
     public void ensureObjectInBounds(Position position, Velocity velocity) {
         Velocity oldVelocity = velocity;
-        if (position.getX() > Constants.GAME_WIDTH) {
+        if (position.getX() > Math.max(xLimit,Constants.GAME_WIDTH)) {
             oldVelocity = new Velocity(-Math.abs(oldVelocity.getX()), oldVelocity.getY());
         }
         if (position.getX() < 0) {

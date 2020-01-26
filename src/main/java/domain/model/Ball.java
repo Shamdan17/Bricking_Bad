@@ -10,6 +10,8 @@ import utils.Constants;
 import utils.Position;
 import utils.Velocity;
 
+import static utils.Constants.*;
+
 public class Ball extends Circle {
 
     private SpecificType curType = SpecificType.Ball;
@@ -17,7 +19,7 @@ public class Ball extends Circle {
     private boolean hitPaddle;
 
     public Ball(Position pos, int radius) {
-        super(new NormalizingLinearMovement(pos, Constants.defaultRespawnVelocity), radius);
+        super(new NormalizingLinearMovement(pos, Constants.defaultRespawnVelocity, GAME_WIDTH+BRICK_WIDTH+BALL_DIAMETER), radius);
     }
 
     public Ball(MovementBehavior movBeh, int radius) {
